@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/default_layout">
+
+<th:block layout:fragment="content">
+	<div class="contents_wrap">
+		<div>이름</div>
+		<input type="text" id="mName">
+		<div>아이디</div>
+		<input type="text" id="mId">
+		<div>비밀번호</div>
+		<input type="password" id="mPw">
+		<div>닉네임</div>
+		<input type="text" id="mNickname">
+		<div>이메일</div>
+		<input type="text" id="mEmail">
+		<div>생년월일</div>
+		<input type="text" id="mBirth">
+		<div>생일공개여부</div>
+		<input type="text" id="mBirthYn">		
+		
+		<input type="submit" id="submit"value="전송">
+	</div>
+</th:block>
+
+</html>

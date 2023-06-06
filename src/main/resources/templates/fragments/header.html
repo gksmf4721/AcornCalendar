@@ -1,0 +1,34 @@
+<!-- 화면 header 영역 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="headerFragment">
+      <div class="header">
+        <div class="logomenu">
+            <div class="system_title">
+                <span>Acorn Calendar</span>
+            </div>
+            <div class="mastermenu">
+                <div class="user_wrap">
+                    <ul class="user_list">
+                        <li class="welcome">
+                            <span id="userNm"></span>
+                        </li>
+                        <li>
+                            <a href="#" class="user_photo" title="마이페이지">유저사진</a>
+                        </li>
+                        <li>
+                            <a href="#" class="user_logout"title="로그아웃">logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="menubar">
+    	<div class="inner"></div>
+    </div>
+    
+
+  </th:block>
+</html>
