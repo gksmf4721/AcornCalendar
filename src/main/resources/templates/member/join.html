@@ -21,8 +21,14 @@
 		<input type="button" id="btn-ajax" value="전송">
 	</div>
 	<script>
+    
 	
 	var btn = document.getElementById("btn-ajax");
+	
+    
+    
+	btn.addEventListener('click', ()=>{
+
     var inputName = document.getElementById("mName").value;
     var inputId = document.getElementById("mId").value;
     var inputPw = document.getElementById("mPw").value;
@@ -30,7 +36,9 @@
     var inputEmail = document.getElementById("mEmail").value;
     var inputBirth = document.getElementById("mBirth").value;
     var inputBirthYn = document.getElementById("mBirthYn").value;
-    
+		
+		
+		
     data = JSON.stringify({
         mName : inputName,
         mId : inputId,
@@ -41,9 +49,6 @@
         mBirthYn : inputBirthYn
     });
     
-    
-     
-	btn.addEventListener('click', ()=>{
 		//XMLHttpRequest 객체 생성
 		var xhr = new XMLHttpRequest();
 		
@@ -55,6 +60,7 @@
 		
 		//요청 전송
 		xhr.send(data);
+		console.log(data);
 		
 		//Callback
 		xhr.onload = () =>{
