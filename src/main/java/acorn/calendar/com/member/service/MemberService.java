@@ -19,4 +19,17 @@ public class MemberService {
 	public void insertMember(AcornMap acornMap) throws Exception {
 		sqlSession.insert("mapper.com.member.insertMember",acornMap);
 	}
+
+	public int selectInputCheck(AcornMap acornMap) throws Exception {
+		int result = 0;
+		if(acornMap.getString("type").equals("id")) result = sqlSession.selectOne("mapper.com.member.selectIdCheck",acornMap);
+		else if(acornMap.get("type").equals("nickname")) result = sqlSession.selectOne("mapper.com.member.selectNicknameCheck",acornMap);
+		else result = sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
+		return result;
+	}
+
+	public AcornMap selectLogin(AcornMap acornMap) throws Exception {
+		return sqlSession.selectOne("mapper.com.member.selectLogin",acornMap);
+	}
+
 }

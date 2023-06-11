@@ -29,16 +29,9 @@
 		<div>생년월일</div>
 		<input type="text" id="mBirth" data-name="생년월일">
 		<div>생일공개여부</div>
-		<input type="text" id="mBirthYn" data-name="생일공개여부">		
-		
-		
-		<select id="111" data-name="셀렉트"></select>
-		
-		<input type="radio">
-		<input type="checkbox">
-		
+		<input type="text" id="mBirthYn" data-name="생일공개여부">
+
 		<input type="button" id="btn-ajax" value="전송">
-		<input type="button" id="btn-ajax2" value="전송">
 	</form>
 	</div>
 	<script>
@@ -89,7 +82,7 @@
 		var xhr = new XMLHttpRequest();
 
 		//요청을 보낼 방식, url , 비동기(true) / 동기(false)
-		xhr.open('POST', '/inputCheck.json, true);
+		xhr.open('POST', '/inputCheck.json', true);
 		
 		//HTTP요청 헤더 설정
 		xhr.setRequestHeader('Content-type', 'application/json');
@@ -100,7 +93,8 @@
 		//Callback
 		xhr.onload = () =>{
 			let data = strToObj(xhr);
-			if(xhr.status == 200 && data.resultCd===1){
+			console.log(data.resultCd);
+			if(xhr.status == 200 && data.resultCd==='1'){
 				if(data.resultType == "email"){
 					sibling2.innerText = "이메일 중복 검사 완료"
 					console.log('성공');
@@ -121,51 +115,10 @@
 					alert("중복된 아이디입니다.")
 				}
 				//실패일시
-				alert(data.resultMsg);
+				//alert(data.resultMsg);
 			}
 		}
     }
-    
-    
-	var nickChkk= document.getElementById("nickChk");
-	nickChkk.addEventListener('click', ()=>{
-		var inputNickname = document.getElementById("mNickname").value;
-		var inputEmail = document.getElementById("mEmail").value;
-		var nickChk_info = document.getElementById("nickChk_info").value;
-		data = {
-		        mNickname : inputNickname,
-		        mEmail : inputEmail,
-		    };
-		//XMLHttpRequest 객체 생성
-		var xhr = new XMLHttpRequest();
-
-		//요청을 보낼 방식, url , 비동기(true) / 동기(false)
-		xhr.open('POST', '/join.json', true);
-		
-		//HTTP요청 헤더 설정
-		xhr.setRequestHeader('Content-type', 'application/json');
-		
-		//요청 전송
-		xhr.send(JSON.stringify(data));
-		
-		
-		//Callback
-		xhr.onload = () =>{
-			let data = strToObj(xhr);
-			if(xhr.status == 200 && data.resultCd===1){
-				
-				//성공일시
-				nickChk_info.innerText = "닉네임중복검사에 성공했습니다.";
-				// var resultData = xhr.resultData;
-				// location.href = resultData;  // 해당 페이지 이동
-			} else {
-				//실패일시
-				alert(data.resultMsg);
-			}
-		}
-		
-	});
-    
     
    var btn = document.getElementById("btn-ajax");
     
@@ -207,7 +160,7 @@
 			//Callback
 			xhr.onload = () =>{
 				let data = strToObj(xhr);
-				if(xhr.status == 200 && data.resultCd===1){
+				if(xhr.status == 200 && data.resultCd==='1'){
 					
 					//성공일시
 					alert(data.resultMsg);

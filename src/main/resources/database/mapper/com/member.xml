@@ -9,10 +9,29 @@
 		VALUES(#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
 	</insert>
 
-	<select id="idCheck" parameterType="acornMap" resultType="int">
+	<select id="selectIdCheck" parameterType="acornMap" resultType="int">
 		SELECT COUNT(1)
 		FROM JH_MEMBER
-		WHERE M_ID = '1'
+		WHERE M_ID = #{mId}
+	</select>
+
+	<select id="selectNicknameCheck" parameterType="acornMap" resultType="int">
+		SELECT COUNT(1)
+		FROM JH_MEMBER
+		WHERE M_NICKNAME = #{mNickname}
+	</select>
+
+	<select id="selectEmailCheck" parameterType="acornMap" resultType="int">
+		SELECT COUNT(1)
+		FROM JH_MEMBER
+		WHERE M_NICKNAME = #{mEmail}
+	</select>
+
+	<select id="selectLogin" parameterType="acornMap" resultType="acornMap">
+		SELECT *
+		FROM JH_MEMBER
+		WHERE M_ID = #{mId}
+		AND M_DEL_YN = 'N'
 	</select>
 
 

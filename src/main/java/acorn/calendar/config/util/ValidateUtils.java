@@ -9,8 +9,9 @@ public class ValidateUtils {
 	
 	
 	public static void resultMap(AcornMap acornMap, String code) {
-//	
-//		String message = MessageUtils.getMessage("code.message."+code);
+
+//		//String message = MessageUtils.getMessage("code.message."+code);
+//		String message = ConfigUtils.getString();
 //		acornMap.put("resultCode", "-1");
 //		if(null == message || "".equals(message)) {
 //			acornMap.put("resultMsg", "code.message.nnn");
