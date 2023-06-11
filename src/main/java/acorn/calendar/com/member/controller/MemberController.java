@@ -36,21 +36,28 @@ public class MemberController {
 	}
 
 	@PostMapping(value="/join.json" )
-	public String joinMember(AcornMap acornMap, HttpServletRequest request) throws Exception {
+	public void joinMember(@RequestBody String json, HttpServletResponse response) throws Exception {
 
-		//AcornMap acornMap = JsonUtils.toAcornMap(json);
+		AcornMap resultMap = new AcornMap();
 
-		log.info("컨트롤러 폼테스트"+acornMap);
 		try {
-			//AcornMap acornMap = JsonUtils.toAcornMap(json);
+			AcornMap acornMap = JsonUtils.toAcornMap(json);
+
+			// "", null, length 유효성 검사
+			acornMap.put("mName",null);
+
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap);
 
-		}catch(NullPointerException e) {
-			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
-		}
+			resultMap.put("resultMsg","회원가입이 완료됐습니다.");
+			resultMap.put("resultUrl","/");
+			ResponseUtils.jsonMap(response,resultMap);
 
-		return "member/login";
+		}catch(Exception e) {
+			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
+			resultMap.put("resultMsg","회원가입에 실패했습니다.");
+			ResponseUtils.jsonMap(response,resultMap);
+		}
 	}
 
 
@@ -68,7 +75,7 @@ public class MemberController {
 //		return "member/login";
 //	}
 
-	@RequestMapping("/login.do")
+	@RequestMapping("/")
 	public String login() throws Exception {
 		return "member/login";
 	}

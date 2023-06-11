@@ -62,17 +62,20 @@
 		
 		//Callback
 		xhr.onload = () =>{
+			let data = strToObj(xhr);
 			if(xhr.status == 200){
 				//성공일시
-				console.log(xhr.resultMsg);
-				var resultData = xhr.resultData;
-				location.href = resultData;  // 해당 페이지 이동
+				alert(data.resultMsg);
+				location.href = data.resultUrl;
+				// var resultData = xhr.resultData;
+				// location.href = resultData;  // 해당 페이지 이동
 			} else {
 				//실패일시
-				alert('실패!!');
+				alert(data.resultMsg);
 			}
 		}
 	});
+
 	
 </script>
 </th:block>

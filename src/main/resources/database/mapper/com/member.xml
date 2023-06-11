@@ -9,6 +9,12 @@
 		VALUES(#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
 	</insert>
 
-    
+	<select id="idCheck" parameterType="acornMap" resultType="int">
+		SELECT COUNT(1)
+		FROM JH_MEMBER
+		WHERE M_ID = '1'
+	</select>
+
+
 
 </mapper>
