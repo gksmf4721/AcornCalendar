@@ -75,14 +75,14 @@
 	});
     
     function duplicateChk(chkId){
-    	var sibling = chkId.previousElementSibling;
-    	
+    	var sibling1 = chkId.previousElementSibling;
+    	var sibling2 = chkId.nextElementSibling;
     	if(chkId == nickChk){
-    	   	data = { type : 'nickname' ,mNickname : sibling.value }
+    	   	data = { type : 'nickname' ,mNickname : sibling1.value }
     	}else if(chkId == emailChk){
-    		data = { type : 'email', mEmail : sibling.value }
+    		data = { type : 'email', mEmail : sibling1.value }
     	}else if(chkId == idChk){
-    		data = { type : 'id', mId: sibling.value }
+    		data = { type : 'id', mId: sibling1.value }
     	}
     	
     	//XMLHttpRequest 객체 생성
@@ -101,12 +101,25 @@
 		xhr.onload = () =>{
 			let data = strToObj(xhr);
 			if(xhr.status == 200 && data.resultCd===1){
+				if(data.resultType == "email"){
+					sibling2.innerText = "이메일 중복 검사 완료"
+					console.log('성공');
+				} else if(data.resultType == "nickname"){
+					sibling2.innerText = "닉네임 중복 검사 완료"
+						console.log('성공');
+				} else if(data.resultType == "id"){
+					sibling2.innerText = "아이디 중복 검사 완료"
+						console.log('성공');
+				}
 				
-				//성공일시
-				nickChk_info.innerText = "닉네임중복검사에 성공했습니다.";
-				// var resultData = xhr.resultData;
-				// location.href = resultData;  // 해당 페이지 이동
 			} else {
+				if(data.resultType == "email"){
+					alert("중복된 이메일입니다.")
+				} else if(data.resultType == "nickname"){
+					alert("중복된 닉네임입니다.")
+				} else if(data.resultType == "id"){
+					alert("중복된 아이디입니다.")
+				}
 				//실패일시
 				alert(data.resultMsg);
 			}
