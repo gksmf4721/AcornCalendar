@@ -75,7 +75,6 @@ public class MemberController {
 		String type = resultMap.getString("type");
 
 		int result = memberService.selectInputCheck(resultMap);
-log.info("ㅋㅋ"+result);
 		if(result != 0){
 			resultMap.put("resultCd","-1");
 		}else{
