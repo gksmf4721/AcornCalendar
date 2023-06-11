@@ -12,26 +12,24 @@ import acorn.calendar.config.model.LoginSession;
 public class RequestUtils {
 	
 	public static AcornMap getParamMap(HttpServletRequest request) {
-		
 		AcornMap acornMap = new AcornMap();
-		
-		Enumeration<?> keys = request.getParameterNames();
-		
-		while(keys.hasMoreElements()) {
+
+		Enumeration keys = request.getParameterNames();
+
+		while(keys.hasMoreElements()){
 			String key = (String)keys.nextElement();
 			String[] val = request.getParameterValues(key);
-			
-			if(val == null) {
-				acornMap.put(key, "");
-			}else if(val.length==1) {
-				acornMap.put(key, val[0]);
-			}else {
+
+			if(val==null){
+				acornMap.put(key,val);
+			}else if(val.length==1){
+				acornMap.put(key,val[0]);
+			}else{
 				acornMap.put(key, new ArrayList(Arrays.asList(val)));
-				//acornMap.put(key, val);
 			}
 		}
 		
-		//¸ðµç ÆÄ¶ó¹ÌÅÍ¿¡ ·Î±×ÀÎ Á¤º¸ ºÙ°Ô ÇÔ.
+		//ï¿½ï¿½ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù°ï¿½ ï¿½ï¿½.
 		LoginSession login = LoginSession.getLoginSession();
 		if(login!=null) {
 			acornMap.put("sessionLogin", "Y");

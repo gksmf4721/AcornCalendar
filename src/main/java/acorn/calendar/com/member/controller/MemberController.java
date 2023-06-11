@@ -1,7 +1,10 @@
 package acorn.calendar.com.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import acorn.calendar.config.util.JsonUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,46 +18,56 @@ import acorn.calendar.config.util.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class MemberController {
-	
-	private static MemberService memberService;
-		
+
+	@Autowired
+	private MemberService memberService;
+
 	@RequestMapping("/join.do")
 	public String join() throws Exception {
 		return "member/join";
 	}
-	
+
 	@PostMapping(value="/join.json" )
-	public void joinMember( AcornMap acornMap, HttpServletResponse response, Model model) throws Exception {
-		
-		AcornMap resultMap = new AcornMap();
-		
-		acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
-				
+	public String joinMember(AcornMap acornMap, HttpServletRequest request) throws Exception {
+
+		//AcornMap acornMap = JsonUtils.toAcornMap(json);
+
+		log.info("컨트롤러 폼테스트"+acornMap);
 		try {
+			//AcornMap acornMap = JsonUtils.toAcornMap(json);
+			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap);
-			
-			// ��ȿ�� �˻� �߰� ����
-			
-//			if(result != 1) {
-//				resultMap.put("resultCode", -1);
-//				resultMap.put("resultMsg", "ȸ�������� �����߽��ϴ�.");
-//				ResponseUtils.jsonMap(response, acornMap);
-//				return;
-//			}
-			
-			resultMap.put("resultCode", 1);
-			resultMap.put("resultMsg", "ȸ�������� �Ϸ��߽��ϴ�.");
-			ResponseUtils.jsonMap(response, resultMap);
-			
+
 		}catch(NullPointerException e) {
 			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
 		}
+
+		return "member/login";
 	}
-	
+
+
+//	@PostMapping(value="/join.json" )
+//	public String joinMember(AcornMap acornMap) throws Exception {
+//
+//		try {
+//			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
+//			memberService.insertMember(acornMap);
+//
+//		}catch(NullPointerException e) {
+//			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
+//		}
+//
+//		return "member/login";
+//	}
+
 	@RequestMapping("/login.do")
 	public String login() throws Exception {
 		return "member/login";

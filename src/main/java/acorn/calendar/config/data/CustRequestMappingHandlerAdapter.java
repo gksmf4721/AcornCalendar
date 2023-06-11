@@ -3,16 +3,19 @@ package acorn.calendar.config.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.annotation.MapMethodProcessor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 @Configuration
+@Slf4j
 public class CustRequestMappingHandlerAdapter extends RequestMappingHandlerAdapter{
 
 	@Override
 	public void afterPropertiesSet() {
+		log.info("어댑터");
 		super.afterPropertiesSet();
 
 		if (getArgumentResolvers() != null) {

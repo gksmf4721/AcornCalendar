@@ -4,18 +4,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 
 import acorn.calendar.config.model.LoginSession;
-
+@Slf4j
 public class AuthenticInterceptor extends WebContentInterceptor{
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws ServletException{
 		LoginSession loginSession = LoginSession.getLoginSession();
+		log.info("Auth ì¸í„°ì…‰í„°");
 		
 		if(loginSession == null) {
-			// Äõ¸®, xml »ı¼º ÈÄ ÀÛ¼º ¿¹Á¤
+			// ï¿½ï¿½ï¿½ï¿½, xml ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
 		
 		return true;
