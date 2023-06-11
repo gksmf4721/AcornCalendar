@@ -3,11 +3,11 @@
 <mapper namespace="mapper.com.member">
 
 
-	<select id="insertMember" parameterType="acornMap" resultType="acornMap">
+	<insert id="insertMember" parameterType="acornMap">
 		INSERT INTO JH_MEMBER
 		(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN)
 		VALUES(#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
-	</select>
+	</insert>
 
     
 
