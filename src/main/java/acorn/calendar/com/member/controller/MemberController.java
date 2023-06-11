@@ -43,19 +43,19 @@ public class MemberController {
 		try {
 			AcornMap acornMap = JsonUtils.toAcornMap(json);
 
-			// "", null, length 유효성 검사
-			acornMap.put("mName",null);
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap);
 
 			resultMap.put("resultMsg","회원가입이 완료됐습니다.");
+			resultMap.put("resultCd", "1");
 			resultMap.put("resultUrl","/");
 			ResponseUtils.jsonMap(response,resultMap);
 
 		}catch(Exception e) {
 			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
 			resultMap.put("resultMsg","회원가입에 실패했습니다.");
+			resultMap.put("resultCd", "-1");
 			ResponseUtils.jsonMap(response,resultMap);
 		}
 	}

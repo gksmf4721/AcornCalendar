@@ -1,55 +1,131 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/default_layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
 
-<th:block layout:fragment="content">
-	<div class="contents_wrap">
+<th:block layout:fragment="mainContent">
+	<div class="login_in_content">
+	<p class="login_in_form_title">회원가입</p>
+	<form id="formData">
 		<div>이름</div>
-		<input type="text" id="mName">
+		<input type="text" id="mName" class="login_in_name" data-name="이름">
+		
 		<div>아이디</div>
-		<input type="text" id="mId">
+		<input type="text" id="mId" data-name="아이디">
+		<input type="button" id="idChk" value="아이디 중복">
+		<p id="idChk_info">아이디 중복 체크를 해주세요</p>
+		
 		<div>비밀번호</div>
-		<input type="password" id="mPw">
+		<input type="password" id="mPw" data-name="비밀번호">
+		
 		<div>닉네임</div>
-		<input type="text" id="mNickname">
+		<input type="text" id="mNickname" data-name="닉네임">
+		<input type="button" id="nickChk" value="닉네임 중복">
+		<p id="nickChk_info">닉네임 중복 체크를 해주세요</p>
+		
 		<div>이메일</div>
-		<input type="text" id="mEmail">
+		<input type="text" id="mEmail" data-name="이메일">
+		<input type="button" id="emailChk" value="이메일 중복">
+		<p id="emailChk_info">이메일 중복 체크를 해주세요</p>
+		
 		<div>생년월일</div>
-		<input type="text" id="mBirth">
+		<input type="text" id="mBirth" data-name="생년월일">
 		<div>생일공개여부</div>
-		<input type="text" id="mBirthYn">		
+		<input type="text" id="mBirthYn" data-name="생일공개여부">		
+		
+		
+		<select id="111" data-name="셀렉트"></select>
+		
+		<input type="radio">
+		<input type="checkbox">
 		
 		<input type="button" id="btn-ajax" value="전송">
+		<input type="button" id="btn-ajax2" value="전송">
+	</form>
 	</div>
 	<script>
-    
+	/* common.js로 뺄거 */
+    function fn_dataChk(formId){
+    	let chk = true;
+		const allElements = formId.getElementsByTagName('*');
+		for (let i = 0; i < allElements.length; i++) {
+			const element = allElements[i];
+			if (element.hasAttribute('data-name') && element.value =="") {
+				alert(element.dataset.name + "을(를) 입력해주세요");
+				element.focus();
+				chk = false;
+				return false;
+			  }
+		}
+	return chk;
+	}
 	
-	var btn = document.getElementById("btn-ajax");
+    const idChk = document.getElementById("idChk");
+    const nickChk = document.getElementById("nickChk");
+    const emailChk = document.getElementById("emailChk");
 	
+    idChk.addEventListener('click', function() {
+    	duplicateChk(idChk);
+	});
     
+    nickChk.addEventListener('click', function() {
+    	duplicateChk(nickChk);
+	});
     
-	btn.addEventListener('click', ()=>{
+    emailChk.addEventListener('click', function() {
+    	duplicateChk(emailChk);
+	});
+    
+    function duplicateChk(chkId){
+    	var sibling = chkId.previousElementSibling;
+    	
+    	if(chkId == nickChk){
+    	   	data = { type : 'nickname' ,mNickname : sibling.value }
+    	}else if(chkId == emailChk){
+    		data = { type : 'email', mEmail : sibling.value }
+    	}else if(chkId == idChk){
+    		data = { type : 'id', mId: sibling.value }
+    	}
+    	
+    	//XMLHttpRequest 객체 생성
+		var xhr = new XMLHttpRequest();
 
-    var inputName = document.getElementById("mName").value;
-    var inputId = document.getElementById("mId").value;
-    var inputPw = document.getElementById("mPw").value;
-    var inputNickname = document.getElementById("mNickname").value;
-    var inputEmail = document.getElementById("mEmail").value;
-    var inputBirth = document.getElementById("mBirth").value;
-    var inputBirthYn = document.getElementById("mBirthYn").value;
-
-    data = {
-        mName : inputName,
-        mId : inputId,
-        mPw : inputPw,
-        mNickname : inputNickname,
-        mEmail : inputEmail,
-        mBirth : inputBirth,
-        mBirthYn : inputBirthYn
-    };
+		//요청을 보낼 방식, url , 비동기(true) / 동기(false)
+		xhr.open('POST', '/inputCheck.json, true);
+		
+		//HTTP요청 헤더 설정
+		xhr.setRequestHeader('Content-type', 'application/json');
+		
+		//요청 전송
+		xhr.send(JSON.stringify(data));
+		
+		//Callback
+		xhr.onload = () =>{
+			let data = strToObj(xhr);
+			if(xhr.status == 200 && data.resultCd===1){
+				
+				//성공일시
+				nickChk_info.innerText = "닉네임중복검사에 성공했습니다.";
+				// var resultData = xhr.resultData;
+				// location.href = resultData;  // 해당 페이지 이동
+			} else {
+				//실패일시
+				alert(data.resultMsg);
+			}
+		}
+    }
     
+    
+	var nickChkk= document.getElementById("nickChk");
+	nickChkk.addEventListener('click', ()=>{
+		var inputNickname = document.getElementById("mNickname").value;
+		var inputEmail = document.getElementById("mEmail").value;
+		var nickChk_info = document.getElementById("nickChk_info").value;
+		data = {
+		        mNickname : inputNickname,
+		        mEmail : inputEmail,
+		    };
 		//XMLHttpRequest 객체 생성
 		var xhr = new XMLHttpRequest();
-		
+
 		//요청을 보낼 방식, url , 비동기(true) / 동기(false)
 		xhr.open('POST', '/join.json', true);
 		
@@ -63,15 +139,73 @@
 		//Callback
 		xhr.onload = () =>{
 			let data = strToObj(xhr);
-			if(xhr.status == 200){
+			if(xhr.status == 200 && data.resultCd===1){
+				
 				//성공일시
-				alert(data.resultMsg);
-				location.href = data.resultUrl;
+				nickChk_info.innerText = "닉네임중복검사에 성공했습니다.";
 				// var resultData = xhr.resultData;
 				// location.href = resultData;  // 해당 페이지 이동
 			} else {
 				//실패일시
 				alert(data.resultMsg);
+			}
+		}
+		
+	});
+    
+    
+   var btn = document.getElementById("btn-ajax");
+    
+	btn.addEventListener('click', ()=>{
+	var dataChk = fn_dataChk(formData);
+	if(dataChk == true){
+		
+	    var inputName = document.getElementById("mName").value;
+	    var inputId = document.getElementById("mId").value;
+	    var inputPw = document.getElementById("mPw").value;
+	    var inputNickname = document.getElementById("mNickname").value;
+	    var inputEmail = document.getElementById("mEmail").value;
+	    var inputBirth = document.getElementById("mBirth").value;
+	    var inputBirthYn = document.getElementById("mBirthYn").value;
+	    
+	    data = {
+	        mName : inputName,
+	        mId : inputId,
+	        mPw : inputPw,
+	        mNickname : inputNickname,
+	        mEmail : inputEmail,
+	        mBirth : inputBirth,
+	        mBirthYn : inputBirthYn
+	    };
+	    
+			//XMLHttpRequest 객체 생성
+			var xhr = new XMLHttpRequest();
+			
+			//요청을 보낼 방식, url , 비동기(true) / 동기(false)
+			xhr.open('POST', '/join.json', true);
+			
+			//HTTP요청 헤더 설정
+			xhr.setRequestHeader('Content-type', 'application/json');
+			
+			//요청 전송
+			xhr.send(JSON.stringify(data));
+			
+			
+			//Callback
+			xhr.onload = () =>{
+				let data = strToObj(xhr);
+				if(xhr.status == 200 && data.resultCd===1){
+					
+					//성공일시
+					alert(data.resultMsg);
+					
+					location.href = data.resultUrl;
+					// var resultData = xhr.resultData;
+					// location.href = resultData;  // 해당 페이지 이동
+				} else {
+					//실패일시
+					alert(data.resultMsg);
+				}
 			}
 		}
 	});
