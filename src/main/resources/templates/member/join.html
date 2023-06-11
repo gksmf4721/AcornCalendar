@@ -36,10 +36,8 @@
     var inputEmail = document.getElementById("mEmail").value;
     var inputBirth = document.getElementById("mBirth").value;
     var inputBirthYn = document.getElementById("mBirthYn").value;
-		
-		
-		
-    data = JSON.stringify({
+
+    data = {
         mName : inputName,
         mId : inputId,
         mPw : inputPw,
@@ -47,7 +45,7 @@
         mEmail : inputEmail,
         mBirth : inputBirth,
         mBirthYn : inputBirthYn
-    });
+    };
     
 		//XMLHttpRequest 객체 생성
 		var xhr = new XMLHttpRequest();
@@ -59,14 +57,16 @@
 		xhr.setRequestHeader('Content-type', 'application/json');
 		
 		//요청 전송
-		xhr.send(data);
-		console.log(data);
+		xhr.send(JSON.stringify(data));
+		
 		
 		//Callback
 		xhr.onload = () =>{
 			if(xhr.status == 200){
 				//성공일시
-				console.log(xhr.response);
+				console.log(xhr.resultMsg);
+				var resultData = xhr.resultData;
+				location.href = resultData;  // 해당 페이지 이동
 			} else {
 				//실패일시
 				alert('실패!!');

@@ -1,13 +1,15 @@
 <!-- 화면 설정파일(css, js) 정의 영역 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="configFragment">
+<th:block th:fragment="mainConfigFragment">
   <head>
     <title>header</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link th:href="@{/css/header.css}" rel="stylesheet" />
     <link th:href="@{/css/content.css}" rel="stylesheet" />
+    
+    
     
     <script type="text/javascript" th:src="@{/js/member.js}"></script>
   </head>
