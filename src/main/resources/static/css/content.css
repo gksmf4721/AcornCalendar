@@ -1,8 +1,9 @@
 @charset "UTF-8";
-.contents_wrap {
-    position: relative;
-    padding-top: 70px;
-    padding-left: 230px;
-    box-sizing: border-box;
-    height:100%;
-}
+
+/* 헤더, 좌측 메뉴 제외 바디 부분 */
+.contents_wrap {position: relative;padding-top: 70px;padding-left: 230px;box-sizing: border-box;height:100%;}
+.container {position: relative;min-width: 1330px;height: 100%;}
+
+
+/* 푸터 */
+.footer {min-width: 1170px;padding: 15px 30px;font-size: 13px;color: #777;text-align: center;border-top: 1px solid #ddd;}

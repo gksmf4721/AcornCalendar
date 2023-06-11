@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <th:block th:replace="fragments/mainConfig :: mainConfigFragment"></th:block>
-    <body>
-        <th:block th:replace="fragments/mainHeader :: mainHeaderFragment"></th:block>
-        <th:block layout:fragment="MainContent"></th:block>
-        <th:block th:replace="fragments/footer :: footerFragment"></th:block>
+    
+    <body class="login_in_body">
+		
+		<div class="login_wrap">
+			<div class="login_in_header">
+	        		<th:block th:replace="fragments/mainHeader :: mainHeaderFragment"></th:block>
+			</div>
+			
+	        		<th:block layout:fragment="mainContent"></th:block>
+
+			<div class="login_in_footer">
+	        		<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+			</div>
+		</div>
     </body>
 </html>

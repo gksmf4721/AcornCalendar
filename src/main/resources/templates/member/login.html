@@ -1,17 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
 
-<th:block layout:fragment="MainContent">
-	<div class="contents_wrap">
-	<form action="">
-		<div>아이디</div>
-		<input type="text">
-		<div>비밀번호</div>
-		<input type="password">
+<th:block layout:fragment="mainContent">
+	<div class="login_in_content">
+	<p class="login_in_form_title">로그인</p>
+	<div class="login_in_form_contents">
+		<form>
+			<input type="text" class="login_in_id" autocomplete="off" placeholder="아이디를 입력하세요">
+			<input type="password" class="login_in_pw" autocomplete="off"  placeholder="비밀번호를 입력하세요">
+			<input type="button" class="login_in_btn" id="btn-ajax" value="전송">
+			
+			<div class="login_id_save_div">
+			<input type="checkbox" class="login_id_chk"><span>아이디 저장</span>
+			</div>
+		</form>
 		
-		<input type="submit" value="전송">
-	</form>
+		
+		<div class="login_href">
+			<a href="#" onclick="forwardURL('kakao')">카카오로 로그인</a>
+		</div>
+		<div class="login_href">
+			<a href="#" onclick="forwardURL('find')" >아이디/비밀번호 찾기</a>
+		</div>
+		
 	</div>
-</th:block>
+	</div>
+	
+	<div class="login_in_content">
+		계정이 없으신가요?
+		<a href="#" onclick="forwardURL('join')">가입하기</a>
+	</div>
+	
+	
+<script>
+function forwardURL(url){
+	if(url === 'kakao'){
+		window.location.href="/kakao.login.do";
+	} else if(url === 'find'){
+		window.location.href = "member/find.do"; 
+ 	} else if(url === 'join'){
+ 		window.location.href = "/join.do";
+ 	}
+}
+</script>	
 
+
+</th:block>
 </html>

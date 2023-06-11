@@ -19,7 +19,3 @@
 .menubar{position: fixed;top: 0;left: 0;bottom: 0;min-width: 210px;padding-top: 70px;z-index: 999;background-color: #ececec;box-sizing: border-box;}
 .menubar > .inner {position: relative;height: 100%;}
 
-footer{
-  position : relative;
-  transform : translateY(-100%);
-}
