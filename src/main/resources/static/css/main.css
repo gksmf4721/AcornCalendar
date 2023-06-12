@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 메인레이아웃에서 사용 */
-.login_in_body{ background: url() no-repeat center 0; background-size: cover; }
+.login_in_body{ background: url(../img/background/background4.jpg) no-repeat center 0; background-size: cover; }
 .login_wrap {min-width: 1000px;}
 .login_in_header{    height: 30px; padding: 15px 30px; margin-bottom: 20px; font-size: 20px; line-height: 1.5;
 background-color: rgb(3, 36, 68, 0.3); border-bottom: 1px solid rgba(255,255,255,0.3); box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);}
