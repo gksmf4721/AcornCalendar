@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
 /* 메인레이아웃에서 사용 */
-.login_in_body{ background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/background/background4.jpg); background-color: #ffb6c1; background-size: contain;}
+.login_in_body{ background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/background/background7.jpg); 
+    background-color: #ffb6c1; background-size: cover; background-repeat: no-repeat; background-position:bottom;}
 .login_wrap {min-width: 1000px;}
 .login_in_header{    height: 30px; padding: 15px 30px; margin-bottom: 20px; font-size: 20px; line-height: 1.5;
 background-color: rgb(3, 36, 68, 0.3); border-bottom: 1px solid rgba(255,255,255,0.3); box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);}
 
-.login_in_content{ width: 360px; padding: 20px; margin: 0 auto; margin-bottom:20px; background-color: #fff; border-radius: 5px;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);}
+.login_in_content{ width: 360px; padding: 30px; margin: 0 auto; margin-bottom:20px; background-color: #fff; border-radius: 5px;box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);}
 .login_in_footer{ position: fixed; right: 0; left: 0; bottom: 0;min-width: 1000px; padding: 15px 25px; font-size: 13px;  text-align: center; border-top: 1px solid black; }
 
 /* 메인 헤더에서 사용 */
