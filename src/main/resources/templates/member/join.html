@@ -2,36 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
 
 <th:block layout:fragment="mainContent">
-	<div class="login_in_content">
-	<p class="login_in_form_title">회원가입</p>
+	<div class="login_in_content" style="height: 530px;">
+	<p class="login_in_form_title">♥ JOIN ♥</p>
 	<form id="formData">
-		<div>이름</div>
-		<input type="text" id="mName" class="login_in_name" data-name="이름">
 		
-		<div>아이디</div>
-		<input type="text" id="mId" data-name="아이디">
-		<input type="button" id="idChk" value="아이디 중복">
-		<p id="idChk_info">아이디 중복 체크를 해주세요</p>
+		<input type="text" id="mName" class="login_in_name" data-name="이름" placeholder="이름">
+
+		<input type="text" id="mId" data-name="아이디" placeholder="아이디">
+		<input type="button" id="idChk" value="중복">
+		<span id="idChk_info" >아이디 중복 체크를 해주세요</span>
 		
-		<div>비밀번호</div>
-		<input type="password" id="mPw" data-name="비밀번호">
+		<input type="password" id="mPw" data-name="비밀번호" placeholder="비밀번호">
 		
-		<div>닉네임</div>
-		<input type="text" id="mNickname" data-name="닉네임">
-		<input type="button" id="nickChk" value="닉네임 중복">
-		<p id="nickChk_info">닉네임 중복 체크를 해주세요</p>
+		<input type="text" id="mNickname" data-name="닉네임" placeholder="닉네임">
+		<input type="button" id="nickChk" value="중복">
+		<span id="nickChk_info">닉네임 중복 체크를 해주세요</span>
 		
-		<div>이메일</div>
-		<input type="text" id="mEmail" data-name="이메일">
-		<input type="button" id="emailChk" value="이메일 중복">
-		<p id="emailChk_info">이메일 중복 체크를 해주세요</p>
+		<input type="text" id="mEmail" data-name="이메일" placeholder="이메일">
+		<input type="button" id="emailChk" value="중복">
+		<span id="emailChk_info">이메일 중복 체크를 해주세요</span>
 		
 		<div>생년월일</div>
-		<input type="text" id="mBirth" data-name="생년월일">
+		<input type="date" id="mBirth" data-name="생년월일">
 		<div>생일공개여부</div>
 		<input type="text" id="mBirthYn" data-name="생일공개여부">
 
-		<input type="button" id="btn-ajax" value="전송">
+		<button type="button" id="btn-ajax" value="전송">
 	</form>
 	</div>
 	<script>
