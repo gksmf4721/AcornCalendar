@@ -6,8 +6,9 @@
 	<p class="login_in_form_title">♥ LOGIN ♥</p>
 	<div class="login_in_form_contents">
 		<form>
-			<input type="text" class="login_in_id" autocomplete="off" placeholder="아이디를 입력하세요">
-			<input type="password" class="login_in_pw" autocomplete="off"  placeholder="비밀번호를 입력하세요">
+			<input type="text" id="mId" class="login_in_id" autocomplete="off" placeholder="아이디를 입력하세요">
+			<!--<input type="password" id=mPw" class="login_in_pw" autocomplete="off"  placeholder="비밀번호를 입력하세요">-->
+			<input type="password" id="mPw" class="login_in_pw" autocomplete="off" placeholder="비밀번호를 입력하세요">
 			<input type="button" class="login_in_btn" id="btn-ajax" value="로그인">
 			
 			<div class="login_id_save_div">
@@ -42,6 +43,30 @@ function forwardURL(url){
  		window.location.href = "/join.do";
  	}
 }
+
+	let btn = document.getElementById("btn-ajax");
+
+	btn.addEventListener('click',()=> {
+		let inputId = document.getElementById('mId').value;
+		let inputPw = document.getElementById('mPw').value;
+
+		data = {
+			mId: inputId,
+			mPw: inputPw
+		}
+		let xhr = new XMLHttpRequest();
+		xhr.open('POST', '/loginCheck.json', true);
+		xhr.setRequestHeader('Content-type', 'application/json');
+		xhr.send(JSON.stringify(data));
+		xhr.onload = () => {
+			let data = strToObj(xhr);
+			if (xhr.status == 200 && data.resultCd === '1') {
+				location.href = data.resultUrl;
+			} else {
+				alert(data.resultMsg);
+			}
+		}
+	})
 </script>	
 
 

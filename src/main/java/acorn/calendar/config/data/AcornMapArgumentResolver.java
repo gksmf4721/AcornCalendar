@@ -35,6 +35,7 @@ public class AcornMapArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+		log.info("리졸버");
 		HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
 		AcornMap acornMap = new AcornMap();
 		acornMap = RequestUtils.getParamMap(request);

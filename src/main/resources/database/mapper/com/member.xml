@@ -28,7 +28,7 @@
 	</select>
 
 	<select id="selectLogin" parameterType="acornMap" resultType="acornMap">
-		SELECT *
+		SELECT M_SEQ, M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN
 		FROM JH_MEMBER
 		WHERE M_ID = #{mId}
 		AND M_DEL_YN = 'N'

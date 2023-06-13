@@ -3,8 +3,10 @@ package acorn.calendar.com.member.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import acorn.calendar.config.util.JsonUtils;
+import acorn.calendar.config.model.LoginSession;
+import acorn.calendar.config.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import acorn.calendar.com.member.service.MemberService;
 import acorn.calendar.config.data.AcornMap;
-import acorn.calendar.config.util.PasswordHashUtils;
-import acorn.calendar.config.util.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
 
 @Slf4j
 @Controller
@@ -30,6 +31,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	@Autowired
+	private MessageSource messageSource;
 
 	@RequestMapping("/")
 	public String login() throws Exception {
@@ -44,34 +48,39 @@ public class MemberController {
 	@RequestMapping(value="/join.json" )
 	public void joinMember(@RequestBody String json, HttpServletResponse response) throws Exception {
 
-		AcornMap resultMap = new AcornMap();
-
 		try {
 			AcornMap acornMap = JsonUtils.toAcornMap(json);
 
-			// "", null, length 유효성 검사
+			String valCd = ValidateUtils.validate(acornMap,acornMap.getString("mPw"),"pwValid:true");
+			if(!"".equals(valCd)){
+				String valMsg = validMsg(valCd);
+				ResponseUtils.responseMap(response,"-1",valMsg,"");
+				return;
+			}
+			if(!acornMap.getString("mPwChk").equals(acornMap.getString("mPw"))){
+				ResponseUtils.responseMap(response,"-1",validMsg("join.check.password"),"");
+				return;
+			}
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap);
 
-			resultMap.put("resultMsg","회원가입이 완료됐습니다.");
-			resultMap.put("resultCd","1");
-			resultMap.put("resultUrl","/");
-			ResponseUtils.jsonMap(response,resultMap);
+			ResponseUtils.responseMap(response,"1",validMsg("join.success"),"/");
 
 		}catch(Exception e) {
-			log.info("EXCEPTION : THROWS_NULL_POINTER_EXCEPTION");
-			resultMap.put("resultCd","-1");
-			resultMap.put("resultMsg","회원가입에 실패했습니다.");
-			ResponseUtils.jsonMap(response,resultMap);
+			e.printStackTrace();
+			ResponseUtils.responseMap(response,"-1",validMsg("join.fail"),"");
 		}
+	}
+
+	public String validMsg(String code) throws Exception{
+		return messageSource.getMessage(code,null,Locale.KOREA);
 	}
 
 	@RequestMapping("/inputCheck.json")
 	public void inputCheck(@RequestBody String json, HttpServletResponse response) throws Exception {
 
 		AcornMap resultMap = JsonUtils.toAcornMap(json);
-
 		String type = resultMap.getString("type");
 
 		int result = memberService.selectInputCheck(resultMap);
@@ -92,8 +101,10 @@ public class MemberController {
 		try{
 			AcornMap resultMap = memberService.selectLogin(acornMap);
 
+			if(null == resultMap){throw new Exception("NOT_FOUND_MEMBER_ID");}
+
 			if(PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))){
-				resultMap.put("resultMsg","로그인 성공");
+				LoginSession.setLoginSession(resultMap);
 				resultMap.put("resultCd","1");
 				resultMap.put("resultUrl","/main");
 			}else{

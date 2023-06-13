@@ -28,9 +28,18 @@ public class RequestUtils {
 				acornMap.put(key, new ArrayList(Arrays.asList(val)));
 			}
 		}
-		
-		//��� �Ķ���Ϳ� �α��� ���� �ٰ� ��.
+
 		LoginSession login = LoginSession.getLoginSession();
+		AcornMap loginMap = RequestUtils.getLoginSession(login);
+		acornMap.putAll(loginMap);
+
+		return acornMap;
+	}
+
+	public static AcornMap getLoginSession(LoginSession login) {
+
+		AcornMap acornMap = new AcornMap();
+
 		if(login!=null) {
 			acornMap.put("sessionLogin", "Y");
 			acornMap.put("session_m_seq", login.getM_seq());
@@ -40,7 +49,7 @@ public class RequestUtils {
 			acornMap.put("session_m_email", login.getM_email());
 			acornMap.put("session_m_birth", login.getM_birth());
 			acornMap.put("session_m_birth_yn", login.getM_birth_yn());
-			acornMap.put("session_m_del_yn", login.getM_del_yn());			
+			acornMap.put("session_m_del_yn", login.getM_del_yn());
 		}else {
 			acornMap.put("sessionLogin", "N");
 			acornMap.remove("session_m_seq");
@@ -50,9 +59,9 @@ public class RequestUtils {
 			acornMap.remove("session_m_email");
 			acornMap.remove("session_m_birth");
 			acornMap.remove("session_m_birth_yn");
-			acornMap.remove("session_m_del_yn");			
+			acornMap.remove("session_m_del_yn");
 		}
-		
+
 		return acornMap;
 	}
 }

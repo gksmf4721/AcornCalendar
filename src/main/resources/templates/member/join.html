@@ -13,6 +13,8 @@
 		<span id="idChk_info" >아이디 중복 체크를 해주세요</span>
 		
 		<input type="password" id="mPw" data-name="비밀번호" placeholder="비밀번호">
+
+		<input type="password" id="mPwChk" data-name="비밀번호 확인" placeholder="비밀번호 확인">
 		
 		<input type="text" id="mNickname" data-name="닉네임" placeholder="닉네임">
 		<input type="button" id="nickChk" value="중복">
@@ -22,12 +24,14 @@
 		<input type="button" id="emailChk" value="중복">
 		<span id="emailChk_info">이메일 중복 체크를 해주세요</span>
 		
+		<!--<div>생년월일</div>
+		<input type="date" id="mBirth" data-name="생년월일">-->
 		<div>생년월일</div>
-		<input type="date" id="mBirth" data-name="생년월일">
+		<input type="text" id="mBirth" data-name="생년월일">
 		<div>생일공개여부</div>
 		<input type="text" id="mBirthYn" data-name="생일공개여부">
 
-		<button type="button" id="btn-ajax" value="전송">
+		<button type="button" id="btn-ajax" value="전송"></button>
 	</form>
 	</div>
 	<script>
@@ -129,7 +133,8 @@
 	    var inputEmail = document.getElementById("mEmail").value;
 	    var inputBirth = document.getElementById("mBirth").value;
 	    var inputBirthYn = document.getElementById("mBirthYn").value;
-	    
+		var inputPwChk = document.getElementById("mPwChk").value;
+
 	    data = {
 	        mName : inputName,
 	        mId : inputId,
@@ -137,7 +142,8 @@
 	        mNickname : inputNickname,
 	        mEmail : inputEmail,
 	        mBirth : inputBirth,
-	        mBirthYn : inputBirthYn
+	        mBirthYn : inputBirthYn,
+			mPwChk : inputPwChk
 	    };
 	    
 			//XMLHttpRequest 객체 생성
