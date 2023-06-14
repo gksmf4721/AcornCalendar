@@ -106,7 +106,7 @@ public class MemberController {
 			if(PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))){
 				LoginSession.setLoginSession(resultMap);
 				resultMap.put("resultCd","1");
-				resultMap.put("resultUrl","/main");
+				resultMap.put("resultUrl","/main.do");
 			}else{
 				resultMap.clear();
 				resultMap.put("resultMsg","비밀번호를 확인해주세요");

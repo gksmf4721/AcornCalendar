@@ -5,17 +5,15 @@
 	<div class="login_in_content">
 	<p class="login_in_form_title">♥ LOGIN ♥</p>
 	<div class="login_in_form_contents">
-		<form>
+		<form id="formData">
 			<input type="text" id="mId" class="login_in_id" autocomplete="off" placeholder="아이디를 입력하세요">
-			<!--<input type="password" id=mPw" class="login_in_pw" autocomplete="off"  placeholder="비밀번호를 입력하세요">-->
 			<input type="password" id="mPw" class="login_in_pw" autocomplete="off" placeholder="비밀번호를 입력하세요">
 			<input type="button" class="login_in_btn" id="btn-ajax" value="로그인">
 			
 			<div class="login_id_save_div">
-			<input type="checkbox" class="login_id_sv"><span>아이디 저장</span>
+			<input type="checkbox" id="saveId" class="login_id_sv"><span>아이디 저장</span>
 			</div>
 		</form>
-		
 		
 		<div class="login_href">
 			<a href="#" onclick="forwardURL('kakao')">카카오로 로그인</a>
@@ -34,21 +32,40 @@
 	
 	
 <script>
-function forwardURL(url){
-	if(url === 'kakao'){
-		window.location.href="/kakao.login.do";
-	} else if(url === 'find'){
-		window.location.href = "member/find.do"; 
- 	} else if(url === 'join'){
- 		window.location.href = "/join.do";
- 	}
-}
+	document.addEventListener("DOMContentLoaded", function(){
+		if(getCookie('id')){
+			document.getElementById('mId').value = getCookie('id');
+			document.getElementById('saveId').checked = true;
+		}
+	});
+
+	const setCookie = function (name, value, expiredDay) {
+		const expired = new Date();
+		expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
+		document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expired.toUTCString() + ';path=/';
+	};
+
+	const getCookie = function (name) {
+		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+		return value ? decodeURIComponent(value[2]) : null;
+	};
+
+	function forwardURL(url){
+		if(url === 'kakao'){
+			window.location.href="/kakao.login.do";
+		} else if(url === 'find'){
+			window.location.href = "member/find.do";
+		} else if(url === 'join'){
+			window.location.href = "/join.do";
+		}
+	}
 
 	let btn = document.getElementById("btn-ajax");
 
 	btn.addEventListener('click',()=> {
 		let inputId = document.getElementById('mId').value;
 		let inputPw = document.getElementById('mPw').value;
+		let chk = document.getElementById('saveId').checked;
 
 		data = {
 			mId: inputId,
@@ -61,14 +78,14 @@ function forwardURL(url){
 		xhr.onload = () => {
 			let data = strToObj(xhr);
 			if (xhr.status == 200 && data.resultCd === '1') {
+				if(chk) setCookie('id', inputId, 7);
+				else setCookie('id',0,0);
 				location.href = data.resultUrl;
 			} else {
 				alert(data.resultMsg);
 			}
 		}
 	})
-</script>	
-
-
+</script>
 </th:block>
 </html>
