@@ -27,6 +27,7 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 .login_href{ text-align: center; padding: 10px; font-size: 18px;}
 
 /* 회원가입 CSS */
+.back_arrow{width: 15px; height: 15px; filter: invert(84%) sepia(27%) saturate(266%) hue-rotate(332deg) brightness(109%) contrast(96%);}
 #formData > .login_input {width: 100%; height: 40px; margin-top: 10px;} /* 일반 Input 파일 */
 #formData > .login_input_chk {width: 97%; height: 40px; margin-top: 10px; margin-bottom: 2px;} /* 중복체크가 있는 Input 파일 */
 
@@ -35,4 +36,9 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 
 #formData > .chk_befo{font-size:14px;}
 #formData > .chk_after{font-size:14px; color:#fff}
+#formData > .box_col{display:flex; flex-direction: row; padding: 10px 0 20px 0; margin: 5px 0 20px 0; border-bottom: 2px solid #faebd7; border-top: 2px solid #faebd7;}
+.box_col > .flex-item{width:50%; text-align: left;}
+.birth_title{padding-bottom: 10px; font-size:15px}
+.birth_title + input[type="date"]{width: 90%; height: 30px;} 
+.birth_title ~ input[type="radio"]{width: 10%; height: 15px; margin-top:10px; cursor: pointer;} 
 

@@ -20,6 +20,13 @@ pre{white-space: pre-wrap; margin: 0;}
 .blind{position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0);}
 input:read-only{background-color: #44413e; color: rgb(229 221 212);}
 td{position: relative;}
+input[type=date]{position: relative;}
+input[type=date]::-webkit-clear-button
+input[type=date]::-webkit-inner-spin-button{display:none}
+input[type=date]::-webkit-calendar-picker-indicator{
+	position:absolute; left: 0; top: 0; width: 100%; height: 100%; background: transparent; color:transparent; cursor: pointer;
+}
+input[type=date]{background:url(../img/icons/calendar.png) no-repeat right 15px center / 15px auto; background-color: #fff;}
 
 *{font-family: 'DungGeunMo';}
 

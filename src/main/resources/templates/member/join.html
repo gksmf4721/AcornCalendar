@@ -3,6 +3,7 @@
 
 <th:block layout:fragment="mainContent">
    <div class="login_in_content" style="height: 600px;">
+      <span ><img src="../img/icons/arrow_left.png" class="back_arrow"></span>
    <p class="login_in_form_title">♥ JOIN ♥</p>
    <form id="formData">
       
@@ -24,24 +25,26 @@
       <button type="button" id="emailChk">중복</button>
       <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
       
-      <div>생년월일
-      <input type="date" id="mBirth" data-name="생년월일">
-      </div>
-      
-      <div>생일공개여부
-      <input type="radio" id="mBirthYn" name="mBirthYn" value="Y">
-      <label for="Y">공개</label>
-      <input type="radio" id="mBirthYn" name="mBirthYn" value="N">
-      <label for="N">비공개</label>
-      </div>
-
+      <div class="box_col">
+         <div class="flex-item">
+            <p class="birth_title">생년월일</p>
+            <input type="date" id="mBirth" data-name="생년월일"  class="login_input">
+         </div>
+         <div class="flex-item">
+            <p class="birth_title">생일공개여부</p>
+            <input type="radio" id="mBirthYn" name="mBirthYn" value="Y">
+            <label for="Y">공개</label>
+            <input type="radio" id="mBirthYn" name="mBirthYn" value="N">
+            <label for="N">비공개</label>
+         </div>
+   </div>
       <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
    </form>
    </div>
    <script>
    
    /* common.js로 뺄거 */
-    function fn_dataChk(formId){
+   function fn_dataChk(formId){
        let chk = true;
       const allElements = formId.getElementsByTagName('*');
       for (let i = 0; i < allElements.length; i++) {
