@@ -24,7 +24,7 @@
 	<select id="selectEmailCheck" parameterType="acornMap" resultType="int">
 		SELECT COUNT(1)
 		FROM JH_MEMBER
-		WHERE M_NICKNAME = #{mEmail}
+		WHERE M_EMAIL = #{mEmail}
 	</select>
 
 	<select id="selectLogin" parameterType="acornMap" resultType="acornMap">

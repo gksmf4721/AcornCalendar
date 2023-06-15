@@ -55,6 +55,8 @@ dependencies {
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
 	implementation 'com.google.code.gson:gson:2.9.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
     //JSP 설정
 	//implementation 'javax.servlet:jstl'
 	//implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'

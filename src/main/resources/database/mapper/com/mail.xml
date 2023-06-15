@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.com.mail">
+
+	<insert id="insertMailAuthHistory" parameterType="acornMap">
+		INSERT INTO JH_MAIL_HISTORY
+		(M_SEQ, HIS_AUTH, HIS_DATE, HIS_FIND_TYPE)
+		VALUES(#{mSeq}, #{hisAuth}, current_timestamp(), #{type})
+	</insert>
+
+	<select id="selectMailAuthHistory" parameterType="acornMap" resultType="acornMap">
+		SELECT JH.HIS_SEQ, JH.M_SEQ, JH.HIS_AUTH, JH.HIS_DATE, JM.M_ID
+		FROM JH_MAIL_HISTORY JH
+			JOIN JH_MEMBER JM ON JH.M_SEQ = JM.M_SEQ
+		WHERE JM.M_EMAIL =#{mEmail}
+			AND JH.HIS_FIND_TYPE = #{type}
+		ORDER BY JH.HIS_SEQ DESC
+			LIMIT 1
+	</select>
+
+	<select id="selectFindId" parameterType="acornMap" resultType="acornMap">
+		SELECT M_ID
+		FROM JH_MEMBER
+		WHERE M_EMAIL = #{mEmail};
+	</select>
+
+	<select id="selectSeq" parameterType="acornMap" resultType="acornMap">
+		SELECT M_SEQ AS mSeq
+		FROM JH_MEMBER
+		WHERE M_EMAIL = #{mEmail}
+	</select>
+
+	<update id="updatePw" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		SET M_PW = #{mPw}
+		WHERE M_EMAIL=#{mEmail}
+	</update>
+
+</mapper>

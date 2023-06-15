@@ -7,6 +7,8 @@ import acorn.calendar.config.model.LoginSession;
 import acorn.calendar.config.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +21,7 @@ import acorn.calendar.config.data.AcornMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -31,9 +30,6 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-
-	@Autowired
-	private MessageSource messageSource;
 
 	@RequestMapping("/")
 	public String login() throws Exception {
@@ -45,6 +41,14 @@ public class MemberController {
 		return "member/join";
 	}
 
+	@RequestMapping("/find.do")
+	public String find(AcornMap acornMap) throws Exception{
+		if(acornMap.getString("type").equals("I")){
+			return "member/findId";
+		}
+		return "member/findPw";
+	}
+
 	@RequestMapping(value="/join.json" )
 	public void joinMember(@RequestBody String json, HttpServletResponse response) throws Exception {
 
@@ -53,28 +57,24 @@ public class MemberController {
 
 			String valCd = ValidateUtils.validate(acornMap,acornMap.getString("mPw"),"pwValid:true");
 			if(!"".equals(valCd)){
-				String valMsg = validMsg(valCd);
+				String valMsg = ValidateUtils.validMsg(valCd);
 				ResponseUtils.responseMap(response,"-1",valMsg,"");
 				return;
 			}
 			if(!acornMap.getString("mPwChk").equals(acornMap.getString("mPw"))){
-				ResponseUtils.responseMap(response,"-1",validMsg("join.check.password"),"");
+				ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("join.check.password"),"");
 				return;
 			}
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap);
 
-			ResponseUtils.responseMap(response,"1",validMsg("join.success"),"/");
+			ResponseUtils.responseMap(response,"1",ValidateUtils.validMsg("join.success"),"/");
 
 		}catch(Exception e) {
 			e.printStackTrace();
-			ResponseUtils.responseMap(response,"-1",validMsg("join.fail"),"");
+			ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("join.fail"),"");
 		}
-	}
-
-	public String validMsg(String code) throws Exception{
-		return messageSource.getMessage(code,null,Locale.KOREA);
 	}
 
 	@RequestMapping("/inputCheck.json")
@@ -106,6 +106,7 @@ public class MemberController {
 			if(PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))){
 				LoginSession.setLoginSession(resultMap);
 				resultMap.put("resultCd","1");
+
 				resultMap.put("resultUrl","/main.do");
 			}else{
 				resultMap.clear();
@@ -114,6 +115,7 @@ public class MemberController {
 			}
 			ResponseUtils.jsonMap(response,resultMap);
 		}catch(Exception e){
+			e.printStackTrace();
 			AcornMap failMap = new AcornMap();
 			failMap.put("resultMsg","아이디를 확인해주세요");
 			failMap.put("resultCd","-1");

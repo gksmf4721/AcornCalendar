@@ -18,6 +18,14 @@ public class ResponseUtils {
 		resultMap.put("resultUrl",url);
 		jsonMap(response,resultMap);
 	}
+	public static void responseMap(HttpServletResponse response, String cd, String msg, String url, String data) throws Exception {
+		AcornMap resultMap = new AcornMap();
+		resultMap.put("resultCd",cd);
+		resultMap.put("resultMsg",msg);
+		resultMap.put("resultUrl",url);
+		resultMap.put("resultData",data);
+		jsonMap(response,resultMap);
+	}
 
 	public static void jsonString(HttpServletResponse response, String string) throws Exception {
 		response.setContentType("application/json");

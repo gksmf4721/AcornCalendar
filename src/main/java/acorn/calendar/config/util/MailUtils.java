@@ -1,0 +1,71 @@
+package acorn.calendar.config.util;
+
+import acorn.calendar.config.data.AcornMap;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+
+@Component
+@RequiredArgsConstructor
+public class MailUtils{
+
+    @Autowired
+    private JavaMailSender postSender;
+
+    private static JavaMailSender sender;
+
+    @PostConstruct
+    private void initStatic(){
+        sender = this.postSender;
+    }
+
+    public static String sendMail(AcornMap acornMap) throws Exception {
+
+        String authCode = RandomStringUtils.randomAlphabetic(6);
+
+        MimeMessage message = sender.createMimeMessage();
+
+        MimeMessageHelper messageHelper  = new MimeMessageHelper(message,true, "UTF-8");
+        if(acornMap.getString("type").equals("I")){
+            messageHelper.setSubject("[AcornCalendar] 아이디 인증 번호입니다.");
+        }else{
+            messageHelper.setSubject("[AcornCalendar] 비밀번호 인증 번호입니다.");
+        }
+        messageHelper.setFrom("acorn_calendar@naver.com");
+        messageHelper.setTo(acornMap.getString("mEmail").toString());
+        messageHelper.setText(createText(authCode),true);
+
+//        ClassPathResource resource = new ClassPathResource("/img/attach/acorn_attach.png");
+//        messageHelper.addInline("img",resource.getFile());
+
+        sender.send(message);
+
+        return authCode;
+    }
+
+    private static String createText(String authCode){
+
+        String text = "";
+
+        //text += "<img src=\"/img/attach/acorn_auth_mail.png\" alt=\"\">";
+        text += "<div style=\"background-color:brown;\">";
+        text += "<p style=\"padding-bottom: 20px; font-size: 30px; line-height: 50px; font-weight: bold;\">코드 인증</p>";
+        text += "<div style=\"width : 100px; height: 100px; border: 1px solid black;\"><h3 style=\"color:red;\">"+authCode+"</h3></div>";
+        text += "<p>"+"이 코드는 3분 뒤 만료됩니다.</p>";
+        text += "</div>";
+
+        return text;
+    }
+
+}

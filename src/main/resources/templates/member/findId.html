@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
+
+<th:block layout:fragment="mainContent">
+	<div class="login_in_content">
+	<p class="login_in_form_title">♥ FIND ID ♥</p>
+		<div class="login_in_form_contents">
+
+		<form id="formData">
+			<input type="text" id="mEmail" class="login_in_id" autocomplete="off" placeholder="이메일을 입력하세요">
+			<button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
+
+			<input type="text" id="mEmailChk" class="login_in_id" autocomplete="off" placeholder="인증번호를 입력하세요">
+			<button type="button" onclick="confirmMail();">인증번호 확인</button>
+
+			ID : <input type="text" class="login_in_id" id="result" value="" readonly>
+
+		</form>
+		</div>
+	</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	function sendMail(){
+
+		let email = $("#mEmail").val();
+
+		$.ajax({
+			type : "POST",
+			url : "/sendMailAuth.json",
+			dataType:'json',
+			contentType : "application/json",
+			data : JSON.stringify({
+				mEmail : email,
+				type : 'I'
+			}),
+			success : function(obj){
+				alert(obj.resultMsg);
+			}
+		})
+	}
+
+	function confirmMail(){
+
+		let emailChk = $("#mEmailChk").val();
+		let email = $("#mEmail").val();
+
+		$.ajax({
+			type : "POST",
+			url : "/confirmMailAuth.json",
+			dataType:'json',
+			contentType : "application/json",
+			data : JSON.stringify({
+				mEmail : email,
+				inputAuth : emailChk,
+				type : 'I'
+			}),
+			success : function(obj){
+				if(obj.resultCd === '1'){
+					$("#result").val(obj.resultData);
+				}else{
+					alert(obj.resultMsg);
+				}
+			}
+		})
+	}
+
+</script>
+</th:block>
+</html>

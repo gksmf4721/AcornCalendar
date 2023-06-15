@@ -1,15 +1,28 @@
 package acorn.calendar.config.util;
 
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import acorn.calendar.config.data.AcornMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 //ValidateUtils���� �˻� (������� �޽��� �����) -> ResponseUtils
 @Slf4j
+@Component
 public class ValidateUtils {
+
+	@Autowired
+	private MessageSource msgSource;
+
+	private static MessageSource messageSource;
+
+	@PostConstruct
+	private void initStatic(){messageSource = this.msgSource;}
 	
 	public static void resultMap(AcornMap acornMap, String code) {
 
@@ -133,5 +146,10 @@ public static String validate(AcornMap acornMap, String str, String validate) {
 		resultMap.put("resultMap", acornMap.getString("resultMsg"));
 		
 		return resultMap;
+	}
+
+
+	public static String validMsg(String code) throws Exception{
+		return messageSource.getMessage(code,null, Locale.KOREA);
 	}
 }
