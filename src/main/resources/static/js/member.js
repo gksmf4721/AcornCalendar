@@ -19,7 +19,9 @@ window.onload = function(){
     btn.addEventListener('click', function(){
         joinJson();
     });
+
 }
+
 
 function duplicateChk(chkId){
     var sibling1 = chkId.previousElementSibling;
