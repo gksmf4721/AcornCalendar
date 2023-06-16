@@ -5,8 +5,18 @@
 
 	<insert id="insertMember" parameterType="acornMap">
 		INSERT INTO JH_MEMBER
-		(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN)
-		VALUES(#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
+			(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN)
+		VALUES
+		    (#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
+		<selectKey keyProperty="mSeq" resultType="String" order="AFTER">
+			SELECT LAST_INSERT_ID() AS M_SEQ
+		</selectKey>
+	</insert>
+
+	<insert id="insertProfile" parameterType="acornMap">
+		INSERT INTO acorncalendar.JH_FILE
+			(F_TYPE, F_TYPE_SEQ, F_OG_NAME, F_SV_NAME, F_SIZE, F_MAIN_YN, F_DEL_YN)
+		VALUES(#{fType}, #{fTypeSeq}, #{fOgName}, #{fSvName}, #{fSize}, 'Y', 'N');
 	</insert>
 
 	<select id="selectIdCheck" parameterType="acornMap" resultType="int">

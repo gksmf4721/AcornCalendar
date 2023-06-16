@@ -11,6 +11,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMailMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
@@ -24,6 +26,14 @@ public class MailUtils{
     private JavaMailSender postSender;
 
     private static JavaMailSender sender;
+
+    @Autowired
+    private SpringTemplateEngine template;
+
+    private static SpringTemplateEngine templateEngine;
+
+    @PostConstruct
+    private void initStt(){templateEngine = this.template;}
 
     @PostConstruct
     private void initStatic(){
@@ -44,28 +54,16 @@ public class MailUtils{
         }
         messageHelper.setFrom("acorn_calendar@naver.com");
         messageHelper.setTo(acornMap.getString("mEmail").toString());
-        messageHelper.setText(createText(authCode),true);
-
-//        ClassPathResource resource = new ClassPathResource("/img/attach/acorn_attach.png");
-//        messageHelper.addInline("img",resource.getFile());
-
+        messageHelper.setText(createHtml(authCode),true);
         sender.send(message);
 
         return authCode;
     }
 
-    private static String createText(String authCode){
-
-        String text = "";
-
-        //text += "<img src=\"/img/attach/acorn_auth_mail.png\" alt=\"\">";
-        text += "<div style=\"background-color:brown;\">";
-        text += "<p style=\"padding-bottom: 20px; font-size: 30px; line-height: 50px; font-weight: bold;\">코드 인증</p>";
-        text += "<div style=\"width : 100px; height: 100px; border: 1px solid black;\"><h3 style=\"color:red;\">"+authCode+"</h3></div>";
-        text += "<p>"+"이 코드는 3분 뒤 만료됩니다.</p>";
-        text += "</div>";
-
-        return text;
+    private static String createHtml(String authCode){
+        Context context = new Context();
+        context.setVariable("code",authCode);
+        return templateEngine.process("mail/sendAuth",context);
     }
 
 }

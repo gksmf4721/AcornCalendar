@@ -50,7 +50,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/join.json" )
-	public void joinMember(@RequestBody String json, HttpServletResponse response) throws Exception {
+	public void joinMember(@RequestBody String json, HttpServletResponse response, HttpServletRequest request) throws Exception {
 
 		try {
 			AcornMap acornMap = JsonUtils.toAcornMap(json);
@@ -67,7 +67,7 @@ public class MemberController {
 			}
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
-			memberService.insertMember(acornMap);
+			memberService.insertMember(acornMap, request);
 
 			ResponseUtils.responseMap(response,"1",ValidateUtils.validMsg("join.success"),"/");
 
