@@ -32,12 +32,10 @@ public class LetterController {
 	@Autowired
 	private LetterService letterService;
 
-	@RequestMapping("/letterList.do")
-	public String letterList(Model model) throws Exception {
-
-
-		model.addAttribute("letterList","");
-		return "";
+	@RequestMapping("/letterList.json")
+	public void letterList(@RequestBody String json, HttpServletResponse response) throws Exception {
+		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		ResponseUtils.jsonList(response, letterService.selectAllLetterList(acornMap));
 	}
 
 	@RequestMapping("letterTrash.json")

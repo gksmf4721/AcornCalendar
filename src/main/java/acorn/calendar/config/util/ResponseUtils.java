@@ -7,6 +7,9 @@ import org.json.JSONObject;
 
 import acorn.calendar.config.data.AcornMap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ResponseUtils {
 
 	private static ObjectMapper objectMapper = new ObjectMapper();
@@ -37,4 +40,10 @@ public class ResponseUtils {
 		String data = (new JSONObject(acornMap)).toString();
 		jsonString(response, data);
 	}
+
+	public static void jsonList(HttpServletResponse response, List<AcornMap> jsonList) throws Exception {
+		String data = (new JSONObject(jsonList)).toString();
+		jsonString(response, data);
+	}
+
 }
