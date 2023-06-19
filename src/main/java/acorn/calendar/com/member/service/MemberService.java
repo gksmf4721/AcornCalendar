@@ -10,37 +10,35 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import javax.activation.DataSource;
 import javax.servlet.http.HttpServletRequest;
 
 @Service("memberService")
 @RequiredArgsConstructor
-@Transactional(rollbackFor={Exception.class})
 public class MemberService {
 
+	// java 버전으로 인해 autowired 없이 private static 으로 선언 불가
 	@Autowired
 	private SqlSession sqlSession;
 
-	// java 버전으로 인해 autowired없이 private static으로 선언 불가
 
-	//@Transactional(rollbackFor=Exception.class)
-
+	//@Transactional(rollbackFor={Exception.class}) // 기존 해당 어노테이션과 다르게 모든 Exception 을 rollback.
 	public void insertMember(AcornMap acornMap, HttpServletRequest request) throws Exception {
 
-		//try{
+		try{
 			sqlSession.insert("mapper.com.member.insertMember",acornMap);
-			//throw new Exception("롤백");
-			//위 쿼리문으로 acornMap에 시퀀스 뽑아옴. 회원가입 시, 프로필 추가 쿼리 사용 예정
 			//sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap,request));
-		//}catch(Exception e){
-			//e.printStackTrace();
-			//TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-			 //트랜잭션 설정 X라서 sqlSession.rollback() 불가, 일단 강제적으로 rollback 지정
-			 //트랜잭션 설정 시, Aspect 설정 안되어 있어서 불가
-			//e.printStackTrace();
-			//sqlSession.rollback();
-		//}
+		}catch (Exception e){
+			sqlSession.rollback();
+		}
 
-
+		// try-catch 를 쓰면 error 발생해도 롤백 안 됨
+		// TransactionConfig 를 지우고 테스트 해보면 트랜잭션 처리는 되는 게 맞음
+		// 근데 try-catch 안에 에러 발생 코드 넣고
+		// sqlSession.rollback(); 해보면 또 먹네..?
+		// try - catch 말고 그냥 해도 먹긴 먹음..
+		// 그냥 메시지만 Manual rollback is not allowed over a Spring managed SqlSession
+		// 이렇게 스프링이 수동 롤백을 지원할 수 없다고 뜨는 듯.
 
 	}
 

@@ -20,8 +20,15 @@
       <input type="text" id="mNickname" class="login_input_chk" data-name="닉네임" placeholder="닉네임">
       <button type="button" id="nickChk" value="중복">중복</button>
       <span id="nickChk_info" class="chk_befo">닉네임 중복 체크를 해주세요</span>
-      
+
+
       <input type="text" id="mEmail" class="login_input_chk" data-name="이메일" placeholder="이메일">
+      <button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
+
+      <input type="text" id="mEmailChk" class="login_in_id" autocomplete="off" placeholder="인증번호를 입력하세요">
+      <button type="button" id="confirmAuthBtn" onclick="confirmMail();">인증번호 확인</button>
+
+
       <button type="button" id="emailChk">중복</button>
       <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
       
@@ -41,7 +48,55 @@
       <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
    </form>
    </div>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
    <script>
+      $(document).ready(function(){
+         $("#mEmailChk").hide();
+         $("#confirmAuthBtn").hide();
+      })
+      function sendMail(){
+
+         let email = $("#mEmail").val();
+
+         $.ajax({
+            type : "POST",
+            url : "/sendMailAuth.json",
+            dataType:'json',
+            contentType : "application/json",
+            data : JSON.stringify({
+               mEmail : email,
+               type : 'J'
+            }),
+            success : function(obj){
+               alert(obj.resultMsg);
+               $('#mEmailChk').show();
+               $('#confirmAuthBtn').show();
+            }
+         })
+      }
+
+      function confirmMail(){
+
+         let emailChk = $("#mEmailChk").val();
+         let email = $("#mEmail").val();
+
+         $.ajax({
+            type : "POST",
+            url : "/confirmMailAuth.json",
+            dataType:'json',
+            contentType : "application/json",
+            data : JSON.stringify({
+               mEmail : email,
+               inputAuth : emailChk,
+               type : 'J'
+            }),
+            success : function(obj){
+               alert(obj.resultMsg);
+            }
+         })
+      }
    
    /* common.js로 뺄거 */
    function fn_dataChk(formId){

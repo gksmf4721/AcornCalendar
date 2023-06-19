@@ -49,8 +49,10 @@ public class MailUtils{
         MimeMessageHelper messageHelper  = new MimeMessageHelper(message,true, "UTF-8");
         if(acornMap.getString("type").equals("I")){
             messageHelper.setSubject("[AcornCalendar] 아이디 인증 번호입니다.");
-        }else{
+        }else if(acornMap.getString("type").equals("P")){
             messageHelper.setSubject("[AcornCalendar] 비밀번호 인증 번호입니다.");
+        }else{
+            messageHelper.setSubject("[AcornCalendar] 회원가입 인증 번호입니다.");
         }
         messageHelper.setFrom("acorn_calendar@naver.com");
         messageHelper.setTo(acornMap.getString("mEmail").toString());
