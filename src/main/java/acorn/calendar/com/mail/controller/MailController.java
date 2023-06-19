@@ -64,7 +64,6 @@ public class MailController {
     public void confirmMailAuth(@RequestBody String json, HttpServletResponse response, HttpSession session) throws Exception {
         //받을 값 : {mEmail, inputAuth, type(아디찾기 I, 비번찾기 P, 가입 J)}
         //join 이라면 인증번호 전송을 성공했을 때, 인증 완료 버튼이 보이게 해야 함. 그래야 자연스럽게 유효성 가능.
-
         try{
             AcornMap acornMap = JsonUtils.toAcornMap(json);
             if("J".equals(acornMap.getString("type"))){
