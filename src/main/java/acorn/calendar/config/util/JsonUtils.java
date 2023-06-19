@@ -7,9 +7,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 public class JsonUtils {
@@ -56,5 +54,23 @@ public class JsonUtils {
 
     public static AcornMap toAcornMap(String jsonStr) throws JSONException {
         return toAcornMap(new JSONObject(jsonStr));
+    }
+
+    public static List<AcornMap> toListAcornMap(List<Map<String,Object>> list) throws JSONException {
+        AcornMap loginMap = RequestUtils.getLoginSession(LoginSession.getLoginSession());
+        List<AcornMap> acornList = new ArrayList<>();
+
+        for(int i=0 ; i<list.size() ; i++){
+            AcornMap acornMap = new AcornMap();
+            Iterator<String> keys = list.get(i).keySet().iterator();
+            while(keys.hasNext()){
+                String key = keys.next();
+                Object value = list.get(i).get(key);
+                acornMap.put(key,value);
+            }
+            acornMap.putAll(loginMap);
+            acornList.add(acornMap);
+        }
+        return acornList;
     }
 }

@@ -36,6 +36,11 @@ public class MailController {
         try{
             AcornMap acornMap = JsonUtils.toAcornMap(json);
 
+            if(mailService.selectEmailCheck(acornMap) != 0){
+                ResponseUtils.responseMap(response, "-1", "중복된 이메일입니다.", null);
+                return;
+            }
+
             if(acornMap.getString("type").equals("J")){
                 String join = MailUtils.sendMail(acornMap);
                 session.setAttribute(acornMap.getString("mEmail"),join);
@@ -64,14 +69,24 @@ public class MailController {
     public void confirmMailAuth(@RequestBody String json, HttpServletResponse response, HttpSession session) throws Exception {
         //받을 값 : {mEmail, inputAuth, type(아디찾기 I, 비번찾기 P, 가입 J)}
         //join 이라면 인증번호 전송을 성공했을 때, 인증 완료 버튼이 보이게 해야 함. 그래야 자연스럽게 유효성 가능.
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         try{
             AcornMap acornMap = JsonUtils.toAcornMap(json);
             if("J".equals(acornMap.getString("type"))){
                 String joinAuthCode = "";
                 try{
                     joinAuthCode = session.getAttribute(acornMap.getString("mEmail")).toString();
-                    if(certExpire(joinAuthCode)==false){
-                        ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("auth.confirm.101"),null);
+                    String createJoinAuthCode = sdf.format(session.getCreationTime());
+                    Date joinAuthCodeDate = sdf.parse(createJoinAuthCode);
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(joinAuthCodeDate);
+                    cal.add(Calendar.MINUTE,3);
+
+                    if(new Date().after(new Date(cal.getTimeInMillis()))){
+                        ResponseUtils.responseMap(response,"-1","인증 번호가 만료됐습니다.",null);
+                        return;
                     }
                 }catch (NullPointerException ne){
                     ne.printStackTrace();
@@ -88,7 +103,15 @@ public class MailController {
             }
             AcornMap authMap = mailService.selectMailAuthHistory(acornMap);
             if(null != authMap){
-                if(certExpire(authMap.getString("HIS_DATE"))==false){
+                String authDate = authMap.getString("HIS_DATE");
+
+                Date date = sdf.parse(authDate);
+
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
+                cal.add(Calendar.MINUTE,3);
+
+                if(new Date().after(new Date(cal.getTimeInMillis()))){
                     ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("auth.confirm.101"),null);
                 }else{
                     if(authMap.getString("HIS_AUTH").equals(acornMap.getString("inputAuth"))){
@@ -110,18 +133,18 @@ public class MailController {
         }
     }
 
-    private boolean certExpire(String authCreateDate) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = sdf.parse(authCreateDate);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.MINUTE,3);
-
-        if(new Date().after(new Date(cal.getTimeInMillis()))){
-            return false;
-        }
-        return true;
-    }
+//    private boolean certExpire(String authCreateDate) throws Exception {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        Date date = sdf.parse(authCreateDate);
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+//        cal.add(Calendar.MINUTE,3);
+//
+//        if(new Date().after(new Date(cal.getTimeInMillis()))){
+//            return false;
+//        }
+//        return true;
+//    }
 
     @RequestMapping("/pwModify.json")
     public void pwModify(@RequestBody String json, HttpServletResponse response) throws Exception {

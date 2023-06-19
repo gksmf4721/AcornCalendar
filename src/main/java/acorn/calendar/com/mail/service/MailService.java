@@ -28,4 +28,8 @@ public class MailService {
     public AcornMap updatePw(AcornMap acornMap) throws Exception {
         return sqlSession.selectOne("mapper.com.mail.updatePw",acornMap);
     }
+
+    public int selectEmailCheck(AcornMap acornMap) throws Exception {
+        return sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
+    }
 }

@@ -27,7 +27,7 @@ public class MemberService {
 
 		try{
 			sqlSession.insert("mapper.com.member.insertMember",acornMap);
-			//sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap,request));
+			sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap,request));
 		}catch (Exception e){
 			sqlSession.rollback();
 		}
@@ -46,7 +46,7 @@ public class MemberService {
 		int result = 0;
 		if(acornMap.getString("type").equals("id")) result = sqlSession.selectOne("mapper.com.member.selectIdCheck",acornMap);
 		else if(acornMap.get("type").equals("nickname")) result = sqlSession.selectOne("mapper.com.member.selectNicknameCheck",acornMap);
-		else result = sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
+		//else result = sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
 		return result;
 	}
 
