@@ -37,6 +37,8 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 
 #formData > button[type="button"] {background-color: #FFF; color:#44413e; height:40px; margin-left:-40px;}
 #formData > button[type="button"]:hover {background-color:#44413e; color:#fff; height:40px; margin-left:-40px;}
+#email_chk > button[type="button"] {background-color: #FFF; color:#44413e; height:40px; margin-left:-40px;}
+#email_chk > button[type="button"]:hover {background-color:#44413e; color:#fff; height:40px; margin-left:-40px;}
 
 #formData > .chk_befo{font-size:12px; margin-left:3px;}
 #formData > .chk_after{font-size:12px; margin-left:3px; color:#fff}

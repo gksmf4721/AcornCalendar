@@ -21,17 +21,17 @@
       <button type="button" id="nickChk" value="중복">중복</button>
       <span id="nickChk_info" class="chk_befo">닉네임 중복 체크를 해주세요</span>
 
+      <div id="email_chk">
+         <input type="text" id="mEmail" class="login_input_chk email" data-name="이메일" placeholder="이메일">
+         <button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
 
-      <input type="text" id="mEmail" class="login_input_chk" data-name="이메일" placeholder="이메일">
-      <button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
+         <input type="text" id="mEmailChk" class="login_in_id" autocomplete="off" placeholder="인증번호를 입력하세요">
+         <button type="button" id="confirmAuthBtn" onclick="confirmMail();">인증번호 확인</button>
+         <br/>
+         <button type="button" id="emailChk">중복</button>
+         <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
+      </div>
 
-      <input type="text" id="mEmailChk" class="login_in_id" autocomplete="off" placeholder="인증번호를 입력하세요">
-      <button type="button" id="confirmAuthBtn" onclick="confirmMail();">인증번호 확인</button>
-
-
-      <button type="button" id="emailChk">중복</button>
-      <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
-      
       <div class="box_col">
          <div class="flex-item">
             <p class="birth_title">생년월일</p>
@@ -47,41 +47,6 @@
    </div>
       <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
    </form>
-         <input type="password" id="mPwChk" name="mPwChk" class="login_input" data-name="비밀번호 확인" autocomplete="off" placeholder="비밀번호 확인">
-
-         <input type="text" id="mNickname" name="mNickname" class="login_input_chk" data-name="닉네임" placeholder="닉네임">
-         <button type="button" id="nickChk" value="중복">중복</button>
-         <span id="nickChk_info" class="chk_befo">닉네임 중복 체크를 해주세요</span>
-
-         <div id="email_chk">
-            <input type="text" id="mEmail" name="mEmail" class="login_input_chk email" data-name="이메일" placeholder="이메일">
-               <span>@</span>
-            <input type="text" id="mEmail2" name="mEmail" class="login_input_chk email">
-               <select id="emailSelection" name="emailSelection" class="login_input_chk emailSelection">
-                  <option value="" disabled selected>E-mail 선택</option>
-                  <option value="naver.com" id="naver.com">naver.com</option>
-                  <option value="gmail.com" id="gmail.com">gmail.com</option>
-                  <option value="nate.com" id="nate.com">nate.com</option>
-                  <option value="directly" id="textEmail">직접입력</option>
-               </select>
-            <button type="button" id="emailChk">중복</button>
-            <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
-         </div>
-         <div class="box_col">
-            <div class="flex-item">
-               <p class="birth_title">생년월일</p>
-               <input type="date" id="mBirth" name="mBirth" data-name="생년월일"  class="login_input">
-            </div>
-            <div class="flex-item">
-               <p class="birth_title">생일공개여부</p>
-               <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" >
-               <label for="Y">공개</label>
-               <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" >
-               <label for="N">비공개</label>
-            </div>
-      </div>
-         <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
-      </form>
    </div>
 
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -133,150 +98,7 @@
          })
       }
    
-   /* common.js로 뺄거 */
-   function fn_dataChk(formId){
-       let chk = true;
-      const allElements = formId.getElementsByTagName('*');
-      for (let i = 0; i < allElements.length; i++) {
-         const element = allElements[i];
-         if (element.hasAttribute('data-name') && element.value =="") {
-            alert(element.dataset.name + "을(를) 입력해주세요");
-            element.focus();
-            chk = false;
-            return false;
-           }
-      }
-   return chk;
-   }
-   
-    const idChk = document.getElementById("idChk");
-    const nickChk = document.getElementById("nickChk");
-    const emailChk = document.getElementById("emailChk");
-   
-    idChk.addEventListener('click', function() {
-       duplicateChk(idChk);
-   });
-    
-    nickChk.addEventListener('click', function() {
-       duplicateChk(nickChk);
-   });
-    
-    emailChk.addEventListener('click', function() {
-       duplicateChk(emailChk);
-   });
-    
-    function duplicateChk(chkId){
-       var sibling1 = chkId.previousElementSibling;
-       var sibling2 = chkId.nextElementSibling;
-       if(chkId == nickChk){
-             data = { type : 'nickname' ,mNickname : sibling1.value }
-       }else if(chkId == emailChk){
-          data = { type : 'email', mEmail : sibling1.value }
-       }else if(chkId == idChk){
-          data = { type : 'id', mId: sibling1.value }
-       }
-       
-       //XMLHttpRequest 객체 생성
-      var xhr = new XMLHttpRequest();
 
-      //요청을 보낼 방식, url , 비동기(true) / 동기(false)
-      xhr.open('POST', '/inputCheck.json', true);
-      
-      //HTTP요청 헤더 설정
-      xhr.setRequestHeader('Content-type', 'application/json');
-      
-      //요청 전송
-      xhr.send(JSON.stringify(data));
-      
-      //Callback
-      xhr.onload = () =>{
-         let data = strToObj(xhr);
-         console.log(data.resultCd);
-         if(xhr.status == 200 && data.resultCd==='1'){
-            if(data.resultType == "email"){
-               sibling2.innerText = "이메일 중복 검사 완료"
-               console.log('성공');
-            } else if(data.resultType == "nickname"){
-               sibling2.innerText = "닉네임 중복 검사 완료"
-                  console.log('성공');
-            } else if(data.resultType == "id"){
-               sibling2.innerText = "아이디 중복 검사 완료"
-                  console.log('성공');
-            }
-            sibling2.className = "chk_after"
-         } else {
-            if(data.resultType == "email"){
-            	sibling2.innerText = "이메일 중복 체크를 해주세요"
-            } else if(data.resultType == "nickname"){
-            	 sibling2.innerText = "닉네임 중복 체크를 해주세요"
-            } else if(data.resultType == "id"){
-            	 sibling2.innerText = "아이디 중복 체크를 해주세요"
-            }
-            
-            sibling2.className = "chk_befo"
-         }
-      }
-    }
-    
-   var btn = document.getElementById("btn-ajax");
-    
-   btn.addEventListener('click', ()=>{
-   var dataChk = fn_dataChk(formData);
-   if(dataChk == true){
-      
-       var inputName = document.getElementById("mName").value;
-       var inputId = document.getElementById("mId").value;
-       var inputPw = document.getElementById("mPw").value;
-       var inputNickname = document.getElementById("mNickname").value;
-       var inputEmail = document.getElementById("mEmail").value;
-       var inputBirth = document.getElementById("mBirth").value;
-       var inputBirthYn =  document.querySelector('input[name="mBirthYn"]:checked').value;
-      
-      var inputPwChk = document.getElementById("mPwChk").value;
-
-      data = {
-           mName : inputName,
-           mId : inputId,
-           mPw : inputPw,
-           mNickname : inputNickname,
-           mEmail : inputEmail,
-           mBirth : inputBirth,
-           mBirthYn : inputBirthYn,
-         mPwChk : inputPwChk
-       };
-       console.log(data);
-         //XMLHttpRequest 객체 생성
-         var xhr = new XMLHttpRequest();
-         
-         //요청을 보낼 방식, url , 비동기(true) / 동기(false)
-         xhr.open('POST', '/join.json', true);
-         
-         //HTTP요청 헤더 설정
-         xhr.setRequestHeader('Content-type', 'application/json');
-         
-         //요청 전송
-         xhr.send(JSON.stringify(data));
-         
-         
-         //Callback
-         xhr.onload = () =>{
-            let data = strToObj(xhr);
-            if(xhr.status == 200 && data.resultCd==='1'){
-               
-               //성공일시
-               alert(data.resultMsg);
-               
-               location.href = data.resultUrl;
-               // var resultData = xhr.resultData;
-               // location.href = resultData;  // 해당 페이지 이동
-            } else {
-               //실패일시
-               alert(data.resultMsg);
-            }
-         }
-      }
-   });
-<script>
 const emailSelection = document.getElementById('emailSelection');
 emailSelection.addEventListener('change', (event) => {
    let mEmail2 = document.getElementById('mEmail2');
