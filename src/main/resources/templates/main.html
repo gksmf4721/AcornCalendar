@@ -28,7 +28,7 @@
                                 <div class="title_wrap">
                                     <div class="title_left medium">쪽지</div>
                                     <div class="title_right">
-                                        <a href="#" onclick="goToLetterBox('all');">더보기</a>
+                                        <a href="#" onclick="goToLetterBox();">더보기</a>
                                     </div>
                                     
                                 </div>
@@ -42,17 +42,9 @@
             </div>
             
 <script>
-    function goToLetterBox(Type){
-        ajaxData = {'type': Type};
-        $.ajax({
-            type : "GET",
-            url : "/letterList.json",
-            dataType:'json',
-            data : ajaxData,
-            contentType : "application/json",
-            success : function(obj){}
-        });
-    };
+    function goToLetterBox(){
+    	location.href = "/letterBox.do"
+    }
 </script>            
             
             
