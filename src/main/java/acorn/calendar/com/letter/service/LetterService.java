@@ -23,7 +23,7 @@ public class LetterService {
 	public List<AcornMap> selectAllLetterList(AcornMap acornMap) throws Exception {
 		if(acornMap.getString("type").equals("all")){
 			acornMap.put("categoryType","0");
-			return sqlSession.selectList("mapper.com.letter.selectAllLetterList",acornMap);
+			return sqlSession.selectList("mapper.com.letter.selectLAllLetterList",acornMap);
 		}else if(acornMap.getString("type").equals("send")){
 			return sqlSession.selectList("mapper.com.letter.selectSendLetterList",acornMap);
 		}else{
