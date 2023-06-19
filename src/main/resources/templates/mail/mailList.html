@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/default_layout">
+    <th:block layout:fragment="content">
+        <div class="container_title" style="font-size:20px;">메일리스트</div> <!--화면 위치 알아두려고 일단 적어놓음 나중에 없앨것-->
+        <div class="container_inner">
+            <div class="container_inner2">
+                    <div class="section">
+                        <div>
+                            <a>메일쓰기</a>
+                            <a href="#">삭제하기</a>
+                        </div>
+                        <div class="mail_list_wrap">
+                            
+                            <ul class="mail_list">
+                                <li class="mail_item">
+                                    <div class="mail">
+                                        <div class="button_checkbox_wrap"><input type="checkbox"> 삭제</div>
+                                        <div class="mail_sender">보낸사람</div>
+                                        <div class="mail_inner">내용</div>
+                                        <div class="mail_date_wrap"><span class="mail_date">06.19 10:00</span></div>
+                                    </div>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .mail_list_wrap{display:flex; position:relative;}
+            .mail_list_wrap > .mail_list{padding: 0 25px; -webkit-box-flex: 1; flex: 1 1 0%;min-height: 0;overflow-x: hidden;overflow-y: auto;}
+            .mail_item{position:relative; margin:0; padding:0px;touch-action: pan-y;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+    .mail{
+        display: flex;
+    padding: 8px 10px 8px 11px;
+    border-bottom: 1px solid rgba(var(--color-button-line-rgb), 0.4);
+    cursor: pointer;
+    position: relative;
+    }
+    .button_checkbox_wrap, .mail_sender, .mail_inner, .mail_date_wrap{
+        -webkit-box-flex: 0;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+    width: 219px;
+    padding-right: 20px;
+    position: relative;
+    display: flex;
+    min-width: 0;
+    }
+        </style>
+    </th:block>
+ 
+</body>
+
+</html>

@@ -114,11 +114,11 @@ function joinJson(){
             success : function(rslt){
                 if(rslt.resultCd==='1'){
                     //성공일시
-                    alert(data.resultMsg);
-                    location.href = data.resultUrl;
+                    alert(rslt.resultMsg);
+                    location.href = rslt.resultUrl;
                 } else {
                     //실패일시
-                    alert(data.resultMsg);
+                    alert(rslt.resultMsg);
                 }
             },
             error : function(request, status, error){
