@@ -3,17 +3,17 @@
 
 <th:block layout:fragment="mainContent">
    <div class="login_in_content" style="height: 600px;">
-      <span ><img src="../img/icons/arrow_left.png" class="back_arrow"></span>
-   <p class="login_in_form_title">♥ JOIN ♥</p>
-   <form id="formData">
-      
-      <input type="text" id="mName" class="login_input" data-name="이름" placeholder="이름">
+      <span ><img src="../img/icons/arrow_left.png" class="back_arrow" onclick="back();"></span>
+      <p class="login_in_form_title">♥ JOIN ♥</p>
 
-      <input type="text" id="mId" class="login_input_chk" data-name="아이디" placeholder="아이디">
-      <button type="button" id="idChk">중복</button>
-      <span id="idChk_info" class="chk_befo">아이디 중복 체크를 해주세요</span>
-      
-      <input type="password" id="mPw" class="login_input" data-name="비밀번호" placeholder="비밀번호">
+      <form id="formData">
+         <input type="text" id="mName" name="mName" class="login_input" data-name="이름" placeholder="이름">
+
+         <input type="text" id="mId" name="mId" class="login_input_chk" data-name="아이디" placeholder="아이디">
+         <button type="button" id="idChk">중복</button>
+         <span id="idChk_info" class="chk_befo">아이디 중복 체크를 해주세요</span>
+
+         <input type="password" id="mPw" name="mPw" class="login_input" data-name="비밀번호" autocomplete="off" placeholder="비밀번호">
 
       <input type="password" id="mPwChk" class="login_input" data-name="비밀번호 확인" placeholder="비밀번호 확인">
       
@@ -47,6 +47,41 @@
    </div>
       <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
    </form>
+         <input type="password" id="mPwChk" name="mPwChk" class="login_input" data-name="비밀번호 확인" autocomplete="off" placeholder="비밀번호 확인">
+
+         <input type="text" id="mNickname" name="mNickname" class="login_input_chk" data-name="닉네임" placeholder="닉네임">
+         <button type="button" id="nickChk" value="중복">중복</button>
+         <span id="nickChk_info" class="chk_befo">닉네임 중복 체크를 해주세요</span>
+
+         <div id="email_chk">
+            <input type="text" id="mEmail" name="mEmail" class="login_input_chk email" data-name="이메일" placeholder="이메일">
+               <span>@</span>
+            <input type="text" id="mEmail2" name="mEmail" class="login_input_chk email">
+               <select id="emailSelection" name="emailSelection" class="login_input_chk emailSelection">
+                  <option value="" disabled selected>E-mail 선택</option>
+                  <option value="naver.com" id="naver.com">naver.com</option>
+                  <option value="gmail.com" id="gmail.com">gmail.com</option>
+                  <option value="nate.com" id="nate.com">nate.com</option>
+                  <option value="directly" id="textEmail">직접입력</option>
+               </select>
+            <button type="button" id="emailChk">중복</button>
+            <span id="emailChk_info" class="chk_befo">이메일 중복 체크를 해주세요</span>
+         </div>
+         <div class="box_col">
+            <div class="flex-item">
+               <p class="birth_title">생년월일</p>
+               <input type="date" id="mBirth" name="mBirth" data-name="생년월일"  class="login_input">
+            </div>
+            <div class="flex-item">
+               <p class="birth_title">생일공개여부</p>
+               <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" >
+               <label for="Y">공개</label>
+               <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" >
+               <label for="N">비공개</label>
+            </div>
+      </div>
+         <input type="button" class="login_in_btn" id="btn-ajax" value="회원가입">
+      </form>
    </div>
 
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -241,8 +276,18 @@
          }
       }
    });
+<script>
+const emailSelection = document.getElementById('emailSelection');
+emailSelection.addEventListener('change', (event) => {
+   let mEmail2 = document.getElementById('mEmail2');
+   if((event.target.value) == 'directly'){
+      mEmail2.value = "";
+   } else {
+      mEmail2.value = event.target.value;
+      mEmail2.readOnly = true;
+   }
+})
 
-   
 </script>
 </th:block>
 

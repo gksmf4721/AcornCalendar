@@ -30,6 +30,10 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 .back_arrow{width: 15px; height: 15px; filter: invert(84%) sepia(27%) saturate(266%) hue-rotate(332deg) brightness(109%) contrast(96%);}
 #formData > .login_input {width: 100%; height: 40px; margin-top: 10px;} /* 일반 Input 파일 */
 #formData > .login_input_chk {width: 97%; height: 40px; margin-top: 10px; margin-bottom: 2px;} /* 중복체크가 있는 Input 파일 */
+#email_chk > .login_input_chk.email{width: 35%; height: 30px; margin-top: 10px; margin-bottom: 2px; } /* 중복체크가 있는 Input 파일 */
+#email_chk > .login_input_chk.emailSelection{
+    width: 23%; height: 25px; background-color: white; font-size: 13px;
+} /* 중복체크가 있는 Input 파일 */
 
 #formData > button[type="button"] {background-color: #FFF; color:#44413e; height:40px; margin-left:-40px;}
 #formData > button[type="button"]:hover {background-color:#44413e; color:#fff; height:40px; margin-left:-40px;}
