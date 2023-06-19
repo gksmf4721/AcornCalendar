@@ -21,11 +21,14 @@ public class LetterService {
 	private SqlSession sqlSession;
 
 	public List<AcornMap> selectAllLetterList(AcornMap acornMap) throws Exception {
-
-
-
-
-		return sqlSession.selectList("mapper.com.letter.selectAllLetterList",acornMap);
+		if(acornMap.getString("type").equals("all")){
+			acornMap.put("categoryType","0");
+			return sqlSession.selectList("mapper.com.letter.selectAllLetterList",acornMap);
+		}else if(acornMap.getString("type").equals("send")){
+			return sqlSession.selectList("mapper.com.letter.selectSendLetterList",acornMap);
+		}else{
+			return sqlSession.selectList("mapper.com.letter.selectReciveLetterList",acornMap);
+		}
 	}
 
 	public void updateTrash(List<AcornMap> list) throws Exception {

@@ -28,7 +28,8 @@
 	</select>
 
 	<select id="selectReciveLetterList" parameterType="acornMap" resultType="acornMap">
-		SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME, JL.L_SENDT, JM.M_SEQ, JF.F_SV_NAME, F_SEQ
+		SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME,
+		       JL.L_SENDT, JM.M_SEQ, JF.F_SV_NAME, F_SEQ
 		FROM JH_LETTER JL
 			JOIN JH_MEMBER JM ON JM.M_SEQ = JL.L_SENDER
 			JOIN JH_FILE JF ON JM.M_SEQ = JF.F_TYPE_SEQ
@@ -37,7 +38,8 @@
 	</select>
 
 	<select id="selectSendLetterList" parameterType="acornMap" resultType="acornMap">
-		SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME, JL.L_SENDT, JM.M_SEQ, JF.F_SV_NAME, F_SEQ
+		SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME,
+		       JL.L_SENDT, JM.M_SEQ, JF.F_SV_NAME, F_SEQ
 		FROM JH_LETTER JL
 			JOIN JH_MEMBER JM ON JM.M_SEQ = JL.L_RECIVER
 			JOIN JH_FILE JF ON JM.M_SEQ = JF.F_TYPE_SEQ
@@ -45,7 +47,7 @@
 		  	AND JL.L_SENDER_TRASH_STEP='0'
 	</select>
 
-	<insert id="insertMember" parameterType="acornMap">
+	<insert id="insertLetter" parameterType="acornMap">
 		INSERT INTO acorncalendar.JH_LETTER
 			(L_SENDER, L_RECIVER, L_TITLE, L_CONTENT, L_SENDT, L_OPEN_YN, L_SENDER_TRASH_STEP, L_RECIVER_TRASH_STEP)
 		VALUES
