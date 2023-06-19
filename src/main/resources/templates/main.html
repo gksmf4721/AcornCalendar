@@ -28,7 +28,7 @@
                                 <div class="title_wrap">
                                     <div class="title_left medium">쪽지</div>
                                     <div class="title_right">
-                                        <a href="./mail/mailList.html">더보기</a>
+                                        <a href="#" onclick="goToLetterBox(all);">더보기</a>
                                     </div>
                                     
                                 </div>
@@ -40,7 +40,22 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
+<script>
+function goToLetterBox(Type){
+	ajaxData = {type: Type}
+        $.ajax({
+           type : "GET",
+           url : "/letterList.json",
+           dataType:'json',
+           data : JSON.stringify(ajaxData),
+           contentType : "application/json",
+           success : function(obj){}
+		});
+	};
+</script>            
+            
+            
     </th:block>
 </body>
 </html>
