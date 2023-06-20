@@ -33,17 +33,23 @@ public class LetterController {
 	private LetterService letterService;
 
 	@RequestMapping("/letterBox.do")
-	public String letterBox(Model model) throws Exception {
-		AcornMap acornMap = new AcornMap();
+	public String letterBox(AcornMap acornMap, Model model) throws Exception {
 		acornMap.put("type","all");
-		model.addAttribute("letterList",letterService.selectAllLetterList(acornMap));
-		 return "mail/letterBox";
+		model.addAttribute("letterList",letterService.selectLetterList(acornMap));
+		return "mail/letterBox";
 	}
 
 	@RequestMapping("/letterList.json")
 	public void letterList(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
-		ResponseUtils.jsonList(response, letterService.selectAllLetterList(acornMap));
+		ResponseUtils.jsonList(response, letterService.selectLetterList(acornMap));
+	}
+
+	@RequestMapping("letterWrite.json")
+	public void letterWrite(@RequestBody String json) throws Exception {
+		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		acornMap.put("lReciver",letterService.selectSeq(acornMap));
+		letterService.insertLetter(acornMap);
 	}
 
 	@RequestMapping("letterTrash.json")

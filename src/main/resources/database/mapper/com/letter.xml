@@ -51,7 +51,7 @@
 		INSERT INTO acorncalendar.JH_LETTER
 			(L_SENDER, L_RECIVER, L_TITLE, L_CONTENT, L_SENDT, L_OPEN_YN, L_SENDER_TRASH_STEP, L_RECIVER_TRASH_STEP)
 		VALUES
-		    (#{mId}, #{lReciver}, #{lTitle}, #{lContent}, current_timestamp(), 'N', 0, 0);
+		    (#{session_m_seq}, #{lReciver}, #{lTitle}, #{lContent}, current_timestamp(), 'N', 0, 0);
 	</insert>
 
 	<!-- UPDATE 문에 SELECT 넣어서 하나로 합칠 예정 -->
@@ -67,6 +67,10 @@
 		WHERE L_SEQ=#{lSeq};
 	</update>
 
-
+	<select id="selectSeq" parameterType="acornMap" resultType="int">
+		SELECT M_SEQ
+		FROM JH_MEMBER
+		WHERE M_NICKNAME=#{mNickname}
+	</select>
 
 </mapper>

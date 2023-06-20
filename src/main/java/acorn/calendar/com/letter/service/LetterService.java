@@ -20,14 +20,17 @@ public class LetterService {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<AcornMap> selectAllLetterList(AcornMap acornMap) throws Exception {
+	public List<AcornMap> selectLetterList(AcornMap acornMap) throws Exception {
 		if(acornMap.getString("type").equals("all")){
 			acornMap.put("categoryType","0");
 			return sqlSession.selectList("mapper.com.letter.selectLAllLetterList",acornMap);
 		}else if(acornMap.getString("type").equals("send")){
 			return sqlSession.selectList("mapper.com.letter.selectSendLetterList",acornMap);
-		}else{
+		}else if(acornMap.getString("type").equals("recive")){
 			return sqlSession.selectList("mapper.com.letter.selectReciveLetterList",acornMap);
+		}else{
+			acornMap.put("categoryType","1");
+			return sqlSession.selectList("mapper.com.letter.selectLAllLetterList",acornMap);
 		}
 	}
 
@@ -41,6 +44,13 @@ public class LetterService {
 		}
 	}
 
+	public int selectSeq(AcornMap acornMap) throws Exception {
+		return sqlSession.selectOne("mapper.com.letter.selectSeq",acornMap);
+	}
+
+	public void insertLetter(AcornMap acornMap) throws Exception {
+		sqlSession.insert("mapper.com.letter.insertLetter",acornMap);
+	}
 
 
 }

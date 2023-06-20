@@ -15,18 +15,18 @@
                             <ul class="mail_list">
                                 <li class="mail_item">
                                 	<div class="mail">
-	                                	<div th:each="mail : ${letterList}">
+	                                	<div th:each="letter : ${letterList}">
 	                                		<div class="button_checkbox_wrap"><input type="checkbox"></div>
-	                                		<div class="">${letterList.L_SEQ}</div>
-	                                		<div class="">${letterList.L_SENDER}</div>
-	                                		<div class="">${letterList.L_RECIVER}</div>
-	                                		<div class="">${letterList.L_TITLE}</div>
-	                                		<div class="">${letterList.L_OPEN_YN}</div>
-	                                		<div class="">${letterList.M_NICKNAME}</div>
-	                                		<div class="">${letterList.L_SENDT}</div>
-	                                		<div class="">${letterList.M_SEQ}</div>
-	                                		<div class="">${letterList.F_SV_NAME}</div>
-	                                		<div class="">${letterList.F_SEQ}</div>
+	                                		<div class="" th:text="${letter.L_SEQ}"></div>
+	                                		<div class="" th:text="${letter.L_SENDER}"></div>
+	                                		<div class="" th:text="${letter.L_RECIVER}"></div>
+	                                		<div class="" th:text="${letter.L_TITLE}"></div>
+	                                		<div class="" th:text="${letter.L_OPEN_YN}"></div>
+	                                		<div class="" th:text="${letter.M_NICKNAME}"></div>
+	                                		<div class="" th:text="${letter.L_SENDT}"></div>
+	                                		<div class="" th:text="${letter.M_SEQ}"></div>
+	                                		<div class="" th:text="${letter.F_SV_NAME}"></div>
+	                                		<div class="" th:text="${letter.F_SEQ}"></div>
 	                                	</div>
                                     </div>
                                 </li>
