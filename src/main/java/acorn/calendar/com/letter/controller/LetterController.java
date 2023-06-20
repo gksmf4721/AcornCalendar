@@ -10,6 +10,7 @@ import acorn.calendar.config.util.ResponseUtils;
 import acorn.calendar.config.util.ValidateUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,14 +51,20 @@ public class LetterController {
 		return "mail/letterWrite";
 	}
 
-	@RequestMapping("letterWrite.json")
-	public void letterWrite(@RequestBody String json) throws Exception {
+	@RequestMapping("/letterWrite.json")
+	public void letterWrite(@RequestBody String json,HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
-		acornMap.put("lReciver",letterService.selectSeq(acornMap));
-		letterService.insertLetter(acornMap);
+		try{
+			acornMap.put("lReciver",letterService.selectSeq(acornMap));
+			log.info("결과"+acornMap);
+			letterService.insertLetter(acornMap);
+		}catch (NullPointerException e){
+			e.printStackTrace();
+			ResponseUtils.responseMap(response, "-1","없는 회원입니다.",null);
+		}
 	}
 
-	@RequestMapping("letterTrash.json")
+	@RequestMapping("/letterTrash.json")
 	public void letterTrash(@RequestBody List<Map<String,Object>> jsonList) throws Exception {
 		List<AcornMap> acornList = JsonUtils.toListAcornMap(jsonList);
 		letterService.updateTrash(acornList);

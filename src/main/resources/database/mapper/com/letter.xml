@@ -67,10 +67,10 @@
 		WHERE L_SEQ=#{lSeq};
 	</update>
 
-	<select id="selectSeq" parameterType="acornMap" resultType="int">
+	<select id="selectSeq" parameterType="acornMap" resultType="acornMap">
 		SELECT M_SEQ
 		FROM JH_MEMBER
-		WHERE M_NICKNAME=#{mNickname}
+		WHERE M_NICKNAME=#{lReciver}
 	</select>
 
 </mapper>

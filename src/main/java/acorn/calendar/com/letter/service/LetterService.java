@@ -44,8 +44,9 @@ public class LetterService {
 		}
 	}
 
-	public int selectSeq(AcornMap acornMap) throws Exception {
-		return sqlSession.selectOne("mapper.com.letter.selectSeq",acornMap);
+	public String selectSeq(AcornMap acornMap) throws Exception {
+		AcornMap resultMap = sqlSession.selectOne("mapper.com.letter.selectSeq",acornMap);
+		return resultMap.getString("M_SEQ");
 	}
 
 	public void insertLetter(AcornMap acornMap) throws Exception {
