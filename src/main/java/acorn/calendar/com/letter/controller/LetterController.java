@@ -45,6 +45,11 @@ public class LetterController {
 		ResponseUtils.jsonList(response, letterService.selectLetterList(acornMap));
 	}
 
+	@RequestMapping("/letterWrite.do")
+	public String letterWrite(AcornMap acornMap, Model model) throws Exception {
+		return "mail/letterWrite";
+	}
+
 	@RequestMapping("letterWrite.json")
 	public void letterWrite(@RequestBody String json) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);

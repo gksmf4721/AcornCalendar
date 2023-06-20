@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/default_layout">
+    <th:block layout:fragment="content">
+        <div>
+            <p>받는사람 <input type="text" id="lReciver" name="lReciver"></p>
+
+            <p>제목 <input type="text" id="lTitle" name="lTitle"></p>
+
+            <p>내용 <textarea id="lContent" name="lContent" cols="50" rows="5"></textarea></p>
+        </div>
+        <input type="button" id="btn-ajax" value="메일전송">
+    <script>
+    window.onload = function(){
+        const btn = document.getElementById("btn-ajax");
+
+        btn.addEventListener('click', function(){
+            letterWriteJson();
+        });
+    }
+
+    function letterWriteJson(){
+        var inputReciver = document.getElementById("lReciver").value;
+        var inputTitle = document.getElementById("lTitle").value;
+        var textareaContent = document.getElementById("lContent").value;
+        
+        ajaxData = {
+            lReciver : inputReciver,
+            lTitle : inputTitle,
+            lContent : textareaContent
+        };
+
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/letterWrite.json",
+            data : JSON.stringify(ajaxData),
+            dataType : 'json',
+            success : function(rslt){
+                alert('성공')
+            },
+            error : function(request, status, error){
+                alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+            }
+        });
+    }
+
+
+    </script>    
+    </th:block>
+</html>

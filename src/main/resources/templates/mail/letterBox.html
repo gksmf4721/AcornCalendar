@@ -7,7 +7,7 @@
             <div class="container_inner2">
                     <div class="section">
                         <div>
-                            <a>메일쓰기</a>
+                            <a href="/letterWrite.do">메일쓰기</a>
                             <a href="#">삭제하기</a>
                         </div>
                         <div class="mail_list_wrap">
@@ -35,7 +35,22 @@
                     </div>
                 </div>
             </div>
-
+<script>
+    function goToletterWrite(){
+        $.ajax({
+            type : "GET",
+            url : "/sendMailAuth.json",
+            dataType:'json',
+            contentType : "application/json",
+            data : JSON.stringify({
+                
+            }),
+            success : function(obj){
+                location.href="../mail/letterWrite.html";
+            }
+        })
+    }
+</script>
 
 
 <style>
