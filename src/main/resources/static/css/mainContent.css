@@ -1,12 +1,26 @@
 @charset "UTF-8";
+/* 메인 레이아웃에 적용되는 css들 */
+.main_content{display:grid; grid-template-columns: 450px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%;}
+.main_item{box-shadow:0 3px 20px 0 rgba(0, 0, 0, 0.12);}
+.main_item:nth-child(1){width:350px; height:300px; margin-left: 30px;}
+.main_item:nth-child(2){width:350px; min-height: 400px; margin-left: 30px;}
+.main_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; margin-left: -10px}
+
+.title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
+.title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
+.title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
+.footer {min-width: 1170px;padding: 13px 30px;font-size: 15px;color: #777;text-align: center;border-top: 1px solid #ddd;}
+
+
+
 
 /* 헤더, 좌측 메뉴 제외 바디 부분 */
 .contents_wrap {position: relative;padding-top: 70px;padding-left: 230px;box-sizing: border-box;height:100%;}
-.container {position: relative;min-width: 1330px;height: 100%;}
+/* .container {position: relative;min-width: 1330px;height: 100%;} */
 .container_inner{padding:20px}
 .container_inner2{min-height: 600px;}
 /* 푸터 */
-.footer {min-width: 1170px;padding: 15px 30px;font-size: 13px;color: #777;text-align: center;border-top: 1px solid #ddd;}
+
 
 
 /* 로그인 한 후 메인 화면 css */
@@ -18,9 +32,9 @@
 }
 
 .title_wrap::after{display: block; content: " "; clear:both;}
-.title_left{float: left; height: 30px; position: relative; font-size: 16px; line-height: 1.875; font-weight: 700;}
+/* .title_left{float: left; height: 30px; position: relative; font-size: 16px; line-height: 1.875; font-weight: 700;} */
 .title_left.large{float: left; height: 30px; font-size: 20px; font-weight: 700; position: relative; line-height: 1.5; padding-left: 25px;}
-.title_right{float:right}
+
 
 /* 대시보드부분 */
 .container_inner.dashboard .tri_left{padding-right: 10px;}
@@ -46,4 +60,4 @@
 /* section 안에서 삼중 분할 tri는 triple을 의미*/
 .section > .tri_left{float: left; width: 33.33%; box-sizing: border-box; padding-right: 15px;}
 .section > .tri_center{float: left; width: 33.33%; box-sizing: border-box; padding: 0 15px;}
-.section > .tri_right{float: right; width: 33.33%; box-sizing: border-box; padding-left: 15px;}
+.section > .tri_right{float: right; width: 33.33%; box-sizing: border-box; padding-left: 15px;} 

@@ -1,9 +1,21 @@
 <!-- 화면 header 영역 -->
 <html xmlns:th="http://www.thymeleaf.org">
-  <th:block th:fragment="mainHeaderFragment">
-    <a href="/">
-		<img th:src="@{/img/icons/calendar.png}" alt="캘린더이미지" class="login_in_png">
-    </a>
-    <a href="/"><span class="login_in_title">ACORN CALENDAR</span></a>
-  </th:block>
+    <th:block th:fragment="mainHeaderFragment">
+
+        <div class="header">
+            <div class="header_logo">
+                <img th:src="@{/img/icons/calendar.png}" alt="캘린더이미지" class="header_logo_png">
+            </div>
+            <div class="header_title">
+                <span class="header_title_item">ACORN CALENDAR</span>
+            </div>
+            <ul class="header_list">
+                <li><a href="#" class="user_alarm" title="알림">알림</a></li>
+                <li><a href="#" class="user_photo" title="마이페이지">유저사진</a></li>
+                <li><a href="/" class="user_logout"title="로그아웃">로그아웃</a></li>
+            </ul>
+        </div>
+
+        
+    </th:block>
 </html>
