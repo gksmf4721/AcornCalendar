@@ -44,7 +44,7 @@ public class MemberController {
 	@RequestMapping("/logout.do")
 	public String logout() throws Exception {
 		SessionUtils.removeAttribute("login.session");
-		return "/";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/join.do")
