@@ -6,6 +6,10 @@
     display: grid;
     grid-template-columns: 210px 3fr 1fr;
     box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);
+    position: sticky;
+    left: 0;
+    top: 0;
+    z-index: 1;
 }
 .header_logo{margin: auto;text-align: left; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
 .header_logo_png{ width:25px; height:25px;}

@@ -8,25 +8,46 @@
                     <div class="section">
                         <div>
                             <a href="/letterWrite.do">메일쓰기</a>
-                            <a href="#">삭제하기</a>
+                            <input type="button" onclick="delLett();" value="삭제">
                         </div>
                         <div class="mail_list_wrap">
-                            
                             <ul class="mail_list">
                                 <li class="mail_item">
                                 	<div class="mail">
-	                                	<div th:each="letter : ${letterList}">
-	                                		<div class="button_checkbox_wrap"><input type="checkbox"></div>
-	                                		<div class="" th:text="${letter.L_SEQ}"></div>
-	                                		<div class="" th:text="${letter.L_SENDER}"></div>
-	                                		<div class="" th:text="${letter.L_RECIVER}"></div>
-	                                		<div class="" th:text="${letter.L_TITLE}"></div>
-	                                		<div class="" th:text="${letter.L_OPEN_YN}"></div>
-	                                		<div class="" th:text="${letter.M_NICKNAME}"></div>
-	                                		<div class="" th:text="${letter.L_SENDT}"></div>
-	                                		<div class="" th:text="${letter.M_SEQ}"></div>
-	                                		<div class="" th:text="${letter.F_SV_NAME}"></div>
-	                                		<div class="" th:text="${letter.F_SEQ}"></div>
+	                                	<div th:each="item : ${letterList}">
+	                                		<div class="button_checkbox_wrap">
+                                                <input type="checkbox" id="lett_CheckBox" name="chk" th:data-param1="${item.L_SEQ}" th:data-param2="${item.SEND}" 
+                                                th:onclick="checkClick(this,this.getAttribute('data-param1'), this.getAttribute('data-param2'))" checked="false">
+                                                <div id="lett_L_SEQ" class="" th:text="${item.L_SEQ}"></div>
+                                                <div id="lett_SEND" class="" th:text="${item.SEND}"></div>
+                                                <div id="lett_L_SENDER" class="" th:text="${item.L_SENDER}"></div>
+                                                <div id="lett_L_RECIVER" class="" th:text="${item.L_RECIVER}"></div>
+                                                <div id="lett_L_TITLE" class="" th:text="${item.L_TITLE}"></div>
+                                                <div id="lett_L_OPEN_YN" class="" th:text="${item.L_OPEN_YN}"></div>
+                                                <div id="lett_M_NICKNAME" class="" th:text="${item.M_NICKNAME}"></div>
+                                                <div id="lett_L_SENDT" class="" th:text="${item.L_SENDT}"></div>
+                                                <div id="lett_M_SEQ" class="" th:text="${item.M_SEQ}"></div>
+                                                <div id="lett_F_SV_NAME" class="" th:text="${item.F_SV_NAME}"></div>
+                                                <div id="lett_F_SEQ" class="" th:text="${item.F_SEQ}"></div>
+
+                                                <!-- <label th:for="lett_CheckBox" th:text="${letter.L_SEQ}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.SEND}"></label>
+                                            </div>
+                                            <div>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_SEQ}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_SENDER}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_RECIVER}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_TITLE}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_OPEN_YN}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.M_NICKNAME}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.L_SENDT}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.M_SEQ}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.F_SV_NAME}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.F_SEQ}"></label>
+                                                <label th:for="lett_CheckBox" th:text="${letter.SEND}"></label> -->
+                                            </div>
+                                                
+	                                		
 	                                	</div>
                                     </div>
                                 </li>
@@ -36,20 +57,50 @@
                 </div>
             </div>
 <script>
-    function goToletterWrite(){
-        $.ajax({
-            type : "GET",
-            url : "/sendMailAuth.json",
-            dataType:'json',
-            contentType : "application/json",
-            data : JSON.stringify({
-                
-            }),
-            success : function(obj){
-                location.href="../mail/letterWrite.html";
-            }
-        })
+function delLett(){
+    let arrCheckbox = [];
+    let objCheckbox = {};
+    var checkbox = document.querySelectorAll('#lett_CheckBox').length; //체크박스 찾기
+
+    var selectedElements = document.querySelectorAll('input[name="chk"]:checked','#lett_SEND');
+
+    for(let i=0; i<selectedElements.length; i++){
+        var item = selectedElements.item(i);
+        console.log('1::: ');
+        console.log(item);
     }
+    
+    console.log('2::: ');
+    console.log(checkbox);
+    console.log('3::: ');
+    console.log('3::: ' + selectedElements);
+
+}
+var arrCheck = [];
+var objCheck = {};
+
+function checkClick(check, seq, send){
+    var TargetCheck = check.checked;
+    console.log(check);
+    objCheck.L_SEQ = seq;
+    objCheck.SEND = send;
+    if(TargetCheck){
+       
+
+        
+
+        arrCheck.push(objCheck);
+    } else {
+        arrCheck.
+    }
+   
+
+    console.log(arrCheck);
+
+}
+
+
+
 </script>
 
 
@@ -59,13 +110,13 @@
 .mail_item{position:relative; margin:0; padding:0px;touch-action: pan-y;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 .mail{
-        display: flex;
     padding: 8px 10px 8px 11px;
     border-bottom: 1px solid rgba(var(--color-button-line-rgb), 0.4);
     cursor: pointer;
     position: relative;
     }
     .button_checkbox_wrap, .mail_sender, .mail_inner, .mail_date_wrap{
+        flex-direction: column;
         -webkit-box-flex: 0;
         flex: 0 0 auto;
         box-sizing: border-box;
