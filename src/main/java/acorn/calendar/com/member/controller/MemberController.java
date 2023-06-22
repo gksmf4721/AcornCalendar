@@ -2,6 +2,7 @@ package acorn.calendar.com.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import acorn.calendar.config.model.LoginSession;
 import acorn.calendar.config.util.*;
@@ -20,6 +21,7 @@ import acorn.calendar.com.member.service.MemberService;
 import acorn.calendar.config.data.AcornMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
@@ -33,7 +35,16 @@ public class MemberController {
 
 	@RequestMapping("/")
 	public String login() throws Exception {
+		if(null != SessionUtils.getSession(true).getAttribute("login.session")){
+			return "redirect:/main.do";
+		}
 		return "member/login";
+	}
+
+	@RequestMapping("/logout.do")
+	public String logout() throws Exception {
+		SessionUtils.removeAttribute("login.session");
+		return "/";
 	}
 
 	@RequestMapping("/join.do")

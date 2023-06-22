@@ -49,6 +49,11 @@ public class LetterService {
 		return resultMap.getString("M_SEQ");
 	}
 
+	public String selectId(AcornMap acornMap) throws Exception {
+		AcornMap resultMap = sqlSession.selectOne("mapper.com.letter.selectId",acornMap);
+		return resultMap.getString("M_ID");
+	}
+
 	public void insertLetter(AcornMap acornMap) throws Exception {
 		sqlSession.insert("mapper.com.letter.insertLetter",acornMap);
 	}

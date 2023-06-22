@@ -58,6 +58,7 @@ public class LetterController {
 			acornMap.put("lReciver",letterService.selectSeq(acornMap));
 			log.info("결과"+acornMap);
 			letterService.insertLetter(acornMap);
+			ResponseUtils.responseMap(response, "1","메일 전송 성공","letterBox.do");
 		}catch (NullPointerException e){
 			e.printStackTrace();
 			ResponseUtils.responseMap(response, "-1","없는 회원입니다.",null);
@@ -69,6 +70,8 @@ public class LetterController {
 		List<AcornMap> acornList = JsonUtils.toListAcornMap(jsonList);
 		letterService.updateTrash(acornList);
 	}
+
+
 
 
 }

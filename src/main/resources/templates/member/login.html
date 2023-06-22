@@ -82,6 +82,7 @@
 			if (xhr.status == 200 && data.resultCd === '1') {
 				if(chk) setCookie('id', inputId, 7);
 				else setCookie('id',0,0);
+				sessionStorage.setItem("id",inputId);
 				location.href = data.resultUrl;
 			} else {
 				alert(data.resultMsg);

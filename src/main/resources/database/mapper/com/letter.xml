@@ -73,4 +73,10 @@
 		WHERE M_NICKNAME=#{lReciver}
 	</select>
 
+	<select id="selectId" parameterType="acornMap" resultType="acornMap">
+		SELECT M_ID
+		FROM JH_MEMBER
+		WHERE M_NICKNAME=#{lReciver}
+	</select>
+
 </mapper>

@@ -16,6 +16,19 @@
             </ul>
         </div>
 
+<script>
+    const eventSource = new EventSource('/api/subscribe?id='+sessionStorage.getItem("id"));
+
+    eventSource.onerror = (e) => {
+        console.log(e);
+    };
+
+    eventSource.onmessage = (e) => {
+        let msg = decodeURI(e.data);
+        let message = msg.replaceAll("+"," ");
+        alert(message);
+    };
+</script>
         
     </th:block>
 </html>

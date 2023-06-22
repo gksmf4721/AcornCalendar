@@ -30,7 +30,7 @@ public class MainController {
 //	private MessageSource messageSource;
 
 	@RequestMapping("/main.do")
-	public String login() throws Exception {
+	public String main() throws Exception {
 		return "main";
 	}
 
