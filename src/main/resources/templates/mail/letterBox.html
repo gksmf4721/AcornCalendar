@@ -102,15 +102,17 @@ function delLett(){
     }
     else{
         let arr = new Array(selectedElementsCnt);
-        let obj = {};
+        let obj = new Object();
         document.querySelectorAll(query).forEach(function(v, i){
             let seq = v.nextElementSibling.innerHTML;
             let sendChk = v.nextElementSibling.nextElementSibling.innerHTML
             
-            obj = {"L_SEQ" : seq, "SEND" : sendChk};
-            arr.push(obj);
+            arr[i] = ({"L_SEQ" : seq, "SEND" : sendChk});
             
         });
+        console.log(document.querySelectorAll(query));
+        console.log(arr);
+        console.log(JSON.stringify(arr))
 
         $.ajax({
             type : 'POST',
