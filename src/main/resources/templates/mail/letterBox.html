@@ -10,14 +10,14 @@
                             <a href="/letterWrite.do">메일쓰기</a>
                             <input type="button" onclick="delLett();" value="삭제">
                         </div>
+                        <input type="checkbox" id="allCheck" onclick="allChecked();">
                         <div class="mail_list_wrap">
                             <ul class="mail_list">
                                 <li class="mail_item">
-                                	<div class="mail">
-	                                	<div th:each="item : ${letterList}">
-	                                		<div class="button_checkbox_wrap">
-                                                <input type="checkbox" id="lett_CheckBox" name="chk" th:data-param1="${item.L_SEQ}" th:data-param2="${item.SEND}" 
-                                                th:onclick="checkClick(this,this.getAttribute('data-param1'), this.getAttribute('data-param2'))" checked="false">
+                                    <div class="mail">
+                                        <div th:each="item : ${letterList}">
+                                            <div class="button_checkbox_wrap">
+                                                <input type="checkbox" id="lett_check" name="lett_check" th:onclick="checkClick()" >
                                                 <div id="lett_L_SEQ" class="" th:text="${item.L_SEQ}"></div>
                                                 <div id="lett_SEND" class="" th:text="${item.SEND}"></div>
                                                 <div id="lett_L_SENDER" class="" th:text="${item.L_SENDER}"></div>
@@ -29,26 +29,8 @@
                                                 <div id="lett_M_SEQ" class="" th:text="${item.M_SEQ}"></div>
                                                 <div id="lett_F_SV_NAME" class="" th:text="${item.F_SV_NAME}"></div>
                                                 <div id="lett_F_SEQ" class="" th:text="${item.F_SEQ}"></div>
-
-                                                <!-- <label th:for="lett_CheckBox" th:text="${letter.L_SEQ}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.SEND}"></label>
                                             </div>
-                                            <div>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_SEQ}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_SENDER}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_RECIVER}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_TITLE}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_OPEN_YN}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.M_NICKNAME}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.L_SENDT}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.M_SEQ}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.F_SV_NAME}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.F_SEQ}"></label>
-                                                <label th:for="lett_CheckBox" th:text="${letter.SEND}"></label> -->
-                                            </div>
-                                                
-	                                		
-	                                	</div>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -57,47 +39,102 @@
                 </div>
             </div>
 <script>
-function delLett(){
-    let arrCheckbox = [];
-    let objCheckbox = {};
-    var checkbox = document.querySelectorAll('#lett_CheckBox').length; //체크박스 찾기
 
-    var selectedElements = document.querySelectorAll('input[name="chk"]:checked','#lett_SEND');
+//전체 체크박스 버튼 체크 여부: 전체 체크박스 해제 또는 체크
+function allChecked(){
+    //전체 체크박스 버튼 요소
+    const checkbox = document.getElementById('allCheck');
 
-    for(let i=0; i<selectedElements.length; i++){
-        var item = selectedElements.item(i);
-        console.log('1::: ');
-        console.log(item);
-    }
-    
-    console.log('2::: ');
-    console.log(checkbox);
-    console.log('3::: ');
-    console.log('3::: ' + selectedElements);
+    //전체 체크박스 버튼 체크 여부 
+    const is_checked = checkbox.checked;
 
-}
-var arrCheck = [];
-var objCheck = {};
-
-function checkClick(check, seq, send){
-    var TargetCheck = check.checked;
-    console.log(check);
-    objCheck.L_SEQ = seq;
-    objCheck.SEND = send;
-    if(TargetCheck){
-       
-
-        
-
-        arrCheck.push(objCheck);
+    //전체 체크박스 제외한 모든 체크박스
+    if(is_checked){
+        //체크박스 전체 체크
+        chkAllChecked();
     } else {
-        arrCheck.
+        //체크박스 전체 해제
+        chkAllUnChecked();
     }
-   
+}
 
-    console.log(arrCheck);
+    //체크박스 전체 체크
+function chkAllChecked(){
+    document.querySelectorAll("#lett_check").forEach(function(v,i){
+        v.checked = true;
+    });
+}
+    //체크박스 전체 해제
+function chkAllUnChecked(){
+    document.querySelectorAll("#lett_check").forEach(function(v,i){
+        v.checked = false;
+    });
+}
+
+//자식 체크박스 개수 == 전체체크박스 개수 일 경우, 전체체크박스 체크 or 해제
+function checkClick(){
+    const allCount = document.querySelectorAll("#lett_check").length;
+
+    const query = "input[name='lett_check']:checked";
+    const selectedElements = document.querySelectorAll(query);
+    const selectedElementsCnt = selectedElements.length;
+
+
+    //체크된 박스가 전체 체크박스의 개수와 같으면 전체 체크박스도 체크 처리하기
+    if(allCount == selectedElementsCnt){
+        document.getElementById('allCheck').checked = true;  
+    } 
+    //같지 않으면 전체 체크박스 해제
+    else {
+        document.getElementById('allCheck').checked = false;
+    }
+}
+
+//삭제버튼 클릭 시, SEQ와 SEND 객체에 넣어서, 배열에 집어넣는 작업
+function delLett(){
+    const query = "input[name='lett_check']:checked";
+    const selectedElements = document.querySelectorAll(query);
+    const selectedElementsCnt = selectedElements.length;
+
+    if(selectedElementsCnt == 0){
+        alert('삭제할 항목을 선택해주세요');
+        return false;
+    }
+    else{
+        let arr = new Array(selectedElementsCnt);
+        let obj = {};
+        document.querySelectorAll(query).forEach(function(v, i){
+            let seq = v.nextElementSibling.innerHTML;
+            let sendChk = v.nextElementSibling.nextElementSibling.innerHTML
+            
+            obj = {"L_SEQ" : seq, "SEND" : sendChk};
+            arr.push(obj);
+            
+        });
+
+        $.ajax({
+            type : 'POST',
+            contentType : "application/json",
+            url : '/letterTrash.json',
+            data : JSON.stringify(arr),
+            dataType : 'json',
+            success : function(rslt){
+                alert('성공')
+            },
+            error : function(request, status, error){
+                alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+            }
+    });
+
+    }
 
 }
+
+
+
+
+
+
 
 
 
@@ -129,7 +166,7 @@ function checkClick(check, seq, send){
 </style>
 
 </th:block>
- 
+
 </body>
 
 </html>
