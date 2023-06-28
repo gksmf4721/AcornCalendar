@@ -17,11 +17,7 @@
 .header_title_item{font-weight: bold; font-size: 30px; line-height: 30px; color:#fff; letter-spacing: 10px;}
 .header_list{display:grid; grid-template-columns: repeat(3, 1fr); align-self:center}
 
-.sidebar{
-    grid-row : span 2;
-    min-height:100vh;
-    background-color : #6F6153;
-}
+.header_symbol{width:25px;}
 
 .nav_container{margin-bottom:40px;}
 
@@ -44,5 +40,15 @@
     color:#fff;
     letter-spacing: 2px;
 }
-
+.sidebar{
+    grid-row : span 2;
+    min-height:100vh;
+    background-color : #6F6153;
+    width: 40px;
+}
+.sidebar:hover{
+    /* 사이드바가 열리는 애니메이션을 위해 추가 */
+    transition:all 0.5s ease-out; 
+    width: 210px;
+}
 
