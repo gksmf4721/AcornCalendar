@@ -5,25 +5,17 @@
 
         <div class="header">
             <div class="header_logo">
-                <img th:src="@{/img/icons/calendar.png}" alt="캘린더이미지" class="header_logo_png">
+                <a href="/main.do">
+                    <img th:src="@{/img/icon/logo.png}" alt="캘린더이미지" class="header_logo_png">
+                </a>
             </div>
             <div class="header_title">
-                <span class="header_title_item">ACORN CALENDAR</span>
+                <span class="header_title_item"></span>
             </div>
             <ul class="header_list">
-                <li><a href="#" class="user_alarm" title="알림">
-                    <!-- <img th:src="@{/img/icons/}"> -->
-                    알림</a></li>
-                <li>
-                    <a href="#" class="user_photo" title="마이페이지">
-                        <img th:src="@{/img/icons/user_clear.png}" alt="유저사진" class="header_symbol">
-                    </a>
-                </li>
-                <li>
-                    <a href="/logout.do" class="user_logout"title="로그아웃">
-                        <img th:src="@{/img/icons/logout.png}" alt="유저사진" class="header_symbol">
-                    </a>
-                </li>
+                <li><a href="#" class="user_alarm"><img th:src="@{/img/icon/Notifications.png}" alt="알림" class="header_symbol"></a></li>
+                <li><a href="#" class="user_photo"><img th:src="@{/img/icon/Account_Circle.png}" alt="유저사진" class="header_symbol"></a></li>
+                <li><a href="/logout.do" class="user_logout"><img th:src="@{/img/icon/Logout.png}" alt="로그아웃" class="header_symbol"></a></li>
             </ul>
         </div>
 

@@ -1,54 +1,52 @@
 .container{ display: grid; grid-template-columns: 210px minmax(420px, auto); grid-template-rows: 60px 1fr;}
-.header {
-    grid-column: span 2;
-    color: #fff;
-    background-color: #373029;
-    display: grid;
-    grid-template-columns: 210px 3fr 1fr;
-    box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);
-    position: sticky;
-    left: 0;
-    top: 0;
-    z-index: 1;
-}
+.header {grid-column: span 2; color: #fff; background-color: #373029; display: grid; grid-template-columns: 210px 3fr 1fr;
+    box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12); position: sticky; left: 0; top: 0; z-index: 1; }
 .header_logo{margin: auto;text-align: left; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
-.header_logo_png{ width:25px; height:25px;}
+.header_logo_png{margin-left:10px}
 .header_title{align-self:center}
 .header_title_item{font-weight: bold; font-size: 30px; line-height: 30px; color:#fff; letter-spacing: 10px;}
 .header_list{display:grid; grid-template-columns: repeat(3, 1fr); align-self:center}
-
-.header_symbol{width:25px;}
-
+.header_symbol{width:35px;filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
 .nav_container{margin-bottom:40px;}
 
-.nav_title{
+.nav_menu img{
     display:block;
-    margin-bottom:12px;
-    padding: 8px 20px;
-    font-weight: bold;
-    letter-spacing: 10px;
-    color:#a59174;
+    margin-bottom: 35px;
+    width: 40px;
+    padding: 0px 30px 0px 5px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);
 }
 
-.nav_list{
-    font-size:16px;
-    padding: 0 20px;
+.nav_item img{
+    display:inline-block;
+    margin-bottom: 10px;
+    width: 40px;
+    padding: 0px 30px 0px 5px;
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);
 }
 
-.nav_item{
-    margin-bottom: 8px;
-    color:#fff;
-    letter-spacing: 2px;
-}
 .sidebar{
     grid-row : span 2;
     min-height:100vh;
     background-color : #6F6153;
-    width: 40px;
+    width: 50px;
+    transition:all 0.5s ease-out; 
 }
 .sidebar:hover{
-    /* 사이드바가 열리는 애니메이션을 위해 추가 */
-    transition:all 0.5s ease-out; 
-    width: 210px;
+    width: 230px;
 }
 
+.menu-text{
+    display:none;
+}
+.sidebar:hover .menu-text{
+    display: inline-block;
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+    top: 10px;
+}
+
+.sidebar:hover .nav_menu{
+    border-bottom: 2px solid #fff;
+}
