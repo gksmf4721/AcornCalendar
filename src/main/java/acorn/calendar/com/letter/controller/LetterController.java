@@ -9,20 +9,31 @@ import acorn.calendar.config.util.JsonUtils;
 import acorn.calendar.config.util.PasswordHashUtils;
 import acorn.calendar.config.util.ResponseUtils;
 import acorn.calendar.config.util.ValidateUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.jdbc.Null;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import top.jfunc.json.Json;
+import top.jfunc.json.JsonArray;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -36,51 +47,12 @@ public class LetterController {
 
 	@RequestMapping("/letterBox.do")
 	public String letterBox(AcornMap acornMap, Model model, HttpSession session) throws Exception {
-		acornMap.put("type","all");
-
 		if(null!=session.getAttribute("trashLetterDelete")){
 			acornMap.put("type","trash");
 			trashLetterDelete(acornMap,session);
 		}
-
+		acornMap.put("type","all");
 		model.addAttribute("letterList",letterService.selectLetterList(acornMap));
-
-
-		//test
-//		acornMap.put("type","trash");
-//		List<AcornMap> list = letterService.selectLetterList(acornMap);
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date date = new Date();
-//
-//
-//		String da = "2023-06-22 09:12:11";
-//		Calendar c = Calendar.getInstance();
-//		Date te = sdf.parse(da);
-//		c.setTime(te);
-//		c.add(Calendar.MONTH,1);
-//		log.info("데이트 테이스 : "+date);
-//		log.info("캘린더 테스트 : "+new Date(c.getTimeInMillis()));
-//
-//
-//
-//		for(int i=0 ; i<list.size() ; i++){
-//			String trash = list.get(i).getString("SEND").equals("SENDER") ?
-//					"L_SENDER_TRASH_DATE": "L_RECIVER_TRASH_DATE";
-//			Date trashDate = sdf.parse(list.get(i).getString(trash));
-//
-//			Calendar cal = Calendar.getInstance();
-//			cal.setTime(trashDate);
-//			cal.add(Calendar.MONTH,1);
-//
-//			log.info("현재 : "+date);
-//			log.info("리스트 날짜 : "+new Date(cal.getTimeInMillis()));
-//
-//			if(!date.before(new Date(cal.getTimeInMillis()))){
-//				//삭제
-//			}
-//		}
-
-
 
 		return "mail/letterBox";
 	}
@@ -89,9 +61,7 @@ public class LetterController {
 		session.removeAttribute("trashLetterDelete");
 		List<AcornMap> list = letterService.selectLetterList(acornMap);
 		List<AcornMap> deleteList = new ArrayList<>();
-
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
 		Date nowDate = new Date();
 
 		for(int i=0 ; i<list.size() ; i++){
@@ -103,14 +73,10 @@ public class LetterController {
 			cal.setTime(trashDate);
 			cal.add(Calendar.MONTH,1);
 
-//			log.info("현재 : "+nowDate);
-//			log.info("리스트 날짜 : "+new Date(cal.getTimeInMillis()));
-
 			if(!nowDate.before(new Date(cal.getTimeInMillis()))){
 				deleteList.add(list.get(i));
 			}
 		}
-
 		letterService.updateTrashList(deleteList);
 	}
 
@@ -121,7 +87,7 @@ public class LetterController {
 	}
 
 	@RequestMapping("/letterWrite.do")
-	public String letterWrite(AcornMap acornMap, Model model) throws Exception {
+	public String letterWrite() throws Exception {
 		return "mail/letterWrite";
 	}
 
@@ -139,8 +105,8 @@ public class LetterController {
 	}
 
 	@RequestMapping("/letterTrash.json")
-	public void letterTrash(@RequestBody List<Map<String,Object>> jsonList, HttpServletResponse response) throws Exception {
-		List<AcornMap> acornList = JsonUtils.toListAcornMap(jsonList);
+	public void letterTrash(@RequestBody String json, HttpServletResponse response) throws Exception {
+		List<AcornMap> acornList = JsonUtils.toListAcornMap(json);
 		try{
 			letterService.updateTrash(acornList);
 			ResponseUtils.responseMap(response, "1","휴지통으로 이동 되었습니다.","/letterBox.do");
@@ -150,7 +116,27 @@ public class LetterController {
 		}
 	}
 
+	@RequestMapping("/letterTrash.json")
+	public void letterTrashDelete(@RequestBody String json, HttpServletResponse response) throws Exception {
+		List<AcornMap> acornList = JsonUtils.toListAcornMap(json);
+		try{
+			letterService.updateTrashDelete(acornList);
+			ResponseUtils.responseMap(response, "1","삭제를 완료했습니다.","/letterBox.do");
+		}catch (Exception e){
+			e.printStackTrace();
+			ResponseUtils.responseMap(response, "-1","삭제를 실패했습니다.",null);
+		}
+	}
 
-
-
+	@RequestMapping("/letterTrash.json")
+	public void letterTrashRestore(@RequestBody String json, HttpServletResponse response) throws Exception {
+		List<AcornMap> acornList = JsonUtils.toListAcornMap(json);
+		try{
+			letterService.updateTrashRestore(acornList);
+			ResponseUtils.responseMap(response, "1","복구를 완료했습니다.","/letterBox.do");
+		}catch (Exception e){
+			e.printStackTrace();
+			ResponseUtils.responseMap(response, "-1","복구를 실패했습니다.",null);
+		}
+	}
 }

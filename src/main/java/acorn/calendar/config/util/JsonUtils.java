@@ -2,11 +2,14 @@ package acorn.calendar.config.util;
 
 import acorn.calendar.config.data.AcornMap;
 import acorn.calendar.config.model.LoginSession;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.map.HashedMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 @Slf4j
@@ -56,6 +59,12 @@ public class JsonUtils {
         return toAcornMap(new JSONObject(jsonStr));
     }
 
+    public static List<AcornMap> toListAcornMap(String json) throws Exception {
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Map<String, Object>>>() {}.getType();
+        List<Map<String, Object>> data = gson.fromJson(json, type);
+        return toListAcornMap(data);
+    }
     public static List<AcornMap> toListAcornMap(List<Map<String,Object>> list) throws JSONException {
         AcornMap loginMap = RequestUtils.getLoginSession(LoginSession.getLoginSession());
         List<AcornMap> acornList = new ArrayList<>();

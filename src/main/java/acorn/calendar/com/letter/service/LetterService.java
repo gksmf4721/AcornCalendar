@@ -49,6 +49,36 @@ public class LetterService {
 		}
 	}
 
+	public void updateTrashDelete(List<AcornMap> list) throws Exception {
+		try{
+			for(int i=0 ; i<list.size() ; i++){
+				if(list.get(i).get("SEND").equals("SENDER")){
+					sqlSession.update("mapper.com.letter.updateSenderTrashDelete",list.get(i));
+				}else{
+					sqlSession.update("mapper.com.letter.updateReciverTrashDelete",list.get(i));
+				}
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			sqlSession.rollback();
+		}
+	}
+
+	public void updateTrashRestore(List<AcornMap> list) throws Exception {
+		try{
+			for(int i=0 ; i<list.size() ; i++){
+				if(list.get(i).get("SEND").equals("SENDER")){
+					sqlSession.update("mapper.com.letter.updateSenderTrashRestore",list.get(i));
+				}else{
+					sqlSession.update("mapper.com.letter.updateReciverTrashRestore",list.get(i));
+				}
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			sqlSession.rollback();
+		}
+	}
+
 	public String selectSeq(AcornMap acornMap) throws Exception {
 		AcornMap resultMap = sqlSession.selectOne("mapper.com.letter.selectSeq",acornMap);
 		return resultMap.getString("M_SEQ");
