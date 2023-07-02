@@ -36,7 +36,10 @@
             dataType : 'json',
             success : function(rslt){
                 fetch(`/api/publish?lReciver=${document.querySelector("#lReciver").value}`);
-                alert('성공')
+                alert(rslt.resultMsg);
+                if(rslt.resultCd=='1'){
+                    location.href = rslt.resultUrl;
+                }
             },
             error : function(request, status, error){
                 alert("javaScript error : "+ error + "request :" + request + "status : " + status);

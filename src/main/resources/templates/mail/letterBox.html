@@ -107,7 +107,7 @@ function delLett(){
             let seq = v.nextElementSibling.innerHTML;
             let sendChk = v.nextElementSibling.nextElementSibling.innerHTML
             
-            arr[i] = ({"L_SEQ" : seq, "SEND" : sendChk});
+            arr[i] = ({"lSeq" : seq, "SEND" : sendChk});
             
         });
         console.log(document.querySelectorAll(query));
@@ -121,7 +121,10 @@ function delLett(){
             data : JSON.stringify(arr),
             dataType : 'json',
             success : function(rslt){
-                alert('성공')
+                alert(rslt.resultMsg);
+                if(rslt.resultCd=='1'){
+                    location.href = rslt.resultUrl;
+                }
             },
             error : function(request, status, error){
                 alert("javaScript error : "+ error + "request :" + request + "status : " + status);
@@ -131,8 +134,6 @@ function delLett(){
     }
 
 }
-
-
 
 
 

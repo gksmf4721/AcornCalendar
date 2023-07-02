@@ -105,7 +105,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/loginCheck.json")
-	public void loginCheck(@RequestBody String json, HttpServletResponse response) throws Exception {
+	public void loginCheck(@RequestBody String json, HttpServletResponse response, HttpSession session) throws Exception {
 
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 
@@ -116,8 +116,8 @@ public class MemberController {
 
 			if(PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))){
 				LoginSession.setLoginSession(resultMap);
+				session.setAttribute("trashLetterDelete",true);
 				resultMap.put("resultCd","1");
-
 				resultMap.put("resultUrl","/main.do");
 			}else{
 				resultMap.clear();
