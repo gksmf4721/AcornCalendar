@@ -12,8 +12,7 @@ background-color:rgb(245 238 230 / 48%);}
 .login_in_footer{ position: fixed; right: 0; left: 0; bottom: 0;min-width: 1000px; padding: 15px 25px; font-size: 13px;  text-align: center; border-top: 1px solid black; }
 
 /* 메인 헤더에서 사용 */
-.login_in_png{padding-right: 15px; margin-right: 10px; border-right: 1px solid rgba(255,255,255,0.3); vertical-align: top; width: 25px;
-    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
+.login_in_png{margin-left: -20px; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%); margin-top: -15px;}
 .login_in_title{display: inline-block; line-height: 30px; font-weight: bold; vertical-align: top; ;color:#fff; letter-spacing: 10px}    
 
 /* 로그인.html에서 사용 */

@@ -8,26 +8,29 @@
                     <div class="section">
                         <div>
                             <a href="/letterWrite.do">메일쓰기</a>
-                            <a href="#">삭제하기</a>
+                            <input type="button" onclick="delLett();" value="삭제">
                         </div>
+                        <input type="checkbox" id="allCheck" onclick="allChecked();">
                         <div class="mail_list_wrap">
-                            
                             <ul class="mail_list">
                                 <li class="mail_item">
-                                	<div class="mail">
-	                                	<div th:each="letter : ${letterList}">
-	                                		<div class="button_checkbox_wrap"><input type="checkbox"></div>
-	                                		<div class="" th:text="${letter.L_SEQ}"></div>
-	                                		<div class="" th:text="${letter.L_SENDER}"></div>
-	                                		<div class="" th:text="${letter.L_RECIVER}"></div>
-	                                		<div class="" th:text="${letter.L_TITLE}"></div>
-	                                		<div class="" th:text="${letter.L_OPEN_YN}"></div>
-	                                		<div class="" th:text="${letter.M_NICKNAME}"></div>
-	                                		<div class="" th:text="${letter.L_SENDT}"></div>
-	                                		<div class="" th:text="${letter.M_SEQ}"></div>
-	                                		<div class="" th:text="${letter.F_SV_NAME}"></div>
-	                                		<div class="" th:text="${letter.F_SEQ}"></div>
-	                                	</div>
+                                    <div class="mail">
+                                        <div th:each="item : ${letterList}">
+                                            <div class="button_checkbox_wrap">
+                                                <input type="checkbox" id="lett_check" name="lett_check" th:onclick="checkClick()" >
+                                                <div id="lett_L_SEQ" class="" th:text="${item.L_SEQ}"></div>
+                                                <div id="lett_SEND" class="" th:text="${item.SEND}"></div>
+                                                <div id="lett_L_SENDER" class="" th:text="${item.L_SENDER}"></div>
+                                                <div id="lett_L_RECIVER" class="" th:text="${item.L_RECIVER}"></div>
+                                                <div id="lett_L_TITLE" class="" th:text="${item.L_TITLE}"></div>
+                                                <div id="lett_L_OPEN_YN" class="" th:text="${item.L_OPEN_YN}"></div>
+                                                <div id="lett_M_NICKNAME" class="" th:text="${item.M_NICKNAME}"></div>
+                                                <div id="lett_L_SENDT" class="" th:text="${item.L_SENDT}"></div>
+                                                <div id="lett_M_SEQ" class="" th:text="${item.M_SEQ}"></div>
+                                                <div id="lett_F_SV_NAME" class="" th:text="${item.F_SV_NAME}"></div>
+                                                <div id="lett_F_SEQ" class="" th:text="${item.F_SEQ}"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -36,20 +39,107 @@
                 </div>
             </div>
 <script>
-    function goToletterWrite(){
-        $.ajax({
-            type : "GET",
-            url : "/sendMailAuth.json",
-            dataType:'json',
-            contentType : "application/json",
-            data : JSON.stringify({
-                
-            }),
-            success : function(obj){
-                location.href="../mail/letterWrite.html";
-            }
-        })
+
+//전체 체크박스 버튼 체크 여부: 전체 체크박스 해제 또는 체크
+function allChecked(){
+    //전체 체크박스 버튼 요소
+    const checkbox = document.getElementById('allCheck');
+
+    //전체 체크박스 버튼 체크 여부 
+    const is_checked = checkbox.checked;
+
+    //전체 체크박스 제외한 모든 체크박스
+    if(is_checked){
+        //체크박스 전체 체크
+        chkAllChecked();
+    } else {
+        //체크박스 전체 해제
+        chkAllUnChecked();
     }
+}
+
+    //체크박스 전체 체크
+function chkAllChecked(){
+    document.querySelectorAll("#lett_check").forEach(function(v,i){
+        v.checked = true;
+    });
+}
+    //체크박스 전체 해제
+function chkAllUnChecked(){
+    document.querySelectorAll("#lett_check").forEach(function(v,i){
+        v.checked = false;
+    });
+}
+
+//자식 체크박스 개수 == 전체체크박스 개수 일 경우, 전체체크박스 체크 or 해제
+function checkClick(){
+    const allCount = document.querySelectorAll("#lett_check").length;
+
+    const query = "input[name='lett_check']:checked";
+    const selectedElements = document.querySelectorAll(query);
+    const selectedElementsCnt = selectedElements.length;
+
+
+    //체크된 박스가 전체 체크박스의 개수와 같으면 전체 체크박스도 체크 처리하기
+    if(allCount == selectedElementsCnt){
+        document.getElementById('allCheck').checked = true;  
+    } 
+    //같지 않으면 전체 체크박스 해제
+    else {
+        document.getElementById('allCheck').checked = false;
+    }
+}
+
+//삭제버튼 클릭 시, SEQ와 SEND 객체에 넣어서, 배열에 집어넣는 작업
+function delLett(){
+    const query = "input[name='lett_check']:checked";
+    const selectedElements = document.querySelectorAll(query);
+    const selectedElementsCnt = selectedElements.length;
+
+    if(selectedElementsCnt == 0){
+        alert('삭제할 항목을 선택해주세요');
+        return false;
+    }
+    else{
+        let arr = new Array(selectedElementsCnt);
+        let obj = new Object();
+        document.querySelectorAll(query).forEach(function(v, i){
+            let seq = v.nextElementSibling.innerHTML;
+            let sendChk = v.nextElementSibling.nextElementSibling.innerHTML
+            
+            arr[i] = ({"L_SEQ" : seq, "SEND" : sendChk});
+            
+        });
+        console.log(document.querySelectorAll(query));
+        console.log(arr);
+        console.log(JSON.stringify(arr))
+
+        $.ajax({
+            type : 'POST',
+            contentType : "application/json",
+            url : '/letterTrash.json',
+            data : JSON.stringify(arr),
+            dataType : 'json',
+            success : function(rslt){
+                alert('성공')
+            },
+            error : function(request, status, error){
+                alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+            }
+    });
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
 </script>
 
 
@@ -59,13 +149,13 @@
 .mail_item{position:relative; margin:0; padding:0px;touch-action: pan-y;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 .mail{
-        display: flex;
     padding: 8px 10px 8px 11px;
     border-bottom: 1px solid rgba(var(--color-button-line-rgb), 0.4);
     cursor: pointer;
     position: relative;
     }
     .button_checkbox_wrap, .mail_sender, .mail_inner, .mail_date_wrap{
+        flex-direction: column;
         -webkit-box-flex: 0;
         flex: 0 0 auto;
         box-sizing: border-box;
@@ -78,7 +168,7 @@
 </style>
 
 </th:block>
- 
+
 </body>
 
 </html>
