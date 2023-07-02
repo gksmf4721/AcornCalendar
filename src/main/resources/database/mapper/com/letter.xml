@@ -6,14 +6,16 @@
 	<select id="selectLAllLetterList" parameterType="acornMap" resultType="acornMap">
 		SELECT LETTER.*, JF.F_SV_NAME, F_SEQ, IF(LETTER.L_SENDER=#{session_m_seq} , 'SENDER', 'RECIVER') AS SEND
 		FROM (
-				 SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME, JL.L_SENDT, JM.M_SEQ
+				 SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN,
+				        JM.M_NICKNAME, JL.L_SENDT, JM.M_SEQ, JL.L_SENDER_TRASH_DATE, JL.L_RECIVER_TRASH_DATE
 				 FROM JH_LETTER JL
 					JOIN JH_MEMBER JM ON JM.M_SEQ = JL.L_SENDER
 				 WHERE JL.L_RECIVER=#{session_m_seq}
 				   AND JL.L_RECIVER_TRASH_STEP=#{categoryType}
 				   AND JM.M_DEL_YN = 'N'
 				 UNION ALL
-				 SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN, JM.M_NICKNAME , JL.L_SENDT, JM.M_SEQ
+				 SELECT JL.L_SEQ, JL.L_SENDER, JL.L_RECIVER, JL.L_TITLE, JL.L_OPEN_YN,
+				        JM.M_NICKNAME , JL.L_SENDT, JM.M_SEQ, JL.L_SENDER_TRASH_DATE, JL.L_RECIVER_TRASH_DATE
 				 FROM JH_LETTER JL
 					JOIN JH_MEMBER JM ON JM.M_SEQ = JL.L_RECIVER
 				 WHERE JL.L_SENDER=#{session_m_seq}
@@ -49,21 +51,21 @@
 
 	<insert id="insertLetter" parameterType="acornMap">
 		INSERT INTO acorncalendar.JH_LETTER
-			(L_SENDER, L_RECIVER, L_TITLE, L_CONTENT, L_SENDT, L_OPEN_YN, L_SENDER_TRASH_STEP, L_RECIVER_TRASH_STEP)
+			(L_SENDER, L_RECIVER, L_TITLE, L_CONTENT, L_SENDT, L_OPEN_YN, L_SENDER_TRASH_STEP, L_RECIVER_TRASH_STEP, L_SENDER_TRASH_DATE)
 		VALUES
-		    (#{session_m_seq}, #{lReciver}, #{lTitle}, #{lContent}, current_timestamp(), 'N', 0, 0);
+		    (#{session_m_seq}, #{lReciver}, #{lTitle}, #{lContent}, current_timestamp(), 'N', 0, 0, current_timestamp());
 	</insert>
 
 	<!-- UPDATE 문에 SELECT 넣어서 하나로 합칠 예정 -->
 	<update id="updateSenderTrash" parameterType="acornMap">
 		UPDATE JH_LETTER
-		SET L_SENDER_TRASH_STEP='1'
+		SET L_SENDER_TRASH_STEP='1', L_SENDER_TRASH_DATE=current_timestamp()
 		WHERE L_SEQ=#{lSeq};
 	</update>
 
 	<update id="updateReciverTrash" parameterType="acornMap">
 		UPDATE JH_LETTER
-		SET L_RECIVER_TRASH_STEP='1'
+		SET L_RECIVER_TRASH_STEP='1', L_RECIVER_TRASH_DATE=current_timestamp()
 		WHERE L_SEQ=#{lSeq};
 	</update>
 
@@ -78,5 +80,24 @@
 		FROM JH_MEMBER
 		WHERE M_NICKNAME=#{lReciver}
 	</select>
+
+	<update id="updateSenderComplateDelete" parameterType="acornMap">
+		UPDATE JH_LETTER
+		SET L_RECIVER_TRASH_STEP='2'
+		WHERE L_SEQ=#{lSeq};
+	</update>
+
+	<update id="updateReciverComplateDelete" parameterType="acornMap">
+		UPDATE JH_LETTER
+		SET L_RECIVER_TRASH_STEP='2'
+		WHERE L_SEQ=#{lSeq};
+	</update>
+
+<!--	<select id="selectUser" parameterType="acornMap" resultType="acornMap">-->
+<!--		SELECT M_ID-->
+<!--		FROM JH_MEMBER-->
+<!--		WHERE M_NICKNAME=#{lReciver}-->
+<!--	</select>-->
+
 
 </mapper>

@@ -35,12 +35,17 @@ public class LetterService {
 	}
 
 	public void updateTrash(List<AcornMap> list) throws Exception {
-		for(int i=0 ; i<list.size() ; i++){
-			if(list.get(i).get("SEND").equals("SENDER")){
-				sqlSession.update("mapper.com.letter.updateSenderTrash",list.get(i));
-			}else{
-				sqlSession.update("mapper.com.letter.updateReciverTrash",list.get(i));
+		try{
+			for(int i=0 ; i<list.size() ; i++){
+				if(list.get(i).get("SEND").equals("SENDER")){
+					sqlSession.update("mapper.com.letter.updateSenderTrash",list.get(i));
+				}else{
+					sqlSession.update("mapper.com.letter.updateReciverTrash",list.get(i));
+				}
 			}
+		}catch (Exception e){
+			e.printStackTrace();
+			sqlSession.rollback();
 		}
 	}
 
@@ -56,6 +61,16 @@ public class LetterService {
 
 	public void insertLetter(AcornMap acornMap) throws Exception {
 		sqlSession.insert("mapper.com.letter.insertLetter",acornMap);
+	}
+
+	public void updateTrashList(List<AcornMap> deleteList) throws Exception {
+		for(int i=0 ; i<deleteList.size() ; i++){
+			if(deleteList.get(i).getString("SEND").equals("SENDER")){
+				sqlSession.insert("mapper.com.letter.updateSenderComplateDelete",deleteList.get(i));
+			}else{
+				sqlSession.insert("mapper.com.letter.updateReciverComplateDelete",deleteList.get(i));
+			}
+		}
 	}
 
 
