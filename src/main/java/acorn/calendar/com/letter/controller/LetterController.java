@@ -116,7 +116,7 @@ public class LetterController {
 		}
 	}
 
-	@RequestMapping("/letterTrash.json")
+	@RequestMapping("/letterTrashDelete.json")
 	public void letterTrashDelete(@RequestBody String json, HttpServletResponse response) throws Exception {
 		List<AcornMap> acornList = JsonUtils.toListAcornMap(json);
 		try{
@@ -128,7 +128,7 @@ public class LetterController {
 		}
 	}
 
-	@RequestMapping("/letterTrash.json")
+	@RequestMapping("/letterTrashRestore.json")
 	public void letterTrashRestore(@RequestBody String json, HttpServletResponse response) throws Exception {
 		List<AcornMap> acornList = JsonUtils.toListAcornMap(json);
 		try{
