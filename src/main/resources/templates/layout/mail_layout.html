@@ -6,7 +6,10 @@
     <body class="main_layout">
         <div class="container">
             <th:block th:replace="fragments/mainHeader :: mainHeaderFragment"></th:block>
-			
+
+            <th:block th:replace="fragments/mainSideBar :: mainSideBarFragment"></th:block>
+			<th:block th:replace="fragments/mailSideBar :: mailSideBarFragment"></th:block>
+
 	        <th:block layout:fragment="mainContent"></th:block>
             
 			<div class="footer">

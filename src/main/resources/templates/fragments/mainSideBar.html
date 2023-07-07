@@ -6,34 +6,47 @@
                     <div class="nav_container">
                         <ul class="nav_item">
                         	<li>
-                        		<div class="item white"></div>
-                           		<div class="menu_name">메뉴</div>
+                        		<div class="item img_white"></div>
+                           		<div class="menu_name"></div>
                         	</li>
-                        	<li>
-                        		<div class="item white"></div>
+                        	<li onclick="goToHref('1')">
+                        		<div class ="item img_white"></div>
                         		<div class="menu_name">메일</div>
                         	</li>
-                        	<li>
-                        		<div class="item white"></div>
+                        	<li onclick="goToHref('2')">
+                        		<div class="item img_white"></div>
                         		<div class="menu_name">캘린더</div>
                         	</li>
-                        	<li>
-                        		<div class="item white"></div>
+							<li onclick="goToHref('3')">
+                        		<div class="item img_white"></div>
                         		<div class="menu_name">하트</div>
                         	</li>
-                        	<li>
-                        		<div class="item white"></div>
+							<li onclick="goToHref('4')">
+                        		<div class="item img_white"></div>
                         		<div class="menu_name">마이페이지</div>
                         	</li>
-                        	<li>
-                        		<div class="item white"></div>
+							<li onclick="goToHref('5')">
+                        		<div class="item img_white"></div>
                         		<div class="menu_name">설정</div>
                         	</li>
                         </ul>
                     </div>
             </nav>
         </div>
+<script>
+function goToHref(value){
+	if(value == '1'){
+		location.href="/letterBox.do"
+	} else if(value == '2'){
+		location.href="#"
+	} else if(value == '3'){
+		location.href="#"
+	} else if(value == '4'){
+		location.href="#"
+	} else if(value == '5'){
+		location.href="#"
+	}
+}
+</script>
     </th:block>
 </html>
-
-<!-- <img th:src="@{/img/icon/Menu.png}" alt="" class=""> -->

@@ -1,0 +1,22 @@
+<!-- 화면 header 영역 -->
+<html xmlns:th="http://www.thymeleaf.org">
+    <th:block th:fragment="mailSideBarFragment">
+        <div class="m_sidebar">
+            <nav>
+                    <div class="m_nav_container">
+                        <ul class="m_nav_item">
+                        	<li>
+                        		<div class="m_item m_white"></div>
+                           		<div class="m_menu_name"></div>
+                        	</li>
+                        	
+                        </ul>
+                    </div>
+            </nav>
+        </div>
+<style>
+.m_sidebar{ grid-row : span 2; min-height:100vh; background-color : #6F6153; width: 170px; transition:all 0.5s ease-out; }
+.m_sidebar:hover {}
+</style>
+    </th:block>
+</html>

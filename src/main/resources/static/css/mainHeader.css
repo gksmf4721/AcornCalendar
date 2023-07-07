@@ -1,29 +1,127 @@
-.container{ display: grid; grid-template-columns: 210px minmax(420px, auto); grid-template-rows: 60px 1fr;}
-.header {grid-column: span 2; color: #fff; background-color: #373029; display: grid; grid-template-columns: 210px 3fr 1fr;
-    box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12); position: sticky; left: 0; top: 0; z-index: 1; }
+/* 전체 화면 그리드 */
+.container{display: grid; grid-template-columns: 140px minmax(420px, auto); grid-template-rows: 60px 1fr;}
+/* 헤더 그리드 */
+.header {grid-column: span 2; color: #fff; background-color: #373029; display: grid; grid-template-columns: 240px 3fr 0fr;
+        box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12); position: sticky; left: 0; top: 0; z-index: 2; }
 .header_logo{margin: auto;text-align: left; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
 .header_logo_png{margin-left:10px}
 .header_title{align-self:center}
 .header_title_item{font-weight: bold; font-size: 30px; line-height: 30px; color:#fff; letter-spacing: 10px;}
-.header_list{display:grid; grid-template-columns: repeat(3, 1fr); align-self:center}
-.header_symbol{width:35px;filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
-.nav_container{margin-bottom:40px;}
-   
-.white{filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
-.sidebar{ grid-row : span 2; min-height:100vh; background-color : #6F6153; width: 60px; transition:all 0.5s ease-out; }
-.sidebar:hover { grid-row : span 2; min-height:100vh; background-color : #6F6153; width: 230px; transition:all 0.5s ease-out; }
-.nav_item li{margin : 20px 0px; display:flex; align-items: center;}
-.nav_container li:nth-child(1){ padding-bottom: 15px ;border-bottom: 2px solid #fff;}
-.nav_container li:nth-child(1) .item::before{content :  url( "/img/icon/Menu.png" ); float:left; }
-.nav_container li:nth-child(2) .item::before{ content: url( "/img/icon/Mail.png" ); float:left; }
-.nav_container li:nth-child(3) .item::before{ content: url( "/img/icon/Calendar_Month.png" );float:left; }
-.nav_container li:nth-child(4) .item::before{ content: url( "/img/icon/Favorite.png" );float:left;}
-.nav_container li:nth-child(5) .item::before{ content: url( "/img/icon/Account_Circle.png" );float:left; }
-.nav_container li:nth-child(6) .item::before{ content: url( "/img/icon/Setting.png" );float:left; }
-.nav_container li .menu_name{font-size:17px; color:#fff; position:absolute; left:6em;}
-.nav_container li:nth-child(n+2):hover{
+.header_list{display:grid; grid-template-columns: repeat(3, 90px); align-self:center}
+.header_symbol{width:30px;filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
+
+/* 이미지 하얗게 만들기 */
+.img_white {filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
+.img_black {filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(208deg) brightness(98%) contrast(106%);}
+
+/* 사이드바 시작 */
+:root{
+    --side-bar__phase-1-width: 50px;
+    --side-bar__background-color:#6F6153; ;
+    --side-bar__color: #fff;
+    --side-bar__img_width : 40px;
+    
+}
+
+.sidebar{
+    grid-row: span 2;
+    display:grid;
+    background-color: var(--side-bar__background-color);
+    width: var(--side-bar__phase-1-width);
+    height: 100%;
+    transition: width 0.3s;
+    z-index: 1;
+}
+
+.nav_item li{display:flex; align-items:center; height:75px; cursor:default; overflow: hidden;}
+.nav_item li:nth-child(1) {padding-bottom:15px;}
+
+.nav_item li:nth-child(1) .item{
+    content: ""; 
+    background-image: url("/img/icon/Menu.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+.nav_item li:nth-child(2) .item{ 
+    content: ""; 
+    background-image: url("/img/icon/Mail.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+.nav_item li:nth-child(3) .item{ 
+    content: ""; 
+    background-image: url("/img/icon/Calendar_Month.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+.nav_item li:nth-child(4) .item{ 
+    content: ""; 
+    background-image: url("/img/icon/Favorite.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+.nav_item li:nth-child(5) .item{ 
+    content: ""; 
+    background-image: url("/img/icon/Account_Circle.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+.nav_item li:nth-child(6) .item{ 
+    content: ""; 
+    background-image: url("/img/icon/Setting.png"); 
+    background-size: var(--side-bar__img_width); 
+    width: var(--side-bar__img_width); 
+    height: var(--side-bar__img_width); 
+    display: inline-block; 
+    vertical-align: middle; 
+    margin-left: calc((var(--side-bar__phase-1-width) - var(--side-bar__img_width)) / 2);
+    position:absolute;
+}
+
+/* 호버했을때 */
+.sidebar:hover{
+    width: 230px;
+}
+/* 호버했을때, 메뉴 이미지 변경 */
+.sidebar:hover li:nth-child(1) .item{
+    background-image: url("/img/icon/DownWard.png"); 
+    transition: all .2s;
+}
+.nav_item > li > .menu_name{
+    display:block;
+    white-space: nowrap;
+    padding : 0px 0px 0px 60px;
+    color: #fff;
+}
+.nav_item li:nth-child(n+2):hover{
     background-color:#fff;
     background-size: 100%;
+    cursor: pointer;
 }
-.nav_container li:nth-child(n+2):hover > .menu_name{ color:#000; }
-.nav_container li:nth-child(n+2):hover > .item { filter: brightness(0%);}
+.nav_item li:nth-child(n+2):hover > .menu_name{ color:#000; }
+.nav_item li:nth-child(n+2):hover > .item { filter: brightness(0%);}

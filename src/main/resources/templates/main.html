@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
-        <div class="main">
+
             <div class="main_content">
                 <div class="main_item">
                     <div class="title_wrap">
@@ -25,16 +25,12 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-            
-<script>
-    function goToLetterBox(){
-    	location.href = "/letterBox.do"
-    }
-</script>            
-            
-            
+    <script>
+        function goToLetterBox(){
+            location.href = "/letterBox.do"
+        }
+    </script>
+
     </th:block>
 </body>
 </html>
