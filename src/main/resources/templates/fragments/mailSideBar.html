@@ -1,22 +1,48 @@
 <!-- 화면 header 영역 -->
 <html xmlns:th="http://www.thymeleaf.org">
     <th:block th:fragment="mailSideBarFragment">
-        <div class="m_sidebar">
-            <nav>
-                    <div class="m_nav_container">
-                        <ul class="m_nav_item">
-                        	<li>
-                        		<div class="m_item m_white"></div>
-                           		<div class="m_menu_name"></div>
-                        	</li>
-                        	
-                        </ul>
-                    </div>
-            </nav>
+        <div class="content_wrap">
+            <div class="headerTitle">
+                <div class="menuFold"></div>
+                <div class="titt">메일</div>
+            </div>
+            <div class="m_sidebar">
+                <div>
+                    <button>메일쓰기</button>
+                    <button>내게쓰기</button>
+                </div>
+                <div>
+                    <button>메일쓰기</button>
+                    <button>내게쓰기</button>
+                </div>
+                <nav>
+                        <div class="m_nav_container">
+                            <ul class="m_nav_item">
+                                <li>
+                                    <div class="m_item m_white"></div>
+                                       <div class="m_menu_name"></div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                </nav>
+            </div>
         </div>
+        
 <style>
-.m_sidebar{ grid-row : span 2; min-height:100vh; background-color : #6F6153; width: 170px; transition:all 0.5s ease-out; }
-.m_sidebar:hover {}
+.content_wrap{position:relative; box-sizing: border-box;}
+.headerTitle{width:100%; height:44px;position: relative; overflow: hidden;border-bottom:1px solid #000; }
+.headerTitle > .menuFold{width:44px; height: 44px; background: #464044 url(/img/icon/Menu.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;}
+.headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
+.m_sidebar{ grid-row : span 2; min-height:100vh; background-color :beige; width: 180px; transition:all 0.5s ease-out; margin-left: -90px; }
+
+
+
+
+
+
+
+
 </style>
     </th:block>
 </html>

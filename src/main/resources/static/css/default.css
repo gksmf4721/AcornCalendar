@@ -30,6 +30,7 @@ input[type=date]{background:url(../img/icons/calendar.png) no-repeat right 15px 
 
 *{font-family: 'DungGeunMo';}
 
+
 @font-face{
 	font-family:'bitbit';
 	src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;

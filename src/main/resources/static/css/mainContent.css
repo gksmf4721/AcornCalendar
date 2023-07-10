@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* 메인 레이아웃에 적용되는 css들 */
-.main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%;}
+.main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%; margin-left: 230px;}
 .main_item{box-shadow:0 3px 20px 0 rgba(0, 0, 0, 0.12);}
 .main_item:nth-child(1){width:350px; height:300px; }
 .main_item:nth-child(2){width:350px; min-height: 400px; }
@@ -9,16 +9,8 @@
 .title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
 .title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
 .title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
-.footer {    position: fixed;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    min-width: 1000px;
-    padding: 15px 25px;
-    font-size: 13px;
-    text-align: center;
-    border-top: 1px solid black;
-    z-index: 0;}
+.footer {position: fixed; right: 0; left: 0; bottom: 0; min-width: 1000px; padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid black;
+    z-index: 0; font-family: 'bitbit'; letter-spacing: 10px;}
 
 @media (max-width: 700px) {
     .main_content{display:grid; grid-template-columns: 450px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%;margin-left: -15%;}
