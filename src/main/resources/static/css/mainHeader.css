@@ -36,7 +36,7 @@
 }
 
 .nav_item li{display:flex; align-items:center; height:75px; cursor:default; overflow: hidden; width: 50px;}
-.nav_item li:nth-child(1) {padding-bottom:15px;}
+.nav_item li:nth-child(1) {margin-bottom:15px; height:44px;}
 
 .nav_item li:nth-child(1) .item{
     content: ""; 
@@ -117,9 +117,13 @@
 
 /* 호버했을때, 메뉴 이미지 변경 */
 .sidebar:hover li:nth-child(1) .item{
-    background-image: url("/img/icon/DownWard.png"); 
+    background-image: url("/img/icon/Menu_Open.png"); 
     transition: all .2s;
 }
+.sidebar:hover li:nth-child(1){
+    border-bottom: 2px solid #fff;
+}
+
 .nav_item > li > .menu_name{
     display:block;
     white-space: nowrap;
