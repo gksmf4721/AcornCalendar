@@ -3,7 +3,7 @@
 /* *{font-family: 'Pretendard', '맑은 고딕', sans-serif;} */
 html, body{height:100%; margin:0;}
 h1, h2, h3, h4, h5, h6, ul, ol, dl, dd, p, fieldset, legend{margin: 0; padding: 0;}
-a {color: #faebd7; text-decoration: none;}
+a {color:#000; text-decoration: none;}
 img{vertical-align: top;}
 fieldset{border: 0;}
 ul, ol{margin: 0; padding: 0; list-style: none;}
@@ -28,7 +28,8 @@ input[type=date]::-webkit-calendar-picker-indicator{
 }
 input[type=date]{background:url(../img/icons/calendar.png) no-repeat right 15px center / 15px auto; background-color: #fff;}
 
-*{font-family: 'DungGeunMo';}
+*{font-family: 'Pretendard-Regular','DungGeunMo','bitbit', 'DOSPilgiMedium'}
+
 
 
 @font-face{
@@ -47,5 +48,12 @@ input[type=date]{background:url(../img/icons/calendar.png) no-repeat right 15px 
     font-family: 'DOSPilgiMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSPilgiMedium.woff2') format('woff2');
     font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
     font-style: normal;
 }

@@ -9,7 +9,8 @@ background-color:rgb(55 48 41); box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);}
 
 .login_in_content{ width: 380px; padding: 30px; margin: 0 auto; margin-bottom:20px; background-color: #fff; border-radius: 5px;box-shadow: rgba(0, 0, 0, 0.12) 17px 9px 9px 0px;
 background-color:rgb(245 238 230 / 48%);}
-.login_in_footer{ position: fixed; right: 0; left: 0; bottom: 0;min-width: 1000px; padding: 15px 25px; font-size: 13px;  text-align: center; border-top: 1px solid black; }
+.login_in_footer{position: fixed; right: 0; left: 0; bottom: 0; min-width: 1000px; padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid #c9bbb5;
+    color:#c9bbb5; z-index: 0; font-family: 'bitbit'; letter-spacing: 10px; }
 
 /* 메인 헤더에서 사용 */
 .login_in_png{margin-left: -20px; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%); margin-top: -15px;}
