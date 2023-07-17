@@ -28,6 +28,12 @@ input[type=date]::-webkit-calendar-picker-indicator{
 }
 input[type=date]{background:url(../img/icons/calendar.png) no-repeat right 15px center / 15px auto; background-color: #fff;}
 
+input[type="checkbox"]{display:none;}
+input[type="checkbox"]+label{display:inline-block; width: 17px; height: 17px; background:#c9bbb5; cursor:pointer; border-radius: 5px;}
+input[type="checkbox"]:checked + label{background:#44413e url(../img/icon/Done.png) no-repeat;background-size: 17px 17px; 
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
+
+
 *{font-family: 'Pretendard-Regular','DungGeunMo','bitbit', 'DOSPilgiMedium'}
 
 

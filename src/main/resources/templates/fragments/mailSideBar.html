@@ -9,23 +9,23 @@
             <div class="m_sidebar">
                 <div class="m_side_header">
                     <div class="m_btn_header">
-                        <a href="#" class="m_btn"><span class="m_span">메일쓰기</span></a>
-                        <a href="#" class="m_btn"><span class="m_span">내게쓰기</span></a>
+                        <a href="#" onclick="goToHref('10')" class="m_btn"><span class="m_span">메일쓰기</span></a>
+                        <a href="#" onclick="goToHref('#')" class="m_btn"><span class="m_span">내게쓰기</span></a>
                     </div>
                     <div class="m_filter_header">
-                        <a href="#" class="item">
+                        <a href="#" class="item" onclick="goToHref('#')">
                             <div class="item_div">1</div>
                             <div class="text">안읽음</div>
                         </a>
-                        <a href="#" class="item">
+                        <a href="#" class="item" onclick="goToHref('#')">
                             <div class="item_div"><img th:src="@{../img/icon/Star.png}"></div>
                             <div class="text">중요</div>
                         </a>
-                        <a href="#" class="item">
+                        <a href="#" class="item" onclick="goToHref('#')">
                             <div class="item_div"><img th:src="@{../img/icon/Link.png}"></div>
                             <div class="text">첨부</div>
                         </a>
-                        <a href="#" class="item">
+                        <a href="#" class="item" onclick="goToHref('#')">
                             <div class="item_div"><img th:src="@{../img/icon/Send.png}"></div>
                             <div class="text">TO</div>
                         </a>
@@ -33,39 +33,22 @@
                 </div>
                 <div>
                     <div class="m_side_menu">
-                        <a href="#" class="side_item"><img th:src="@{../img/icon/Mail.png}"><span>전체메일함</span></a>
-                        <a href="#" class="side_item"><img th:src="@{../img/icon/Mail.png}"><span>받은메일함</span></a>
-                        <a href="#" class="side_item"><img th:src="@{../img/icon/Mail.png}"><span>보낸메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHref('#')"><img th:src="@{../img/icon/Mail.png}" class="side_img"><span>전체메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHref('#')"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHref('#')"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHref('#')"><img th:src="@{../img/icon/Mail_Delete.png}"><span>휴지통</span></a>
                     </div>
                 </div>
             </div>
         </div>
-        
-<style>
-:root{
-    --m_side_bar_img_size: 16px;
-    --m_size : inherit;
-}
-
-.content_wrap{position:relative; box-sizing: border-box;}
-.headerTitle{width:100%; height:44px;position: relative; overflow: hidden;border-bottom:1px solid #000; }
-.headerTitle > .menuFold{width:44px; height: 44px; background: #464044 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;}
-.headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
-.m_sidebar{ grid-row : span 2; min-height:100vh; background-color:#fff; width: 180px; transition:all 0.5s ease-out; border-right: 1px solid black;}
-
-.m_btn_header{box-sizing: border-box;display: flex;width: 100%;height: 80px;justify-content: center;align-items: center;justify-content: space-around;border-bottom: 1px solid #c9bbb5;;}
-.m_btn{background-color: #c9bbb5; color:white; width:85px; text-align: center;height: 40px;border-radius: 5px;line-height: 40px;}
-.m_filter_header{border-bottom: 1px solid #c9bbb5;display: flex;justify-content: space-evenly;padding-bottom: 10px; padding-top:10px}
-.m_filter_header> .item{text-align: center; width: 25%;}
-.m_filter_header> .item > .item_div {display:block;text-align: center;color:#000;font-size: var(--m_side_bar_img_size); margin-bottom: 5px;}
-.m_filter_header> .item > .item_div img{width: var(--m_side_bar_img_size);}
-.m_filter_header> .item > .text{color:black; font-family: '나눔고딕'; font-size: 12px;}
-
-.m_side_menu{display: flex; flex-wrap: wrap;}
-.side_item{display:block; width: 100%; margin-top: 15px;}
-.side_item img{width: 28px; margin-left:20px;}
-.side_item span{vertical-align: sub; margin-left: 10px;}
-
-</style>
+        <script>
+            function goToHref(value){
+                if(value == '10'){
+                    location.href="/letterWrite.do"
+                } else if(value == '2'){
+                    location.href="#"
+                }
+            }
+            </script>        
     </th:block>
 </html>

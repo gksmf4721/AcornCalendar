@@ -9,8 +9,6 @@
 .title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
 .title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
 .title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
-.footer {position: fixed; right: 0; left: 0; bottom: 0; min-width: 1000px; padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid #c9bbb5;
-    color:#c9bbb5; z-index: 0; font-family: 'bitbit'; letter-spacing: 10px;}
 
 @media (max-width: 700px) {
     .main_content{display:grid; grid-template-columns: 450px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%;margin-left: -15%;}
