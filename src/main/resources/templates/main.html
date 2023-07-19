@@ -22,6 +22,11 @@
                 <div class="main_item">
                     <div class="title_wrap">
                         <div class="title_left"><a href="#">캘린더</a></div>
+                        <div class="title_right"><a href="#" onclick="goToCalendar();">더보기</a></div>
+                    </div>
+                    <!-- calendar 태그 -->
+                    <div class='calendar_container'>
+                        <div id='calendar'></div>
                     </div>
                 </div>
             </div>
@@ -29,6 +34,12 @@
         function goToLetterBox(){
             location.href = "/letterBox.do"
         }
+
+        function goToCalendar(){
+            location.href = "/calendarList.do"
+        }
+        
+
     </script>
 
     </th:block>
