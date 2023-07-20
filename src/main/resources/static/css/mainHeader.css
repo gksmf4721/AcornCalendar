@@ -34,7 +34,6 @@
     transition: width 0.3s;
     z-index: 1;
     position:fixed;
-    margin-top:60px;
 }
 
 .nav_item li{display:flex; align-items:center; height:75px; cursor:default; overflow: hidden; width: 50px;}
@@ -139,5 +138,4 @@
 }
 .nav_item li:nth-child(n+2):hover > .menu_name{ color:#000; }
 .nav_item li:nth-child(n+2):hover > .item { filter: brightness(0%);}
-.footer {position: fixed; right: 0; left: 0; bottom: 0; min-width: 1000px; padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid #c9bbb5;
-    color:#c9bbb5; z-index: 0; font-family: 'bitbit'; letter-spacing: 10px;}
+.footer {min-width: 850px; padding: 15px 25px; font-size: 13px; text-align: center; color:#c9bbb5; border-top: 1px solid #c9bbb5; font-family: 'bitbit'; letter-spacing: 10px;}

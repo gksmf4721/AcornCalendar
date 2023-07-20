@@ -17,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function(){
         editable: true,
         selectable: true,
         dragScroll: true,
-        height: "59%",    //전체길이
+        // height: "59%",    //전체길이
+        // height: inherit,
+        contentHeight: 600,
         aspectRatio: 1.35,
         events: [
             {
