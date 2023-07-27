@@ -111,6 +111,7 @@
     width: 230px;
 }
 
+
 .sidebar:hover .nav_item li{
     width: 230px;
 }
@@ -123,6 +124,7 @@
 }
 .sidebar:hover li:nth-child(1){
     border-bottom: 2px solid #fff;
+    transition: all .2s;
 }
 
 .nav_item > li > .menu_name{

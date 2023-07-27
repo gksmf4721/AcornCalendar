@@ -1,12 +1,7 @@
 @charset "UTF-8";
-/* 메인 레이아웃에 적용되는 css들 */
-.container_wrap{
-    position: relative;
-    padding-top: 20px;
-    padding-left: 100px;
-    box-sizing: border-box;
-}
-.main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}
+/* 메인 레이아웃에 적용 */
+.container_wrap{position: relative; padding-top: 20px;box-sizing: border-box;}
+.main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; padding-left: 100px;}
 .main_item{box-shadow:0 3px 20px 0 rgba(0, 0, 0, 0.12);}
 .main_item:nth-child(1){width:350px; height:300px; }
 .main_item:nth-child(2){width:350px; min-height: 400px; }
@@ -15,21 +10,13 @@
 .title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
 .title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
 .title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
-
-@media (max-width: 700px) {
-    .main_content{display:grid; grid-template-columns: 450px 1000px; grid-template-rows: 330px 450px; padding-top: 30px;height:100%;margin-left: -15%;}
-}
-
-
+.title_center{height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px; text-align:center;}
 
 /* 헤더, 좌측 메뉴 제외 바디 부분 */
 .contents_wrap {position: relative;padding-top: 70px;padding-left: 230px;box-sizing: border-box;height:100%;}
 /* .container {position: relative;min-width: 1330px;height: 100%;} */
 .container_inner{padding:20px}
 .container_inner2{min-height: 600px;}
-/* 푸터 */
-
-
 
 /* 로그인 한 후 메인 화면 css */
 .dashboard.left{

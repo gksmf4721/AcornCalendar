@@ -4,7 +4,8 @@
     --m_size : inherit;
 }
 
-.content_wrap{position:relative; box-sizing: border-box;}
+.side_content_wrap{position:relative; box-sizing: border-box;}
+.m_container_wrap{margin-left: 50px;}
 .headerTitle{width:100%; height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;margin-left:50px;}
 .headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;}
 .headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}

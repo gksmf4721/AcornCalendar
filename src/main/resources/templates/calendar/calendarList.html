@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
-
-                 <!-- calendar 태그 -->
-                 <div class='calendar_container'>
-                    <div id='calendar'></div>
+        <div class="main_content">
+            <div class="main_item">
+                <div class="title_wrap">
+                    <div class="title_center">내정보</div>
                 </div>
+            </div>
 
+            <div class="main_item">
+                <div class="title_wrap">
+                    <div class="title_center">그룹웨어</div>
+                </div>
+            </div>
 
+            <div class="main_item">
+                <div class="title_wrap">
+                    <div class="title_center">캘린더</div>
+                </div>
+                <div class="calendar_container">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
     </th:block>
 </body>
 </html>

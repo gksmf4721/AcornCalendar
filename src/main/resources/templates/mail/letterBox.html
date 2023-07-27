@@ -11,6 +11,8 @@
                         <input type="button" onclick="delLett();" value="삭제">
                     </div>
                     삭제버튼 || 보낸사람 || 받은사람 || 제목 || 보낸날짜 ||  내 닉네임
+                </div>
+                <div class="section">
                     <div class="mail_list_wrap">
                         <ul class="mail_list">
                             <li th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}">
