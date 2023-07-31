@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* 메인 레이아웃에 적용 */
-.container_wrap{position: relative; padding-top: 20px;box-sizing: border-box;}
+.container_wrap{position: relative; padding-top: 80px;box-sizing: border-box; }
 .main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; padding-left: 100px;}
 .main_item{box-shadow:0 3px 20px 0 rgba(0, 0, 0, 0.12);}
 .main_item:nth-child(1){width:350px; height:300px; }
