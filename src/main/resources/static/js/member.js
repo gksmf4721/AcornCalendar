@@ -1,20 +1,18 @@
 window.onload = function(){
     const idChk = document.getElementById("idChk");
     const nickChk = document.getElementById("nickChk");
-    const emailChk = document.getElementById("emailChk");
+    // const emailChk = document.getElementById("emailChk");
     const btn = document.getElementById("btn-ajax");
 
-    idChk.addEventListener('click', function() {
-        duplicateChk(idChk);
-    });
+    
     
     nickChk.addEventListener('click', function() {
         duplicateChk(nickChk);
     });
     
-    emailChk.addEventListener('click', function() {
-        duplicateChk(emailChk);
-    });
+    // emailChk.addEventListener('click', function() {
+    //     duplicateChk(emailChk);
+    // });
 
     btn.addEventListener('click', function(){
         joinJson();
@@ -24,13 +22,26 @@ window.onload = function(){
 
 
 function duplicateChk(chkId){
-    var sibling1 = chkId.previousElementSibling;
-    var sibling2 = chkId.nextElementSibling;
+    var chkValue = document.getElementById(chkId).value;
+   
+    if(chkValue == ''){
+        if(chkId == 'mId'){
+            $("#idChk_info").text( "아이디 중복 체크를 해주세요");
+        }
+    } else {
+        
+    }
+
+    
+
+    
+    return false;
 
     if(sibling1.value == ''){
-        if(chkId == emailChk){
-            sibling2.innerText = "이메일 중복 체크를 해주세요";
-        } else if(chkId == nickChk){
+        // if(chkId == emailChk){
+        //     sibling2.innerText = "이메일 중복 체크를 해주세요";
+        // } else
+         if(chkId == nickChk){
             sibling2.innerText = "닉네임 중복 체크를 해주세요";
         } else if(chkId == idChk){
             sibling2.innerText = "아이디 중복 체크를 해주세요";
