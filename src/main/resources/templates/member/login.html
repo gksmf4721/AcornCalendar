@@ -1,7 +1,7 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
 
 <th:block layout:fragment="loginContent">
+<div class="login_outer">
 	<div class="login_in_content">
 	<p class="login_in_form_title">♥ LOGIN ♥</p>
 		<div class="login_in_form_contents">
@@ -29,7 +29,7 @@
 		계정이 없으신가요?
 		<a href="#" onclick="forwardURL('join')" class="join_a">가입하기</a>
 	</div>
-
+</div>
 
 <script>
 	document.addEventListener("DOMContentLoaded", function(){
@@ -91,4 +91,3 @@
 	})
 </script>
 </th:block>
-</html>

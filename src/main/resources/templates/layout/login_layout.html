@@ -5,14 +5,10 @@
     <body class="login_in_body">
 		
 		<div class="login_wrap">
-			<div class="login_in_header">
 	        	<th:block th:replace="fragments/loginHeader :: loginHeaderFragment"></th:block>
-			</div>
 	        	<th:block layout:fragment="loginContent"></th:block>
-
-			<div class="login_in_footer">
-	        	<th:block th:replace="fragments/footer :: footerFragment"></th:block>
-			</div>
 		</div>
+		
+		<th:block th:replace="fragments/footer :: footerFragment"></th:block>
     </body>
 </html>

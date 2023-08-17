@@ -32,7 +32,8 @@ input[type="checkbox"]{display:none;}
 input[type="checkbox"]+label{display:inline-block; width: 17px; height: 17px; background:#c9bbb5; cursor:pointer; border-radius: 5px;}
 input[type="checkbox"]:checked + label{background:#44413e url(../img/icon/Done.png) no-repeat;background-size: 17px 17px; 
     filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%);}
-
+footer{ height: 45px; position : relative; transform : translateY(-100%); line-height: 2.5;
+font-size: 15px; text-align: center; color:#c9bbb5; border-top: 1px solid #c9bbb5; font-family: 'bitbit'; letter-spacing: 10px;}
 
 *{font-family: 'Pretendard-Regular','DungGeunMo','bitbit', 'DOSPilgiMedium'}
 
