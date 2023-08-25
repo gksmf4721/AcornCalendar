@@ -11,23 +11,27 @@
 				<input type="button" class="login_in_btn" id="btn-ajax" value="로그인">
 
 				<div class="login_id_save_div">
-					<input type="checkbox" id="saveId" class="login_id_sv"><span>아이디 저장</span>
+					<label for="saveId">
+						<input type="checkbox" id="saveId" class="login_id_sv">
+						<span for="saveId"></span>
+						아이디 저장
+					</label>
 				</div>
 			</form>
 
 			<div class="login_href">
-				<a href="#" onclick="forwardURL('kakao')">카카오로 로그인</a>
+				<a href="#" onclick="forwardURL('kakao')" class="login_a">카카오로 로그인</a>
 			</div>
 			<div class="login_href">
-				<a href="#" onclick="forwardURL('findId')" >아이디 찾기</a>
-				<a href="#" onclick="forwardURL('findPw')" >비밀번호 찾기</a>
+				<a href="#" onclick="forwardURL('findId')" class="login_a">아이디 찾기</a>
+				<a href="#" onclick="forwardURL('findPw')" class="login_a">비밀번호 찾기</a>
 			</div>
 		</div>
 	</div>
 	
 	<div class="login_in_content">
 		계정이 없으신가요?
-		<a href="#" onclick="forwardURL('join')" class="join_a">가입하기</a>
+		<a href="#" onclick="forwardURL('join')" class="login_a">가입하기</a>
 	</div>
 
 
@@ -52,7 +56,11 @@
 
 	function forwardURL(url){
 		if(url === 'kakao'){
-			window.location.href="/kakao.login.do";
+			$.alert({
+				title: '카카오로그인!',
+    			content: '준비중이에요!!',
+				columnClass: 'small',
+			});
 		} else if(url === 'findId'){
 			window.location.href = "/find.do?type=I";
 		} else if(url === 'findPw'){

@@ -3,14 +3,14 @@
 /* 메인레이아웃에서 사용 */
 .login_in_body{ background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/background/background7.jpg); 
     background-color:#6F6153; background-size: cover; background-repeat: no-repeat; background-position:bottom;}
-.login_wrap {min-width: 1000px;}
+.login_wrap {min-width: 1000px; height: auto; min-height: 100%;}
 .login_in_header{height: 30px; padding: 15px 30px; margin-bottom: 40px; font-size: 30px; line-height: 1.5; 
 background-color:rgb(55 48 41); box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);}
 
 .login_in_content{ width: 380px; padding: 30px; margin: 0 auto; margin-bottom:20px; background-color: #fff; border-radius: 5px;box-shadow: rgba(0, 0, 0, 0.12) 17px 9px 9px 0px;
 background-color:rgb(245 238 230 / 48%);}
-.login_in_footer{position: relative; min-width: 1000px; padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid #c9bbb5;
-    color:#c9bbb5; z-index: 0; font-family: 'bitbit'; letter-spacing: 10px; }
+.login_in_footer{position: relative; transform: translateY(-100%); padding: 15px 25px; font-size: 13px; text-align: center; border-top: 1px solid #c9bbb5;
+color:#c9bbb5; z-index: 0; font-family: 'bitbit'; letter-spacing: 10px; }
 
 /* 메인 헤더에서 사용 */
 .login_in_png{margin-left: -20px; filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(156deg) brightness(103%) contrast(103%); margin-top: -15px;}
@@ -19,6 +19,7 @@ background-color:rgb(245 238 230 / 48%);}
 /* 로그인.html에서 사용 */
 .login_in_form_title { padding-bottom: 20px; font-size: 30px; line-height: 50px; font-weight: bold; text-align: center;}
 input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-bottom: 10px; font-size: 16px; border: 1px solid #bbb; border-radius: 5px;}
+.login_a{color: antiquewhite; background:#44413e; padding: 5px; border-radius: 5px;}
 .login_in_btn { display: block; width: 100%; height: 60px; padding: 0 20px; font-size: 22px; 
     font-weight: bold; text-align: center; border: 0; border-radius: 5px; box-sizing: border-box; cursor: pointer;}
 .join_a{color : antiquewhite}
@@ -31,7 +32,7 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 .form{margin: 10px 10px;}
 .form > .login_input {width: 100%; height: 40px; margin-top: 10px;} /* 일반 Input 파일 */
 .form > .login_input_chk {width: 80%; height: 40px; margin-top: 10px; } /* 중복체크가 있는 Input 파일 */
-.form > button[type="button"] {background-color: #FFF; color:#44413e; height:36px; width: 17%; cursor: pointer; font-size: 12px; vertical-align: middle;}
+.form > button[type="button"] {background-color: #FFF; color:#44413e; height:36px; width: 17%; cursor: pointer; font-size: 12px; vertical-align: middle; border: 1px solid #44413e;}
 .form > button[type="button"]:hover {background-color:#44413e; color:#fff; }
 .form > .chk_befo{font-size:12px; margin-left:3px;}
 
