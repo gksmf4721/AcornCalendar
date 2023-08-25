@@ -2,22 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
 
 <th:block layout:fragment="loginContent">
-	<div class="login_in_content">
-	<p class="login_in_form_title">♥ FIND ID ♥</p>
-		<div class="login_in_form_contents">
-
-		<form id="formData">
-			<input type="text" id="mEmail" class="login_in_id" autocomplete="off" placeholder="이메일을 입력하세요">
-			<button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
-
-			<input type="text" id="mEmailChk" class="login_in_id" autocomplete="off" placeholder="인증번호를 입력하세요">
-			<button type="button" onclick="confirmMail();">인증번호 확인</button>
-
-			ID : <input type="text" class="login_in_id" id="result" value="" readonly>
-
-		</form>
+<div class="login_outer">
+	<div class="login_inner">
+		<div class="login_in_content">
+			<span ><img  th:src="@{../img/icon/Arrow_Back.png}" class="back_arrow" onclick="back();"></span>
+			<p class="login_in_form_title">♥ FIND ID ♥</p>
+	
+			<form id="formData" autocomplete="off">
+				<div class="form">
+					<input type="text" id="mEmail" class="login_input_chk" placeholder="이메일">
+					<button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
+		
+					<input type="text" id="mEmailChk" class="login_input_chk" placeholder="인증번호">
+					<button type="button" onclick="confirmMail();">인증번호 확인</button>
+		
+					<!-- ID : <input type="text" class="" id="result" value="" readonly> -->
+				</div>
+				<div  id="result_div" style="display:none;">
+					♥입력하신 정보와 일치하는 아이디는 <span id="result" style="font-weight:bold; color:white; ">111</span> 입니다.♥
+				</div>
+			</form>
 		</div>
 	</div>
+<<<<<<< HEAD
+=======
+</div>
+
+
+>>>>>>> 912f05eeda0829078463ea1364d737df1a168788
 <script type="text/javascript">
 	function sendMail(){
 
@@ -39,7 +51,6 @@
 	}
 
 	function confirmMail(){
-
 		let emailChk = $("#mEmailChk").val();
 		let email = $("#mEmail").val();
 
@@ -55,7 +66,9 @@
 			}),
 			success : function(obj){
 				if(obj.resultCd === '1'){
-					$("#result").val(obj.resultData);
+					$(".form").css("display", "none");
+					$("#result_div").css("display", "");
+					$("#result").text(obj.resultData);
 				}else{
 					alert(obj.resultMsg);
 				}
