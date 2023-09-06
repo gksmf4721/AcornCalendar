@@ -1,101 +1,47 @@
-window.onload = function(){
-    const idChk = document.getElementById("idChk");
-    const nickChk = document.getElementById("nickChk");
-    // const emailChk = document.getElementById("emailChk");
-    const btn = document.getElementById("btn-ajax");
-
-    
-    
-    nickChk.addEventListener('click', function() {
-        duplicateChk(nickChk);
-    });
-    
-    // emailChk.addEventListener('click', function() {
-    //     duplicateChk(emailChk);
-    // });
-
-    btn.addEventListener('click', function(){
-        joinJson();
-    });
-
-}
-
-
-function duplicateChk(chkId){
-    var chkValue = document.getElementById(chkId).value;
-   
-    if(chkValue == ''){
-        if(chkId == 'mId'){
-            $("#idChk_info").text( "아이디 중복 체크를 해주세요");
-        }
-    } else {
-        
-    }
-
-    
-
-    
-    return false;
-
-    if(sibling1.value == ''){
-        // if(chkId == emailChk){
-        //     sibling2.innerText = "이메일 중복 체크를 해주세요";
-        // } else
-         if(chkId == nickChk){
-            sibling2.innerText = "닉네임 중복 체크를 해주세요";
-        } else if(chkId == idChk){
-            sibling2.innerText = "아이디 중복 체크를 해주세요";
-        }
-        sibling2.className = "chk_befo";
+//아이디, 닉네임 중복검사
+function duplicate(id, idName){
+    var chkVal = document.getElementById(id).value;
+    if(chkVal == ""){
+        $.alertError(idName + "을(를) 입력해주세요!! •̀ㅅ•́");
         return false;
-
-    }else{
-        if(chkId == nickChk){
-            ajaxData = {type:'nickname',mNickname:sibling1.value}
-        }else if(chkId == emailChk){
-            ajaxData = {type:'email',mEmail:sibling1.value}
-        }else if(chkId == idChk){
-            ajaxData = {type:'id',mId:sibling1.value}
-        }
     }
+    ajaxData = {type: idName, id: chkVal};
 
     $.ajax({
-        type : 'POST',
+        type : "POST",
         contentType : "application/json",
         url : '/inputCheck.json',
         data : JSON.stringify(ajaxData),
         dataType : 'json',
         success : function(rslt){
-            if(rslt.resultCd==='1'){
-                if(rslt.resultType == "email"){
-                    sibling2.innerText = "이메일 중복 검사 완료"
-                } else if(rslt.resultType == "nickname"){
-                    sibling2.innerText = "닉네임 중복 검사 완료"
-                } else if(rslt.resultType == "id"){
-                    sibling2.innerText = "아이디 중복 검사 완료"
+            if(rslt.resultCd == 1){
+                if(rslt.type == 'id'){
+                    $.alertSuccess("아이디 중복 검사 완료");
+                    $("#idChk_info").hide();
+                } else if(rslt.type == 'nickname'){
+                    $.alertSuccess("닉네임 중복 검사 완료");
+                    $("#nickChk_info").hide();
                 }
-                sibling2.className = "chk_after"
             } else {
-                if(rslt.resultType == "email"){
-                    sibling2.innerText = "이메일 중복 체크를 해주세요"
-                } else if(rslt.resultType == "nickname"){
-                    sibling2.innerText = "닉네임 중복 체크를 해주세요"
-                } else if(rslt.resultType == "id"){
-                    sibling2.innerText = "아이디 중복 체크를 해주세요"
-                }
-                sibling2.className = "chk_befo"
+                $.alertError("이미 사용하고 있어요. ʅ（◞‿◟）ʃ");
             }
         },
         error : function(request, status, error){
-            alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
         }
+    });
+}
+
+window.onload = function(){
+    const btn = document.getElementById("btn-ajax");
+    btn.addEventListener('click', function(){
+        joinJson();
     });
 }
 
 
 function joinJson(){
-    var dataChk = fn_dataChk(formData);
-    if(dataChk == true){
+    if(fn_dataChk(formData)){
         var inputName = document.getElementById("mName").value;
         var inputId = document.getElementById("mId").value;
         var inputPw = document.getElementById("mPw").value;
@@ -125,15 +71,15 @@ function joinJson(){
             success : function(rslt){
                 if(rslt.resultCd==='1'){
                     //성공일시
-                    alert(rslt.resultMsg);
+                    $.alertSuccess(rslt.resultMsg);
                     location.href = rslt.resultUrl;
                 } else {
                     //실패일시
-                    alert(rslt.resultMsg);
+                    $.alertError(rslt.resultMsg);
                 }
             },
             error : function(request, status, error){
-                alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+                $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
             }
         });
     }

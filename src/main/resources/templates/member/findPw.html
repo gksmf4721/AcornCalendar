@@ -47,7 +47,7 @@
 					type : 'P'
 				}),
 				success : function(obj){
-					alert(obj.resultMsg);
+					$.alertSucces(obj.resultMsg);
 				}
 			})
 		}
@@ -69,11 +69,11 @@
 				}),
 				success : function(obj){
 					if(obj.resultCd === '1'){
-						alert(obj.resultMsg);
+						$.alertSucces(obj.resultMsg);
 						$("#result").val(obj.resultData);
 						$("#inputPw").show();
 					}else{
-						alert(obj.resultMsg);
+						$.alertError(obj.resultMsg);
 					}
 				}
 			})
@@ -96,7 +96,7 @@
 					mEmail : email
 				}),
 				success : function(obj){
-					alert(obj.resultMsg);
+					$.alertSucces(obj.resultMsg);
 					location.href=obj.resultUrl;
 				}
 			})

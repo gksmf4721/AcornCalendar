@@ -7,7 +7,7 @@
 .login_in_header{height: 30px; padding: 15px 30px; margin-bottom: 40px; font-size: 30px; line-height: 1.5; 
 background-color:rgb(55 48 41); box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);}
 
-.login_outer{margin-top: 10%; height: auto; min-height: 100%; padding-bottom: 45px;}
+.login_outer{margin-top: 3%; height: auto; min-height: 100%; padding-bottom: 45px;}
 .login_inner{margin: auto; }
 .login_in_content{ width: 380px; padding: 30px; margin: 0 auto; margin-bottom:20px; background-color: #fff; border-radius: 5px;box-shadow: rgba(0, 0, 0, 0.12) 17px 9px 9px 0px;
 background-color:rgb(245 238 230 / 48%);}

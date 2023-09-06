@@ -29,7 +29,7 @@
     eventSource.onmessage = (e) => {
         let msg = decodeURI(e.data);
         let message = msg.replaceAll("+"," ");
-        alert(message);
+        $.alertError(message);
     };
 </script>
         

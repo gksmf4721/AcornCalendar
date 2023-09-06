@@ -40,7 +40,7 @@
 				type : 'I'
 			}),
 			success : function(obj){
-				alert(obj.resultMsg);
+				$.alertSuccess(obj.resultMsg);
 			}
 		})
 	}
@@ -65,7 +65,7 @@
 					$("#result_div").css("display", "");
 					$("#result").text(obj.resultData);
 				}else{
-					alert(obj.resultMsg);
+					$.alertError(obj.resultMsg);
 				}
 			}
 		})

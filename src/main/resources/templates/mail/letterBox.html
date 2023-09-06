@@ -104,7 +104,7 @@
 
         //삭제버튼 클릭 시, 체크값이 없을 때
         if(selectedElementsCnt == 0){
-            alert('삭제할 항목을 선택해주세요');
+            $.alertError('삭제할 항목을 선택해주세요');
             return false;
         }
         //삭제버튼 클릭 시, 체크값이 있을때
@@ -125,13 +125,13 @@
                     data : JSON.stringify(arr),
                     dataType : 'json',
                     success : function(rslt){
-                        alert(rslt.resultMsg);
+                        $.alertSucces(rslt.resultMsg);
                         if(rslt.resultCd=='1'){
                             location.href = rslt.resultUrl;
                         }
                     },
                     error : function(request, status, error){
-                        alert("javaScript error : "+ error + "request :" + request + "status : " + status);
+                        $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
                     }
                 });
             }
