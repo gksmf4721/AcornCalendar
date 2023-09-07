@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-<!-- 전체메일함 전체 -->
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/mail_layout">
-    <th:block layout:fragment="mailContent">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/letter_layout">
+    <th:block layout:fragment="letterContent">
         <div class="m_inner_content">
             <div class="m_container_title">전체메일함</div>
             <div class="m_inner_content2">
@@ -10,9 +8,44 @@
                         <input type="checkbox" id="chk_all" onclick="ChkAll();"><label for="chk_all"><span></span></label>
                         <input type="button" onclick="delLett();" value="삭제">
                     </div>
-                    삭제버튼 || 보낸사람 || 받은사람 || 제목 || 보낸날짜 ||  내 닉네임
+                    <table class="table_m">
+                        <colgroup>
+                            <col style="width: 10%">
+                            <col style="width: 15%">
+                            <col style="width: 15%">
+                            <col style="width: 30%">
+                            <col style="width: 15%">
+                            <col style="width: 15%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>삭제체크</th>
+                                <th>보낸사람</th>
+                                <th>받은사람</th>
+                                <th>제목</th>
+                                <th>보낸날짜</th>
+                                <th>내 닉네임</th>
+                            </tr>
+                        </thead>
+                        <tbody th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}">
+                            <tr>
+                                <td class="txtc">
+                                    <label th:for="'chkbox'+${item.L_SEQ}" th:onclick="checkClick()">
+                                        <input type="checkbox" th:id="'chkbox'+${item.L_SEQ}" th:value="${item.L_SEQ}" class="chkClass" >
+                                        <span for="'chkbox'+${item.L_SEQ}"></span>
+                                        <input type="hidden" th:id="'_chksend'+${item.L_SEQ}" th:value="${item.SEND}">
+                                    </label>
+                                </td>
+                                <td class="txtc"><span id="lett_L_SENDER" class="mail_sender" th:text="${item.L_SENDER}"></td>
+                                <td class="txtc"><span id="lett_L_RECIVER" class="mail_sender" th:text="${item.L_RECIVER}"></td>
+                                <td class="txtc"><span id="lett_L_TITLE" class="mail_sender" th:text="${item.L_TITLE}"></td>
+                                <td class="txtc"><span id="lett_L_SENDT" class="mail_sender" th:text="${item.L_SENDT}"></td>
+                                <td class="txtc"><span id="lett_M_NICKNAME" class="mail_sender" th:text="${item.M_NICKNAME}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="section">
+                <!-- <div class="section">
                     <div class="mail_list_wrap">
                         <ul class="mail_list">
                             <li th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}">
@@ -31,9 +64,10 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
+        
 <!--  each 문에서 꺼낼 수 있는 것들
 시퀀스<div id="lett_L_SEQ" class="" th:text="${item.L_SEQ}"></div>
 보낸사람인지에 대한 여부 <div id="lett_SEND" class="" th:text="${item.SEND}"></div>
@@ -140,4 +174,3 @@
 </script>
 
     </th:block>
-</html>

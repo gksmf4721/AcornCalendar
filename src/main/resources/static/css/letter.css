@@ -4,12 +4,12 @@
     --m_size : inherit;
 }
 
-.side_content_wrap{position:relative; box-sizing: border-box;}
-.m_container_wrap{margin-left: 50px;}
-.headerTitle{width:100%; height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;margin-left:50px;top:60px}
-.headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;}
+.side_content_wrap{position: absolute;left: 50px;top: 60px;box-sizing: border-box;width:180px; height:100%;}
+.m_container_wrap{position: relative;margin-top: 60px;margin-left: 230px;box-sizing: border-box;}
+.headerTitle{height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;top:60px;width: 180px;background: #c9bbb5;}
+.headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;border-right: 1px solid black;}
 .headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
-.m_sidebar{ grid-row : span 2; min-height:100vh; background-color:#fff; width: 180px; transition:all 0.5s ease-out; border-right: 1px solid black; position:fixed; margin-top:60px;margin-left:50px;}
+.m_sidebar{ grid-row : span 2; min-height:100vh; background-color:#fff; width: 179px; transition:all 0.5s ease-out; position:fixed; margin-top:45px;}
 
 .m_btn_header{box-sizing: border-box;display: flex;width: 100%;height: 80px;justify-content: center;align-items: center;justify-content: space-around;border-bottom: 1px solid #c9bbb5;;}
 .m_btn{background-color: #c9bbb5; color:white; width:85px; text-align: center;height: 40px;border-radius: 5px;line-height: 40px; cursor: pointer;}
@@ -25,17 +25,31 @@
 .side_item span{vertical-align: sub; margin-left: 10px;}
 .side_img{width: 24px !important; margin-left: 21px !important; margin-right: 3px;} 
 
-.m_inner_content{position: relative; margin-top: 44px; margin-left: 180px; box-sizing: border-box;}
-.m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; padding:20px;}
-.m_inner_content2{padding:20px;}
+.m_inner_content{}
+.m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; padding:10px;position: fixed;top: 60px;left: 230px;right:0;z-index: 2; background-color: #fff;}
+.m_inner_content2{padding-top:50px; padding-left:20px;}
 
 /* 전체메일함 */
 .mail_list_wrap{display:flex; position:relative;}
 .mail_list_wrap > .mail_list{padding: 0 25px; -webkit-box-flex: 1; flex: 1 1 0%;min-height: 0;overflow-x: hidden;overflow-y: auto;}
 .mail_item{position:relative; margin:0; padding:0px;touch-action: pan-y; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
 .mail{ padding: 8px 10px 8px 11px; border-bottom: 1px solid rgba(var(--color-button-line-rgb), 0.4); cursor: pointer; position: relative;display:flex;}
-.button_checkbox_wrap, .mail_sender, .mail_inner, .mail_date_wrap{
+/* .button_checkbox_wrap, .mail_sender, .mail_inner, .mail_date_wrap{
     flex-direction: column; -webkit-box-flex: 0; flex: 0 0 auto; box-sizing: border-box;
     overflow: hidden; padding-right: 20px; position: relative; display: flex; min-width: 0; max-width: 185px;
-}
+} */
 .button_checkbox_wrap{width: 40px;}
+
+/*테이블 스타일*/
+.table_m{border-top: 2px solid #03243a;}
+.table_m td, .table_m th {
+    padding: 5px;
+    font-size: 13px;
+    line-height: 1.846153;
+    border: 1px solid #b1aeae;
+}
+
+.txtl{text-align:left}
+.txtr{text-align: right;}
+.txtc{text-align: center;}
+

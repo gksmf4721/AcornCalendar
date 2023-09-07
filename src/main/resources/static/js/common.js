@@ -13,10 +13,12 @@ function fn_dataChk(formId){
     const allElements = formId.getElementsByTagName('*');
     for (let i = 0; i < allElements.length; i++) {
         const element = allElements[i];
+        console.log()
         var type = element.getAttribute('type');    //유효성검사가 필요한 타입
         var name = element.getAttribute('name');    //유효성검사가 필요한 이름
         var className = element.getAttribute('class');
         var id = element.getAttribute('id');
+        var chk_befo = $("."+className).data('dupl');
 
         if(element.getAttribute('readonly')==false &&element.getAttribute('disabled')==false || element.hasAttribute('data-name')){
             if(type == 'checkbox'){
@@ -26,25 +28,20 @@ function fn_dataChk(formId){
                     chk = false;
                     return false;
                 }
-
             } else if(type == 'password'){
                 if (element.value =='') {
-                    $alertError(element.dataset.name + '을(를) 입력해주세요');
+                    $.alertError(element.dataset.name + '을(를) 입력해주세요');
                     element.focus();
                     chk = false;
                     return false;
                 }
-            
             } else if(type == 'radio'){
-                for(var radio of name){
-                    if(!radio.checked) {
-                        $.alertError(element.dataset.name + '을(를) 선택해주세요');
-                        element.focus();
-                        chk = false;
-                        return false;
-                    }
+                if($("input:radio[name='" + name +"']:checked").length == 0){
+                    $.alertError(element.dataset.name + '을(를) 선택해주세요');
+                    element.focus();
+                    chk = false;
+                    return false;
                 }
-
             } else if(type == 'text' || type=='date'){
                 if (element.value =='') {
                     $.alertError(element.dataset.name + '을(를) 입력해주세요');
@@ -52,7 +49,6 @@ function fn_dataChk(formId){
                     chk = false;
                     return false;
                 }
-
             } else if(element == 'select'){ //select박스일경우
                 if(element.value == ''){
                     $.alertError(element.dataset.name + '을(를) 선택해주세요');
@@ -68,9 +64,8 @@ function fn_dataChk(formId){
                     return false;
                 }
             }
-        } else if (className == 'chk_befo'){
-            $.alertError('중복 체크를 해주세요.');
-            element.focus();
+        } else if(chk_befo == 'N'){
+            $.alertError("중복 체크를 해주세요");
             chk = false;
             return false;
         }
