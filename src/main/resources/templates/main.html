@@ -2,20 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
         <div class="main_content">
+
             <div class="main_item">
-                <div class="title_wrap">
-                    <div class="title_left"><a href="#">내정보</a></div>
-                    <div class="title_right"><a href="#">마이페이지</a></div>
+                <div class="w_title">
+                    <div class="w_left">MYPAGE</div>
+                    <div class="w_right">
+                        <div class="box"></div><div class="box"></div><div class="box"></div>
+                    </div>
+                </div>
+                <div class="w_photo">
+                    <img th:src="@{../img/icon/instagram.png}" style="width:70%; height:100%; margin:0 15%">
                 </div>
             </div>
 
             <div class="main_item">
-                <div class="divide">
-                    <ul class="title_list">
-                        <li class="title_left on"><a href="#" onclick="">알림</a></li>
-                        <li class="title_left"><a href="#" onclick="tab">쪽지</a></li>
+                <div class="w_title">
+                    <ul class="tabmenu left">
+                        <li class="tabl on" id="alarm"><a href="#" onclick="tab('alarm')">ALARM</a></li>
+                        <li class="tabl" id="message"><a href="#"onclick="tab('message')">MESSAGE</a></li>
                     </ul>
-                    <!-- <div class="title_left"><a href="#">알림</a></div> -->
+                    <div class="w_right">
+                        <div class="box"></div><div class="box"></div><div class="box"></div>
+                    </div>
                 </div>
                 <!-- <div class="title_wrap">
                     <div class="title_left"><a href="#">쪽지</a></div>
@@ -23,9 +31,9 @@
                 </div> -->
             </div>
             <div class="main_item">
-                <div class="title_wrap">
-                    <div class="title_left"><a href="#">캘린더</a></div>
-                    <div class="title_right"><a href="#" onclick="goToCalendar();">더보기</a></div>
+                <div class="w_title">
+                    <div class="w_left"><a href="#">캘린더</a></div>
+                    <div class="w_right"><a href="#" onclick="goToCalendar();">더보기</a></div>
                 </div>
                 <!-- calendar 태그 -->
                 <div class='calendar_container'>
@@ -40,6 +48,12 @@
 
         function goToCalendar(){
             location.href = "/calendarList.do"
+        }
+
+        function tab(id){
+            $(".tabl").removeClass('on')
+            $("#"+id).addClass('on');
+
         }
         
 

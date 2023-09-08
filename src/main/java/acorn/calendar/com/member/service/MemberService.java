@@ -29,7 +29,7 @@ public class MemberService {
 			sqlSession.insert("mapper.com.member.insertMember",acornMap);
 			sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap,request));
 		}catch (Exception e){
-			sqlSession.rollback();
+			// sqlSession.rollback();
 		}
 
 		// try-catch 를 쓰면 error 발생해도 롤백 안 됨
