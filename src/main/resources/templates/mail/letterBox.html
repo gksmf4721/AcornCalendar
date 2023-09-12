@@ -4,8 +4,11 @@
             <div class="m_container_title">전체메일함</div>
             <div class="m_inner_content2">
                 <div class="section">
-                    <div>
-                        <input type="checkbox" id="chk_all" onclick="ChkAll();"><label for="chk_all"><span></span></label>
+                    <div class="m_menubox">
+                        <label for="chk_all">
+                            <input type="checkbox" id="chk_all" onclick="ChkAll();">
+                            <span for="chk_all"></span>
+                        </label>
                         <input type="button" onclick="delLett();" value="삭제">
                     </div>
                     <table class="table_m">
@@ -27,44 +30,24 @@
                                 <th>내 닉네임</th>
                             </tr>
                         </thead>
-                        <tbody th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}">
-                            <tr>
-                                <td class="txtc">
-                                    <label th:for="'chkbox'+${item.L_SEQ}" th:onclick="checkClick()">
-                                        <input type="checkbox" th:id="'chkbox'+${item.L_SEQ}" th:value="${item.L_SEQ}" class="chkClass" >
-                                        <span for="'chkbox'+${item.L_SEQ}"></span>
-                                        <input type="hidden" th:id="'_chksend'+${item.L_SEQ}" th:value="${item.SEND}">
-                                    </label>
-                                </td>
-                                <td class="txtc"><span id="lett_L_SENDER" class="mail_sender" th:text="${item.L_SENDER}"></td>
-                                <td class="txtc"><span id="lett_L_RECIVER" class="mail_sender" th:text="${item.L_RECIVER}"></td>
-                                <td class="txtc"><span id="lett_L_TITLE" class="mail_sender" th:text="${item.L_TITLE}"></td>
-                                <td class="txtc"><span id="lett_L_SENDT" class="mail_sender" th:text="${item.L_SENDT}"></td>
-                                <td class="txtc"><span id="lett_M_NICKNAME" class="mail_sender" th:text="${item.M_NICKNAME}"></td>
-                            </tr>
-                        </tbody>
+                            <tbody th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}" th:if="${letterList.size() != 0}">
+                                <tr>
+                                    <td class="txtc">
+                                        <label th:for="'chkbox'+${item.L_SEQ}" th:onclick="checkClick()">
+                                            <input type="checkbox" th:id="'chkbox'+${item.L_SEQ}" th:value="${item.L_SEQ}" class="chkClass" >
+                                            <span for="'chkbox'+${item.L_SEQ}"></span>
+                                            <input type="hidden" th:id="'_chksend'+${item.L_SEQ}" th:value="${item.SEND}">
+                                        </label>
+                                    </td>
+                                    <td class="txtc"><span id="lett_L_SENDER" class="mail_sender" th:text="${item.L_SENDER}"></td>
+                                    <td class="txtc"><span id="lett_L_RECIVER" class="mail_sender" th:text="${item.L_RECIVER}"></td>
+                                    <td class="txtc"><span id="lett_L_TITLE" class="mail_sender" th:text="${item.L_TITLE}"></td>
+                                    <td class="txtc"><span id="lett_L_SENDT" class="mail_sender" th:text="${item.L_SENDT}"></td>
+                                    <td class="txtc"><span id="lett_M_NICKNAME" class="mail_sender" th:text="${item.M_NICKNAME}"></td>
+                                </tr>
+                            </tbody>
                     </table>
                 </div>
-                <!-- <div class="section">
-                    <div class="mail_list_wrap">
-                        <ul class="mail_list">
-                            <li th:each="item : ${letterList}" th:class="'mail_item mail-'+${item.L_SEQ}">
-                                <div class="mail">
-                                    <div class="button_checkbox_wrap">
-                                        <input type="checkbox" th:id="'chkbox'+${item.L_SEQ}" th:value="${item.L_SEQ}" class="chkClass" >
-                                        <label th:for="'chkbox'+${item.L_SEQ}" th:onclick="checkClick()"></label>
-                                        <input type="hidden" th:id="'_chksend'+${item.L_SEQ}" th:value="${item.SEND}">
-                                    </div>
-                                    <div id="lett_L_SENDER" class="mail_sender" th:text="${item.L_SENDER}"></div>
-                                    <div id="lett_L_RECIVER" class="mail_sender" th:text="${item.L_RECIVER}"></div>
-                                    <div id="lett_L_TITLE" class="mail_sender" th:text="${item.L_TITLE}"></div>
-                                    <div id="lett_L_SENDT" class="mail_sender" th:text="${item.L_SENDT}"></div>
-                                    <div id="lett_M_NICKNAME" class="mail_sender" th:text="${item.M_NICKNAME}"></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div> -->
             </div>
         </div>
         

@@ -6,10 +6,10 @@
 
 .side_content_wrap{position: absolute;left: 50px;top: 60px;box-sizing: border-box;width:180px; height:100%;}
 .m_container_wrap{position: relative;margin-top: 60px;margin-left: 230px;box-sizing: border-box;}
-.headerTitle{height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;top:60px;width: 180px;background: #c9bbb5;}
+.headerTitle{height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;top:60px;width: 179px;background: #c9bbb5;border-right: 1px solid black;}
 .headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;border-right: 1px solid black;}
 .headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
-.m_sidebar{ grid-row : span 2; min-height:100vh; background-color:#fff; width: 179px; transition:all 0.5s ease-out; position:fixed; margin-top:45px;}
+.m_sidebar{ grid-row : span 2; min-height:100vh; background-color:#fff; width: 179px; transition:all 0.5s ease-out; position:fixed; margin-top:45px;border-right: 1px solid black;}
 
 .m_btn_header{box-sizing: border-box;display: flex;width: 100%;height: 80px;justify-content: center;align-items: center;justify-content: space-around;border-bottom: 1px solid #c9bbb5;;}
 .m_btn{background-color: #c9bbb5; color:white; width:85px; text-align: center;height: 40px;border-radius: 5px;line-height: 40px; cursor: pointer;}
@@ -25,9 +25,9 @@
 .side_item span{vertical-align: sub; margin-left: 10px;}
 .side_img{width: 24px !important; margin-left: 21px !important; margin-right: 3px;} 
 
-.m_inner_content{}
-.m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; padding:10px;position: fixed;top: 60px;left: 230px;right:0;z-index: 2; background-color: #fff;}
+.m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; height:24px;padding:10px;position: fixed;top: 60px;left: 230px;right:0;z-index: 2; background-color: #fff;}
 .m_inner_content2{padding-top:50px; padding-left:20px;}
+.m_menubox{display: flex; align-items: center; height:30px; border: 1px solid; margin-bottom: 10px;}
 
 /* 전체메일함 */
 .mail_list_wrap{display:flex; position:relative;}
@@ -53,3 +53,14 @@
 .txtr{text-align: right;}
 .txtc{text-align: center;}
 
+/*편지 상세보기*/
+.main_item{box-shadow: 5px 5px 0 black; border: 1px solid black;width: 90%;margin: 0 5%;}
+.main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #a1887e;}
+.main_item > .w_title > .w_left > a{float: left; line-height: 25px; margin-left: 7px;font-family: 'DungGeunMo';}
+.main_item > .w_title > .w_right{float: right; display: flex;align-items: center;justify-content: center; height: 20px;margin-top: 2.5px;}
+.main_item > .w_title > .w_right > .box{margin-right: 7px;}
+.box > img{width: 20px;}
+
+.m_subject{ background:rgba(0, 0, 0, 0.397); height: 70px;}
+.m_subject > p {width: 100%;}
+.m_subject > p > span > input{width:90%}

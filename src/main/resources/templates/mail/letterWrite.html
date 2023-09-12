@@ -3,12 +3,25 @@
         <div class="m_inner_content">
             <div class="m_container_title">메일작성하기</div>
             <div class="m_inner_content2">
-                <div class="section">
-                    <p>받는사람 <input type="text" id="lReciver" name="lReciver"></p>
-                    <p>제목 <input type="text" id="lTitle" name="lTitle"></p>
-                    <p>내용 <textarea id="lContent" name="lContent" cols="50" rows="5"></textarea></p>
+                    <div class="section">
+                        <div class="main_item">
+                            <div class="w_title">
+                                <div class="w_right">
+                                    <div class="box">
+                                        <img th:src="@{../img/attach/min.png}">
+                                        <img th:src="@{../img/attach/max.png}">
+                                        <img th:src="@{../img/attach/close.png}">
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="m_subject">
+                            <p>TO : <span><input type="text" id="lReciver" name="lReciver"></span></p>
+                            
+                            <p>TITLE : <span><input type="text" id="lTitle" name="lTitle"></span></p>
+                        </div>
+                        <p>내용 <textarea id="lContent" name="lContent" cols="50" rows="5"></textarea></p>
+                    </div>
                 </div>
-                
             </div>
             <input type="button" id="btn-ajax" value="메일전송">
         </div>
