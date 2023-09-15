@@ -19,7 +19,7 @@
 /* 사이드바 시작 */
 :root{
     --side-bar__phase-1-width: 50px;
-    --side-bar__background-color:#6F6153; ;
+    --side-bar__background-color:#ac957e; ;
     --side-bar__color: #fff;
     --side-bar__img_width : 40px;
     
@@ -108,18 +108,14 @@
     position:absolute;
 }
 
-/* 호버했을때 */
+/* 호버했을때 사이드바 크기 늘어남*/
 .sidebar:hover{
     width: 230px;
 }
-
-
 .sidebar:hover .nav_item li{
     width: 230px;
 }
-
-
-/* 호버했을때, 메뉴 이미지 변경 */
+/* 호버했을때 메뉴 이미지 변경 */
 .sidebar:hover li:nth-child(1) .item{
     background-image: url("/img/icon/Menu_Open.png"); 
     transition: all .2s;
@@ -128,18 +124,42 @@
     border-bottom: 2px solid #fff;
     transition: all .2s;
 }
-
+/* 호버했을때 메뉴아이템 디자인 변경 */
 .nav_item > li > .menu_name{
     display:block;
     white-space: nowrap;
     padding : 0px 0px 0px 60px;
     color: #fff;
 }
-.nav_item li:nth-child(n+2):hover{
-    background-color:#fff;
-    background-size: 100%;
+
+.nav_item li:nth-child(n+2):hover > .menu_name{
+    -webkit-animation-name: eff24-move;
+    animation-name: eff24-move;
+    -webkit-animation-duration: .4s;
+    animation-duration: .4s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
     cursor: pointer;
 }
-.nav_item li:nth-child(n+2):hover > .menu_name{ color:#000; }
-.nav_item li:nth-child(n+2):hover > .item { filter: brightness(0%);}
 .footer {min-width: 850px; padding: 15px 25px; font-size: 13px; text-align: center; color:#c9bbb5; border-top: 1px solid #c9bbb5; font-family: 'bitbit'; letter-spacing: 10px;}
+
+@keyframes eff24-move {
+    30% {
+        -webkit-transform: translate3d(0, -5px, 0) rotate(5deg);
+        transform: translate3d(0, -5px, 0) rotate(5deg)
+    }
+    50% {
+        -webkit-transform: translate3d(0, -3px, 0) rotate(-4deg);
+        transform: translate3d(0, -3px, 0) rotate(-4deg)
+    }
+    80% {
+        -webkit-transform: translate3d(0, 0, 0) rotate(-3deg);
+        transform: translate3d(0, 0, 0) rotate(-3deg)
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+}

@@ -3,34 +3,43 @@
         <div class="m_inner_content">
             <div class="m_container_title">메일작성하기</div>
             <div class="m_inner_content2">
-                    <div class="section">
-                        <div class="main_item">
-                            <div class="w_title">
-                                <div class="w_right">
-                                    <div class="box">
-                                        <img th:src="@{../img/attach/min.png}">
-                                        <img th:src="@{../img/attach/max.png}">
-                                        <img th:src="@{../img/attach/close.png}">
-                                    </div>
+                <div class="section">
+                    <div class="main_item">
+                        <div class="w_title">
+                            <div class="w_left">New Message</div>
+                            <div class="w_right">
+                                <div class="box">
+                                    <img th:src="@{../img/attach/min.png}">
+                                    <img th:src="@{../img/attach/max.png}">
+                                    <img th:src="@{../img/attach/close.png}">
                                 </div>
                             </div>
-                        <div class="m_subject">
-                            <p>TO : <span><input type="text" id="lReciver" name="lReciver"></span></p>
-                            
-                            <p>TITLE : <span><input type="text" id="lTitle" name="lTitle"></span></p>
                         </div>
-                        <p>내용 <textarea id="lContent" name="lContent" cols="50" rows="5"></textarea></p>
+                        <div class="m_content">
+                            <div class="m_subject"><span>To: <input type="text" id="lReciver" name="lReciver"></span></div>
+                            <div class="m_subject"><span>Title: <input type="text" id="lTitle" name="lTitle"></span></div>
+                            <div class="m_editor">
+                                <div class="m_textarea" contenteditable="true" id="lContent" name="lContent"></div>
+                                <div class="m_editor_tool">
+                                    <input type="button" onclick="command('bold');" value="B" id="btn-bold">
+                                    <input type="button" onclick="command('italic');" value="I" id="btn-italic" >
+                                    <input type="button" onclick="command('underline');" value="U" id="btn-underline">
+                                    <input type="button" onclick="command('strikeThrough');" value="S" id="btn-strike">
+                                    <input type="button" id="btn-ajax" value="메일전송">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <input type="button" id="btn-ajax" value="메일전송">
         </div>
         
 
     <script>
-    window.onload = function(){
-        const btn = document.getElementById("btn-ajax");
+    const btn = document.getElementById("btn-ajax");
+    const editor = document.getElementById("lContent");
 
+    window.onload = function(){
         btn.addEventListener('click', function(){
             letterWriteJson();
         });
@@ -66,6 +75,14 @@
         });
     }
 
+    function command(type){
+        document.execCommand(type);
+        focusEditor();
+    }
+
+    function focusEditor(){
+        editor.focus();
+    }
 
     </script>    
     </th:block>

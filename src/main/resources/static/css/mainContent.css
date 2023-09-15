@@ -3,14 +3,13 @@
 .container_wrap{position: relative; padding-top: 80px;box-sizing: border-box; }
 .main_content{display:grid; grid-template-columns: 380px 1000px; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; padding-left: 100px;}
 .main_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
-.main_item:nth-child(1){width:300px; height:300px;}
+.main_item:nth-child(1){width:350px; height:300px;}
 .main_item:nth-child(2){width: 350px;min-height: 400px;}
 .main_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
 
-
 /*윈도우창 style*/
-.main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #a1887e;}
-.main_item > .w_title > .w_left > a{float: left; line-height: 25px; margin-left: 7px;font-family: 'DungGeunMo';}
+.main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #6F6153;}
+.main_item > .w_title > .w_left > a{float: left; line-height: 25px; margin-left: 7px;font-family: 'DungGeunMo'; color:white}
 .main_item > .w_title > .w_right{float: right; display: flex;align-items: center;justify-content: center; height: 20px;margin-top: 2.5px;}
 .main_item > .w_title > .w_right > .box{margin-right: 7px;}
 .box > img{width: 20px;}
@@ -26,31 +25,11 @@
 .tabmenu > li.on > a{color: #fff8f5;background: #594c47;}
 .tabmenu.right{position: absolute; top: 0; right: 0;}
 
-
-
-
 .title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
 .title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
 .title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
 .title_center{height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px; text-align:center;}
 
-.title_list{position: relative;}
-.title_list > li {float: left;height: 190px;}
-.title_list > li + li > a {position: relative; padding-left: 15px; margin-left: 15px;}
-
-.title_list > li > a {
-    display: inline-block;
-    font-size: 20px;
-    line-height: 1.1;
-    color:
-}
-
-.title_list > li.on > a {
-    font-size: 22px;
-    line-height: 1;
-    font-weight: 700;
-    color: black;
-}
 
 /* 헤더, 좌측 메뉴 제외 바디 부분 */
 .contents_wrap {position: relative;padding-top: 70px;padding-left: 230px;box-sizing: border-box;height:100%;}
