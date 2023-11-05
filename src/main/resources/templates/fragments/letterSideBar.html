@@ -58,7 +58,7 @@
                         type : 'POST',
                         contentType : "application/json",
                         url : '/letterList.json',
-                        data :{type : TYPE},
+                        data :JSON.stringify({type : TYPE, t:'tt'}),
                         dataType : 'json',
                         success : function(rslt){
                             console.log(rslt)

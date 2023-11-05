@@ -85,6 +85,21 @@ public class LetterController {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		AcornMap map = new AcornMap();
 		map.put("data",letterService.selectLetterList(acornMap));
+
+//		List<AcornMap> l = new ArrayList<>();
+//		AcornMap m = new AcornMap();
+//		AcornMap d = new AcornMap();
+//		m.put("test","test");
+//		m.put("test2",1);
+//		l.add(m);
+//
+//		AcornMap a = new AcornMap();
+//		a.put("test","test");
+//		a.put("test2",1);
+//		l.add(a);
+//
+//		d.put("z",l);
+
 		ResponseUtils.jsonMap(response, map);
 	}
 
