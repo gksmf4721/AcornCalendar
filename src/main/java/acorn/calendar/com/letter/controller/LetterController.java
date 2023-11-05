@@ -83,7 +83,9 @@ public class LetterController {
 	@RequestMapping("/letterList.json")
 	public void letterList(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
-		ResponseUtils.jsonList(response, letterService.selectLetterList(acornMap));
+		AcornMap map = new AcornMap();
+		map.put("data",letterService.selectLetterList(acornMap));
+		ResponseUtils.jsonMap(response, map);
 	}
 
 	@RequestMapping("/letterWrite.do")

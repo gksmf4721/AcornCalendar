@@ -1,6 +1,7 @@
 package acorn.calendar.com.letter.service;
 
 import acorn.calendar.config.data.AcornMap;
+import acorn.calendar.config.model.LoginSession;
 import acorn.calendar.config.util.FileUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSession;
@@ -21,6 +22,7 @@ public class LetterService {
 	private SqlSession sqlSession;
 
 	public List<AcornMap> selectLetterList(AcornMap acornMap) throws Exception {
+
 		if(acornMap.getString("type").equals("all")){
 			acornMap.put("categoryType","0");
 			return sqlSession.selectList("mapper.com.letter.selectLAllLetterList",acornMap);

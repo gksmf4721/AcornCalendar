@@ -3,6 +3,7 @@ package acorn.calendar.config.util;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import acorn.calendar.config.data.AcornMap;
@@ -33,6 +34,7 @@ public class ResponseUtils {
 	public static void jsonString(HttpServletResponse response, String string) throws Exception {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
+		System.out.println("데이터 : "+string);
 		response.getWriter().write(string);
 	}
 
@@ -42,8 +44,13 @@ public class ResponseUtils {
 	}
 
 	public static void jsonList(HttpServletResponse response, List<AcornMap> jsonList) throws Exception {
-		String data = (new JSONObject(jsonList)).toString();
-		jsonString(response, data);
+		JSONArray jsonArray = new JSONArray();
+		for (AcornMap map : jsonList) {
+			JSONObject jsonMap = new JSONObject(map);
+			jsonArray.put(jsonMap);
+		}
+		String jsonString = jsonArray.toString();
+		jsonString(response, jsonString);
 	}
 
 }
