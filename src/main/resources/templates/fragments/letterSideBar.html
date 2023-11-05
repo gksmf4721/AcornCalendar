@@ -58,10 +58,11 @@
                         type : 'POST',
                         contentType : "application/json",
                         url : '/letterList.json',
-                        data :JSON.stringify({type : TYPE}),
+                        data :{type : TYPE},
                         dataType : 'json',
                         success : function(rslt){
-                            location.href = "/letterBox.do";
+                            console.log(rslt)
+                            //location.href = "/letterBox.do";
                         },
                         error : function(request, status, error){
                             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
