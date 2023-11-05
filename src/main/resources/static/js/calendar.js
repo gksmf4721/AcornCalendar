@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function(){
         events: [
             {
               title: 'All Day Event',
-              start: '2023-07-05'
+              start: '2023-11-05'
             },
         ]
     });

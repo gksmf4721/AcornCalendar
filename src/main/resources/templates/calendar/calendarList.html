@@ -1,28 +1,84 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
-        <div class="main_content">
-            <div class="main_item">
+        <div class="cal_content">
+            <div class="cal_item">
                 <div class="title_wrap">
                     <div class="title_center">내정보</div>
                 </div>
             </div>
 
-            <div class="main_item">
+            <div class="cal_item">
                 <div class="title_wrap">
                     <div class="title_center">그룹웨어</div>
                 </div>
+                    <div>입사일자</div>
+                    <div>-</div>
+                    <div>남은 휴가 개수</div>
+                    <div>-</div>
+                    <div>사용한 휴가 개수</div>
+                    <div>-</div>
             </div>
 
-            <div class="main_item">
+            <div class="cal_item">
                 <div class="title_wrap">
                     <div class="title_center">캘린더</div>
+                    <div class="title_right" id="calAdd">PLUS</div>
                 </div>
                 <div class="calendar_container">
                     <div id="calendar"></div>
                 </div>
             </div>
         </div>
-    </th:block>
-</body>
+        
+        <!-- 모달창 팝업 -->
+        <button id="modalOpenButton">모달창</button>
+        <div id="modalContainer" class="hidden">
+		  <div id="modalContent">
+		    <p>모달 창 입니다.</p>
+		    <button id="modalCloseButton">닫기</button>
+		  </div>
+		</div>
+        
+        <div id="calAddContainer" class="hidden">
+        	<div id="calAddContent">
+        		<input type="text" id="title" placeholder="타이틀">
+        		시작일<input type="date" id="start-date">
+        		종료일<input type="date" id="end-date">
+        		<input type="button" value="저장" id="calAddBtn">
+        	</div>
+        </div>
+        
+        
+	<script>
+	const modalOpenButton = document.getElementById('modalOpenButton');
+	const modalCloseButton = document.getElementById('modalCloseButton');
+	const modal = document.getElementById('modalContainer');
+
+	modalOpenButton.addEventListener('click', () => {
+	  modal.classList.remove('hidden');
+	});
+
+	modalCloseButton.addEventListener('click', () => {
+	  modal.classList.add('hidden');
+	});
+	
+	//캘린더 추가 이벤트
+	const calendarAddBtn = document.getElementById("calAddBtn");
+	calendarAddBtn.addEventListener('click', () => {
+		var calendarEl = document.getElementById('calendar'); 
+		var calendar = new Calendar(calendarEl, {
+			  events: [
+			    { // this object will be "parsed" into an Event Object
+			      title: 'The Title', // a property!
+			      start: '2023-11-6', // a property!
+			      end: '2023-11-8' // a property! ** see important note below about 'end' **
+			    }
+			  ]
+			});
+	});
+	
+	</script>        
+</th:block>
+
 </html>
