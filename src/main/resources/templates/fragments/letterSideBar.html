@@ -34,8 +34,8 @@
                 <div>
                     <div class="m_side_menu">
                         <a href="#" class="side_item" onclick="goToHrefAjax('all')"><img th:src="@{../img/icon/Mail.png}" class="side_img"><span>전체메일함</span></a>
-                        <a href="#" class="side_item" onclick="goToHrefAjax('send')"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
-                        <a href="#" class="side_item" onclick="goToHrefAjax('receive')"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHrefAjax('receive')"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
+                        <a href="#" class="side_item" onclick="goToHrefAjax('send')"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
                         <a href="#" class="side_item" onclick="goToHrefAjax('trash')"><img th:src="@{../img/icon/Mail_Delete.png}"><span>휴지통</span></a>
                     </div>
                 </div>
@@ -54,21 +54,25 @@
             }
 
             function goToHrefAjax(TYPE){
-                $.ajax({
-                        type : 'POST',
-                        contentType : "application/json",
-                        url : '/letterList.json',
-                        data :JSON.stringify({type : TYPE, t:'tt'}),
-                        dataType : 'json',
-                        success : function(rslt){
-                            console.log(rslt)
-                            //location.href = "/letterBox.do";
-                        },
-                        error : function(request, status, error){
-                            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
-                        }
-                    });
+                location.href="/letterBox.do?type="+TYPE
             }
+
+            // function goToHrefAjax(TYPE){
+            //     $.ajax({
+            //             type : 'POST',
+            //             contentType : "application/json",
+            //             url : '/letterList.json',
+            //             data :JSON.stringify({type : TYPE}),
+            //             dataType : 'json',
+            //             success : function(rslt){
+            //                 console.log(rslt)
+            //                 //location.href = "/letterBox.do";
+            //             },
+            //             error : function(request, status, error){
+            //                 $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+            //             }
+            //         });
+            // }
             </script>        
     </th:block>
 </html>

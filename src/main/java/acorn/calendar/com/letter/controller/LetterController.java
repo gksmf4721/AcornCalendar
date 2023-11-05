@@ -47,11 +47,16 @@ public class LetterController {
 
 	@RequestMapping("/letterBox.do")
 	public String letterBox(AcornMap acornMap, Model model, HttpSession session) throws Exception {
+
 		if(null!=session.getAttribute("trashLetterDelete")){
 			acornMap.put("type","trash");
 			trashLetterDelete(acornMap,session);
+			acornMap.put("type","all");
 		}
-		acornMap.put("type","all");
+		if(acornMap.getString("type").equals("")){
+			acornMap.put("type","all");
+		}
+
 		model.addAttribute("letterList",letterService.selectLetterList(acornMap));
 
 		return "mail/letterBox";
@@ -80,28 +85,13 @@ public class LetterController {
 		letterService.updateTrashList(deleteList);
 	}
 
-	@RequestMapping("/letterList.json")
-	public void letterList(@RequestBody String json, HttpServletResponse response) throws Exception {
-		AcornMap acornMap = JsonUtils.toAcornMap(json);
-		AcornMap map = new AcornMap();
-		map.put("data",letterService.selectLetterList(acornMap));
-
-//		List<AcornMap> l = new ArrayList<>();
-//		AcornMap m = new AcornMap();
-//		AcornMap d = new AcornMap();
-//		m.put("test","test");
-//		m.put("test2",1);
-//		l.add(m);
-//
-//		AcornMap a = new AcornMap();
-//		a.put("test","test");
-//		a.put("test2",1);
-//		l.add(a);
-//
-//		d.put("z",l);
-
-		ResponseUtils.jsonMap(response, map);
-	}
+//	@RequestMapping("/letterList.json")
+//	public void letterList(@RequestBody String json, HttpServletResponse response) throws Exception {
+//		AcornMap acornMap = JsonUtils.toAcornMap(json);
+//		AcornMap map = new AcornMap();
+//		map.put("data",letterService.selectLetterList(acornMap));
+//		ResponseUtils.jsonMap(response, map);
+//	}
 
 	@RequestMapping("/letterWrite.do")
 	public String letterWrite() throws Exception {

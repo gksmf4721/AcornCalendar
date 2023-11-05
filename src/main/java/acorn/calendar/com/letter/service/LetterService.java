@@ -28,7 +28,7 @@ public class LetterService {
 			return sqlSession.selectList("mapper.com.letter.selectLAllLetterList",acornMap);
 		}else if(acornMap.getString("type").equals("send")){
 			return sqlSession.selectList("mapper.com.letter.selectSendLetterList",acornMap);
-		}else if(acornMap.getString("type").equals("recive")){
+		}else if(acornMap.getString("type").equals("receive")){
 			return sqlSession.selectList("mapper.com.letter.selectReciveLetterList",acornMap);
 		}else{
 			acornMap.put("categoryType","1");
