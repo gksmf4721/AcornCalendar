@@ -1,77 +1,43 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
 
 <th:block layout:fragment="loginContent">
-<div class="login_outer">
-	<div class="login_inner">
-		<div class="login_in_content">
-			<span ><img  th:src="@{../img/icon/Arrow_Back.png}" class="back_arrow" onclick="back();"></span>
-			<p class="login_in_form_title">♥ FIND ID ♥</p>
-	
-			<form id="formData" autocomplete="off">
-				<div class="form">
-					<input type="text" id="mEmail" class="login_input_chk" placeholder="이메일">
-					<button type="button" id="sendBtn" onclick="sendMail();">인증번호 전송</button>
+	<div class="login_outer">
+		<div class="login_inner">
+			<div class="login_in_content">
+				<a href="/"><img th:src="@{../img/icon/Arrow_Back.png}" class="back_arrow"></a>
+				<p class="login_in_form_title">♥ FIND ID ♥</p>
 		
-					<input type="text" id="mEmailChk" class="login_input_chk" placeholder="인증번호">
-					<button type="button" onclick="confirmMail();">인증번호 확인</button>
-		
-					<!-- ID : <input type="text" class="" id="result" value="" readonly> -->
-				</div>
-				<div  id="result_div" style="display:none;">
-					♥입력하신 정보와 일치하는 아이디는 <span id="result" style="font-weight:bold; color:white; ">111</span> 입니다.♥
-				</div>
-			</form>
+				<form id="formData" autocomplete="off">
+					<div class="form" id="form">
+						<input type="text" id="mEmail" class="login_input_chk" placeholder="이메일">
+						<button type="button" id="sendBtn">인증번호 전송</button>
+			
+						<input type="text" id="mEmailChk" class="login_input_chk" placeholder="인증번호">
+						<button type="button" id="chkBtn">인증번호 확인</button>
+					</div>
+					<div id="result_div">
+						♥입력하신 정보와 일치하는 아이디는 <span id="result" style="font-weight:bold; color:white;"></span> 입니다.♥
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-<script type="text/javascript">
-	function sendMail(){
 
-		let email = $("#mEmail").val();
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(){
+			document.getElementById("result_div").style.display = 'none';
+		});
 
-		$.ajax({
-			type : "POST",
-			url : "/sendMailAuth.json",
-			dataType:'json',
-			contentType : "application/json",
-			data : JSON.stringify({
-				mEmail : email,
-				type : 'I'
-			}),
-			success : function(obj){
-				console.log(obj);
-				$.alertSuccess(obj.resultMsg);
-			}
-		})
-	}
+		//인증번호 전송
+		let sendBtn = document.getElementById("sendBtn");
+		sendBtn.addEventListener('click',() => {
+			sendMail('I');
+		});
 
-	function confirmMail(){
-		let emailChk = $("#mEmailChk").val();
-		let email = $("#mEmail").val();
-
-		$.ajax({
-			type : "POST",
-			url : "/confirmMailAuth.json",
-			dataType:'json',
-			contentType : "application/json",
-			data : JSON.stringify({
-				mEmail : email,
-				inputAuth : emailChk,
-				type : 'I'
-			}),
-			success : function(obj){
-				if(obj.resultCd === '1'){
-					$(".form").css("display", "none");
-					$("#result_div").css("display", "");
-					$("#result").text(obj.resultData);
-				}else{
-					$.alertError(obj.resultMsg);
-				}
-			}
-		})
-	}
-
-</script>
+		//인증번호 확인
+		let chkBtn = document.getElementById("chkBtn");
+		chkBtn.addEventListener('click',() => {
+			confirmMail('I');
+		});
+	</script>
 </th:block>
-</html>

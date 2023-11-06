@@ -1,3 +1,121 @@
+    //URL 이동
+    function forwardURL(url){
+        if(url === 'kakao'){
+            $.alertError("준비중입니다!");
+        } else if(url === 'findId'){
+            window.location.href = "/find.do?type=I";
+        } else if(url === 'findPw'){
+            window.location.href = "/find.do?type=P";
+        } else if(url === 'join'){
+            window.location.href = "/join.do";
+        }
+    }
+
+    //로그인 화면 => 로그인 처리
+    function login(){
+        let inputId = document.getElementById('mId').value;
+        let inputPw = document.getElementById('mPw').value;
+        let chk = document.getElementById('saveId').checked;
+        
+        ajaxData = {
+            mId: inputId,
+            mPw: inputPw
+        };
+
+        if(fn_dataChk(formData)){
+            $.ajax({
+                type : "POST",
+                contentType : "application/json",
+                url : '/loginCheck.json',
+                data : JSON.stringify(ajaxData),
+                dataType : 'json',
+                success : function(rslt){
+                    if(rslt.resultCd == 1){
+                        if(chk){
+                            setCookie('id', inputId, 7);
+                        }else{
+                            setCookie('id',0,0);
+                        }
+                        sessionStorage.setItem("id",inputId);
+                        location.href = rslt.resultUrl;
+                    }
+                },
+                error : function(request, status, error){
+                    $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+                }
+            });
+        }
+    }
+
+	//아이디찾기 => 이메일 보내기
+	function sendMail(mtype){
+		let email = document.getElementById("mEmail").value;
+
+		ajaxData = {
+			mEmail: email,
+			type: mtype
+		};
+
+		if(email == ''){
+			$.alertError("이메일을 입력해주세요"); return false;
+		}
+
+		$.ajax({
+			type : "POST",
+			url : "/sendMailAuth.json",
+			dataType:'json',
+			contentType : "application/json",
+			data : JSON.stringify({ajaxData}),
+			success : function(rslt){
+				console.log(rslt);
+				if(rslt.resultCd == 1){
+					$.alertSuccess(rslt.resultMsg);
+				} else {
+					$.alertError(rslt.resultMsg);
+				}
+			}
+		});
+	}
+
+    //아이디 찾기 => 인증번호 확인
+	function confirmMail(mtype){
+		let email = document.getElementById("mEmail").value;
+		let emailChk = document.getElementById("mEmailChk").value;
+
+		ajaxData = {
+			mEmail : email,
+			inputAuth : emailChk,
+			type : mtype
+		};
+
+		if(emailChk = ''){
+			$.alertError("인증번호를 입력해주세요"); return false;
+		}
+
+		$.ajax({
+			type : "POST",
+			url : "/confirmMailAuth.json",
+			dataType:'json',
+			contentType : "application/json",
+			data : JSON.stringify({ajaxData}),
+			success : function(rslt){
+				console.log(rslt);
+				if(rslt.resultCd == 1){
+                    if(mtype == 'I'){
+                        document.getElementById("form").style.display = 'none';
+                        document.getElementById("result_div").style.display = 'block';
+                        document.getElementById("result").innerText = rslt.resultData;
+                    } else if (mtype == 'P'){
+                        document.getElementById("form").style.display = 'none';
+                        document.getElementById("inputPw").style.display = 'block';
+                    }
+				}else{
+					$.alertError(rslt.resultMsg);
+				}
+			}
+		});
+	}
+
 //아이디, 닉네임 중복검사
 function duplicate(id, idName){
     var chkVal = document.getElementById(id).value;

@@ -3,10 +3,6 @@ function strToObj(xhr){
     return obj;
 }
 
-function back(){
-    location.href = '/';
-}
-
 //데이터 유효성 검사 
 function fn_dataChk(formId){
     let chk = true;
