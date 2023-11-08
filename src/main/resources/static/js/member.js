@@ -47,7 +47,7 @@
         }
     }
 
-	//아이디찾기 => 이메일 보내기
+	//아이디_비밀번호_찾기 => 이메일 보내기
 	function sendMail(mtype){
 		let email = document.getElementById("mEmail").value;
 
@@ -77,7 +77,7 @@
 		});
 	}
 
-    //아이디 찾기 => 인증번호 확인
+    //아이디_비밀번호_찾기 => 인증번호 확인
 	function confirmMail(mtype){
 		let email = document.getElementById("mEmail").value;
 		let emailChk = document.getElementById("mEmailChk").value;
@@ -116,7 +116,41 @@
 		});
 	}
 
-//아이디, 닉네임 중복검사
+    //비밀번호_찾기 => 비밀번호 변경
+    function modifyPw(){
+        let email = document.getElementById("mEmail").value;
+        let pw = document.getElementById("mPw").value;
+        let pwChk = document.getElementById("mPwChk").value;
+
+        ajaxData = {
+            mPw : pw,
+            mPwChk : pwChk,
+            mEmail : email
+        };
+        
+        if(pw == '' || pwChk == ''){
+            $.alertError("비밀번호를 확인해주세요"); return false;
+        }
+
+        $.ajax({
+            type : "POST",
+            url : "/pwModify.json",
+            dataType:'json',
+            contentType : "application/json",
+            data : JSON.stringify({ajaxData}),
+            success : function(rslt){
+                if(rslt.resultCd == 1){
+                    $.alertSucces(rslt.resultMsg);
+                    location.href=rslt.resultUrl;
+                } else {
+                    $.alertError(rslt.resultMsg);
+                }
+                
+            }
+        });
+    } 
+
+//회원가입 => 아이디, 닉네임 중복검사
 function duplicate(id, idName){
     var chkVal = document.getElementById(id).value;
     if(chkVal == ""){
@@ -151,7 +185,7 @@ function duplicate(id, idName){
     });
 }
 
-//중복체크를 하고 나서, 값을 변경했을 때 다시 중복체크 하기 위한 메소드
+//회원가입 => 중복체크 후, 값 변경되면 다시 중복체크
 function inputChk(type){
     if(type == 'idDupl'){
         $("#idChk_info").show();

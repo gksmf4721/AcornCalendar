@@ -1,5 +1,4 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
-
 <th:block layout:fragment="loginContent">
 	<div class="login_outer">
 		<div class="login_inner">
@@ -15,18 +14,22 @@
 						<input type="text" id="mEmailChk" class="login_input_chk" placeholder="인증번호">
 						<button type="button" id="chkBtn">인증번호 확인</button>
 					</div>
-					<div id="inputPw">
+
+					<div id="inputPw" class="result_div" autocomplete="off">
 						<input type="password" id="mPw" placeholder="비밀번호">
 						<input type="password" id="mPwChk" placeholder="비밀번호 확인">
-						<button type="button" id="modifyBtn">변경</button>
+						<button type="button" id="modifyBtn">비밀번호 변경</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", function(){
-			document.getElementById("inputPw").style.display = 'block';
+			// document.getElementById("inputPw").style.display = 'none';
+			document.getElementById("form").style.display = 'none';
+                        document.getElementById("inputPw").style.display = 'block';
 		});
 
 		//인증번호 전송
@@ -46,35 +49,5 @@
 		modifyBtn.addEventListener('click',() => {
 			modifyPw();
 		});
-
-		//수정중 => rslt 결과값에 맞는 alert 띄워야함
-		function modifyPw(){
-			let email = document.getElementById("mEmail").value;
-			let pw = document.getElementById("mPw").value;
-			let pwChk = document.getElementById("mPwChk").value;
-
-			ajaxData = {
-				mPw : pw,
-				mPwChk : pwChk,
-				mEmail : email
-			};
-			
-			if(pw == '' || pwChk == ''){
-				$.alertError("비밀번호를 확인해주세요"); return false;
-			}
-
-			$.ajax({
-				type : "POST",
-				url : "/pwModify.json",
-				dataType:'json',
-				contentType : "application/json",
-				data : JSON.stringify({ajaxData}),
-				success : function(rslt){
-					$.alertSucces(rslt.resultMsg);
-					location.href=rslt.resultUrl;
-				}
-			})
-		}
 	</script>
 </th:block>
-</html>

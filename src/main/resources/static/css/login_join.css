@@ -29,6 +29,11 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 .login_id_save_div{    padding-top: 15px; border-bottom: 1px solid black; padding-bottom: 15px;}    
 .login_href{ text-align: center; padding: 10px; font-size: 18px;}
 
+/*아이디 찾기, 비밀번호 찾기 div */
+.result_div{text-align:center;}
+.result_div > input[type="password"]{height:40px;  margin-bottom: 10px; margin-right:20%}
+.result_div > button[type="button"]{height: 36px; width: 30%;}
+
 /* 회원가입 CSS */
 .back_arrow{width: 30px; height: 30px; cursor: pointer;}
 .form{margin: 10px 10px;}
@@ -52,5 +57,3 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 .birth_title + input[type="date"]{width: 70%; height: 30px; border:none;} 
 .birth_title ~ input[type="radio"]{width: 10%; height: 15px; margin-top:10px; cursor: pointer;} 
 
-
-#result_div{text-align:center;}

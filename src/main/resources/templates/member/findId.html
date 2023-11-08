@@ -1,5 +1,4 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
-
 <th:block layout:fragment="loginContent">
 	<div class="login_outer">
 		<div class="login_inner">
@@ -15,8 +14,8 @@
 						<input type="text" id="mEmailChk" class="login_input_chk" placeholder="인증번호">
 						<button type="button" id="chkBtn">인증번호 확인</button>
 					</div>
-					<div id="result_div">
-						♥입력하신 정보와 일치하는 아이디는 <span id="result" style="font-weight:bold; color:white;"></span> 입니다.♥
+					<div id="result_div" class="result_div">
+						♥입력하신 정보와 일치하는 아이디는 <span id="result"style="font-weight:bold; color:white;"></span> 입니다.♥
 					</div>
 				</form>
 			</div>
