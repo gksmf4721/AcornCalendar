@@ -1,97 +1,61 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/login_layout">
 
 <th:block layout:fragment="loginContent">
-<div class="login_outer">
-	<div class="login_in_content">
-	<p class="login_in_form_title">♥ LOGIN ♥</p>
-		<div class="login_in_form_contents">
-			<form id="formData">
-				<input type="text" id="mId" class="login_in_id" autocomplete="off" placeholder="아이디를 입력하세요">
-				<input type="password" id="mPw" class="login_in_pw" autocomplete="off" placeholder="비밀번호를 입력하세요">
-				<input type="button" class="login_in_btn" id="btn-ajax" value="로그인">
+	<div class="login_outer">
+		<div class="login_in_content">
+		<p class="login_in_form_title">♥ LOGIN ♥</p>
+			<div class="login_in_form_contents">
+				<form id="formData" autocomplete="off">
+					<input type="text" id="mId" class="login_in_id" placeholder="아이디" data-name="아이디">
+					<input type="password" id="mPw" class="login_in_pw" placeholder="비밀번호" data-name="비밀번호">
+					<input type="button" class="login_in_btn" id="btn-ajax" value="로그인">
 
-				<div class="login_id_save_div">
-					<label for="saveId">
-						<input type="checkbox" id="saveId" class="login_id_sv">
-						<span for="saveId"></span>
-						아이디 저장
-					</label>
+					<div class="login_id_save_div">
+						<label for="saveId">
+							<input type="checkbox" id="saveId" class="login_id_sv">
+							<span for="saveId"></span>
+							아이디 저장
+						</label>
+					</div>
+				</form>
+				<div class="login_href">
+					<a href="#" onclick="forwardURL('kakao')" class="login_a">카카오로 로그인</a>
 				</div>
-			</form>
-
-			<div class="login_href">
-				<a href="#" onclick="forwardURL('kakao')" class="login_a">카카오로 로그인</a>
-			</div>
-			<div class="login_href">
-				<a href="#" onclick="forwardURL('findId')" class="login_a">아이디 찾기</a>
-				<a href="#" onclick="forwardURL('findPw')" class="login_a">비밀번호 찾기</a>
+				<div class="login_href">
+					<a href="#" onclick="forwardURL('findId')" class="login_a">아이디 찾기</a>
+					<a href="#" onclick="forwardURL('findPw')" class="login_a">비밀번호 찾기</a>
+				</div>
 			</div>
 		</div>
+		
+		<div class="login_in_content">
+			계정이 없으신가요?
+			<a href="#" onclick="forwardURL('join')" class="login_a">가입하기</a>
+		</div>
 	</div>
-	
-	<div class="login_in_content">
-		계정이 없으신가요?
-		<a href="#" onclick="forwardURL('join')" class="login_a">가입하기</a>
-	</div>
-</div>
 
-<script>
-	document.addEventListener("DOMContentLoaded", function(){
-		if(getCookie('id')){
-			document.getElementById('mId').value = getCookie('id');
-			document.getElementById('saveId').checked = true;
-		}
-	});
-
-	const setCookie = function (name, value, expiredDay) {
-		const expired = new Date();
-		expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
-		document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expired.toUTCString() + ';path=/';
-	};
-
-	const getCookie = function (name) {
-		var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
-		return value ? decodeURIComponent(value[2]) : null;
-	};
-
-	function forwardURL(url){
-		if(url === 'kakao'){
-			$.alertError("준비중입니다!");
-		} else if(url === 'findId'){
-			window.location.href = "/find.do?type=I";
-		} else if(url === 'findPw'){
-			window.location.href = "/find.do?type=P";
-		} else if(url === 'join'){
-			window.location.href = "/join.do";
-		}
-	}
-
-	let btn = document.getElementById("btn-ajax");
-
-	btn.addEventListener('click',()=> {
-		let inputId = document.getElementById('mId').value;
-		let inputPw = document.getElementById('mPw').value;
-		let chk = document.getElementById('saveId').checked;
-
-		data = {
-			mId: inputId,
-			mPw: inputPw
-		}
-		let xhr = new XMLHttpRequest();
-		xhr.open('POST', '/loginCheck.json', true);
-		xhr.setRequestHeader('Content-type', 'application/json');
-		xhr.send(JSON.stringify(data));
-		xhr.onload = () => {
-			let data = strToObj(xhr);
-			if (xhr.status == 200 && data.resultCd === '1') {
-				if(chk) setCookie('id', inputId, 7);
-				else setCookie('id',0,0);
-				sessionStorage.setItem("id",inputId);
-				location.href = data.resultUrl;
-			} else {
-				$.alertError(data.resultMsg);
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function(){
+			if(getCookie('id')){
+				document.getElementById('mId').value = getCookie('id');
+				document.getElementById('saveId').checked = true;
 			}
-		}
-	})
-</script>
+		});
+
+		const setCookie = function (name, value, expiredDay) {
+			const expired = new Date();
+			expired.setTime(expired.getTime() + expiredDay * 24 * 60 * 60 * 1000);
+			document.cookie = name + '=' + encodeURIComponent(value) + ';expires=' + expired.toUTCString() + ';path=/';
+		};
+
+		const getCookie = function (name) {
+			var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+			return value ? decodeURIComponent(value[2]) : null;
+		};
+
+		let btn = document.getElementById("btn-ajax");
+		btn.addEventListener('click',() => {
+			login();
+		});
+	</script>
 </th:block>
