@@ -20,17 +20,17 @@
         </div>
 
 <script>
-    const eventSource = new EventSource('/api/subscribe?id='+sessionStorage.getItem("id"));
+//     const eventSource = new EventSource('/api/subscribe?id='+sessionStorage.getItem("id"));
 
-    eventSource.onerror = (e) => {
-        console.log(e);
-    };
+//     eventSource.onerror = (e) => {
+//         console.log(e);
+//     };
 
-    eventSource.onmessage = (e) => {
-        let msg = decodeURI(e.data);
-        let message = msg.replaceAll("+"," ");
-        $.alertError(message);
-    };
+//     eventSource.onmessage = (e) => {
+//         let msg = decodeURI(e.data);
+//         let message = msg.replaceAll("+"," ");
+//         $.alertError(message);
+//     };
 </script>
         
     </th:block>

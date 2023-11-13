@@ -19,7 +19,7 @@
                             <div class="m_subject"><span>To: <input type="text" id="lReciver" name="lReciver"></span></div>
                             <div class="m_subject"><span>Title: <input type="text" id="lTitle" name="lTitle"></span></div>
                             <div class="m_editor">
-                                <div class="m_textarea" contenteditable="true" id="lContent" name="lContent"></div>
+                                <div class="m_textarea" contenteditable="true" id="lContent"></div>
                                 <div class="m_editor_tool">
                                     <input type="button" onclick="command('bold');" value="B" id="btn-bold">
                                     <input type="button" onclick="command('italic');" value="I" id="btn-italic" >
@@ -50,10 +50,11 @@
         var inputTitle = document.getElementById("lTitle").value;
         var textareaContent = document.getElementById("lContent").value;
         
+        console.log(textareaContent);
         ajaxData = {
             lReciver : inputReciver,
             lTitle : inputTitle,
-            lContent : textareaContent
+            Content : textareaContent
         };
 
         $.ajax({
