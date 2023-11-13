@@ -16,18 +16,16 @@
         let inputId = document.getElementById('mId').value;
         let inputPw = document.getElementById('mPw').value;
         let chk = document.getElementById('saveId').checked;
-        
-        ajaxData = {
-            mId: inputId,
-            mPw: inputPw
-        };
 
         if(fn_dataChk(formData)){
             $.ajax({
                 type : "POST",
                 contentType : "application/json",
                 url : '/loginCheck.json',
-                data : JSON.stringify(ajaxData),
+                data : JSON.stringify({
+                    mId: inputId,
+                    mPw: inputPw
+                }),
                 dataType : 'json',
                 success : function(rslt){
                     if(rslt.resultCd == 1){
@@ -47,27 +45,23 @@
         }
     }
 
-	//아이디_비밀번호_찾기 => 이메일 보내기
+	//아이디찾기&비밀번호찾기&회원가입 => 이메일 보내기
 	function sendMail(mtype){
 		let email = document.getElementById("mEmail").value;
 
-		ajaxData = {
-			mEmail: email,
-			type: mtype
-		};
-
-		if(email == ''){
+		if(email === ""){
 			$.alertError("이메일을 입력해주세요"); return false;
 		}
-
 		$.ajax({
 			type : "POST",
 			url : "/sendMailAuth.json",
 			dataType:'json',
 			contentType : "application/json",
-			data : JSON.stringify({ajaxData}),
+			data : JSON.stringify({
+                mEmail: email,
+                type: mtype
+            }),
 			success : function(rslt){
-				console.log(rslt);
 				if(rslt.resultCd == 1){
 					$.alertSuccess(rslt.resultMsg);
 				} else {
@@ -82,13 +76,7 @@
 		let email = document.getElementById("mEmail").value;
 		let emailChk = document.getElementById("mEmailChk").value;
 
-		ajaxData = {
-			mEmail : email,
-			inputAuth : emailChk,
-			type : mtype
-		};
-
-		if(emailChk = ''){
+		if(emailChk === ""){
 			$.alertError("인증번호를 입력해주세요"); return false;
 		}
 
@@ -97,15 +85,20 @@
 			url : "/confirmMailAuth.json",
 			dataType:'json',
 			contentType : "application/json",
-			data : JSON.stringify({ajaxData}),
+			data : JSON.stringify({
+                mEmail : email ,
+                inputAuth : emailChk ,
+                type : mtype
+            }),
 			success : function(rslt){
-				console.log(rslt);
 				if(rslt.resultCd == 1){
                     if(mtype == 'I'){
+                        $.alertSuccess(rslt.resultMsg);
                         document.getElementById("form").style.display = 'none';
                         document.getElementById("result_div").style.display = 'block';
                         document.getElementById("result").innerText = rslt.resultData;
                     } else if (mtype == 'P'){
+                        $.alertSuccess(rslt.resultMsg);
                         document.getElementById("form").style.display = 'none';
                         document.getElementById("inputPw").style.display = 'block';
                     }
@@ -121,26 +114,22 @@
         let email = document.getElementById("mEmail").value;
         let pw = document.getElementById("mPw").value;
         let pwChk = document.getElementById("mPwChk").value;
-
-        ajaxData = {
-            mPw : pw,
-            mPwChk : pwChk,
-            mEmail : email
-        };
-        
         if(pw == '' || pwChk == ''){
             $.alertError("비밀번호를 확인해주세요"); return false;
         }
-
         $.ajax({
             type : "POST",
             url : "/pwModify.json",
             dataType:'json',
             contentType : "application/json",
-            data : JSON.stringify({ajaxData}),
+            data : JSON.stringify({
+                mPw : pw,
+                mPwChk : pwChk,
+                mEmail : email
+            }),
             success : function(rslt){
                 if(rslt.resultCd == 1){
-                    $.alertSucces(rslt.resultMsg);
+                    $.alertSuccess(rslt.resultMsg);
                     location.href=rslt.resultUrl;
                 } else {
                     $.alertError(rslt.resultMsg);
@@ -157,12 +146,15 @@ function duplicate(id, idName){
         $.alertError(idName + "을(를) 입력해주세요!! •̀ㅅ•́");
         return false;
     }
-    ajaxData = {type: idName, id: chkVal};
+
     $.ajax({
         type : "POST",
         contentType : "application/json",
         url : '/inputCheck.json',
-        data : JSON.stringify(ajaxData),
+        data : JSON.stringify({
+            type: idName, 
+            id: chkVal
+        }),
         dataType : 'json',
         success : function(rslt){
             if(rslt.resultCd == 1){
@@ -196,60 +188,60 @@ function inputChk(type){
     };
 }
 
-//이메일 보내기
-function sendMail(){
-    let email = $("#mEmail").val();
+// //이메일 보내기
+// function sendMail(){
+//     let email = $("#mEmail").val();
 
-    $.ajax({
-        type : "POST",
-        url : "/sendMailAuth.json",
-        dataType:'json',
-        contentType : "application/json",
-        data : JSON.stringify({
-            mEmail : email,
-            type : 'J'
-        }),
-        success : function(obj){
-            //정상적으로 이메일이 발송되었을때에만, 이메일 인증번호 입력 창 생성
-            if(obj.resultCd == 1){
-                $.alertSuccess(obj.resultMsg);
-                $('#mEmailChk').show();
-                $('#confirmAuthBtn').show();
-            }else {
-                $.alertError(obj.resultMsg);
-            }
-        }
-    });
-}
+//     $.ajax({
+//         type : "POST",
+//         url : "/sendMailAuth.json",
+//         dataType:'json',
+//         contentType : "application/json",
+//         data : JSON.stringify({
+//             mEmail : email,
+//             type : 'J'
+//         }),
+//         success : function(obj){
+//             //정상적으로 이메일이 발송되었을때에만, 이메일 인증번호 입력 창 생성
+//             if(obj.resultCd == 1){
+//                 $.alertSuccess(obj.resultMsg);
+//                 $('#mEmailChk').show();
+//                 $('#confirmAuthBtn').show();
+//             }else {
+//                 $.alertError(obj.resultMsg);
+//             }
+//         }
+//     });
+// }
 
 //이메일 인증번호 확인
-function confirmMail(){
-    let emailChk = $("#mEmailChk").val();
-    let email = $("#mEmail").val();
+// function confirmMail(){
+//     let emailChk = $("#mEmailChk").val();
+//     let email = $("#mEmail").val();
 
-    $.ajax({
-        type : "POST",
-        url : "/confirmMailAuth.json",
-        dataType:'json',
-        contentType : "application/json",
-        data : JSON.stringify({
-            mEmail : email,
-            inputAuth : emailChk,
-            type : 'J'
-        }),
-        success : function(obj){
-            //정상적으로 이메일이 발송되었을때에만, 이메일 인증번호 입력 창 생성
-            if(obj.resultCd == 1){
-                $.alertSuccess(obj.resultMsg);
-                $("#emailChk_info").data("dupl", "Y");
-                $("#emailChk_info").hide();
-                $("#mEmail").prop('readonly', true);
-            }else {
-                $.alertError(obj.resultMsg);
-            }
-        }
-    });
-}
+//     $.ajax({
+//         type : "POST",
+//         url : "/confirmMailAuth.json",
+//         dataType:'json',
+//         contentType : "application/json",
+//         data : JSON.stringify({
+//             mEmail : email,
+//             inputAuth : emailChk,
+//             type : 'J'
+//         }),
+//         success : function(obj){
+//             //정상적으로 이메일이 발송되었을때에만, 이메일 인증번호 입력 창 생성
+//             if(obj.resultCd == 1){
+//                 $.alertSuccess(obj.resultMsg);
+//                 $("#emailChk_info").data("dupl", "Y");
+//                 $("#emailChk_info").hide();
+//                 $("#mEmail").prop('readonly', true);
+//             }else {
+//                 $.alertError(obj.resultMsg);
+//             }
+//         }
+//     });
+// }
 
 //회원가입 절차
 function joinJson(){
@@ -262,23 +254,21 @@ function joinJson(){
         var inputBirth = document.getElementById("mBirth").value;
         var inputBirthYn =  document.querySelector('input[name="mBirthYn"]:checked').value;
         var inputPwChk = document.getElementById("mPwChk").value;
-    
-        ajaxData = {
-            mName : inputName,
-            mId : inputId,
-            mPw : inputPw,
-            mNickname : inputNickname,
-            mEmail : inputEmail,
-            mBirth : inputBirth,
-            mBirthYn : inputBirthYn,
-            mPwChk : inputPwChk
-        };
 
         $.ajax({
             type : 'POST',
             contentType : "application/json",
             url : '/join.json',
-            data : JSON.stringify(ajaxData),
+            data : JSON.stringify({
+                mName : inputName,
+                mId : inputId,
+                mPw : inputPw,
+                mNickname : inputNickname,
+                mEmail : inputEmail,
+                mBirth : inputBirth,
+                mBirthYn : inputBirthYn,
+                mPwChk : inputPwChk
+            }),
             dataType : 'json',
             success : function(rslt){
                 if(rslt.resultCd==='1'){

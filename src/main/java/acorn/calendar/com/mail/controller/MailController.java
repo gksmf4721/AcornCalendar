@@ -35,13 +35,11 @@ public class MailController {
 
         try{
             AcornMap acornMap = JsonUtils.toAcornMap(json);
-
-            if(mailService.selectEmailCheck(acornMap) != 0){
-                ResponseUtils.responseMap(response, "-1", "중복된 이메일입니다.", null);
-                return;
-            }
-
             if(acornMap.getString("type").equals("J")){
+                if(mailService.selectEmailCheck(acornMap) != 0){
+                    ResponseUtils.responseMap(response, "-1", "중복된 이메일입니다.", null);
+                    return;
+                }
                 String join = MailUtils.sendMail(acornMap);
                 session.setAttribute(acornMap.getString("mEmail"),join);
                 session.setMaxInactiveInterval(3*60);
