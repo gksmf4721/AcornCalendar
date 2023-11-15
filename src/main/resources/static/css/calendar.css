@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.calendar_container{height:100%}
+.calendar_container{height:100%; border:1px solid #ddd}
 .fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
 
 .cal_content{display:grid; grid-template-columns: 320px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}

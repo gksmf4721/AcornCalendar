@@ -10,12 +10,15 @@
 /*윈도우창 style*/
 .main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #6F6153;}
 .main_item > .w_title > .w_left > a{float: left; line-height: 25px; margin-left: 7px;font-family: 'DungGeunMo'; color:white}
-.main_item > .w_title > .w_right{float: right; display: flex;align-items: center;justify-content: center; height: 20px;margin-top: 2.5px;}
+.main_item > .w_title > .w_right{float: right; display: flex;align-items: center;justify-content: center; height: 20px;margin-top: 2.5px; width:80px}
 .main_item > .w_title > .w_right > .box{margin-right: 7px;}
 .box > img{width: 20px;}
 .w_wrap{width:100%; height:100%}
 .w_photo{ border: 1px solid black; width:90%; height:65%; margin:2% 5%;}
+.w_info{text-align: center;}
+.w_info > .w_nick{font-size:20px; font-weight: bold;}
 
+/*탭메뉴*/
 .tabmenu_wrap{position: relative;}
 .tabmenu{width: 100%;height: 25px;border-bottom: 1px solid black;}
 .tabmenu::after{display: block; content: " "; clear: both;}
@@ -25,6 +28,19 @@
 .tabmenu > li.on > a{color: #fff8f5;background: #594c47;}
 .tabmenu.right{position: absolute; top: 0; right: 0;}
 
+/*탭 메뉴 안에 테이블*/
+.tableScroll{height:397px; overflow-y:scroll; display:none;}
+.tableScroll.on{display:block;}
+.tableTab{width:100%; table-layout: fixed;}
+.tableTab thead{background:#6F6153; color:#fff}
+.tableTab th , .tableTab td{padding:5px; border:1px solid #000; font-family:'Pretendard-Regular';font-feature-settings: "tnum";font-variant-numeric: tabular-nums;}
+.tableTab td{font-size: 12px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;}
+
+
+.txtl{text-align:left}
+.txtr{text-align: right;}
+.txtc{text-align: center;}
+
 .title_wrap{position:relative; padding-top:10px; padding-left: 10px; background-color:rgba(128, 128, 128, 0.418)}
 .title_left{float: left; height: 30px; font-size: 20px; font-weight: 600;letter-spacing: 5px;}
 .title_right{float: right; height: 30px; padding-right: 10px; letter-spacing: 1px;}
@@ -33,44 +49,21 @@
 
 /* 헤더, 좌측 메뉴 제외 바디 부분 */
 .contents_wrap {position: relative;padding-top: 70px;padding-left: 230px;box-sizing: border-box;height:100%;}
-/* .container {position: relative;min-width: 1330px;height: 100%;} */
 .container_inner{padding:20px}
 .container_inner2{min-height: 600px;}
-
-/* 로그인 한 후 메인 화면 css */
-.dashboard.left{
-    float:left;
-    width: 40%;
-    box-sizing: border-box;
-    padding-right: 15px;
-}
-
 .title_wrap::after{display: block; content: " "; clear:both;}
-/* .title_left{float: left; height: 30px; position: relative; font-size: 16px; line-height: 1.875; font-weight: 700;} */
 .title_left.large{float: left; height: 30px; font-size: 20px; font-weight: 700; position: relative; line-height: 1.5; padding-left: 25px;}
 
 
-/* 대시보드부분 */
-.container_inner.dashboard .tri_left{padding-right: 10px;}
-.container_inner.dashboard .tri_center{padding: 0 10px;}
-.container_inner.dashboard .tri_right{padding-left: 10px;}
-.tri_left > .inner, .tri_center > .inner, .tri_right > .inner{min-height: 223px;/* background-color: #fff; *//* border: 1px solid #bbb; *//* border-radius: 5px; */}
-.container_inner.dashboard .title_wrap{position: relative;padding: 10px 15px;margin-bottom: 0;background-color: #f9f9f9;border: 1px solid #bbb;border-bottom: 0;border-radius: 5px 5px 0 0;}
-.container_inner.dashboard .title_wrap::before{position: absolute;bottom: 0;left: 15px;right: 15px;display: block;content: '';height: 1px;background-color: #ddd;}
-.container_inner.dashboard .title_left{font-size: 18px; line-height: 1.666666666666667;}
-.container_inner.dashboard .title_left.medium::before {content: "";display: block;width: auto;height: 4px;background-color: #41a1cf;color: #000;margin: 0;position: absolute;bottom: -10px;left: 0;right: 0;} 
-.tri_contents{min-height: 182px;background-color: #f9f9f9;padding: 10px 15px;border: 1px solid #bbb;border-top: 0;border-radius: 0 0 5px 5px;}
 
 
 /* 콘텐츠 안에서 내용별로 묶는 단위(또는 division) 관련 */
 .section + .section{margin-top: 20px;}
 .section::after{display: block; content: " "; clear: both;}
-
 /* section 안에서 이중 분할 */
 .section > .left, .section > .right{width: 50%; box-sizing: border-box;}
 .section > .left{float: left; padding-right: 15px;}
 .section > .right{float: right; padding-left: 15px;}
-
 /* section 안에서 삼중 분할 tri는 triple을 의미*/
 .section > .tri_left{float: left; width: 33.33%; box-sizing: border-box; padding-right: 15px;}
 .section > .tri_center{float: left; width: 33.33%; box-sizing: border-box; padding: 0 15px;}

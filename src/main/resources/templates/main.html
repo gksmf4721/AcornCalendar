@@ -1,8 +1,7 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
         <div class="main_content">
-
+            <!--회원 마이페이지-->
             <div class="main_item">
                 <div class="w_title">
                     <div class="w_left"><a href="/mypage.do" target="_self">MYPAGE</a></div>
@@ -15,10 +14,15 @@
                     </div>
                 </div>
                 <div class="w_photo">
-                    <img th:src="@{../img/icon/instagram.png}" style="width:70%; height:100%; margin:0 15%">
+                    <img th:src="@{/img/icon/instagram.png}" style="width:70%; height:100%; margin:0 15%" alt="회원사진">
+                </div>
+                <div class="w_info">
+                    <p class="w_nick">회원 이름</p>
+                    <p>회원 이메일@naver.com</p>
                 </div>
             </div>
 
+            <!--회원 알림과 메일-->
             <div class="main_item">
                 <div class="w_title">
                     <div class="w_right">
@@ -30,10 +34,136 @@
                     </div>
                 </div>
                 <ul class="tabmenu left">
-                    <li class="tabl on" id="alarm"><a href="#alarm" onclick="tab('alarm')">ALARM</a></li>
-                    <li class="tabl" id="message"><a href="#message"onclick="tab('message')">MESSAGE</a></li>
+                    <li class="tabl on" id="alarm"><a href="javascript:;" onclick="tab('alarm')">ALARM</a></li>
+                    <li class="tabl" id="message"><a href="javascript:;"onclick="tab('message')">MESSAGE</a></li>
                 </ul>
+                <div class="tableScroll on" id="alarmTable">
+                    <table class="tableTab">
+                        <colgroup>
+                            <col style="width:75%">
+                            <col style="width:25%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>내용</th>
+                                <th>시간</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grid1">
+                            <tr>
+                                <td class="txtl">알림이에요</td>
+                                <td class="txtl">11-13 13:40</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 할일이에요가나다라마바사아자차카타파하아야어여요오요우우ㅡ유이이</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tableScroll" id="messageTable">
+                    <table class="tableTab" >
+                        <colgroup>
+                            <col style="width:76%">
+                            <col style="width:24%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>내용</th>
+                                <th>시간</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grid1">
+                            <tr>
+                                <td class="txtl">메시지가 왔습니다</td>
+                                <td class="txtl">11-13 00:40</td>
+                            </tr>
+                            <tr>
+                                <td class="txtl">내일 메시지에여</td>
+                                <td class="txtl">88-88 88:88</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+            <!--회원 캘린더-->
             <div class="main_item">
                 <div class="w_title">
                     <div class="w_left"><a href="/calendarList.do" target="_self">CALENDAR</a></div>
@@ -53,14 +183,12 @@
         </div>
         
     <script>
-        function tab(id){
-            $(".tabl").removeClass('on')
-            $("#"+id).addClass('on');
-        }
+    function tab(idVal){
+        $(".tabl").removeClass('on');
+        $("#"+idVal).addClass('on');
+        $(".tableScroll").removeClass('on');
+        $("#"+idVal + "Table").addClass('on');
+    }
         
-
     </script>
-
     </th:block>
-</body>
-</html>

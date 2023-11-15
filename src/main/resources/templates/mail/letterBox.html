@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/letter_layout">
     <th:block layout:fragment="letterContent">
         <div class="m_inner_content">
-            <div class="m_container_title">전체메일함</div>
+            <div class="m_container_title" id="container_title"></div>
             <div class="m_inner_content2">
                 <div class="section">
                     <div class="m_menubox">
@@ -70,6 +70,33 @@
 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        const search = window.location.search;  //'?' 뒤의 쿼리 스트링 가져오기
+        var index = search.lastIndexOf("=") + 1;
+        var type = search.substr(index);
+        titleChange(type);
+    });
+
+    //
+    function titleChange(type){
+        var title = "";
+        switch(type){
+            case 'all' : 
+                title = "전체메일함"
+                break;
+            case 'receive' : 
+                title = "받은메일함"
+                break;    
+            case 'send' : 
+                title = "보낸메일함"
+                break;
+            case 'trash' : 
+                title = "휴지통"
+                break;
+        }
+        document.getElementById('container_title').innerText = title;
+    }
+
     //전체 체크박스 버튼 체크 여부: 전체 체크박스 해제 또는 체크
     function ChkAll(){
         const chkBoxAll = document.getElementById('chk_all');   //전체 체크박스 버튼 요소
@@ -158,5 +185,4 @@
         }
     }
 </script>
-
-    </th:block>
+</th:block>
