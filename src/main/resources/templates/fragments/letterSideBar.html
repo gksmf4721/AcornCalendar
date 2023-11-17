@@ -8,23 +8,23 @@
         <div class="m_sidebar">
             <div class="m_side_header">
                 <div class="m_btn_header">
-                    <a href="#" onclick="goToHref('write')" class="m_btn"><span class="m_span">메일쓰기</span></a>
-                    <a href="#" onclick="goToHref('#')" class="m_btn"><span class="m_span">내게쓰기</span></a>
+                    <a href="/letterWrite.do" class="m_btn"><span class="m_span">메일쓰기</span></a>
+                    <a href="#" class="m_btn"><span class="m_span">내게쓰기</span></a>
                 </div>
                 <div class="m_filter_header">
-                    <a href="#" class="item" onclick="goToHref('#')">
+                    <a href="#" class="item">
                         <div class="item_div">1</div>
                         <div class="text">안읽음</div>
                     </a>
-                    <a href="#" class="item" onclick="goToHref('#')">
+                    <a href="#" class="item">
                         <div class="item_div"><img th:src="@{../img/icon/Star.png}"></div>
                         <div class="text">중요</div>
                     </a>
-                    <a href="#" class="item" onclick="goToHref('#')">
+                    <a href="#" class="item">
                         <div class="item_div"><img th:src="@{../img/icon/Link.png}"></div>
                         <div class="text">첨부</div>
                     </a>
-                    <a href="#" class="item" onclick="goToHref('#')">
+                    <a href="#" class="item">
                         <div class="item_div"><img th:src="@{../img/icon/Send.png}"></div>
                         <div class="text">TO</div>
                     </a>
@@ -32,25 +32,12 @@
             </div>
             <div>
                 <div class="m_side_menu">
-                    <a href="#" class="side_item" onclick="goToHrefAjax('all')"><img th:src="@{../img/icon/Mail.png}" class="side_img"><span>전체메일함</span></a>
-                    <a href="#" class="side_item" onclick="goToHrefAjax('receive')"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
-                    <a href="#" class="side_item" onclick="goToHrefAjax('send')"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
-                    <a href="#" class="side_item" onclick="goToHrefAjax('trash')"><img th:src="@{../img/icon/Mail_Delete.png}"><span>휴지통</span></a>
+                    <a href="/letterBox.do?type=all" class="side_item"><img th:src="@{../img/icon/Mail.png}" class="side_img"><span>전체메일함</span></a>
+                    <a href="/letterBox.do?type=receive" class="side_item"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
+                    <a href="/letterBox.do?type=send" class="side_item"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
+                    <a href="/letterBox.do?type=trash" class="side_item"><img th:src="@{../img/icon/Mail_Delete.png}"><span>휴지통</span></a>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        function goToHref(value){
-            if(value == 'write'){
-                window.location.href="/letterWrite.do"
-            } else if(value == 'trash'){
-                window.location.href="/letterTrahBox.do"
-            } 
-        }
-
-        function goToHrefAjax(TYPE){
-            window.location.href="/letterBox.do?type="+TYPE;
-        }
-        </script>        
+    </div>    
 </th:block>

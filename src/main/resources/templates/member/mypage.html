@@ -1,26 +1,42 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="layout/main_layout">
     <th:block layout:fragment="mainContent">
-        <div style="padding: 0px 230px">
-                <!--인풋부분-->
-                <div>
-                    개인정보수정
-                    <div><input type="text" placeholder="이름" style="width:500px"></div>
-                    <div><input type="text" placeholder="ID" style="width:500px"></div>
-                    <div><input type="text" placeholder="닉네임" style="width:500px"></div>
-                    <div><input type="password" placeholder="비밀번호" style="width:500px"></div>
-                    <div><input type="password" placeholder="비밀번호확인" style="width:500px"></div>
-                    <div><input type="text" placeholder="이메일" style="width:500px"></div>
-                    <div><input type="text" placeholder="인증번호" style="width:500px"></div>
-                    <div><input type="date" placeholder="생년월일" style="width:500px"></div>
+        <div class="mypage_container">
+        <div class="main_item mypage">
+            <div class="w_title">
+                <div class="w_left"><a href="/mypage.do" target="_self">MYPAGE</a></div>
+                <div class="w_right">
+                    <div class="box">
+                        <img th:src="@{../img/attach/min.png}">
+                        <img th:src="@{../img/attach/max.png}">
+                        <img th:src="@{../img/attach/close.png}">
+                    </div>
                 </div>
-                <div>
-                    내 정보
-                    <div><img th:src="@{/img/icon/Account_Circle.png}" alt="유저사진"></div>
-                    <a>탈퇴하기</a>
+            </div>
+            <div class="mypage_content">
+                <div class="item" style="width:70%">
+                    <input type="text" placeholder="이름">
+                    <input type="text" class="chk" placeholder="닉네임"><button type="button">중복</button>
+                    <input type="text" class="chk" placeholder="이메일"><button type="button">인증번호 전송</button>
+                    <input type="text" class="chk" placeholder="인증번호"><button type="button">인증번호 확인</button>
+                    <input type="date" placeholder="생년월일">
+                    <p class="birth_title">생일공개여부</p>
+                    <input type="radio" id="mBirthYn1" value="Y">
+                    <label for="Y">공개</label>
+                    <input type="radio" id="mBirthYn2" value="N">
+                    <label for="N">비공개</label>
                 </div>
-
+                <div class="item" style="width:30%">
+                    <div><img src="" alt="프로필사진"></div>
+                    <div>
+                        <p>아이디</p>
+                        <p>기분표시..?</p>
+                    </div>
+                    <a href="#">비밀번호변경팝업</a>
+                    <a href="#">탈퇴하기</a>
+                </div>
+            </div?>
         </div>
+    </div>
+        
     </th:block>
-</body>
 </html>

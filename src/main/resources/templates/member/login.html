@@ -57,5 +57,13 @@
 		btn.addEventListener('click',() => {
 			login();
 		});
+
+		//로그인 폼 안의 input을 Enter 누르면 로그인 되도록
+		const login_form = document.getElementById('formData')
+		login_form.addEventListener("keypress", (e) => {
+			if(e.keyCode === 13){
+				login();
+			}
+		})
 	</script>
 </th:block>

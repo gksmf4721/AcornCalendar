@@ -1,22 +1,21 @@
 <!-- 화면 header 영역 -->
-<html xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="mainSideBarFragment">
-        <div class="sidebar">
-            <nav>
-                    <div class="nav_container">
-                        <ul class="nav_item">
-							<li><div class="item img_white"></div><div class="menu_name"></div></li>
-							<li onclick="goToHref('1')"><div class ="item img_white"></div><div class="menu_name">메일</div></li>
-							<li onclick="goToHref('2')"><div class="item img_white"></div><div class="menu_name">캘린더</div></li>
-							<li onclick="goToHref('3')"><div class="item img_white"></div><div class="menu_name">하트</div></li>
-							<li onclick="goToHref('4')"><div class="item img_white"></div><div class="menu_name">마이페이지</div></li>
-							<li onclick="goToHref('5')"><div class="item img_white"></div><div class="menu_name">설정</div></li>
-                        </ul>
-                    </div>
-            </nav>
-        </div>
-	<script>
-	function goToHref(value){
+<th:block th:fragment="mainSideBarFragment">
+	<div class="sidebar">
+		<nav>
+			<div class="nav_container">
+				<ul class="nav_item">
+					<li><div class="item img_white"></div><div class="menu_name"></div></li>
+					<li onclick="mainS_url('1')"><div class ="item img_white"></div><div class="menu_name">메일</div></li>
+					<li onclick="mainS_url('2')"><div class="item img_white"></div><div class="menu_name">캘린더</div></li>
+					<li onclick="mainS_url('3')"><div class="item img_white"></div><div class="menu_name">하트</div></li>
+					<li onclick="mainS_url('4')"><div class="item img_white"></div><div class="menu_name">마이페이지</div></li>
+					<li onclick="mainS_url('5')"><div class="item img_white"></div><div class="menu_name">설정</div></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+<script>
+	function mainS_url(value){
 		if(value == '1'){
 			location.href="/letterBox.do?type=all"
 		} else if(value == '2'){
@@ -24,11 +23,10 @@
 		} else if(value == '3'){
 			location.href="#"
 		} else if(value == '4'){
-			location.href="#"
+			location.href="/mypage.do"
 		} else if(value == '5'){
 			location.href="#"
 		}
 	}
-	</script>
+</script>
 </th:block>
-</html>

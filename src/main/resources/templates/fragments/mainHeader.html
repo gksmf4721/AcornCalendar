@@ -1,24 +1,18 @@
 <!-- 화면 header 영역 -->
-<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-<html xmlns:th="http://www.thymeleaf.org">
-    <th:block th:fragment="mainHeaderFragment">
-
-        <div class="header">
-            <div class="header_logo">
-                <a href="/main.do">
-                    <img th:src="@{/img/icon/logo.png}" alt="캘린더이미지" class="header_logo_png">
-                </a>
-            </div>
-            <div class="header_title">
-                <span class="header_title_item"></span>
-            </div>
-            <ul class="header_list">
-                <li><a href="#" class="user_alarm"><img th:src="@{/img/icon/Notifications.png}" alt="알림" class="header_symbol"></a></li>
-                <li><a href="/mypage.do" class="user_photo"><img th:src="@{/img/icon/Account_Circle.png}" alt="유저사진" class="header_symbol"></a></li>
-                <li><a href="/logout.do" class="user_logout"><img th:src="@{/img/icon/Logout.png}" alt="로그아웃" class="header_symbol"></a></li>
-            </ul>
+<th:block th:fragment="mainHeaderFragment">
+    <div class="header">
+        <div class="header_logo">
+            <a href="/"><img th:src="@{/img/icon/logo.png}" alt="캘린더이미지" class="header_logo_png"></a>
         </div>
-
+        <div class="header_title">
+            <span class="header_title_item"></span>
+        </div>
+        <ul class="header_list">
+            <li><a href="#" class="user_alarm"><img th:src="@{/img/icon/Notifications.png}" alt="알림" class="header_symbol"></a></li>
+            <li><a href="/mypage.do" class="user_photo"><img th:src="@{/img/icon/Account_Circle.png}" alt="유저사진" class="header_symbol"></a></li>
+            <li><a href="/logout.do" class="user_logout"><img th:src="@{/img/icon/Logout.png}" alt="로그아웃" class="header_symbol"></a></li>
+        </ul>
+    </div>
 <script>
 //     const eventSource = new EventSource('/api/subscribe?id='+sessionStorage.getItem("id"));
 
@@ -32,6 +26,4 @@
 //         $.alertError(message);
 //     };
 </script>
-        
-    </th:block>
-</html>
+</th:block>
