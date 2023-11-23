@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <th:block th:replace="fragments/loginConfig :: loginConfigFragment"></th:block>
+    <th:block th:replace="fragments/config/loginConfig :: loginConfigFragment"></th:block>
     
     <body class="login_in_body">
 		<div class="login_wrap">
 			<div class="login_in_header">
-				<th:block th:replace="fragments/loginHeader :: loginHeaderFragment"></th:block>
+				<th:block th:replace="fragments/header/loginHeader :: loginHeaderFragment"></th:block>
 			</div>
 				<th:block layout:fragment="loginContent"></th:block>
 		</div>
 		<div class="login_in_footer">
-			<th:block th:replace="fragments/footer :: footerFragment"></th:block>
+			<th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 		</div>
     </body>
 </html>

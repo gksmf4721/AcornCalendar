@@ -11,22 +11,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 
 import acorn.calendar.config.model.LoginSession;
-@Slf4j
-public class AuthenticInterceptor extends WebContentInterceptor{
-	
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws ServletException{
-		LoginSession loginSession = LoginSession.getLoginSession();
-		log.info("Auth Interceptor : "+loginSession);
 
-		if(loginSession!=null){
+@Slf4j
+public class AuthenticInterceptor extends WebContentInterceptor {
+
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws ServletException {
+		LoginSession loginSession = LoginSession.getLoginSession();
+		log.info("Auth Interceptor : " + loginSession);
+
+		if (loginSession != null) {
 			MemberService service = (MemberService) ContextUtils.getBean("memberService");
 			AcornMap param = new AcornMap();
-			param.put("mId",loginSession.getM_id());
-			try{
+			param.put("mId", loginSession.getM_id());
+			try {
 				AcornMap member = service.selectLogin(param);
 				LoginSession.setLoginSession(member);
-			}catch(Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}

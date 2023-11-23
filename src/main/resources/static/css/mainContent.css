@@ -1,8 +1,9 @@
 @charset "UTF-8";
 /* 메인 레이아웃에 적용 */
+.main_layout{background-color: #c9bbb5;}
 .container_wrap{position: relative; box-sizing: border-box; padding: 80px 20px 0px 70px;}
 .main_content{display:grid; grid-template-columns: 380px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; }
-.main_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
+.main_item{box-shadow: 5px 5px 0 black; border: 1px solid black; background-color: #fff;}
 .main_item:nth-child(1){width:350px; height:300px;}
 .main_item:nth-child(2){width: 350px;min-height: 400px;}
 .main_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
@@ -16,7 +17,7 @@
 .mypage_content input.chk{width: 80%;height: 40px;margin-top: 10px;}
 
 /*윈도우창 style*/
-.main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #6F6153;}
+.main_item > .w_title{border-bottom: 1px solid black; width:100%; height:25px; background: #373029;}
 .main_item > .w_title > .w_left > a{float: left; line-height: 25px; margin-left: 7px;font-family: 'DungGeunMo'; color:white}
 .main_item > .w_title > .w_right{float: right; display: flex;align-items: center;justify-content: center; height: 20px;margin-top: 2.5px; width:80px}
 .main_item > .w_title > .w_right > .box{margin-right: 7px;}

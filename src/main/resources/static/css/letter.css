@@ -63,7 +63,7 @@
 .m_subject > span {font-family: 'DungGeunMo'; color:#929294;}
 .m_subject > span > input[type="text"]{width:90%; outline:none; border:none;font-family: 'DungGeunMo';}
 .m_editor{margin-top:25px;}
-.m_textarea{border: 1px solid #929294;height:230px; padding:10px; border-bottom: none; outline:none;overflow-x: auto;}
+.m_textarea{border: 1px solid #929294;height:230px; padding:10px; border-bottom: none; outline:none;overflow-x: auto; resize: none;}
 .m_editor_tool{height:40px; background:#75353575; display:flex; align-items: center;}
 .m_editor_tool > input[type='button']{margin-left:10px; margin-right:10px}
 .m_editor_tool > #btn-bold{font-weight: bold;}
