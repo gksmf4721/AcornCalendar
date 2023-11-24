@@ -19,14 +19,14 @@
                             <div class="m_subject"><span>To: <input type="text" id="lReciver" name="lReciver" placeholder="닉네임"></span></div>
                             <div class="m_subject"><span>Title: <input type="text" id="lTitle" name="lTitle"></span></div>
                             <div class="m_editor">
-                                <textarea class="m_textarea" contenteditable="true" id="lContent"></textarea>
                                 <div class="m_editor_tool">
-                                    <input type="button" onclick="command('bold');" value="B" id="btn-bold">
-                                    <input type="button" onclick="command('italic');" value="I" id="btn-italic" >
-                                    <input type="button" onclick="command('underline');" value="U" id="btn-underline">
-                                    <input type="button" onclick="command('strikeThrough');" value="S" id="btn-strike">
+                                    <input type="button" class="" onclick="command('bold');" value="B" id="btn-bold">
+                                    <input type="button" class="" onclick="command('italic');" value="I" id="btn-italic" >
+                                    <input type="button" class="" onclick="command('underline');" value="U" id="btn-underline">
+                                    <input type="button" class="" onclick="command('strikeThrough');" value="S" id="btn-strike">
                                     <input type="button" id="btn-ajax" value="메일전송">
                                 </div>
+                                <textarea class="m_textarea" contenteditable="true" id="lContent"></textarea>
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,7 @@
 
     function command(type){
         document.execCommand(type);
+        
         focusEditor();
     }
 

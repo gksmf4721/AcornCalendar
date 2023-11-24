@@ -11,12 +11,12 @@
                         </label> -->
                         <input type="button" onclick="delLett();" value="삭제">
                     </div>
-                    <table class="table_m">
+                    <table class="table_m" style="width:90%">
                         <colgroup>
-                            <col style="width: 10%">
+                            <col style="width: 3%">
                             <col style="width: 15%">
                             <col style="width: 15%">
-                            <col style="width: 30%">
+                            <col style="width: 37%">
                             <col style="width: 15%">
                             <col style="width: 15%">
                         </colgroup>
@@ -47,6 +47,11 @@
                                     <td class="txtc"><span id="lett_L_TITLE" class="mail_sender" th:text="${item.L_TITLE}"></td>
                                     <td class="txtc"><span id="lett_L_SENDT" class="mail_sender" th:text="${item.L_SENDT}"></td>
                                     <td class="txtc"><span id="lett_M_NICKNAME" class="mail_sender" th:text="${item.M_NICKNAME}"></td>
+                                </tr>
+                            </tbody>
+                            <tbody th:unless="${letterList.size() != 0}">
+                                <tr>
+                                    <td colspan="6" class="txtc">내용이 없습니다</td>
                                 </tr>
                             </tbody>
                     </table>
