@@ -27,6 +27,7 @@
 .side_img{width: 24px !important; margin-left: 21px !important; margin-right: 3px;} 
 
 .m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; height:24px;padding:10px;position: fixed;top: 60px;left: 230px;right:0;z-index: 2; background-color: #fff;}
+.m_inner_content{min-height: 960px;}
 .m_inner_content2{padding-top:50px; padding-left:20px;}
 .m_menubox{display: flex; align-items: center; height:30px; border: 1px solid; margin-bottom: 10px;}
 
@@ -39,12 +40,7 @@
 
 /*테이블 스타일*/
 .table_m{border-top: 2px solid #03243a;}
-.table_m td, .table_m th {
-    padding: 5px;
-    font-size: 13px;
-    line-height: 1.846153;
-    border: 1px solid #b1aeae;
-}
+.table_m td, .table_m th { padding: 5px; font-size: 13px; line-height: 1.846153; border: 1px solid #b1aeae;}
 
 .txtl{text-align:left}
 .txtr{text-align: right;}
@@ -65,27 +61,15 @@
 .m_editor{margin-top:25px;}
 .m_textarea{border: 1px solid #929294;height:340px; padding:10px; outline:none;overflow-x: auto; resize: none; border-top:none}
 .m_editor_tool{height:40px; display:flex; align-items: center;border: 1px solid black;}
-.m_editor_tool > input[type='button']{margin-left:3px; margin-right:3px; background-color: transparent; color:#000; border: none; cursor: pointer;}
-.m_editor_tool > input[type='button']:active{color:#fff}
+.m_editor_tool > input[type='button']{margin-left:3px; margin-right:3px; background-color: transparent; color:#000; border:transparent; cursor: pointer;}
+.m_editor_tool > input[type='button']:hover{outline:2px solid #e6e6ea;} /*마우스 올렸을때*/
+.m_editor_tool > input[type='button'].active{color:red}
 .m_editor_tool > #btn-bold{font-weight: bold; }
 .m_editor_tool > #btn-italic{font-style: italic;}
 .m_editor_tool > #btn-underline{text-decoration-line: underline;}
-.m_editor_tool > #btn-strike{text-decoration: line-through;}
+.m_editor_tool > #btn-strikeThrough{text-decoration: line-through;}
+.m_editor_tool > #btn-ajax{outline: 2px solid #e6e6ea;}
 
 
-.m_textarea::-webkit-scrollbar{
-    width: 20px;
-    border: 1px solid #00000030;
-}
-.m_textarea::-webkit-scrollbar-thumb {
-    background: #c9bbb5;/* 스크롤바의 색상 */
-    border: 1px solid #00000030;
-}
 
-.m_textarea::-webkit-scrollbar-track {
-    background: rgb(201 187 181 / 10%); /*스크롤바 뒷 배경 색상*/
-}
-.m_textarea::-webkit-scrollbar-button{
-    border: 1px solid #00000030;
-    height:20px;
-}
+

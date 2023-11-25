@@ -1,6 +1,5 @@
 @charset "UTF-8";
 /* 메인 레이아웃에 적용 */
-.main_layout{background-color: #c9bbb5;}
 .container_wrap{position: relative; box-sizing: border-box; padding: 80px 20px 0px 70px;}
 .main_content{display:grid; grid-template-columns: 380px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; }
 .main_item{box-shadow: 5px 5px 0 black; border: 1px solid black; background-color: #fff;}

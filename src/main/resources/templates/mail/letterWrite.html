@@ -23,7 +23,7 @@
                                     <input type="button" class="" onclick="command('bold');" value="B" id="btn-bold">
                                     <input type="button" class="" onclick="command('italic');" value="I" id="btn-italic" >
                                     <input type="button" class="" onclick="command('underline');" value="U" id="btn-underline">
-                                    <input type="button" class="" onclick="command('strikeThrough');" value="S" id="btn-strike">
+                                    <input type="button" class="" onclick="command('strikeThrough');" value="S" id="btn-strikeThrough">
                                     <input type="button" id="btn-ajax" value="메일전송">
                                 </div>
                                 <textarea class="m_textarea" contenteditable="true" id="lContent"></textarea>
@@ -75,7 +75,14 @@
 
     function command(type){
         document.execCommand(type);
-        
+		
+        let classList = document.getElementById('btn-' + type).classList;
+        //active 클래스가 없는 경우
+        if(classList.length == 0){
+        	classList.add('active')
+        }else{
+        	classList.remove('active');
+        }
         focusEditor();
     }
 
