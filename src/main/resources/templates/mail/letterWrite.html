@@ -16,7 +16,7 @@
                             </div>
                         </div>
                         <div class="m_content">
-                            <div class="m_subject"><span>To: <input type="text" id="lReciver" name="lReciver" placeholder="닉네임"></span></div>
+                            <div class="m_subject"><span>To: <input type="text" id="lReciver" name="lReciver" placeholder="닉네임" th:value="${type}"></span></div>
                             <div class="m_subject"><span>Title: <input type="text" id="lTitle" name="lTitle"></span></div>
                             <div class="m_editor">
                                 <div class="m_editor_tool">
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-    <script>
+    <script th:inline="javascript">
     const btn = document.getElementById("btn-ajax");
     const editor = document.getElementById("lContent");
 
@@ -42,6 +42,11 @@
         btn.addEventListener('click', function(){
             letterWriteJson();
         });
+
+        let type = [[${type}]];
+        if(type == "toMe"){
+            document.getElementById("lReciver").readOnly = true;
+        }
     }
 
     function letterWriteJson(){

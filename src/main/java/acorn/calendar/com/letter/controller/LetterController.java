@@ -94,7 +94,8 @@ public class LetterController {
 //	}
 
 	@RequestMapping("/letterWrite.do")
-	public String letterWrite() throws Exception {
+	public String letterWrite(Model model, @RequestParam(name="type",defaultValue="") String type) throws Exception {
+		model.addAttribute("type", type);
 		return "mail/letterWrite";
 	}
 
