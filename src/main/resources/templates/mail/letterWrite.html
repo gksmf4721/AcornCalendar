@@ -26,7 +26,8 @@
                                     <input type="button" class="" onclick="command('strikeThrough');" value="S" id="btn-strikeThrough">
                                     <input type="button" id="btn-ajax" value="메일전송">
                                 </div>
-                                <textarea class="m_textarea" contenteditable="true" id="lContent"></textarea>
+<!--                                 <textarea class="m_textarea" contenteditable="true" id="lContent"></textarea> -->
+                                <div class="m_textarea" contenteditable="true" id="lContent"></div>
                             </div>
                         </div>
                     </div>
@@ -46,7 +47,9 @@
     function letterWriteJson(){
         var inputReciver = document.getElementById("lReciver").value;
         var inputTitle = document.getElementById("lTitle").value;
-        var textareaContent = document.getElementById("lContent").value;
+        var textareaContent = document.getElementById("lContent").innerHTML;
+        
+        console.log(textareaContent);
 
         ajaxData = {
             lReciver : inputReciver,
