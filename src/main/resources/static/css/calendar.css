@@ -2,9 +2,17 @@
 
 /* .calendar_container{height:100%; border:1px solid #ddd} */
 .fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
+.main_item > .w_title.cal{background: #ddd;}
+.main_item > .w_title > .w_left > a.cal {color:#373029;}
+/* .c_content{display:grid; grid-template-columns: 320px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}
+.c_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
+.c_item:nth-child(1){width:290px; height:300px;}
+.c_item:nth-child(2){width: 290px;min-height: 400px;}
+.c_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
 
-.cal_content{display:grid; grid-template-columns: 320px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}
-.cal_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
-.cal_item:nth-child(1){width:290px; height:300px;}
-.cal_item:nth-child(2){width: 290px;min-height: 400px;}
-.cal_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
+.c_title_wrap{position:relative; text-align: left;}
+.c_title_wrap > .center{display:inline-block;}
+.c_title_wrap > .right{float:right}
+.c_title_wrap > .center, .c_title_wrap > .right{ box-sizing: border-box;}
+.c_title_wrap > .add{cursor: pointer;}
+.c_title_wrap > .add:hover{background-color: rgb(221, 221, 221);} */

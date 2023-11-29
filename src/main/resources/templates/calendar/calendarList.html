@@ -1,85 +1,80 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
     <th:block layout:fragment="mainContent">
-        <div class="cal_content">
-            <div class="cal_item">
-                <div class="title_wrap">
-                    <div class="title_center">내정보</div>
+        <div class="main_content">
+            <div class="main_item">
+				<div class="w_title cal">
+                    <div class="w_left"><a href="/mypage.do" class="cal">내정보</a></div>
+                    <div class="w_right">
+                        <div class="box"><img th:src="@{../img/attach/min.png}"><img th:src="@{../img/attach/max.png}"><img th:src="@{../img/attach/close.png}"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="cal_item">
-                <div class="title_wrap">
-                    <div class="title_center">그룹웨어</div>
+			<div class="main_item">
+				<div class="w_title cal">
+                    <div class="w_left"><a href="#" class="cal">그룹웨어</a></div>
+                    <div class="w_right">
+                        <div class="box"><img th:src="@{../img/attach/min.png}"><img th:src="@{../img/attach/max.png}"><img th:src="@{../img/attach/close.png}"></div>
+                    </div>
                 </div>
-                    <div>입사일자</div>
+				<div class="w_info">
+					<div>입사일자</div>
                     <div>-</div>
                     <div>남은 휴가 개수</div>
                     <div>-</div>
                     <div>사용한 휴가 개수</div>
                     <div>-</div>
+				</div>
             </div>
 
-            <div class="cal_item">
-                <div class="title_wrap">
-                    <div class="title_center">캘린더</div>
-                    <div class="title_right" id="calAdd">PLUS</div>
+			<div class="main_item">
+				<div class="w_title cal">
+                    <div class="w_left"><a href="#" class="cal">캘린더</a></div>
+                    <div class="w_right">
+						<div class="box"><img th:src="@{../img/attach/min.png}"><img th:src="@{../img/attach/max.png}"><img th:src="@{../img/attach/close.png}"></div>
+					</div>
                 </div>
-                <div class="calendar_container">
+				<div class="cendar_container">
                     <div id="calendar"></div>
                 </div>
             </div>
         </div>
         
         <!-- 모달창 팝업 -->
-        <button id="modalOpenButton">모달창</button>
         <div id="modalContainer" class="hidden">
-		  <div id="modalContent">
-		    <p>모달 창 입니다.</p>
-		    <button id="modalCloseButton">닫기</button>
-		  </div>
-		</div>
-        
-        <div id="calAddContainer" class="hidden">
-        	<div id="calAddContent">
-        		<input type="text" id="title" placeholder="타이틀">
-        		시작일<input type="date" id="start-date">
-        		종료일<input type="date" id="end-date">
-        		<input type="button" value="저장" id="calAddBtn">
-        	</div>
+		<!-- <div id="modalContainer" class="">  -->
+			<!-- 개발후 삭제 -->
+			<div id="modalContent">
+				<div class="m_wrap">
+					<span>제목</span>
+					<input type="text" id="title" placeholder="타이틀">
+				</div>
+				<div class="m_wrap">
+					<span>내용</span>
+					<input type="text" id="title" placeholder="타이틀">
+				</div>
+				<div class="m_wrap">
+					<span>일시</span>
+					<input type="date" id="title" placeholder="타이틀">
+					<input type="date" id="title" placeholder="타이틀">
+					<input type="checkbox" id="title" placeholder="타이틀">
+				</div>
+				<div class="m_wrap">
+					<span>카테고리</span>
+					<select>
+						<option>휴가</option>
+						<option>A</option>
+						<option>B</option>
+						<option>C</option>
+						<option>D</option>
+					</select>
+				</div>
+				<input type="button" value="저장" id="cAddBtn" onclick="save();">
+				<button id="modalCloseButton" onclick="toggleModal();">닫기</button>
+			</div>
         </div>
-        
-        
 	<script>
-	const modalOpenButton = document.getElementById('modalOpenButton');
-	const modalCloseButton = document.getElementById('modalCloseButton');
-	const modal = document.getElementById('modalContainer');
-
-	modalOpenButton.addEventListener('click', () => {
-	  modal.classList.remove('hidden');
-	});
-
-	modalCloseButton.addEventListener('click', () => {
-	  modal.classList.add('hidden');
-	});
-	
-	
-	//캘린더 추가 이벤트
-	const calendarAddBtn = document.getElementById("calAddBtn");
-	calendarAddBtn.addEventListener('click', () => {
-		var calendarEl = document.getElementById('calendar'); 
-		var calendar = new FullCalendar.Calendar(calendarEl, {
-			  events: [
-			    { // this object will be "parsed" into an Event Object
-			      title: 'The Title', // a property!
-			      start: '2023-11-6', // a property!
-			      end: '2023-11-8' // a property! ** see important note below about 'end' **
-			    }
-			  ]
-			});
-		calendar.render();
-	});
-	
+		
 	</script>        
 </th:block>
 
