@@ -39,40 +39,41 @@
                 </div>
             </div>
         </div>
-        
-        <!-- 모달창 팝업 -->
-        <div id="modalContainer" class="hidden">
-		<!-- <div id="modalContainer" class="">  -->
-			<!-- 개발후 삭제 -->
-			<div id="modalContent">
-				<div class="m_wrap">
-					<span>제목</span>
-					<input type="text" id="title" placeholder="타이틀">
+
+		<aside>
+			<!-- 모달창 팝업 -->
+			<div id="modalContainer">
+				<!-- 개발후 삭제 -->
+				<div id="modalContent">
+					<div class="m_wrap">
+						<span>제목</span>
+						<input type="text" id="title" placeholder="타이틀">
+					</div>
+					<div class="m_wrap">
+						<span>내용</span>
+						<input type="text" id="title" placeholder="타이틀">
+					</div>
+					<div class="m_wrap">
+						<span>일시</span>
+						<input type="date" id="title" placeholder="타이틀">
+						<input type="date" id="title" placeholder="타이틀">
+						<input type="checkbox" id="title" placeholder="타이틀">
+					</div>
+					<div class="m_wrap">
+						<span>카테고리</span>
+						<select>
+							<option>휴가</option>
+							<option>A</option>
+							<option>B</option>
+							<option>C</option>
+							<option>D</option>
+						</select>
+					</div>
+					<input type="button" value="저장" id="cAddBtn" onclick="save();">
+					<button id="modalCloseButton" onclick="modalClose();">닫기</button>
 				</div>
-				<div class="m_wrap">
-					<span>내용</span>
-					<input type="text" id="title" placeholder="타이틀">
-				</div>
-				<div class="m_wrap">
-					<span>일시</span>
-					<input type="date" id="title" placeholder="타이틀">
-					<input type="date" id="title" placeholder="타이틀">
-					<input type="checkbox" id="title" placeholder="타이틀">
-				</div>
-				<div class="m_wrap">
-					<span>카테고리</span>
-					<select>
-						<option>휴가</option>
-						<option>A</option>
-						<option>B</option>
-						<option>C</option>
-						<option>D</option>
-					</select>
-				</div>
-				<input type="button" value="저장" id="cAddBtn" onclick="save();">
-				<button id="modalCloseButton" onclick="toggleModal();">닫기</button>
 			</div>
-        </div>
+		</aside>
 	<script>
 		
 	</script>        

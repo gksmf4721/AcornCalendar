@@ -26,39 +26,35 @@ const calendarOption = {
     //날짜 클릭 시, 이벤트 추가 
     dateClick : function(){
         //모달 열기
-        toggleModal();
+        modalOpen();
     }
 }
 
 
+//모달오픈 : 날짜 클릭시 열기
+//바디 가지고와서, 바디에다가 modalAct 클래스 추가
+//modalAct 클래스 추가 시, modal 창 활성화되기
+function modalOpen(){
+    var body  = document.querySelector('.container_wrap');                 //body 가져오기
+    body.classList.add('modalAct');
+}
 
-
-//이벤트 추가
-toggleModal = function(){
-    let modal = document.getElementById('modalContainer');
-
-    if (modal !== null) {
-        if (modal.classList.contains('hidden')) {
-            modal.classList.remove('hidden');
-            document.body.classList.add('active');
-        } else {
-            modal.classList.add('hidden');
-        }
-    } else {
-        console.error('Element with id "modalContainer" not found');
-    }
-};
+function modalClose(){
+    var body  = document.querySelector('.container_wrap');                 //body 가져오기
+    body.classList.remove('modalAct');
+}
 
 document.addEventListener('DOMContentLoaded', function(){
     var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
     var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
-    var modal = document.getElementById('modalContainer');
-
     calendar.render();      //calendar 렌더링
     
-    if(modal){      //모달창이 열려있을 경우, 모달창 제외를 클릭한 경우, 모달창 삭제
-        modal.addEventListener('click', function(){
-            toggleModal();
-        });
-    }
+    var $div = document.createElement("div");                   //$div 하나 생성 
+    var body  = document.querySelector('.container_wrap');          
+    $div.setAttribute('id', 'overlay');                         //$div id='overlay' 요소 추가
+    body.prepend($div);
+
+    $div.addEventListener('click',() => {
+        modalClose();
+    });
 });
