@@ -1,63 +1,20 @@
 @charset "UTF-8";
 
 /* /////////////여기부터 새로추가///////////// */
-aside{background: #FFF;bottom: 0;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  right: -380px;
-  top: 60px;
-  width: 380px;
-  z-index: 1;
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;}
+aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -380px;top: 60px;width: 380px;z-index: 1;-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
 
 .modalAct > .main_content{transform: translate(-380px, 0px);-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
 .main_content{-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;} 
 .modalAct aside{right: 0; z-index: 999;}
-
-.modalAct aside #modalContainer{  -webkit-transform-origin: 0% 50% 0px;
-  -moz-transform-origin: 0% 50% 0px;
-  transform-origin: 0% 50% 0px;
-  -webkit-transform: matrix(1, 0, 0, 1, 0, 0);
-  -moz-transform: matrix(1, 0, 0, 1, 0, 0);
-  transform: matrix(1, 0, 0, 1, 0, 0);
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;}
-
-#overlay {
-  background: #000;
-  bottom: 0;
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  overflow: hidden;
-  position: fixed;
-  right: 0;
-  top: 0;
-  visibility: hidden;
-  width: 100%;
-  z-index: 99;
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
-}
-
-.modalAct #overlay {
-  opacity: .65;
-  visibility: visible;
-  -webkit-transition: all .5s ease-in-out;
-  -moz-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out;
-}
-
-
-
+.modalAct aside #modalContainer{  -webkit-transform-origin: 0% 50% 0px;-moz-transform-origin: 0% 50% 0px;transform-origin: 0% 50% 0px;-webkit-transform: matrix(1, 0, 0, 1, 0, 0);-moz-transform: matrix(1, 0, 0, 1, 0, 0);transform: matrix(1, 0, 0, 1, 0, 0);-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
+#overlay {background: #000;bottom: 0;height: 100%;left: 0;opacity: 0;overflow: hidden;position: fixed;right: 0;top: 0;visibility: hidden;width: 100%;z-index: 99;-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
+.modalAct #overlay {opacity: .65;visibility: visible;-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
 
 /* 모달 안 내용 */
-.m_wrap{ display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:50px;}
-.m_wrap > input[type="text"]{width:80%;}
-.m_wrap > span {width: 70px;}
-.m_wrap > select {width: 80%}
+.modalContent{padding:20px;}
+.m_wrap{display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:50px;margin-bottom: 10px;}
+.m_wrap > span {width: 80px;}
+.m_wrap > input[type="text"]{width:240px;}
+.m_wrap > select {width: 240px; height:24px;}
+.m_title{border-bottom: 1px solid #f1f1f1; padding-bottom: 5px;margin-bottom: 5px;}
+.divTextarea{border: 1px solid #929294; padding:0 5px; outline:none; resize: none; border-radius: 3px; width:240px;box-sizing: border-box;}

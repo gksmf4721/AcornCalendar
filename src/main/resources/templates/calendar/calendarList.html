@@ -43,15 +43,17 @@
 		<aside>
 			<!-- 모달창 팝업 -->
 			<div id="modalContainer">
-				<!-- 개발후 삭제 -->
-				<div id="modalContent">
+				<div id="modalContent" class="modalContent">
+					<div class="m_title">
+						<h1>상세보기</h1>
+					</div>
 					<div class="m_wrap">
 						<span>제목</span>
 						<input type="text" id="title" placeholder="타이틀">
 					</div>
 					<div class="m_wrap">
 						<span>내용</span>
-						<input type="text" id="title" placeholder="타이틀">
+						<div contenteditable="true" class="divTextarea"></div>
 					</div>
 					<div class="m_wrap">
 						<span>일시</span>
