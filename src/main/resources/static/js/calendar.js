@@ -63,6 +63,11 @@ const calendarOption = {
             title: 'Lunch1',
             start: '2023-12-03T15:00:00'
         },
+        {
+            title: '아콘하는날',
+            start: '2023-12-23',
+            end:'2023-12-23'
+        },
         
     ],
 }
@@ -93,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
     calendar.render();      //calendar 렌더링
     
-    var $div = document.createElement("div");                   //$div 하나 생성 
+    var $div = document.createElement("div");                   //$div 하나 생성
     var body  = document.querySelector('.container_wrap');          
     $div.setAttribute('id', 'overlay');                         //$div id='overlay' 요소 추가
     body.prepend($div);
