@@ -26,7 +26,6 @@
                     <div>-</div>
 				</div>
             </div>
-
 			<div class="main_item">
 				<div class="w_title cal">
                     <div class="w_left"><a href="#" class="cal">캘린더</a></div>
@@ -39,7 +38,6 @@
                 </div>
             </div>
         </div>
-
 		<aside>
 			<!-- 모달창 팝업 -->
 			<div id="modalContainer">
@@ -52,14 +50,22 @@
 						<input type="text" id="title" placeholder="타이틀">
 					</div>
 					<div class="m_wrap">
-						<span>내용</span>
-						<div contenteditable="true" class="divTextarea"></div>
-					</div>
-					<div class="m_wrap">
 						<span>일시</span>
-						<input type="date" id="title" placeholder="타이틀">
-						<input type="date" id="title" placeholder="타이틀">
-						<input type="checkbox" id="title" placeholder="타이틀">
+						<label for="allDay">
+							<input type="checkbox" id="allDay" class="login_id_sv" onclick="allDayCheck();">
+							<span for="allDay"></span>
+							종일
+						</label>
+						<div class="m_date">
+							<span>시작</span>
+							<input type="date" id="startDate" placeholder="타이틀">
+							<input type="time" id="startTime" >
+						</div>
+						<div class="m_date">
+							<span>종료</span>
+							<input type="date" id="endDate" placeholder="타이틀">
+							<input type="time" id="endTime" >
+						</div>
 					</div>
 					<div class="m_wrap">
 						<span>카테고리</span>
@@ -71,13 +77,28 @@
 							<option>D</option>
 						</select>
 					</div>
+					<div class="m_wrap cont">
+						<span>내용</span>
+						<div contenteditable="true" class="divTextarea"></div>
+					</div>
+				</div>
+				<div class="modalBtn">
 					<input type="button" value="저장" id="cAddBtn" onclick="save();">
 					<button id="modalCloseButton" onclick="modalClose();">닫기</button>
 				</div>
 			</div>
 		</aside>
 	<script>
-		
+		function allDayCheck(){
+			const checkBox = document.getElementById("allDay");
+			if(checkBox.checked){
+				document.getElementById("startTime").readOnly = true;
+				document.getElementById("endTime").readOnly = true;
+			} else {
+				document.getElementById("startTime").readOnly = false;
+				document.getElementById("endTime").readOnly = false;
+			}
+		}
 	</script>        
 </th:block>
 

@@ -101,4 +101,14 @@
 
     }
 
+    //빈값인지 체크하는 메서드
+    var isEmpty = function(value){
+        if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
+            return true
+        }else{
+            return false
+        }
+    };
+    // 출처: https://sanghaklee.tistory.com/3 [이상학의 개발블로그:티스토리]
+
 

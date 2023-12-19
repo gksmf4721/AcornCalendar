@@ -16,27 +16,71 @@ const calendarOption = {
     selectable : true,                                  //드래그하여 날짜범위 선택 가능
     eventLimit : true,                                  //달력에 셀보다 많은 이벤트가 등록된 경우, 'more'로 표기함
     weekends : true,                                    //초기에 주말 보이기
-    events: [ 
-                {
-                    title: 'All Day Event',
-                    start: '2023-12-15',
-                    end : '2023-12-17'
-                },
-            ],
+    dayMaxEvents: true,                                 //이벤트가 많이 추가되면 높이 제한
     //날짜 클릭 시, 이벤트 추가 
-    dateClick : function(){
+    dateClick : function(info){
         //모달 열기
-        modalOpen();
-    }
+        modalOpen(info);
+    },
+    events: [ 
+        {
+            title: 'All Day Event',
+            start: '2023-12-15',
+        },
+        {
+            title: 'Long Event',
+            start: '2023-12-07',
+            end: '2023-12-10'
+        },
+        {
+            groupId: 999,
+            title: 'Repeating Event',
+            start: '2023-12-19T16:00:00'
+        },
+        {
+            groupId: 999,
+            title: 'Repeating Event',            
+            start: '2023-12-26T16:00:00'
+        },
+        {
+            title: 'Conference',            
+            start: '2023-12-03',            
+            end: '2023-12-06'     
+        },
+        {
+            title: 'Lunch4',
+            start: '2023-12-03T12:00:00'
+        },
+        {
+            title: 'Lunch3',
+            start: '2023-12-03T13:00:00'
+        },
+        {
+            title: 'Lunch2',
+            start: '2023-12-03T14:00:00'
+        },
+        {
+            title: 'Lunch1',
+            start: '2023-12-03T15:00:00'
+        },
+        
+    ],
 }
 
 
 //모달오픈 : 날짜 클릭시 열기
 //바디 가지고와서, 바디에다가 modalAct 클래스 추가
 //modalAct 클래스 추가 시, modal 창 활성화되기
-function modalOpen(){
+function modalOpen(info){
     var body  = document.querySelector('.container_wrap');                 //body 가져오기
+    var startDate = document.getElementById('startDate');
+    var endDate = document.getElementById('endDate');
+    if(!startDate){         //메인화면일 경우, modal 부분 띄우지 않음
+        return false;
+    }
     body.classList.add('modalAct');
+    startDate.value = info.dateStr;
+    endDate.value = info.dateStr;
 }
 
 function modalClose(){

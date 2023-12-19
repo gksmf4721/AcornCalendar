@@ -4,6 +4,13 @@
 .fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
 .main_item > .w_title.cal{background: #ddd;}
 .main_item > .w_title > .w_left > a.cal {color:#373029;}
+.fc .fc-toolbar-title {font-size: 1.75em;display: inline-block;vertical-align: top; margin: 5px;}
+
+/* 버튼 색상 */
+.fc .fc-button-primary {background-color:#996443cc;}
+.fc .fc-button-primary:disabled {background-color:#996443cc;}
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {background-color:#996443cc; opacity: .65;}
+
 /* .c_content{display:grid; grid-template-columns: 320px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}
 .c_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
 .c_item:nth-child(1){width:290px; height:300px;}

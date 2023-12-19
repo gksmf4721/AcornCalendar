@@ -1,9 +1,11 @@
 @charset "UTF-8";
-
+:root{
+    --modal_Tag_Width: 275px;
+}
 /* /////////////여기부터 새로추가///////////// */
-aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -380px;top: 60px;width: 380px;z-index: 1;-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
+aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -380px;top: 60px;width: 395px;z-index: 1;-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
 
-.modalAct > .main_content{transform: translate(-380px, 0px);-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
+.modalAct > .main_content{transform: translate(-395px, 0px);-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
 .main_content{-webkit-transition: all .5s ease-in-out; -moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;} 
 .modalAct aside{right: 0; z-index: 999;}
 .modalAct aside #modalContainer{  -webkit-transform-origin: 0% 50% 0px;-moz-transform-origin: 0% 50% 0px;transform-origin: 0% 50% 0px;-webkit-transform: matrix(1, 0, 0, 1, 0, 0);-moz-transform: matrix(1, 0, 0, 1, 0, 0);transform: matrix(1, 0, 0, 1, 0, 0);-webkit-transition: all .5s ease-in-out;-moz-transition: all .5s ease-in-out;transition: all .5s ease-in-out;}
@@ -12,9 +14,18 @@ aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -38
 
 /* 모달 안 내용 */
 .modalContent{padding:20px;}
-.m_wrap{display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:50px;margin-bottom: 10px;}
-.m_wrap > span {width: 80px;}
-.m_wrap > input[type="text"]{width:240px;}
-.m_wrap > select {width: 240px; height:24px;}
-.m_title{border-bottom: 1px solid #f1f1f1; padding-bottom: 5px;margin-bottom: 5px;}
-.divTextarea{border: 1px solid #929294; padding:0 5px; outline:none; resize: none; border-radius: 3px; width:240px;box-sizing: border-box;}
+.m_wrap{display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:50px; padding:5px 0px; border-bottom:1px solid #48484847;}
+.m_wrap > span {width: 65px;}
+.m_wrap > input[type="text"]{width:var(--modal_Tag_Width);}
+.m_wrap > select {width:var(--modal_Tag_Width); height:24px;}
+.m_wrap.cont{height:130px; padding: 15px 0px;}
+.m_title{border-bottom: 1px solid  #a3a3a3;; padding-bottom: 10px; }
+.divTextarea{border: 1px solid #929294; padding:5px 5px 0 5px; outline:none; resize: none; border-radius: 3px; width:var(--modal_Tag_Width);box-sizing: border-box; height:130px;overflow-y: scroll;}
+.divTextarea:focus{outline:1px solid black;}
+.modalBtn{text-align: center;}
+
+.m_wrap:nth-child(3){height:100px;}
+.m_date{width:100%; margin-left:65px;}
+.m_date > span{margin-right: 25px;}
+.m_date > input[type="date"]{width:calc(var(--modal_Tag_Width)/2 - 40px); margin-right:5px; padding-left: 1px; border:1px solid #a3a3a3;border-radius: 3px; background-position: right 3px center;}
+.m_wrap > input[type="date"] + input[type="date"]{margin-left: 5px;}
