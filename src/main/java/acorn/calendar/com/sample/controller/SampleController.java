@@ -26,8 +26,6 @@ public class SampleController {
     @GetMapping(value = "/sample", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RestResponse<SampleDTO.SampleListResponse>> sample(@RequestParam("type") SampleEnum type){
         SampleDTO.SampleListResponse response = sampleService.sampleList(type);
-        System.out.println("리스폰즈 : "+response.getItems().get(0).getRegDt());
-        System.out.println("리스폰즈 : "+response.getItems().get(0).getTitle());
         return ResponseEntity.ok(new RestResponse<SampleDTO.SampleListResponse>(response));
     }
 }
