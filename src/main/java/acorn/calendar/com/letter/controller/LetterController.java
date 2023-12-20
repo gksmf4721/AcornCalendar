@@ -12,6 +12,9 @@ import acorn.calendar.config.util.ValidateUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +26,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import top.jfunc.json.Json;
 import top.jfunc.json.JsonArray;
 
@@ -40,6 +40,7 @@ import java.util.*;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@Tag(name="Letter")
 public class LetterController {
 
 	@Autowired
@@ -70,8 +71,7 @@ public class LetterController {
 		Date nowDate = new Date();
 
 		for(int i=0 ; i<list.size() ; i++){
-			String trash = list.get(i).getString("SEND").equals("SENDER") ?
-					"L_SENDER_TRASH_DATE": "L_RECIVER_TRASH_DATE";
+			String trash = list.get(i).getString("SEND").equals("SENDER") ? "L_SENDER_TRASH_DATE": "L_RECIVER_TRASH_DATE";
 			Date trashDate = sdf.parse(list.get(i).getString(trash));
 
 			Calendar cal = Calendar.getInstance();
@@ -99,7 +99,21 @@ public class LetterController {
 		return "mail/letterWrite";
 	}
 
-	@RequestMapping("/letterWrite.json")
+//	@RequestMapping(value = "/letterWrite.json")
+//	public void letterWrite(@RequestBody String json,HttpServletResponse response) throws Exception {
+//		AcornMap acornMap = JsonUtils.toAcornMap(json);
+//		try{
+//			acornMap.put("lReciver",letterService.selectSeq(acornMap));
+//			letterService.insertLetter(acornMap);
+//			ResponseUtils.responseMap(response, "1","메일 전송 성공","/letterBox.do");
+//		}catch (NullPointerException e){
+//			e.printStackTrace();
+//			ResponseUtils.responseMap(response, "-1","없는 회원입니다.",null);
+//		}
+//	}
+
+	@ApiOperation(tags = "Letter", value="메일 전송", notes = "메일 전송 API")
+	@RequestMapping(value = "/letterWrite.json", method = RequestMethod.POST)
 	public void letterWrite(@RequestBody String json,HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		try{

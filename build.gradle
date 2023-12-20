@@ -69,13 +69,14 @@ dependencies {
 	// firebase
 	implementation 'com.google.firebase:firebase-admin:7.1.1'
 
-//	implementation 'io.springfox:springfox-boot-starter:2.9.2'
-//	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
-//	implementation 'io.springfox:springfox-oas:2.9.2'
-
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	implementation 'io.springfox:springfox-oas:3.0.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.7'
+
+//	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
 }
 
 tasks.named('test') {
