@@ -96,19 +96,55 @@
         });
     }
 
-    //확인용 alert
-    $.confirm = function(){
-
+    //확인용 alert\
+    $.confirm = function( title, text){
+        return swal({
+            title : title,
+            text : text,
+            icon: 'warning',
+            buttons: true,
+            buttons: {
+                cancel : {
+                    text : "취소",
+                    value : false,
+                    visible : true,
+                    className : "btn-cancle",
+                },
+                confirm: {
+                    text : "확인",
+                    value : true,
+                    visible : true,
+                    className : "btn-success"
+                },
+            },
+        });
     }
 
-    //빈값인지 체크하는 메서드
-    var isEmpty = function(value){
-        if( value == "" || value == null || value == undefined || ( value != null && typeof value == "object" && !Object.keys(value).length ) ){
-            return true
-        }else{
-            return false
+
+    //날짜포맷변경함수 Date => YYYY-MM-DD로 변경
+    function dateFormat(date) {
+        const d1 = new Date(date);
+        let dateFormat1 = d1.getFullYear() +
+            '-' + ( (d1.getMonth()+1) < 9 ? "0" + (d1.getMonth()+1) : (d1.getMonth()+1) )+
+            '-' + ( (d1.getDate()) < 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
+        return dateFormat1;
+    }
+
+    //시간포맷변경함수 Date => HH:MM로 변경
+    function hourMinFormat(date){
+        const d2 = new Date(date);
+        let hourFormat1 = d2.toTimeString().split(' ')[0];
+        let hourFormat2 = hourFormat1.slice(0, -3);
+        return hourFormat1
+    }
+    
+    //문자열 빈 문자열인지 체크해서 기본값으로 문자열 리턴
+    function nvl(str, defaultStr){
+        if(typeof str === "undefined" || str === null || str === ""){
+            if(typeof defaultStr === "undefined" || defaultStr === null || defaultStr === "")
+                str = '';
+            else
+                str = defaultStr;
         }
-    };
-    // 출처: https://sanghaklee.tistory.com/3 [이상학의 개발블로그:티스토리]
-
-
+        return str;
+    }

@@ -5,10 +5,6 @@
             <div class="m_inner_content2">
                 <div class="section">
                     <div class="m_menubox">
-                        <!-- <label for="chk_all">
-                            <input type="checkbox" id="chk_all" onclick="ChkAll();">
-                            <span for="chk_all"></span>
-                        </label> -->
                         <input type="button" onclick="delLett();" value="삭제">
                     </div>
                     <table class="table_m" style="width:90%">
@@ -73,7 +69,6 @@
 파일시퀀스..? <div id="lett_F_SEQ" class="" th:text="${item.F_SEQ}"></div> 
 -->
 
-
 <script>
     document.addEventListener("DOMContentLoaded", function(){
         const search = window.location.search;  //'?' 뒤의 쿼리 스트링 가져오기
@@ -82,7 +77,6 @@
         titleChange(type);
     });
 
-    //
     function titleChange(type){
         var title = "";
         switch(type){
@@ -153,6 +147,12 @@
         const query = "input[id^='chkbox']:checked";
         const selectedElements = document.querySelectorAll(query);
         const selectedElementsCnt = selectedElements.length;
+        let arr = new Array(selectedElementsCnt);
+        document.querySelectorAll(query).forEach(function(v, i){
+            let seq = v.value
+            let sendChk = document.getElementById("_chksend"+seq).value;
+            arr[i] = ({"lSeq" : seq, "SEND" : sendChk});
+        });
 
         //삭제버튼 클릭 시, 체크값이 없을 때
         if(selectedElementsCnt == 0){
@@ -161,32 +161,39 @@
         }
         //삭제버튼 클릭 시, 체크값이 있을때
         else{
-            if(confirm("삭제하시겠습니까?")){
-                let arr = new Array(selectedElementsCnt);
-
-                document.querySelectorAll(query).forEach(function(v, i){
-                    let seq = v.value
-                    let sendChk = document.getElementById("_chksend"+seq).value;
-                    arr[i] = ({"lSeq" : seq, "SEND" : sendChk});
-                });
-
-                $.ajax({
-                    type : 'POST',
-                    contentType : "application/json",
-                    url : '/letterTrash.json',
-                    data : JSON.stringify(arr),
-                    dataType : 'json',
-                    success : function(rslt){
-                        $.alertSucces(rslt.resultMsg);
-                        if(rslt.resultCd=='1'){
-                            location.href = rslt.resultUrl;
-                        }
-                    },
-                    error : function(request, status, error){
-                        $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+            $.confirm("메일을 삭제할까요?", "메일함에 있는 메일이 휴지통으로 이동합니다")
+                .then(result => {
+                    if(result){
+                        deleteProc(arr);
+                    }else{
+                        swal("삭제가 취소되었습니다.", {icon : "error"});
                     }
-                });
-            }
+                }
+            );
+        }
+    }
+
+    function deleteProc(arr){
+        let promise = $.ajax({
+            type : 'POST',
+            contentType : "application/json",
+            url : '/letterTrash.json',
+            data : JSON.stringify(arr),
+            dataType : 'json',
+        });
+        promise.done(successFunction);
+        promise.fail(errFunction);
+    }
+
+    function successFunction(rslt){
+        if(rslt.resultCd=='1'){
+            $.alertSuccessRtn("삭제되었습니다",rslt.resultUrl )
+        }
+    }
+
+    function errFunction(rslt ){
+        if(rslt.resultCd !='1'){
+            $.alertError("msg: "+ rslt.msg);
         }
     }
 </script>

@@ -47,24 +47,24 @@
 					</div>
 					<div class="m_wrap">
 						<span>제목</span>
-						<input type="text" id="title" placeholder="타이틀">
+						<input type="text" id="cal_title" placeholder="타이틀">
 					</div>
 					<div class="m_wrap">
 						<span>일시</span>
-						<label for="allDay">
-							<input type="checkbox" id="allDay" class="login_id_sv" onclick="allDayCheck();">
-							<span for="allDay"></span>
+						<label for="cal_allDay">
+							<input type="checkbox" id="cal_allDay" class="login_id_sv" onclick="allDayCheck();">
+							<span for="cal_allDay"></span>
 							종일
 						</label>
 						<div class="m_date">
 							<span>시작</span>
-							<input type="date" id="startDate" placeholder="타이틀">
-							<input type="time" id="startTime" >
+							<input type="date" id="cal_startDate" placeholder="타이틀">
+							<input type="time" id="cal_startTime" >
 						</div>
 						<div class="m_date">
 							<span>종료</span>
-							<input type="date" id="endDate" placeholder="타이틀">
-							<input type="time" id="endTime" >
+							<input type="date" id="cal_endDate" placeholder="타이틀">
+							<input type="time" id="cal_endTime" >
 						</div>
 					</div>
 					<div class="m_wrap">
@@ -98,6 +98,17 @@
 				document.getElementById("startTime").readOnly = false;
 				document.getElementById("endTime").readOnly = false;
 			}
+		}
+		
+		function save(){
+			const startTime = document.getElementById("cal_startTime");
+			const endTime = document.getElementById("cal_endTime");
+
+			startTime.value = "15:18"
+			console.log(typeof(startTime));
+
+			console.log(startTime.value);
+			console.log(endTime.value);
 		}
 	</script>        
 </th:block>
