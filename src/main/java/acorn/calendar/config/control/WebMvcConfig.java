@@ -25,5 +25,15 @@ public class WebMvcConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/swagger-ui/**")
 				.addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
 				.resourceChain(false);
+
+		registry.addResourceHandler("/css/**")
+				.addResourceLocations("classpath:/static/css/");
+
+		registry.addResourceHandler("/img/**")
+				.addResourceLocations("classpath:/static/img/");
+
+		registry.addResourceHandler("/js/**")
+				.addResourceLocations("classpath:/static/js/");
+
 	}
 }
