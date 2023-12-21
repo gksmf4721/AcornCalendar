@@ -8,16 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import acorn.calendar.config.interceptor.AuthenticInterceptor;
 
 @Configuration
-public class WebMvcConfig implements WebMvcConfigurer{
+public class WebMvcConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new AuthenticInterceptor())
-			.addPathPatterns("/index")
-			.addPathPatterns("/*")
-			.addPathPatterns("/**/*")
-			.excludePathPatterns("/test.json")
-			.excludePathPatterns("/test");
+				.addPathPatterns("/index")
+				.addPathPatterns("/*")
+				.addPathPatterns("/**/*")
+				.excludePathPatterns("/test.json")
+				.excludePathPatterns("/test");
 	}
 
 	@Override
@@ -34,6 +34,9 @@ public class WebMvcConfig implements WebMvcConfigurer{
 
 		registry.addResourceHandler("/js/**")
 				.addResourceLocations("classpath:/static/js/");
+
+		registry.addResourceHandler("/json/**")
+				.addResourceLocations("classpath:/static/json/");
 
 	}
 }

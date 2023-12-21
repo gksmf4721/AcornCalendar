@@ -1,25 +1,45 @@
 @charset "UTF-8";
 
-/* .calendar_container{height:100%; border:1px solid #ddd} */
-.fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
 .main_item > .w_title.cal{background: #ddd;}
 .main_item > .w_title > .w_left > a.cal {color:#373029;}
+.fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
 .fc .fc-toolbar-title {font-size: 1.75em;display: inline-block;vertical-align: top; margin: 5px;}
 
 /* 버튼 색상 */
-.fc .fc-button-primary {background-color:#996443cc;}
-.fc .fc-button-primary:disabled {background-color:#996443cc;}
-.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {background-color:#996443cc; opacity: .65;}
+.fc .fc-button-primary {background-color: #673617; border:none;}
+.fc .fc-button-primary:disabled {background-color:#794736;}
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {background-color:#794736; opacity: .65;}
 
-/* .c_content{display:grid; grid-template-columns: 320px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px;}
-.c_item{box-shadow: 5px 5px 0 black; border: 1px solid black;}
-.c_item:nth-child(1){width:290px; height:300px;}
-.c_item:nth-child(2){width: 290px;min-height: 400px;}
-.c_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
+/*캘린더 헤더 title*/
 
-.c_title_wrap{position:relative; text-align: left;}
-.c_title_wrap > .center{display:inline-block;}
-.c_title_wrap > .right{float:right}
-.c_title_wrap > .center, .c_title_wrap > .right{ box-sizing: border-box;}
-.c_title_wrap > .add{cursor: pointer;}
-.c_title_wrap > .add:hover{background-color: rgb(221, 221, 221);} */
+
+/*캘린더 이벤트 title*/
+.fc-daygrid-dot-event .fc-event-title {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.fc .fc-timegrid-slot {height:18px;border-bottom: 0;}
+
+
+:root{
+	--main1 :  #983C2D;
+	--main2 :  #B96028;
+	--main3 :  #E2AC48;
+	--main4 :  #DEE0D5;
+	--main5 :  #A7C5C5;
+	--main6 :  #C68B59;
+	--main7 :  #402218;
+	--main8 :  #865439;
+	--main9 :  #D7B19D;
+	--main10 : #373029;
+	--main11 : #A67C52;
+	--main12 : #764C24;
+	--main13 : #EDE4DB;
+	--main14 : #373029;
+	--main15 : #6F6153;
+	--main16 : #AFA599;
+	--main17 : #44413E;
+	--main18 : #DEC2A8;
+	--main19 : #8A6252;
+	--main20 : #EED6C4;
+    --fc-button-hover-bg-color: #D7B19D;
+	--fc-event-bg-color: #8B6138;
+	--fc-event-border-color: #6b4c2c;
+}

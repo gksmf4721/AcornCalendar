@@ -182,13 +182,49 @@
             </div>
         </div>
         
-    <script>
-    function tab(idVal){
-        $(".tabl").removeClass('on');
-        $("#"+idVal).addClass('on');
-        $(".tableScroll").removeClass('on');
-        $("#"+idVal + "Table").addClass('on');
-    }
-        
-    </script>
-    </th:block>
+<script>
+function tab(idVal){
+    $(".tabl").removeClass('on');
+    $("#"+idVal).addClass('on');
+    $(".tableScroll").removeClass('on');
+    $("#"+idVal + "Table").addClass('on');
+}
+
+//캘린더 헤더 옵션
+const headerToolbar = {
+    start: 'today,prevYear,nextYear',                    //왼쪽   : prevYear(작년),prev(전월),next(다음월),nextYear(내년)
+    center: 'prev,title,next',                           //가운데 : 타이틀(YYYY년 MM월)
+    end: 'dayGridMonth,dayGridWeek,timeGridDay'          //오른쪽 : dayGridMonth(월),week(주),day(일)
+};
+
+    //캘린더 생성 옵션
+const calendarOption = {
+    height: '730px',                                    //높이 설정
+    initialView : 'dayGridMonth',                       //초기 로드 될때 보이는 캘린더 화면 (기본 설정 : 달)
+    headerToolbar : headerToolbar,                      //헤더 툴바 설정
+    locale: "ko",                                       //한글로 변경
+    eventLimit : true,                                  //달력에 셀보다 많은 이벤트가 등록된 경우, 'more'로 표기함
+    weekends : true,                                    //초기에 주말 보이기
+    dayMaxEvents: true,                                 //이벤트가 많이 추가되면 높이 제한
+    //기존 이벤트 가져오기
+    events: function (info, successCallback, failureCallback) {
+        $.ajax({
+            type : "get",
+            url : "/json/calendarEvent.json",
+            success : function(response){
+                successCallback(response);
+            },
+            error : function(err){
+                failureCallback(err);
+            }
+        });
+    },
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
+    var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
+    calendar.render();      //calendar 렌더링
+});
+</script>
+</th:block>

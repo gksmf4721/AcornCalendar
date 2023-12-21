@@ -19,122 +19,26 @@ const calendarOption = {
     dayMaxEvents: true,                                 //이벤트가 많이 추가되면 높이 제한
     //날짜 클릭 시, 이벤트 추가 
     dateClick : function(info){
-        //모달 열기
-        parentCheck(info, "date");
+        //모달 열기 :: 신규
+        modalSlide(info, "N", "Y");
     },
     eventClick : function(info){
-        parentCheck(info, "event");
+        //모달 열기 :: 기존
+        modalSlide(info, "E", "Y");
     },
-    events: [ 
-        {
-            title: 'All Day Event',
-            start: '2023-12-15',
-        },
-        {
-            title: 'Long Event',
-            start: '2023-12-07',
-            end: '2023-12-10'
-        },
-        {
-            title: 'Repeating Event',
-            start: '2023-12-19T16:00:00'
-        },
-        {
-            title: 'Repeating Event',            
-            start: '2023-12-26T16:00:00'
-        },
-        {
-            title: 'Conference',            
-            start: '2023-12-03',            
-            end: '2023-12-06'     
-        },
-        {
-            title: 'Lunch4',
-            start: '2023-12-03T12:00:00'
-        },
-        {
-            title: 'Lunch3',
-            start: '2023-12-03T13:00:00'
-        },
-        {
-            title: 'Lunch2',
-            start: '2023-12-03T14:00:00'
-        },
-        {
-            title: 'Lunch1',
-            start: '2023-12-03T15:00:00'
-        },
-        {
-            title: '아콘하는날',
-            start: '2023-12-23',
-            end:'2023-12-23'
-        },
-        
-    ],
-}
-
-
-
-
-//모달오픈 : 날짜 클릭시 열기
-//바디 가지고와서, 바디에다가 modalAct 클래스 추가
-//modalAct 클래스 추가 시, modal 창 활성화되기
-function parentCheck(info, type){
-    const calendarClass = document.getElementById("calendar").className;
-    
-    //메인화면일 경우
-    if(calendarClass.indexOf("mainType") > -1){
-        return false;
-    }
-
-    switch(type){
-        case "date" : modalOpen(info, "N"); break;
-        case "event": modalOpen(info, "E"); break;
-    }
-}
-
-function modalOpen(info, type){
-    const body  = document.querySelector('.container_wrap');                //body 가져오기
-    const startDate = document.getElementById('cal_startDate');             //info.event.startStr
-    const endDate = document.getElementById('cal_endDate');                 //info.event.endStr
-    const title = document.getElementById('cal_title');                     //info.title
-    const startTime = document.getElementById('cal_startTime');             //info.event.start
-    const endTime = document.getElementById('cal_endTime');                 //info.event.end
-
-    if(type == "N"){
-        startDate.value = info.dateStr;
-        endDate.value = info.dateStr;
-    } else {
-        title.value = info.event.title;
-        startDate.value = dateFormat(nvl(info.event.start));
-        endDate.value = dateFormat(nvl(info.event.end));
-        startTime.value = hourMinFormat(nvl(info.event.start));
-        endTime.value = hourMinFormat(nvl(info.event.end));
-    }
-    body.classList.add('modalAct');
-}
-
-function modalClose(){
-    const body  = document.querySelector('.container_wrap');                //body 가져오기
-    body.classList.remove('modalAct');
-    setTimeout(function(){
-        valueReset();
-    }, 500);
-}
-
-function valueReset(){
-    const startDate = document.getElementById('cal_startDate');             //info.event.startStr
-    const endDate = document.getElementById('cal_endDate');                 //info.event.endStr
-    const title = document.getElementById('cal_title');                     //info.title
-    const startTime = document.getElementById('cal_startTime');             //info.event.start
-    const endTime = document.getElementById('cal_endTime');                 //info.event.end
-
-    title.value = ""
-    startDate.value = ""
-    endDate.value = ""
-    startTime.value = ""
-    endTime.value = ""
-    
+    //기존 이벤트 가져오기
+    events: function (info, successCallback, failureCallback) {
+        $.ajax({
+            type : "get",
+            url : "/json/calendarEvent.json",
+            success : function(response){
+                successCallback(response);
+            },
+            error : function(err){
+                failureCallback(err);
+            }
+        });
+    },
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -148,6 +52,6 @@ document.addEventListener('DOMContentLoaded', function(){
     body.prepend($div);
 
     $div.addEventListener('click',() => {
-        modalClose();
+        modalSlide('','', 'N');
     });
 });
