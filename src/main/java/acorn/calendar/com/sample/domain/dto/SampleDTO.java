@@ -27,7 +27,7 @@ public class SampleDTO {
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm:ss")
         @ApiModelProperty(position = 3, value = "생성일자")
-        private Timestamp regDt;
+        private String regDt;
 
         @ApiModelProperty(position = 4, value = "샘플 컬럼 1")
         private String sampleColumn1;
@@ -46,7 +46,7 @@ public class SampleDTO {
                     .seq(sampleVO.getSeq())
                     .title(sampleVO.getTitle())
                     .content(sampleVO.getContent())
-                    .regDt(sampleVO.getRegDt())
+                    .regDt(sampleVO.getRegDt().toString())
                     .sampleColumn1(sampleVO.getSampleColumn1())
                     .sampleColumn2(sampleVO.getSampleColumn2())
                     .type(sampleVO.getType())

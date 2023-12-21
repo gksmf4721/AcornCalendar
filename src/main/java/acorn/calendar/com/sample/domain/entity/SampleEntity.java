@@ -31,7 +31,7 @@ public class SampleEntity {
     @Column(name = "REG_DT", updatable = false)
     @Comment("샘플_생성일자")
     @JsonFormat(shape = JsonFormat.Shape.STRING, timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm")
-    private Timestamp regDt;
+    private LocalDateTime regDt;
 
     @Column(name = "SAMPLE_COLUMN1")
     @Comment("샘플_컬럼_1")

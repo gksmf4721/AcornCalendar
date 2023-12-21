@@ -16,14 +16,14 @@ public class SampleVO {
     private long seq;
     private String title;
     private String content;
-    private Timestamp regDt;
+    private LocalDateTime regDt;
     private String sampleColumn1;
     private String sampleColumn2;
     private String type;
     private String delYn;
 
     @Builder
-    public SampleVO (long seq, String title, String content, Timestamp regDt, String sampleColumn1, String sampleColumn2, String type, String delYn){
+    public SampleVO (long seq, String title, String content, LocalDateTime regDt, String sampleColumn1, String sampleColumn2, String type, String delYn){
         this.seq = seq;
         this.title = title;
         this.content = content;
