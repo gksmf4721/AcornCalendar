@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "Sample")
+@Tag(name = "Sample", description = "Sample API Example")
 @RequestMapping("/api/v1")
 public class SampleController {
 
@@ -26,7 +26,6 @@ public class SampleController {
     @GetMapping(value = "/sample", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RestResponse<SampleDTO.SampleListResponse>> sample(@RequestParam("type") SampleEnum type){
         SampleDTO.SampleListResponse response = sampleService.sampleList(type);
-        System.out.println(response);
         return ResponseEntity.ok(new RestResponse<SampleDTO.SampleListResponse>(response));
     }
 }
