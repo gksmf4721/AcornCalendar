@@ -1,9 +1,10 @@
-const body  = document.querySelector('.container_wrap');                //body
-const startDate = document.getElementById('cal_startDate');             //info.event.startStr
-const endDate = document.getElementById('cal_endDate');                 //info.event.endStr
-const title = document.getElementById('cal_title');                     //info.title
-const startTime = document.getElementById('cal_startTime');             //info.event.start
-const endTime = document.getElementById('cal_endTime');                 //info.event.end
+const body  = document.querySelector('.container_wrap');          //body
+const startDate = document.getElementById('cal_startDate');     //info.event.startStr -시작날짜
+const endDate = document.getElementById('cal_endDate');        //info.event.endStr - 마감날짜
+const title = document.getElementById('cal_title');                     //info.title - 제목
+const startTime = document.getElementById('cal_startTime');     //info.event.start - 시작시간
+const endTime = document.getElementById('cal_endTime');        //info.event.end - 마감시간
+const content = document.getElementById('divTextarea')l			   //내용
 
 /* ****************************************
  *  Modal function :: modalSlide
@@ -28,23 +29,22 @@ function modalSlide(info, type, openYn){
     } else {
         body.classList.remove('modalAct');
         setTimeout(function(){
-            valueReset();
+            valueReset("every");
         }, 500);
     }
 }
 
-function valueReset(){
-    title.value = ""
-    startDate.value = ""
-    endDate.value = ""
+function valueReset(type){
+	if(type == "every"){
+		title.value = ""
+	    startDate.value = ""
+	    endDate.value = ""
+	} 
     startTime.value = ""
     endTime.value = ""
 }
 
 function save(){
-    const startDate = document.getElementById('cal_startDate');             //info.event.startStr
-    const endDate = document.getElementById('cal_endDate');                 //info.event.endStr
-    const title = document.getElementById('cal_title');                     //info.title
-    const startTime = document.getElementById('cal_startTime');             //info.event.start
-    const endTime = document.getElementById('cal_endTime');                 //info.event.end
+  
+  ajaxData = {mId:inputId, mPw:inputPw}
 }
