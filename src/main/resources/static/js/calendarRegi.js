@@ -1,10 +1,11 @@
-const body  = document.querySelector('.container_wrap');          //body
+const body  = document.querySelector('.container_wrap');        //body
 const startDate = document.getElementById('cal_startDate');     //info.event.startStr -시작날짜
-const endDate = document.getElementById('cal_endDate');        //info.event.endStr - 마감날짜
-const title = document.getElementById('cal_title');                     //info.title - 제목
+const endDate = document.getElementById('cal_endDate');         //info.event.endStr - 마감날짜
+const title = document.getElementById('cal_title');             //info.title - 제목
 const startTime = document.getElementById('cal_startTime');     //info.event.start - 시작시간
-const endTime = document.getElementById('cal_endTime');        //info.event.end - 마감시간
-const content = document.getElementById('divTextarea')l			   //내용
+const endTime = document.getElementById('cal_endTime');         //info.event.end - 마감시간
+const content = document.getElementById('divTextarea');			//내용
+const alldayCheck = document.getElementById('cal_allDay');
 
 /* ****************************************
  *  Modal function :: modalSlide
@@ -45,6 +46,10 @@ function valueReset(type){
 }
 
 function save(){
-  
-  ajaxData = {mId:inputId, mPw:inputPw}
+    var a = startDate.value;
+    var b = endDate.value;
+    var c = title.value;
+    var d = startTime.value;
+    var e = endTime.value;
+    var f = alldayCheck.checked == true ? "Y" : "N";
 }
