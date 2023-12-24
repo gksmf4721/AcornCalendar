@@ -2,6 +2,7 @@ package acorn.calendar.com.calendar.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
@@ -9,6 +10,7 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 
 @Builder
+@Getter
 @AllArgsConstructor
 @Entity(name="JH_CAL")
 public class CalendarEntity {
@@ -23,10 +25,10 @@ public class CalendarEntity {
     String calType;
 
     @Column(name = "M_SEQ_MAKE")
-    long mSeqMake;
+    long seqMake;
 
     @Column(name = "M_SEQ_PARTY")
-    long mSeqParty;
+    long seqParty;
 
     @Column(name = "CAL_NAME")
     String calName;
