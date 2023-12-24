@@ -16,8 +16,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addPathPatterns("/index")
 				.addPathPatterns("/*")
 				.addPathPatterns("/**/*")
-				.excludePathPatterns("/test.json")
-				.excludePathPatterns("/test");
+				.excludePathPatterns("/css/**")
+				.excludePathPatterns("/img/**")
+				.excludePathPatterns("/js/**")
+				.excludePathPatterns("/json/**");
 	}
 
 	@Override

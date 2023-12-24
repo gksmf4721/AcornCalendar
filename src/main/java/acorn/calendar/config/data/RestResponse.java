@@ -3,7 +3,9 @@ package acorn.calendar.config.data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -34,17 +36,24 @@ public class RestResponse<T> {
         this.data = data;
     }
 
+    @Getter
+    @Setter
     public static class RestResultResponse {
 
         @ApiModelProperty(position = 1, value = "결과 코드")
         private int resultCode;
+
         @ApiModelProperty(position = 2, value = "결과 요청 일시")
         private String resultDate;
 
-        public RestResultResponse(int resultCode){
+        @ApiModelProperty(position = 3, value = "결과 메시지")
+        private String resultMsg;
+
+        @Builder
+        public RestResultResponse(int resultCode, String resultMsg){
             this.resultCode = resultCode == 0 ? 200 : resultCode;
-            // this.resultDate = LocalDateTime.now();
             this.resultDate = LocalDateTime.now().toString();
+            this.resultMsg = resultMsg == null ? "성공했습니다." : resultMsg;
         }
     }
 
