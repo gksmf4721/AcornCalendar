@@ -137,8 +137,8 @@ function saveCalType(){
          data : JSON.stringify(ajaxData),
          dataType : 'json',
          success : function(rslt){
-             if(rslt.resultCd == 1){
-                 $.alertSuccess("성공:: " + rslt.resultCd + "  메세지 ::" + rslt.resultMsg);
+             if(rslt.resultCode == 200){
+                 $.alertSuccess("성공:: " + rslt.resultCode + "  메세지 ::" + rslt.resultMsg);
              }else{
                  $.alertError(rslt.resultMsg);
              }
