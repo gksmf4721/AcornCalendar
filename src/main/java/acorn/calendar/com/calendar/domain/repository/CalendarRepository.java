@@ -6,6 +6,9 @@ import acorn.calendar.com.calendar.domain.vo.CalendarVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +28,14 @@ public interface CalendarRepository extends JpaRepository<CalendarEntity,Long> {
                 .build();
     }
 
-    default List<CalendarDTO.Jh_Cal_Calendar_Response>
-    findCalendarDTOByCalDelYnAndMseqMakeOrMseqParty(String calDelYn, long mSeq) {
+    default List<CalendarDTO.Jh_Cal_Calendar_Response> findCalendarEntitiesBy(String calDelYn, long mSeq) {
         List<CalendarEntity> entities = findByCalDelYnAndSeqMakeOrSeqParty(calDelYn, mSeq, mSeq);
+        List<String> sort = Arrays.asList("S","C","F");
+        Collections.sort(entities, Comparator.comparingInt(
+                entity -> sort.indexOf(entity.getCalType())));
         return entities.stream().map(
-                entity -> CalendarDTO.Jh_Cal_Calendar_Response.ofEntity(entity)
-            ).collect(Collectors.toList());
+                entity -> CalendarDTO.Jh_Cal_Calendar_Response.ofEntity(entity))
+                .collect(Collectors.toList());
     }
 
 
