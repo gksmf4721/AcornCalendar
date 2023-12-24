@@ -41,10 +41,24 @@ const calendarOption = {
     },
 }
 
+
+//캘린더 생성 작은 버전
+const s_calendarOption = {
+    height: '300px',                                    //높이 설정
+    initialView : 'dayGridMonth',                       //초기 로드 될때 보이는 캘린더 화면 (기본 설정 : 달)
+    locale: "ko",                                       //한글로 변경
+    dayMaxEvents: true,                                 //이벤트가 많이 추가되면 높이 제한
+   
+}
+
+
 document.addEventListener('DOMContentLoaded', function(){
     var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
+    var s_calendarEl = document.getElementById('smallCalendar'); // calendar 요소 가져오기
     var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
+    var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
     calendar.render();      //calendar 렌더링
+    s_calendar.render();      //calendar 렌더링
     
     var $div = document.createElement("div");                   //$div 하나 생성
     var body  = document.querySelector('.container_wrap');          

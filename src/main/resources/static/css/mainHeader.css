@@ -31,7 +31,7 @@
     width: var(--side-bar__phase-1-width);
     height: 100vh;
     transition: width 0.3s;
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     top: 0;
     padding-top: 60px;

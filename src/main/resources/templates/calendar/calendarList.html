@@ -1,32 +1,49 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
     <th:block layout:fragment="mainContent">
-        <div class="main_content">
-            <div class="main_item">
-				<div class="w_title cal">
-                    <div class="w_left"><a href="/mypage.do" class="cal">내정보</a></div>
-                    <div class="w_right">
-                        <div class="box"><img th:src="@{../img/attach/min.png}"><img th:src="@{../img/attach/max.png}"><img th:src="@{../img/attach/close.png}"></div>
-                    </div>
-                </div>
+        <div class="w_main_content">
+            <div class="w_main_item">
+				<div id="smallCalendar"></div>
             </div>
 
-			<div class="main_item">
-				<div class="w_title cal">
-                    <div class="w_left"><a href="#" class="cal">그룹웨어</a></div>
-                    <div class="w_right">
-                        <div class="box"><img th:src="@{../img/attach/min.png}"><img th:src="@{../img/attach/max.png}"><img th:src="@{../img/attach/close.png}"></div>
-                    </div>
+			<div class="w_main_item">
+				<div class="w_myCal">
+                    <h3>내 캘린더</h3>
+                    <div class="right"><button class="w_plus" onclick="w_modal_open();" >+</h1></div>
                 </div>
-				<div class="w_info">
-					<div><button onclick="saveCalType();">+</button></div>
-					<select id="P_calType">
+				<div class="w_myCalList" id="w_myCalList_main">
+					<!-- <div class="w_myCalListDetail">
+						<label for="myCalCheck1">
+							<input type="checkbox" id="myCalCheck1" class="login_id_sv">
+							<span for="myCalCheck1"></span>
+							개인 캘린더
+						</label>
+					</div>
+					<div class="w_myCalListDetail">
+						<label for="myCalCheck2">
+							<input type="checkbox" id="myCalCheck2" class="login_id_sv">
+							<span for="myCalCheck2"></span>
+							커플 캘린더
+						</label>
+					</div> -->
+				</div>
+
+				<div class="w_modal" id="calList_modal" data-openyn="N">
+					<div class="w_modal_item"><span>캘린더 이름</span><input type="text" id="P_calName" placeholder="캘린더이름" ></div>
+					<div class="w_modal_item"><span>캘린더 종류</span>
+						<select id="P_calType">
+						<option value="" selected>선택하세요</option>
 						<option value="S">개인</option>
 						<option value="C">커플</option>
 						<option value="F">친구</option>
-					</select>
-					<input type="text" id="P_calName" placeholder="캘린더이름" >
-					<input type="text" id="P_mSeqMake" value="4" readonly> 
-					<input type="text" id="P_mSeqParty" placeholder="참가할회원번호" >
+					</select></div>
+					<div class="w_modal_item"><span>특정 멤버</span>
+						<!--임시용 :: 나중에 검색으로 변경할 것-->
+						<input type="text" id="P_mSeqParty" placeholder="특정 멤버 번호">
+					</div>
+					
+					<div class="w_modal_item"><span>내 회원번호<br>임시용</span><input type="text" id="P_mSeqMake" th:value="${data.session_m_seq}" readonly></div>
+					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
+					<div class="modalBtn"><input type="button" onclick="getList();" value="저장"></div>
 				</div>
             </div>
 			<div class="main_item">
@@ -96,6 +113,42 @@
 const checkAllDay = document.getElementById("cal_allDay");
 const editStartTime = document.getElementById("cal_startTime");
 const editEndTime = document.getElementById("cal_endTime");
+const P_mSeq = document.getElementById("P_mSeqMake").value;
+
+document.addEventListener('DOMContentLoaded', function(){
+	getList();
+});
+
+function getList(){
+	var w_myCalList = document.getElementById("w_myCalList_main");
+	$.ajax({
+         type : "GET",
+         contentType : "application/json",
+         url : '/calendar.json/' + P_mSeq,
+         dataType : 'json',
+         success : function(rslt){
+			let dataResult = "";
+             if(rslt.resultCode == 200){
+				var resultObj = rslt.data.items;
+				 for(let i=0; i<resultObj.length; i++){
+					dataResult += `<div class="w_myCalListDetail">
+						<label for="myCalCheck${i}">
+							<input type="checkbox" id="myCalCheck${i}" class="login_id_sv">
+							<span for="myCalCheck${i}"></span>
+								${resultObj[i].calName}
+						</label>
+					</div>`;
+				 }
+				w_myCalList.innerHTML = dataResult;
+             }else{
+                 $.alertError(rslt.resultMsg);
+             }
+         },
+         error : function(request, status, error){
+             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+         }
+     });
+}
 
 function allDayCheck() {
 	if (checkAllDay.checked) {
@@ -111,11 +164,11 @@ function allDayCheck() {
 }
 
 function saveCalType(){
-	const calType = document.getElementById("P_calType");
-	const P_calType = (calType.options[calType.selectedIndex].value);
-	const P_calName = document.getElementById("P_calName").value;
-	const P_mSeqMake = document.getElementById("P_mSeqMake").value;
-	const P_mSeqParty = document.getElementById("P_mSeqParty").value;
+	let calType = document.getElementById("P_calType");
+	let P_calType = (calType.options[calType.selectedIndex].value);
+	let P_calName = document.getElementById("P_calName").value;
+	let P_mSeqMake = document.getElementById("P_mSeqMake").value;
+	let P_mSeqParty = document.getElementById("P_mSeqParty").value;
 	
 	if(P_calName == ""){
 		$.alertError("캘린더제목을 작성해주세요");
@@ -129,7 +182,6 @@ function saveCalType(){
 					 , mSeqMake : P_mSeqMake
 					 , mSeqParty : P_mSeqParty
 					 , calName : P_calName }
-	console.log(ajaxData);
 	$.ajax({
          type : "POST",
          contentType : "application/json",
@@ -139,6 +191,12 @@ function saveCalType(){
          success : function(rslt){
              if(rslt.resultCode == 200){
                  $.alertSuccess("성공:: " + rslt.resultCode + "  메세지 ::" + rslt.resultMsg);
+				 P_calType = "";
+				 P_calName = "";
+				 P_mSeqParty = "";
+
+				 getList();
+				 w_modal_open();
              }else{
                  $.alertError(rslt.resultMsg);
              }
@@ -148,6 +206,11 @@ function saveCalType(){
          }
      });
 	
+}
+
+function w_modal_open(){
+	var calListModal = document.getElementById("calList_modal");
+	calListModal.dataset.openyn = calListModal.dataset.openyn == "N" ? "Y" : "N";
 }
 
 </script>

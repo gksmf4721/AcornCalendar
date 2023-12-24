@@ -4,7 +4,6 @@
         const allElements = formId.getElementsByTagName('*');
         for (let i = 0; i < allElements.length; i++) {
             const element = allElements[i];
-            console.log()
             var type = element.getAttribute('type');    //유효성검사가 필요한 타입
             var name = element.getAttribute('name');    //유효성검사가 필요한 이름
             var className = element.getAttribute('class');

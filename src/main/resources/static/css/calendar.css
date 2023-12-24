@@ -1,7 +1,31 @@
 @charset "UTF-8";
 
-.main_item > .w_title.cal{background: #ddd;}
-.main_item > .w_title > .w_left > a.cal {color:#373029;}
+/* 캘린더 레이아웃에 적용 */
+.w_main_content{display:grid; grid-template-columns: 380px auto; grid-template-rows: 330px 450px; height:100%; padding-bottom: 15px; }
+.w_main_item:nth-child(1){width:350px; height:300px;}
+.w_main_item:nth-child(2){width: 350px;min-height: 400px;}
+.w_main_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
+
+.w_myCal{display: flex;justify-content: space-between;flex-direction: row;align-items: center;}
+.w_myCal > .left{float:left;}
+.w_myCal > .right{float:right;}
+.w_myCal > .right > .w_plus{font-size: 22.5px;background: #fff;border: none;cursor: pointer;}
+
+.w_myCalList{border-bottom: 1px solid #e6e6e6;}
+.w_myCalList > .w_myCalListDetail:first-child{margin-top: 15px;}
+.w_myCalListDetail{height: 35px;}
+
+.w_modal[data-openyn="N"]{display:none;}
+.w_modal{margin-top: 15px;}
+.w_modal_item{display: flex; justify-content: space-between;align-items: center; margin: 10px 0;}
+.w_modal_item > span {font-size: 13px; width: 30%;}
+.w_modal_item > select {height: 24px;}
+
+
+
+
+
+
 .fc-header-toolbar {padding-top: 1em; padding-left: 1em; padding-right: 1em;}
 .fc .fc-toolbar-title {font-size: 1.75em;display: inline-block;vertical-align: top; margin: 5px;}
 
