@@ -43,7 +43,7 @@
 					
 					<div class="w_modal_item"><span>내 회원번호<br>임시용</span><input type="text" id="P_mSeqMake" th:value="${data.session_m_seq}" readonly></div>
 					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
-					<div class="modalBtn"><input type="button" onclick="getList();" value="저장"></div>
+					<div class="modalBtn"><input type="button" onclick="aa();" value="저장"></div>
 				</div>
             </div>
 			<div class="main_item">
@@ -130,6 +130,7 @@ function getList(){
 			let dataResult = "";
              if(rslt.resultCode == 200){
 				var resultObj = rslt.data.items;
+				console.log(resultObj);
 				 for(let i=0; i<resultObj.length; i++){
 					dataResult += `<div class="w_myCalListDetail">
 						<label for="myCalCheck${i}">
@@ -163,12 +164,20 @@ function allDayCheck() {
 	}
 }
 
+function aa(){
+	let calType = document.getElementById("P_calType");
+	let P_calType = (calType.options[calType.selectedIndex]);
+	// Set the selected index to the index of the default option
+	calType.selectedIndex = 0; // Index of the default option
+
+	
+}
 function saveCalType(){
 	let calType = document.getElementById("P_calType");
 	let P_calType = (calType.options[calType.selectedIndex].value);
-	let P_calName = document.getElementById("P_calName").value;
-	let P_mSeqMake = document.getElementById("P_mSeqMake").value;
-	let P_mSeqParty = document.getElementById("P_mSeqParty").value;
+	let P_calName = document.getElementById("P_calName");
+	let P_mSeqMake = document.getElementById("P_mSeqMake");
+	let P_mSeqParty = document.getElementById("P_mSeqParty");
 	
 	if(P_calName == ""){
 		$.alertError("캘린더제목을 작성해주세요");
@@ -179,9 +188,9 @@ function saveCalType(){
 	}
 	
 	ajaxData = {calType: P_calType
-					 , mSeqMake : P_mSeqMake
-					 , mSeqParty : P_mSeqParty
-					 , calName : P_calName }
+					 , mSeqMake : P_mSeqMake.value
+					 , mSeqParty : P_mSeqParty.value
+					 , calName : P_calName.value }
 	$.ajax({
          type : "POST",
          contentType : "application/json",
@@ -191,10 +200,12 @@ function saveCalType(){
          success : function(rslt){
              if(rslt.resultCode == 200){
                  $.alertSuccess("성공:: " + rslt.resultCode + "  메세지 ::" + rslt.resultMsg);
-				 P_calType = "";
-				 P_calName = "";
-				 P_mSeqParty = "";
-
+				 P_calName.value = "";
+				 P_mSeqParty.value = "";
+				 calType.selectedIndex = 0; // Index of the default option
+				// Trigger the change event
+				var event = new Event('change');
+				calType.dispatchEvent(event);
 				 getList();
 				 w_modal_open();
              }else{
