@@ -35,7 +35,7 @@ public class MemberController {
 
 	@RequestMapping("/")
 	public String login() throws Exception {
-		if(null != SessionUtils.getSession(true).getAttribute("login.session")){
+		if (null != SessionUtils.getSession(true).getAttribute("login.session")) {
 			return "redirect:/main.do";
 		}
 		return "member/login";
@@ -53,38 +53,39 @@ public class MemberController {
 	}
 
 	@RequestMapping("/find.do")
-	public String find(AcornMap acornMap) throws Exception{
-		if(acornMap.getString("type").equals("I")){
+	public String find(AcornMap acornMap) throws Exception {
+		if (acornMap.getString("type").equals("I")) {
 			return "member/findId";
 		}
 		return "member/findPw";
 	}
 
-	@RequestMapping(value="/join.json" )
-	public void joinMember(@RequestBody String json, HttpServletResponse response, HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/join.json")
+	public void joinMember(@RequestBody String json, HttpServletResponse response, HttpServletRequest request)
+			throws Exception {
 
 		try {
 			AcornMap acornMap = JsonUtils.toAcornMap(json);
 
-			String valCd = ValidateUtils.validate(acornMap,acornMap.getString("mPw"),"pwValid:true");
-			if(!"".equals(valCd)){
+			String valCd = ValidateUtils.validate(acornMap, acornMap.getString("mPw"), "pwValid:true");
+			if (!"".equals(valCd)) {
 				String valMsg = ValidateUtils.validMsg(valCd);
-				ResponseUtils.responseMap(response,"-1",valMsg,"");
+				ResponseUtils.responseMap(response, "-1", valMsg, "");
 				return;
 			}
-			if(!acornMap.getString("mPwChk").equals(acornMap.getString("mPw"))){
-				ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("join.check.password"),"");
+			if (!acornMap.getString("mPwChk").equals(acornMap.getString("mPw"))) {
+				ResponseUtils.responseMap(response, "-1", ValidateUtils.validMsg("join.check.password"), "");
 				return;
 			}
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap, request);
 
-			ResponseUtils.responseMap(response,"1",ValidateUtils.validMsg("join.success"),"/");
+			ResponseUtils.responseMap(response, "1", ValidateUtils.validMsg("join.success"), "/");
 
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("join.fail"),"");
+			ResponseUtils.responseMap(response, "-1", ValidateUtils.validMsg("join.fail"), "");
 		}
 	}
 
@@ -95,48 +96,45 @@ public class MemberController {
 		String type = resultMap.getString("type");
 
 		int result = memberService.selectInputCheck(resultMap);
-		if(result != 0){
-			resultMap.put("resultCd","-1");
-		}else{
-			resultMap.put("resultCd","1");
+		if (result != 0) {
+			resultMap.put("resultCd", "-1");
+		} else {
+			resultMap.put("resultCd", "1");
 		}
-		resultMap.put("resultType",type);
-		ResponseUtils.jsonMap(response,resultMap);
+		resultMap.put("resultType", type);
+		ResponseUtils.jsonMap(response, resultMap);
 	}
 
 	@RequestMapping("/loginCheck.json")
-	public void loginCheck(@RequestBody String json, HttpServletResponse response, HttpSession session) throws Exception {
+	public void loginCheck(@RequestBody String json, HttpServletResponse response, HttpSession session)
+			throws Exception {
 
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 
-		try{
+		try {
 			AcornMap resultMap = memberService.selectLogin(acornMap);
 
-			if(null == resultMap){throw new Exception("NOT_FOUND_MEMBER_ID");}
-
-			if(PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))){
-				LoginSession.setLoginSession(resultMap);
-				session.setAttribute("trashLetterDelete",true);
-				resultMap.put("resultCd","1");
-				resultMap.put("resultUrl","/main.do");
-			}else{
-				resultMap.clear();
-				resultMap.put("resultMsg","비밀번호를 확인해주세요");
-				resultMap.put("resultCd","-1");
+			if (null == resultMap) {
+				throw new Exception("NOT_FOUND_MEMBER_ID");
 			}
-			ResponseUtils.jsonMap(response,resultMap);
-		}catch(Exception e){
+
+			if (PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))) {
+				LoginSession.setLoginSession(resultMap);
+				session.setAttribute("trashLetterDelete", true);
+				resultMap.put("resultCd", "1");
+				resultMap.put("resultUrl", "/main.do");
+			} else {
+				resultMap.clear();
+				resultMap.put("resultMsg", "비밀번호를 확인해주세요");
+				resultMap.put("resultCd", "-1");
+			}
+			ResponseUtils.jsonMap(response, resultMap);
+		} catch (Exception e) {
 			e.printStackTrace();
 			AcornMap failMap = new AcornMap();
-			failMap.put("resultMsg","아이디를 확인해주세요");
-			failMap.put("resultCd","-1");
-			ResponseUtils.jsonMap(response,failMap);
+			failMap.put("resultMsg", "아이디를 확인해주세요");
+			failMap.put("resultCd", "-1");
+			ResponseUtils.jsonMap(response, failMap);
 		}
-	}
-
-	@RequestMapping("/mypage.do")
-	public String mypage(AcornMap acornMap) throws Exception{
-		
-		return "member/mypage";
 	}
 }
