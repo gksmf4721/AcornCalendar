@@ -1,5 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
     <th:block layout:fragment="mainContent">
+		<!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
+        <input type="hidden" data-sidebar="a_calendar" id="actSidebarData">
         <div class="w_main_content">
             <div class="w_main_item">
 				<div id="smallCalendar"></div>

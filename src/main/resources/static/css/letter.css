@@ -4,8 +4,8 @@
     --m_size : inherit;
 }
 
-.side_content_wrap{position: absolute;left: 50px;top: 60px;box-sizing: border-box;width:180px; height:100vh;}
-.m_container_wrap{position: relative;margin-top: 60px;margin-left: 230px;box-sizing: border-box;}
+.side_content_wrap{position: absolute;left: 50px;top: 60px;box-sizing: border-box;width:180px;}
+.m_container_wrap{position: relative;margin-top: 60px;margin-left: 230px;box-sizing: border-box;min-height: 93vh;}
 .headerTitle{height:44px;position: fixed; overflow: hidden;border-bottom:1px solid #000;top:60px;width: 179px;background: #c9bbb5;border-right: 1px solid black;}
 .headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;border-right: 1px solid black;}
 .headerTitle .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
@@ -21,15 +21,16 @@
 .m_filter_header> .item > .text{color:black; font-family: '나눔고딕'; font-size: 12px;}
 
 .m_side_menu{display: flex; flex-wrap: wrap;}
-.side_item{display:block; width: 100%; margin-top: 15px;}
+.m_side_menu > .side_item:first-child{margin-top:10px;}
+.side_item{display:block; width: 100%; padding: 7.5px 0px;}
 .side_item img{width: 28px; margin-left:20px;}
 .side_item span{vertical-align: sub; margin-left: 10px;}
 .side_img{width: 24px !important; margin-left: 21px !important; margin-right: 3px;} 
 
 .m_container_title{font-size: 20px; font-weight: bold; border-bottom: 1px solid black; height:24px;padding:10px;position: fixed;top: 60px;left: 230px;right:0;z-index: 2; background-color: #fff;}
-.m_inner_content{min-height: 960px;}
+.m_inner_content{min-height: 88vh;}
 .m_inner_content2{padding-top:50px; padding-left:20px;}
-.m_menubox{display: flex; align-items: center; height:30px; border: 1px solid; margin-bottom: 10px;}
+.m_menubox{display: flex; align-items: center; height:30px;margin-bottom: 10px;}
 
 /* 전체메일함 */
 .mail_list_wrap{display:flex; position:relative;}
@@ -70,6 +71,9 @@
 .m_editor_tool > #btn-strikeThrough{text-decoration: line-through;}
 .m_editor_tool > #btn-ajax{outline: 2px solid #e6e6ea;}
 
+/*메일 사이드바 선택 시, active 효과*/
+.selected_btn{background-color: #958984;}   /*메일쓰기, 내게쓰기 해당*/
+.selected_a{background-color: #c9bbb5;border-bottom-right-radius: 20px;border-top-right-radius: 20px;} /*메일함에 해당*/
 
 
 

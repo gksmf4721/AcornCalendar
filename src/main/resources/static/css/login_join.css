@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 메인레이아웃에서 사용 */
-.login_in_body{ background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/background/background7.jpg); background-color:#6F6153; background-size: cover; background-repeat: no-repeat; background-position:bottom;}
+.login_in_body{ background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ),url(../img/background/background7.jpg); background-color:#6F6153; background-size: cover; background-repeat: no-repeat; background-position:bottom; height: 100vh;}
 .login_wrap {min-width: 1000px; height: auto; min-height: 100%;}
 .login_in_header{height: 30px; padding: 15px 30px; margin-bottom: 40px; font-size: 30px; line-height: 1.5;background-color:rgb(55 48 41); box-shadow: 0 6px 3px 0 rgba(0, 0, 0, 0.12);}
 .login_outer{margin-top: 3%; height: auto; min-height: 100%; padding-bottom: 45px;}

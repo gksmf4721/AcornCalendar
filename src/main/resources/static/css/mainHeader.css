@@ -36,7 +36,7 @@
     top: 0;
     padding-top: 60px;
 }
-
+.main_selected{filter: invert(75%) sepia(14%) saturate(656%) hue-rotate(349deg) brightness(93%) contrast(90%)}
 .nav_item li{display:flex; align-items:center; height:75px; cursor:default; overflow: hidden; width: 50px;}
 .nav_item li:nth-child(1) {margin-bottom:15px; height:44px;}
 

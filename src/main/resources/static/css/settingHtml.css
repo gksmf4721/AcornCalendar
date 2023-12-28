@@ -1,0 +1,21 @@
+/* 사이드바 설정 */
+.side_content_wrap{position: absolute;left: 50px;top: 60px;box-sizing: border-box;width:180px; height:100vh;border-right: 1px solid black;}
+
+/*사이드바 헤더*/
+.headerTitle{height:44px;position: static; overflow: hidden;border-bottom:1px solid #000;top:60px;width: 179px;background: #c9bbb5;}
+.headerTitle > .menuFold{width:44px; height: 44px; background: #c9bbb5 url(/img/icon/Sort.png) no-repeat 50%; background-size: 30px;float: left;cursor: pointer;border-right: 1px solid black;}
+.headerTitle > .titt{font-size: 18px; line-height: 44px; color: black; float: left; padding-left: 10px;}
+
+/*사이드바 본문*/
+.s_sidebar{display: flex; flex-wrap: wrap;}
+.s_sidebar > .s_item{display: block;width: 100%;padding: 9px 20px 9px 55px; cursor: pointer;}
+.s_sidebar > .s_item:first-child{margin-top:10px;}
+
+.selected_a{background-color: #c9bbb5;border-bottom-right-radius: 20px;border-top-right-radius: 20px;}
+
+
+/*마이페이지 적용*/
+.mypage_content{display:inline-flex; height:94%; padding:10px; justify-content: space-around;width: -webkit-fill-available; align-items: stretch;}
+.mypage_content input{width: 100%; height: 40px; margin-top: 10px;}
+.mypage_content button{background-color: #FFF;color: #44413e;height: 36px;width: 17%;cursor: pointer;font-size: 12px;vertical-align: middle;border: 1px solid #44413e;margin-left: 15px;}
+.mypage_content input.chk{width: 80%;height: 40px;margin-top: 10px;}

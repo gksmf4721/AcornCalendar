@@ -3,41 +3,17 @@
     <div class="side_content_wrap">
         <div class="headerTitle">
             <div class="menuFold"></div>
-            <div class="titt">메일</div>
+            <div class="titt">설정</div>
         </div>
-        <div class="m_sidebar">
-            <div class="m_side_header">
-                <div class="m_btn_header">
-                    <a href="/letterWrite.do" class="m_btn"><span class="m_span">메일쓰기</span></a>
-                    <a href="/letterWrite.do?type=toMe" class="m_btn"><span class="m_span">내게쓰기</span></a>
-                </div>
-                <div class="m_filter_header">
-                    <a href="#" class="item">
-                        <div class="item_div">1</div>
-                        <div class="text">안읽음</div>
-                    </a>
-                    <a href="#" class="item">
-                        <div class="item_div"><img th:src="@{../img/icon/Star.png}"></div>
-                        <div class="text">중요</div>
-                    </a>
-                    <a href="#" class="item">
-                        <div class="item_div"><img th:src="@{../img/icon/Link.png}"></div>
-                        <div class="text">첨부</div>
-                    </a>
-                    <a href="#" class="item">
-                        <div class="item_div"><img th:src="@{../img/icon/Send.png}"></div>
-                        <div class="text">TO</div>
-                    </a>
-                </div>
-            </div>
-            <div>
-                <div class="m_side_menu">
-                    <a href="/letterBox.do?type=all" class="side_item"><img th:src="@{../img/icon/Mail.png}" class="side_img"><span>전체메일함</span></a>
-                    <a href="/letterBox.do?type=receive" class="side_item"><img th:src="@{../img/icon/Mail_Receive.png}"><span>받은메일함</span></a>
-                    <a href="/letterBox.do?type=send" class="side_item"><img th:src="@{../img/icon/Mail_Send.png}"><span>보낸메일함</span></a>
-                    <a href="/letterBox.do?type=trash" class="side_item"><img th:src="@{../img/icon/Mail_Delete.png}"><span>휴지통</span></a>
-                </div>
-            </div>
-        </div>
-    </div>    
+        <ul class="s_sidebar">
+            <li class="s_item selected_a" id="aa_mypage"><a href="#">마이페이지</a></li>
+            <li class="s_item" id="aa_calendar"><a href="#">캘린더</a></li>
+            <li class="s_item" id="aa_time"><a href="#">시간 및 언어</a></li>
+        </ul>
+    </div>
+
+<script>
+
+</script>
+
 </th:block>

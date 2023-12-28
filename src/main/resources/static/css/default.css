@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* *{font-family: 'Pretendard', '맑은 고딕', sans-serif;} */
-html, body{height:100%; margin:0;}
+html, body{margin:0;}
 h1, h2, h3, h4, h5, h6, ul, ol, dl, dd, p, fieldset, legend{margin: 0; padding: 0;}
 a {color:#000; text-decoration: none;}
 img{vertical-align: top;}
