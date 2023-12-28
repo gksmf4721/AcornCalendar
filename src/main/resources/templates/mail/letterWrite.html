@@ -1,7 +1,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/letter_layout}">
     <th:block layout:fragment="letterContent">
+        <input type="hidden" data-sidebar="a_letter" id="actSidebarData">
         <div class="m_inner_content">
-            <div class="m_container_title">메일작성하기</div>
+            <div class="m_container_title" id="m_container_title"></div>
             <div class="m_inner_content2">
                 <div class="section">
                     <div class="main_item">
@@ -46,6 +47,11 @@
         let type = [[${type}]];
         if(type == "toMe"){
             document.getElementById("lReciver").readOnly = true;
+            document.getElementById("writeMe").classList.add("selected_btn");
+            document.getElementById("m_container_title").innerText = "내게쓰기";
+        } else {
+            document.getElementById("writeOther").classList.add("selected_btn");
+            document.getElementById("m_container_title").innerText = "메일쓰기";
         }
     }
 

@@ -1,16 +1,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/setting_layout}">
     <th:block layout:fragment="settingContent">
-        <div class="mypage_container">
+    <!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
+    <input type="hidden" data-sidebar="a_mypage" id="actSidebarData">
+
+
+        <div class="m_inner_content">
         <div class="main_item mypage">
             <div class="w_title">
                 <div class="w_left"><a href="/mypage.do" target="_self">MYPAGE</a></div>
-                <div class="w_right">
-                    <div class="box">
-                        <img th:src="@{../img/attach/min.png}">
-                        <img th:src="@{../img/attach/max.png}">
-                        <img th:src="@{../img/attach/close.png}">
-                    </div>
-                </div>
             </div>
             <div class="mypage_content">
                 <div class="item" style="width:70%">
@@ -34,9 +31,8 @@
                     <a href="#">비밀번호변경팝업</a>
                     <a href="#">탈퇴하기</a>
                 </div>
-            </div?>
+            </div>
         </div>
     </div>
-        
     </th:block>
 </html>
