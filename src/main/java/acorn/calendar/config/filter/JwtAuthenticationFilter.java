@@ -1,10 +1,10 @@
 package acorn.calendar.config.filter;
 
 import acorn.calendar.config.control.JwtProvider;
-import io.jsonwebtoken.Jwt;
+import acorn.calendar.config.util.ResponseUtils;
+import groovy.util.logging.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
@@ -26,16 +27,39 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // 포스트맨으로 쿠키 생성해서 실제 브라우저에는 쿠키가 없음.
-        // 정적 리소스 url은 필터에서 제외 예정
+        // 정적 리소스 url 필터에서 제외 예정
 
-        String token = jwtProvider.resolveToken(request);
-        if(token != null && jwtProvider.validateToken(token)){
-            Authentication authentication = jwtProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        String accessToken = jwtProvider.resolveToken(request, "accessToken");
+        String refreshToken = jwtProvider.resolveToken(request, "refreshToken");
+
+        if(accessToken != null && refreshToken != null){
+            if(jwtProvider.validateToken(accessToken) && jwtProvider.validateToken(refreshToken)){
+                logger.info("success");
+                Authentication authentication = jwtProvider.getAuthentication(accessToken);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }else{
+                logger.info("fail");
+
+                // 컨트롤러의 경우 @RequestMapping 메소드에서 직접 throws Exception 을 선언해서 예외 처리를 안해도 됨.
+                // 근데 jsonString 메소드는 throws Exception 이 선언되어 있기에 try - catch 사용해야 함.
+                try {
+                    ResponseUtils.jsonString(response, "TOKEN IS INVALID");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+
+                return;
+            }
         }else{
-            // 토큰 없을 시 처리
+            logger.info("no token");
+            try {
+                ResponseUtils.jsonString(response, "TOKEN NOT FOUND");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return;
         }
+
         filterChain.doFilter(request,response);
     }
 

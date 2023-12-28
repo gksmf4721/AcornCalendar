@@ -20,8 +20,10 @@ public class UserDetailService implements UserDetailsService {
         Optional<MemberEntity> member = Optional.ofNullable(memberRepository.findByMemberId(username).orElseThrow(
                     () -> new UsernameNotFoundException("Invalid Authentication")
                 ));
-        System.out.println("멤버겟 : "+member.get());
 
-        return new UserDetail(member.get());
+        return UserDetail.builder()
+                .memberId(member.get().getMemberId())
+                .memberPw(member.get().getMemberPw())
+                .build();
     }
 }

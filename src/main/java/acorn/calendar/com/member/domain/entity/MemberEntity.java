@@ -1,9 +1,12 @@
 package acorn.calendar.com.member.domain.entity;
 
+import lombok.Getter;
+
 import javax.persistence.*;
 
+@Getter
 @Entity(name="JH_MEMBER")
-public class MemberEntity {
+public class  MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

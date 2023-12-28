@@ -34,7 +34,6 @@ public class ResponseUtils {
 	public static void jsonString(HttpServletResponse response, String string) throws Exception {
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		System.out.println("데이터 : "+string);
 		response.getWriter().write(string);
 	}
 

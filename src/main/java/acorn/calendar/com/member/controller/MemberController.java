@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	@RequestMapping("/")
 	public String login() throws Exception {
@@ -78,6 +82,9 @@ public class MemberController {
 				return;
 			}
 
+			// BCrypt 적용
+			//acornMap.put("mPw",passwordEncoder.encode(acornMap.get("mPw").toString()));
+
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap, request);
 
@@ -118,6 +125,8 @@ public class MemberController {
 				throw new Exception("NOT_FOUND_MEMBER_ID");
 			}
 
+			// security
+			//if (passwordEncoder.matches(acornMap.getString("mPw", resultMap.getString("M_PW")))) {
 			if (PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))) {
 				LoginSession.setLoginSession(resultMap);
 				session.setAttribute("trashLetterDelete", true);
