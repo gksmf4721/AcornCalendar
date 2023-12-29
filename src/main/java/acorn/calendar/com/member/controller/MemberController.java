@@ -137,4 +137,9 @@ public class MemberController {
 			ResponseUtils.jsonMap(response, failMap);
 		}
 	}
+
+	@GetMapping("/mypage.do")
+	public String mypage(AcornMap acornMap) throws Exception {
+		return "member/mypage";
+	}
 }

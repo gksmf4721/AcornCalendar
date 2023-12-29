@@ -13,9 +13,3 @@
 
 .selected_a{background-color: #c9bbb5;border-bottom-right-radius: 20px;border-top-right-radius: 20px;}
 
-
-/*마이페이지 적용*/
-.mypage_content{display:inline-flex; height:94%; padding:10px; justify-content: space-around;width: -webkit-fill-available; align-items: stretch;}
-.mypage_content input{width: 100%; height: 40px; margin-top: 10px;}
-.mypage_content button{background-color: #FFF;color: #44413e;height: 36px;width: 17%;cursor: pointer;font-size: 12px;vertical-align: middle;border: 1px solid #44413e;margin-left: 15px;}
-.mypage_content input.chk{width: 80%;height: 40px;margin-top: 10px;}
