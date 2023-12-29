@@ -43,21 +43,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 // 컨트롤러의 경우 @RequestMapping 메소드에서 직접 throws Exception 을 선언해서 예외 처리를 안해도 됨.
                 // 근데 jsonString 메소드는 throws Exception 이 선언되어 있기에 try - catch 사용해야 함.
                 try {
-                    ResponseUtils.jsonString(response, "TOKEN IS INVALID");
+                    //ResponseUtils.jsonString(response, "TOKEN IS INVALID");
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
 
-                return;
+                //return;
             }
         }else{
             logger.info("no token");
             try {
-                ResponseUtils.jsonString(response, "TOKEN NOT FOUND");
+                //ResponseUtils.jsonString(response, "TOKEN NOT FOUND");
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            return;
+            //return;
         }
 
         filterChain.doFilter(request,response);
