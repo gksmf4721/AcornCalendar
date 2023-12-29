@@ -209,6 +209,9 @@
             var inputBirthYn =  document.querySelector('input[name="mBirthYn"]:checked').value;
             var inputPwChk = document.getElementById("mPwChk").value;
 
+            var inputJoinComptDt = document.getElementById("mJoinComptDt").value;
+            var inputVactCnt = document.getElementById("mVactCnt").value;
+
             $.ajax({
                 type : 'POST',
                 contentType : "application/json",
@@ -221,7 +224,9 @@
                     mEmail : inputEmail,
                     mBirth : inputBirth,
                     mBirthYn : inputBirthYn,
-                    mPwChk : inputPwChk
+                    mPwChk : inputPwChk,
+                    mJoinComptDt : inputJoinComptDt,
+                    mVactCnt : inputVactCnt
                 }),
                 dataType : 'json',
                 success : function(rslt){

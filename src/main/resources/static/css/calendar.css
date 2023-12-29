@@ -6,7 +6,7 @@
 .w_main_item:nth-child(2){width: 350px;min-height: 400px;}
 .w_main_item:nth-child(3){ grid-column: 2 / span 1; grid-row : 1 / span 2; }
 
-.w_myCal{display: flex;justify-content: space-between;flex-direction: row;align-items: center;}
+.w_myCal{display: flex;justify-content: space-between;flex-direction: row;align-items: center; height: 45px;}
 .w_myCal > .left{float:left;}
 .w_myCal > .right{float:right;}
 .w_myCal > .right > .w_plus{font-size: 22.5px;background: #fff;border: none;cursor: pointer;}
@@ -21,6 +21,7 @@
 .w_modal_item > span {font-size: 13px; width: 30%;}
 .w_modal_item > select {height: 24px;}
 
+/*캘린더 추가 부분 빼고, 입사일자 보여주는 부분으로 임시 변경*/
 
 
 

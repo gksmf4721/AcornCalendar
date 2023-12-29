@@ -15,33 +15,16 @@
 				<div class="w_modal">
 					<div class="w_modal_item">
 						<h4>입사일자</h4>
-						<input type="date" id="" value>
+						<h5>2023.12.23</h5>
 					</div>
-					<div>
+					<div class="w_modal_item">
 						<h4>총 휴가 일수</h4>
 						<h5>150만개</h5>
 					</div>
-					<div>
+					<div class="w_modal_item">
 						<h4>남은 휴가 일수</h4>
 						<h5>150만개-1개</h5>
 					</div>
-				</div>
-
-				<div class="w_modal" id="calList_modal" data-openyn="N">
-					<div class="w_modal_item"><span>캘린더 이름</span><input type="text" id="P_calName" placeholder="캘린더이름" ></div>
-					<div class="w_modal_item"><span>캘린더 종류</span>
-						<select id="P_calType">
-						<option value="" selected>선택하세요</option>
-						<option value="S">개인</option>
-						<option value="C">커플</option>
-						<option value="F">친구</option>
-					</select></div>
-					<div class="w_modal_item"><span>특정 멤버</span>
-						<!--임시용 :: 나중에 검색으로 변경할 것-->
-						<input type="text" id="P_mSeqParty" placeholder="특정 멤버 번호">
-					</div>
-					<div class="w_modal_item"><span>내 회원번호<br>임시용</span><input type="text" id="P_mSeqMake" th:value="${data.session_m_seq}" readonly></div>
-					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
 				</div>
             </div>
 
@@ -86,6 +69,7 @@
                 </div>
             </div>
         </div>
+		<form id="formData" autocomplete="one-time-code">
 		<aside>
 			<!-- 모달창 팝업 -->
 			<div id="modalContainer">
@@ -95,7 +79,7 @@
 					</div>
 					<div class="m_wrap">
 						<span>제목</span>
-						<input type="text" id="cal_title" placeholder="타이틀">
+						<input type="text" id="cal_title" placeholder="타이틀" data-name="제목">
 					</div>
 					<div class="m_wrap">
 						<span>일시</span>
@@ -106,23 +90,23 @@
 						</label>
 						<div class="m_date">
 							<span>시작</span>
-							<input type="date" id="cal_startDate" placeholder="타이틀">
-							<input type="time" id="cal_startTime" >
+							<input type="date" id="cal_startDate" placeholder="타이틀" data-name="시작날짜">
+							<input type="time" id="cal_startTime">
 						</div>
 						<div class="m_date">
 							<span>종료</span>
-							<input type="date" id="cal_endDate" placeholder="타이틀">
-							<input type="time" id="cal_endTime" >
+							<input type="date" id="cal_endDate" placeholder="타이틀" data-name="종료날짜">
+							<input type="time" id="cal_endTime">
 						</div>
 					</div>
 					<div class="m_wrap">
 						<span>카테고리</span>
-						<select>
-							<option>휴가</option>
-							<option>A</option>
-							<option>B</option>
-							<option>C</option>
-							<option>D</option>
+						<select id="cal_category" data-name="카테고리">
+							<option value="" selected>선택하세요</option>
+							<option value="S1">연차(월차)</option>
+							<option value="S2">프로젝트</option>
+							<option value="S3">출장</option>
+							<option value="S4">기타</option>
 						</select>
 					</div>
 					<div class="m_wrap cont">
@@ -131,20 +115,22 @@
 					</div>
 				</div>
 				<div class="modalBtn">
-					<input type="button" value="저장" id="cAddBtn" onclick="save();">
+					<input type="button" value="저장" id="cAddBtn" onclick="regiEvent();">
 					<button id="modalCloseButton" onclick="modalSlide('', '', 'N');">닫기</button>
 				</div>
 			</div>
 		</aside>
+	</form>
 		
 <script>
 const checkAllDay = document.getElementById("cal_allDay");
 const editStartTime = document.getElementById("cal_startTime");
 const editEndTime = document.getElementById("cal_endTime");
-const P_mSeq = document.getElementById("P_mSeqMake").value;
+//나중에 캘린더 추가 기능 넣을 때 쓸 부분 지금은 주석처리
+//const P_mSeq = document.getElementById("P_mSeqMake").value;
 
 document.addEventListener('DOMContentLoaded', function(){
-	getList();
+	//getList();
 });
 
 function getList(){

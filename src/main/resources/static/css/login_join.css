@@ -46,7 +46,7 @@ input.login_in_id, input.login_in_pw { height: 50px; padding: 10px; margin-botto
 #email_chk > button[type="button"]:hover {background-color:#44413e; color:#fff; height:40px; margin-left:-40px;}
 
 .form > .chk_after{font-size:12px; margin-left:3px; color:#fff}
-.form  > .box_col{display:flex; flex-direction: row; padding: 10px 0 20px 0; margin: 5px 0 20px 0; border-bottom: 2px solid #faebd7; border-top: 2px solid #faebd7;}
+.form  > .box_col{display:flex; flex-direction: row; padding-top: 10px; margin: 10px 0 10px 0; border-top: 2px solid #faebd7;}
 .box_col > .flex-item{width:50%; text-align: left;}
 .birth_title{padding-bottom: 10px; font-size:15px}
 .birth_title + input[type="date"]{width: 70%; height: 30px; border:none;} 
