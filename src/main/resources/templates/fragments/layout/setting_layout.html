@@ -5,12 +5,12 @@
     <body class="main_layout">
         <th:block th:replace="fragments/header/mainHeader :: mainHeaderFragment"></th:block>
         <th:block th:replace="fragments/header/mainSideBar :: mainSideBarFragment"></th:block>
-        <th:block th:replace="fragments/header/settingSideBar :: settingSideBarFragment"></th:block> 
-        <div class="m_container_wrap">
+        <!-- <th:block th:replace="fragments/header/settingSideBar :: settingSideBarFragment"></th:block>  -->
+        <div class="s_container_wrap">
             <th:block layout:fragment="settingContent"></th:block>
-            <div class="footer">
-                <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
-            </div>
+        </div>
+        <div class="footer">
+            <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
         </div>
     </body>
 </html>

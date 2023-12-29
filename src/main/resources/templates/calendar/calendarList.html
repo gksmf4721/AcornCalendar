@@ -6,27 +6,25 @@
             <div class="w_main_item">
 				<div id="smallCalendar"></div>
             </div>
-
+			<!--나중에 사용할 것 :: 캘린더 추가부분-->
 			<div class="w_main_item">
 				<div class="w_myCal">
                     <h3>내 캘린더</h3>
-                    <div class="right"><button class="w_plus" onclick="w_modal_open();" >+</h1></div>
+					<div class="right"><button class="w_plus" onclick="w_modal_open();" >+</h1></div>
                 </div>
-				<div class="w_myCalList" id="w_myCalList_main">
-					<!-- <div class="w_myCalListDetail">
-						<label for="myCalCheck1">
-							<input type="checkbox" id="myCalCheck1" class="login_id_sv">
-							<span for="myCalCheck1"></span>
-							개인 캘린더
-						</label>
+				<div class="w_modal">
+					<div class="w_modal_item">
+						<h4>입사일자</h4>
+						<input type="date" id="" value>
 					</div>
-					<div class="w_myCalListDetail">
-						<label for="myCalCheck2">
-							<input type="checkbox" id="myCalCheck2" class="login_id_sv">
-							<span for="myCalCheck2"></span>
-							커플 캘린더
-						</label>
-					</div> -->
+					<div>
+						<h4>총 휴가 일수</h4>
+						<h5>150만개</h5>
+					</div>
+					<div>
+						<h4>남은 휴가 일수</h4>
+						<h5>150만개-1개</h5>
+					</div>
 				</div>
 
 				<div class="w_modal" id="calList_modal" data-openyn="N">
@@ -42,12 +40,40 @@
 						<!--임시용 :: 나중에 검색으로 변경할 것-->
 						<input type="text" id="P_mSeqParty" placeholder="특정 멤버 번호">
 					</div>
-					
 					<div class="w_modal_item"><span>내 회원번호<br>임시용</span><input type="text" id="P_mSeqMake" th:value="${data.session_m_seq}" readonly></div>
 					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
-					<div class="modalBtn"><input type="button" onclick="aa();" value="저장"></div>
 				</div>
             </div>
+
+			<!-- <div class="w_main_item">
+				<div class="w_myCal">
+                    <h3>내 캘린더</h3>
+                    <div class="right"><button class="w_plus" onclick="w_modal_open();" >+</h1></div>
+                </div>
+				<div class="w_myCalList" id="w_myCalList_main">
+				</div>
+
+				<div class="w_modal" id="calList_modal" data-openyn="N">
+					<div class="w_modal_item"><span>캘린더 이름</span><input type="text" id="P_calName" placeholder="캘린더이름" ></div>
+					<div class="w_modal_item"><span>캘린더 종류</span>
+						<select id="P_calType">
+						<option value="" selected>선택하세요</option>
+						<option value="S">개인</option>
+						<option value="C">커플</option>
+						<option value="F">친구</option>
+					</select></div>
+					<div class="w_modal_item"><span>특정 멤버</span>
+						/*임시용 :: 나중에 검색으로 변경할 것/*
+						<input type="text" id="P_mSeqParty" placeholder="특정 멤버 번호">
+					</div>
+					<div class="w_modal_item"><span>내 회원번호<br>임시용</span><input type="text" id="P_mSeqMake" th:value="${data.session_m_seq}" readonly></div>
+					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
+				</div>
+            </div> -->
+
+
+
+
 			<div class="main_item">
 				<div class="w_title cal">
                     <div class="w_left"><a href="#" class="cal">캘린더</a></div>
@@ -166,14 +192,7 @@ function allDayCheck() {
 	}
 }
 
-function aa(){
-	let calType = document.getElementById("P_calType");
-	let P_calType = (calType.options[calType.selectedIndex]);
-	// Set the selected index to the index of the default option
-	calType.selectedIndex = 0; // Index of the default option
 
-	
-}
 function saveCalType(){
 	let calType = document.getElementById("P_calType");
 	let P_calType = (calType.options[calType.selectedIndex].value);

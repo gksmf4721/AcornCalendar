@@ -28,8 +28,4 @@ import java.awt.*;
 @Tag(name = "Setting", description = "Setting API")
 public class SettingController {
 
-	@GetMapping("/mypage.do")
-	public String mypage(AcornMap acornMap) throws Exception {
-		return "setting/mypage";
-	}
 }

@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
+    <th:block layout:fragment="mainContent">
+    <!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
+    <input type="hidden" data-sidebar="a_mypage" id="actSidebarData">
+        <div class="main_content_m">
+        <div class="main_item">
+            <div class="w_title">
+                <div class="w_left"><a href="/mypage.do" target="_self">MYPAGE</a></div>
+                <div class="w_right">
+                    <div class="box">
+                        <img th:src="@{../img/attach/min.png}">
+                        <img th:src="@{../img/attach/max.png}">
+                        <img th:src="@{../img/attach/close.png}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mypage_content">
+                <div class="item" style="width:70%">
+                    <input type="text" placeholder="이름">
+                    <input type="text" placeholder="닉네임"><button type="button">중복</button>
+                    <input type="text" placeholder="이메일"><button type="button">인증번호 전송</button>
+                    <input type="text" placeholder="인증번호"><button type="button">인증번호 확인</button>
+                    <input type="date" placeholder="생년월일">
+                    <h3 class="birth_title">생일공개여부</h3>
+                    <input type="radio" id="mBirthYn1" value="Y">
+                    <label for="Y">공개</label>
+                    <input type="radio" id="mBirthYn2" value="N">
+                    <label for="N">비공개</label>
+                </div>
+                <div class="item" style="width:30%">
+                    <div class="w_photo_m">
+                        <img th:src="@{/img/icon/instagram.png}"alt="프로필사진">
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_btn">
+                <input type="button" value="저장">
+                <input type="button" value="탈퇴">
+
+            </div>
+        </div>
+    </div>
+    </th:block>
+</html>
