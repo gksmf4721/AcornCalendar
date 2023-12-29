@@ -1,6 +1,7 @@
 package acorn.calendar.com.member.domain.security;
 
 import acorn.calendar.com.member.domain.entity.MemberEntity;
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,10 +9,13 @@ import java.util.Collection;
 
 public class UserDetail implements UserDetails {
 
-    private final MemberEntity memberEntity;
+    private String memberId;
+    private String memberPw;
 
-    public UserDetail(MemberEntity memberEntity){
-        this.memberEntity = memberEntity;
+    @Builder
+    public UserDetail(String memberId, String memberPw){
+        this.memberId = memberId;
+        this.memberPw = memberPw;
     }
 
     @Override
@@ -21,12 +25,12 @@ public class UserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return memberPw;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return memberId;
     }
 
     @Override
