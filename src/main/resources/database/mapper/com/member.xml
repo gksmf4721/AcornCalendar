@@ -5,9 +5,9 @@
 
 	<insert id="insertMember" parameterType="acornMap">
 		INSERT INTO JH_MEMBER
-			(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN)
+			(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN, M_JOIN_COMP_DT, M_VACT_CNT)
 		VALUES
-		    (#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N')
+		    (#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N', #{mJoinCompDt}, #{mVactCnt})
 		<selectKey keyProperty="mSeq" resultType="String" order="AFTER">
 			SELECT LAST_INSERT_ID() AS M_SEQ
 		</selectKey>
