@@ -48,24 +48,45 @@ function valueReset(type){
 
 function regiEvent(){
     //필수입력 검사 => 나중에 if문 안에 전부 집어넣기
-    if(fn_dataChk(formData)){console.log('a')}
-    var a = startDate.value;
-    var b = endDate.value;
-    var c = title.value;
-    var d = startTime.value;
-    var e = endTime.value;
-    var f = alldayCheck.checked == true ? "Y" : "N";
+    //if(fn_dataChk(formData)){console.log('a')}
+    let inputcalSeq = document.getElementById("P_CalSeq").value;        //캘린더 시퀀스
+    let inputmSeq = document.getElementById("P_mSeq").value;            //일정 등록 회원 시퀀스
+    let inputcontCont = document.getElementById("P_contCont").innerHTML;    //일정 내용
+    let inputcontTitle = title.value;                                   //제목
+    let inputcontStartDt = startDate.value;                             //시작 날짜
+    let inputcontEndDt = endDate.value;                                 //마감 날짜
+    let inputcontStartTm = startTime.value;                             //일정 시작 시각
+    let inputcontEndTm = endTime.value;                                 //일정 마감 시각
     let cateTypeId = document.getElementById("cal_category");
-    let cateType = (cateTypeId.options[cateTypeId.selectedIndex].value);
-    console.log('시작날짜'+a);
-    console.log('마감날짜'+b);
-    console.log('제목'+c);
-    console.log('시작시간'+d);
-    console.log('마감시간'+e);
-    console.log('종일여부'+f);
-    console.log('옵션'+cateType);
+    let inputcalDetailType = (cateTypeId.options[cateTypeId.selectedIndex].value);    //카테고리 상세 종류
+    let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";                    //종일 여부
 
-    /*날짜 입력 시, */
+    ajaxData = {
+        calSeq : inputcalSeq,
+        mSeq : inputmSeq,
+        contCont : inputcontCont,
+        contTitle : inputcontTitle,
+        contStartDt : inputcontStartDt,
+        contEndDt : inputcontEndDt,
+        contStartTm : inputcontStartTm,
+        contEndTm : inputcontEndTm,
+        calDetailType : inputcalDetailType,
+        contAlldayYn : inputcontAlldayYn
+    }
+    console.log(JSON.stringify(ajaxData));
 
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : '/cont.json',
+        data : JSON.stringify(ajaxData),
+        dataType : 'json',
+        success : function(rslt){
+            console.log(rslt);
+        },
+        error : function(request, status, error){
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+        }
+    });
 
 }

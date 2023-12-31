@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
     var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
     calendar.render();      //calendar 렌더링
-    s_calendar.render();      //calendar 렌더링
+    s_calendar.render();      //작은 calendar 렌더링
     
     var $div = document.createElement("div");                   //$div 하나 생성
     var body  = document.querySelector('.container_wrap');          

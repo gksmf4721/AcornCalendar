@@ -2,6 +2,8 @@
     <th:block layout:fragment="mainContent">
 		<!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
         <input type="hidden" data-sidebar="a_calendar" id="actSidebarData">
+		<input type="hidden" id="P_mSeq" th:value="${data.session_m_seq}">
+		<input type="hidden" id="P_CalSeq" th:value="${calendar.cal_seq}">
         <div class="w_main_content">
             <div class="w_main_item">
 				<div id="smallCalendar"></div>
@@ -111,7 +113,7 @@
 					</div>
 					<div class="m_wrap cont">
 						<span>내용</span>
-						<div contenteditable="true" class="divTextarea"></div>
+						<div contenteditable="true" class="divTextarea" id="P_contCont"></div>
 					</div>
 				</div>
 				<div class="modalBtn">
