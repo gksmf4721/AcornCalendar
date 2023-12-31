@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -36,11 +37,11 @@ public class CalendarContEntity {
     String contTitle;
 
     @Column(name = "CONT_START_DT")
-    String contStartDt;
+    Date contStartDt;
 
     @Nullable
     @Column(name = "CONT_END_DT")
-    String contEndDt;
+    Date contEndDt;
 
     @Nullable
     @Column(name = "CONT_START_TM")

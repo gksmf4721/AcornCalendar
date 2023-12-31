@@ -21,6 +21,7 @@ import acorn.calendar.config.data.AcornMap;
 import lombok.RequiredArgsConstructor;
 
 import java.awt.*;
+import java.text.ParseException;
 
 @Slf4j
 @Controller
@@ -51,7 +52,7 @@ public class CalendarController {
 	@ApiOperation(tags = "Cont", value = "일정 추가", notes = "일정 추가")
 	@PostMapping(value = "/cont.json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<RestResponse.RestResultResponse> cont(@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody){
+	public ResponseEntity<RestResponse.RestResultResponse> cont(@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody) throws ParseException {
 		calendarContService.insertCalendarCont(requestBody);
 		return ResponseEntity.ok(RestResponse.RestResultResponse.builder().build());
 	}
@@ -61,6 +62,13 @@ public class CalendarController {
 	public ResponseEntity<RestResponse<CalendarDTO.Jh_Cal_Calendar_ListResponse>> calendar(@PathVariable long mSeq){
 		CalendarDTO.Jh_Cal_Calendar_ListResponse response = calendarService.selectCalendar(mSeq);
 		return ResponseEntity.ok(new RestResponse<CalendarDTO.Jh_Cal_Calendar_ListResponse>(response));
+	}
+
+	@ApiOperation(tags = "Cont", value = "일정 조회", notes = "일정 조회")
+	@GetMapping(value = "/cont.json", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<RestResponse<CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse>> selectCont(@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody){
+		CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse response = calendarContService.selectCalendarCont(requestBody);
+		return ResponseEntity.ok(new RestResponse<CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse>(response));
 	}
 
 }
