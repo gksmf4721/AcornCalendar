@@ -199,7 +199,7 @@
 
     //회원가입 절차
     function joinJson(){
-        if(fn_dataChk(formData)){
+        // if(fn_dataChk(formData)){
             var inputName = document.getElementById("mName").value;
             var inputId = document.getElementById("mId").value;
             var inputPw = document.getElementById("mPw").value;
@@ -209,7 +209,7 @@
             var inputBirthYn =  document.querySelector('input[name="mBirthYn"]:checked').value;
             var inputPwChk = document.getElementById("mPwChk").value;
 
-            var inputJoinComptDt = document.getElementById("mJoinComptDt").value;
+            var inputJoinCompDt = document.getElementById("mJoinCompDt").value;
             var inputVactCnt = document.getElementById("mVactCnt").value;
 
             $.ajax({
@@ -225,7 +225,7 @@
                     mBirth : inputBirth,
                     mBirthYn : inputBirthYn,
                     mPwChk : inputPwChk,
-                    mJoinComptDt : inputJoinComptDt,
+                    mJoinCompDt : inputJoinCompDt,
                     mVactCnt : inputVactCnt
                 }),
                 dataType : 'json',
@@ -241,5 +241,5 @@
                     $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
                 }
             });
-        }
+        // }
     }

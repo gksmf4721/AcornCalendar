@@ -22,11 +22,35 @@
                     <input type="text" placeholder="이메일"><button type="button">인증번호 전송</button>
                     <input type="text" placeholder="인증번호"><button type="button">인증번호 확인</button>
                     <input type="date" placeholder="생년월일">
-                    <h3 class="birth_title">생일공개여부</h3>
+                    <div class="box_col">
+                        <div class="flex-item">
+                           <p class="birth_title">생년월일</p>
+                           <input type="date" id="mBirth" data-name="생년월일"  class="login_input">
+                        </div>
+                           <div class="flex-item">
+                              <p class="birth_title">생일공개여부</p>
+                              <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" data-name="생일공개여부">
+                              <label for="Y">공개</label>
+                              <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" data-name="생일공개여부">
+                              <label for="N">비공개</label>
+                           </div>
+                     </div>
+                     <div class="box_col">
+                        <div class="flex-item">
+                           <p class="birth_title">입사일자</p>
+                           <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input">
+                        </div>
+                        <div class="flex-item">
+                           <p class="birth_title">휴가잔여일수</p>
+                           <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input">
+                        </div>
+                     </div>
+
+                    <!-- <h3 class="birth_title">생일공개여부</h3>
                     <input type="radio" id="mBirthYn1" value="Y">
                     <label for="Y">공개</label>
                     <input type="radio" id="mBirthYn2" value="N">
-                    <label for="N">비공개</label>
+                    <label for="N">비공개</label> -->
                 </div>
                 <div class="item" style="width:30%">
                     <div class="w_photo_m">
