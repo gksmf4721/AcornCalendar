@@ -61,6 +61,11 @@ function regiEvent(){
     let inputcalDetailType = (cateTypeId.options[cateTypeId.selectedIndex].value);    //카테고리 상세 종류
     let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";                    //종일 여부
 
+    if(inputcontAlldayYn == "Y"){
+        inputcontStartTm = null;
+        inputcontEndTm = null;
+    }
+
     ajaxData = {
         calSeq : inputcalSeq,
         mSeq : inputmSeq,

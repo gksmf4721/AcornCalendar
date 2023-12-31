@@ -28,4 +28,5 @@ aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -38
 .m_date{width:100%; margin-left:65px;}
 .m_date > span{margin-right: 25px;}
 .m_date > input[type="date"]{width:calc(var(--modal_Tag_Width)/2 - 25px); margin-right:5px; padding-left: 1px; border:1px solid #a3a3a3;border-radius: 3px; background-position: right 3px center;}
+.m_date > input[type="time"]{width: calc(var(--modal_Tag_Width)/2 - 40px)};
 .m_wrap > input[type="date"] + input[type="date"]{margin-left: 5px;}
