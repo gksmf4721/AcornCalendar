@@ -1,14 +1,12 @@
 package acorn.calendar.com.calendar.domain.dto;
 
+import acorn.calendar.com.calendar.domain.entity.CalendarContEntity;
 import acorn.calendar.com.calendar.domain.entity.CalendarEntity;
 import acorn.calendar.com.calendar.domain.vo.CalendarVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class CalendarDTO {
@@ -110,6 +108,35 @@ public class CalendarDTO {
         @ApiModelProperty(position = 11, value = "캘린더 타입")
         public String contAlldayYn;
 
+        public static Jh_Cal_Cont_Calendar_Response ofEntity(CalendarContEntity entity){
+            return Jh_Cal_Cont_Calendar_Response.builder()
+                    .contSeq(entity.getContSeq())
+                    .calSeq(entity.getCalSeq())
+                    .mSeq(entity.getMSeq())
+                    .contCont(entity.getContCont())
+                    .title(entity.getContTitle())
+                    .contStartDt(entity.getContStartDt().toString())
+                    .contEndDt(entity.getContEndDt().toString())
+                    .contStartTm(entity.getContStartTm())
+                    .contEndTm(entity.getContEndTm())
+                    .contDelYn(entity.getContDelYn())
+                    .calDetailType(entity.getCalDetailType())
+                    .contAlldayYn(entity.getContAlldayYn())
+                    .build();
+        }
+    }
+
+    @Builder
+    @Getter
+    public static class Jh_Cal_Cont_Calendar_ListResponse {
+        @ApiModelProperty(position = 1, value = "결과 리스트")
+        List<CalendarDTO.Jh_Cal_Cont_Calendar_Response> items;
+
+        public static Jh_Cal_Cont_Calendar_ListResponse of(List<Jh_Cal_Cont_Calendar_Response> items) {
+            return Jh_Cal_Cont_Calendar_ListResponse.builder()
+                    .items(items)
+                    .build();
+        }
     }
 
 }

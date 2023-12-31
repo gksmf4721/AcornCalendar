@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class CalendarVO {
 
@@ -37,15 +38,15 @@ public class CalendarVO {
         public long mSeq;
         public String contCont;
         public String contTitle;
-        public String contStartDt;
-        public String contEndDt;
+        public Date contStartDt;
+        public Date contEndDt;
         public String contStartTm;
         public String contEndTm;
         public String contDelYn;
         public String calDetailType;
         public String contAlldayYn;
 
-        public Jh_Cal_Cont_Calendar(long contSeq, long calSeq, long mSeq, String contCont, String contTitle, String contStartDt, String contEndDt, String contStartTm, String contEndTm, String contDelYn, String calDetailType, String contAlldayYn){
+        public Jh_Cal_Cont_Calendar(long contSeq, long calSeq, long mSeq, String contCont, String contTitle, Date contStartDt, Date contEndDt, String contStartTm, String contEndTm, String contDelYn, String calDetailType, String contAlldayYn){
             this.contSeq = contSeq;
             this.calSeq = calSeq;
             this.mSeq = mSeq;
