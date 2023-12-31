@@ -33,6 +33,8 @@ public class CalendarController {
 
 	@RequestMapping("/calendarList.do")
 	public String join(AcornMap acornMap, Model model) throws Exception {
+		AcornMap calendar = calendarService.selectMyCalendar(Long.parseLong(acornMap.getString("session_m_seq")));
+		model.addAttribute("calendar",calendar);
 		model.addAttribute("data",acornMap);
 		return "calendar/calendarList";
 	}

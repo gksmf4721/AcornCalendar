@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @Repository
 public interface CalendarRepository extends JpaRepository<CalendarEntity,Long> {
 
+    CalendarEntity findByCalDelYnAndSeqMake(String calDelYn, long seqMake);
+
     List<CalendarEntity> findByCalDelYnAndSeqMakeOrSeqParty(String calDelYn, long seqMake, long seqParty);
 
     default CalendarEntity returnCalendarEntity(CalendarVO.Jh_Cal_Calendar vo){
