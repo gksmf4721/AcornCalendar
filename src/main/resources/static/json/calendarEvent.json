@@ -36,11 +36,13 @@
     "start": "2024-01-01T10:00",
     "end":"2024-01-01T11:00",
     "contCont" : "일정내용",
-    "allDay" : false
+    "allDay" : false,
+    "calDetailType" : "S2"
 },{
     "title":"[test]새해2",
     "start": "2024-01-01",
     "end" : "2024-01-01",
     "allDay" : true,
-    "contCont" : "테스트요! 새해요!!"
+    "contCont" : "테스트요! 새해요!!",
+    "calDetailType" : "S1"
 }]

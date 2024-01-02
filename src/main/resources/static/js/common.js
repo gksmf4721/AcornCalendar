@@ -146,7 +146,7 @@
             hourFormat1 = d2.toTimeString().split(' ')[0];
             hourFormat2 = hourFormat1.slice(0, -3);
         }
-        return hourFormat1;
+        return hourFormat2;
     }
     
     //문자열 빈 문자열인지 체크해서 기본값으로 문자열 리턴

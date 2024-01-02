@@ -61,11 +61,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
      // 왼쪽,오른쪽 버튼을 클릭하였을 경우        
     $("button.fc-prev-button, button.fc-next-button, button.fc-today-button, button.fc-prevYear-button, button.fc-nextYear-button").click(function() {
-        firstLastDay(calendar);
+        firstLastDay();
     });
 });
 
-function firstLastDay(calendar){
+function firstLastDay(){
     var currentDate = calendar.getDate();
     var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
     var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
@@ -92,15 +92,38 @@ function headerType(calendar){
 }
 
 //데이터 json 가져오기
+// function getEventList(info, successCallback, failureCallback) {
+//     $.ajax({
+//         type : "get",
+//         url : "/json/calendarEvent.json",
+//         success : function(response){
+//             console.log(response)
+//             successCallback(response);
+//         },
+//         error : function(err){
+//             failureCallback(err);
+//         }
+//     });
+// }
+
 function getEventList(info, successCallback, failureCallback) {
+    let inputCalSeq = document.getElementById("P_CalSeq").value;
+    console.log(inputCalSeq);
+    ajaxData = {
+        calSeq : inputCalSeq,
+        contStartDt : "2023-12-31",
+        contEndDt : "2024-01-01"
+    }
+    console.log(encodeURI(JSON.stringify(ajaxData)))
     $.ajax({
         type : "get",
-        url : "/json/calendarEvent.json",
+        url : "/cont.json",
+        data : encodeURI(JSON.stringify(ajaxData)),
         success : function(response){
             successCallback(response);
         },
         error : function(err){
-            failureCallback(err);
+            console.log(err);
         }
     });
 }
