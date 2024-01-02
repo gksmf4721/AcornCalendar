@@ -122,19 +122,31 @@
 
     //날짜포맷변경함수 Date => YYYY-MM-DD로 변경
     function dateFormat(date) {
-        const d1 = new Date(date);
-        let dateFormat1 = d1.getFullYear() +
-            '-' + ( (d1.getMonth()+1) < 9 ? "0" + (d1.getMonth()+1) : (d1.getMonth()+1) )+
-            '-' + ( (d1.getDate()) < 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
+        let dateFormat1 = "";
+        if(date == ""){
+            dateFormat1 = "";
+        } else {
+            const d1 = new Date(date);
+            dateFormat1= d1.getFullYear() +
+                '-' + ( (d1.getMonth()+1) < 9 ? "0" + (d1.getMonth()+1) : (d1.getMonth()+1) )+
+                '-' + ( (d1.getDate()) < 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
+        }
         return dateFormat1;
     }
 
     //시간포맷변경함수 Date => HH:MM로 변경
     function hourMinFormat(date){
-        const d2 = new Date(date);
-        let hourFormat1 = d2.toTimeString().split(' ')[0];
-        let hourFormat2 = hourFormat1.slice(0, -3);
-        return hourFormat1
+        let hourFormat1 = "";
+        let hourFormat2 = "";
+
+        if(date == ""){
+            hourFormat1 = "";
+        } else {
+            const d2 = new Date(date);
+            hourFormat1 = d2.toTimeString().split(' ')[0];
+            hourFormat2 = hourFormat1.slice(0, -3);
+        }
+        return hourFormat1;
     }
     
     //문자열 빈 문자열인지 체크해서 기본값으로 문자열 리턴

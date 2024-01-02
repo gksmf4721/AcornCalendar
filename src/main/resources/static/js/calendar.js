@@ -29,17 +29,8 @@ const calendarOption = {
         modalSlide(info, "E", "Y");
     },
     //기존 이벤트 가져오기
-    events: function (info, successCallback, failureCallback) {
-        $.ajax({
-            type : "get",
-            url : "/json/calendarEvent.json",
-            success : function(response){
-                successCallback(response);
-            },
-            error : function(err){
-                failureCallback(err);
-            }
-        });
+    events: function(info, successCallback, failureCallback){
+        getEventList(info, successCallback, failureCallback);
     },
 }
 
@@ -76,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function firstLastDay(calendar){
     var currentDate = calendar.getDate();
-    
     var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
     var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
     var daysAgo = new Date(firstDayOfMonth);
@@ -92,4 +82,25 @@ function firstLastDay(calendar){
     console.log("캘린더에서 보이는 진짜 마지막 날짜 :: " + formattedLastDayOfMonth)
 }
 
+function headerType(calendar){
+    var calendarType = calendar.view.type;
 
+    //월 :: dayGridMonth
+    //주 :: dayGridWeek
+    //일 :: timeGridDay
+
+}
+
+//데이터 json 가져오기
+function getEventList(info, successCallback, failureCallback) {
+    $.ajax({
+        type : "get",
+        url : "/json/calendarEvent.json",
+        success : function(response){
+            successCallback(response);
+        },
+        error : function(err){
+            failureCallback(err);
+        }
+    });
+}

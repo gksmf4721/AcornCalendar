@@ -5,7 +5,7 @@ const startDate = document.getElementById('cal_startDate');     //info.event.sta
 const endDate = document.getElementById('cal_endDate');         //info.event.endStr - 마감날짜
 const startTime = document.getElementById('cal_startTime');     //info.event.start - 시작시간
 const endTime = document.getElementById('cal_endTime');         //info.event.end - 마감시간
-const content = document.getElementById('divTextarea');			//내용
+const content = document.getElementById("P_contCont");
 
 
 /* ****************************************
@@ -16,6 +16,8 @@ const content = document.getElementById('divTextarea');			//내용
  *  이벤트 클릭 시, 기존값 매칭하여 적용
  * ************************************** */
 function modalSlide(info, type, openYn){
+    // console.log(info.event.extendedProps.contCont);
+    // console.log(info.event.allDay);
     if(openYn == "Y"){
         if(type == "N"){
             startDate.value = info.dateStr;
@@ -26,22 +28,26 @@ function modalSlide(info, type, openYn){
             endDate.value = dateFormat(nvl(info.event.end));
             startTime.value = hourMinFormat(nvl(info.event.start));
             endTime.value = hourMinFormat(nvl(info.event.end));
+            alldayCheck.checked = info.event.allDay;
+            content.innerHTML = info.event.extendedProps.contCont;
         }
         body.classList.add('modalAct');
     } else {
         body.classList.remove('modalAct');
         setTimeout(function(){
-            valueReset("every");
+            //모달창 닫을때, 값 리셋시키기 => 모달창이 slide되기 때문에, 바로 없어지는게 보이지 않게 하기 위해 settimeout사용함
+            valueReset("modalClose");
         }, 500);
     }
 }
 
 function valueReset(type){
-	if(type == "every"){
+	if(type == "modalClose"){
 		title.value = ""
 	    startDate.value = ""
 	    endDate.value = ""
-	} 
+	}
+    //종일체크버튼 클릭 시, 시간만 리셋되도록 만들기
     startTime.value = ""
     endTime.value = ""
 }
@@ -93,5 +99,24 @@ function regiEvent(){
             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
         }
     });
-
 }
+
+
+
+// json 넘기는 방식
+// "contCont" 	: "일정내용"					//일정 내용(CONT_CONT) => info.event.extendedProps.content로 가져오기
+// "title" 	: "내생일"					//*제목(CONT_TITLE)
+// "start" 	: "2024-01-09" + "T09:00"	//*시작날짜(CONT_START_DT) + "T" + 일정시작시각(CONT_START_TM)
+// "end"   	: "2024-01-10" + "T09:00"	//*마감날짜(CONT_END_DT) + "T" + 일정마감시각(CONT_END_TM)
+// "allDay"	: true or false				//종일여부(CONT_ALLDAY_YN)
+// 										//Y일 경우 :: true로 보내주세여
+// 										//N일 경우 :: false로 보내주세여
+// 										//false일 경우 :: 시간이 정의되어 있지 않을 때 자동으로 오전12시가 됨
+// "calDetailType" : "S2"					//카테고리 상세 종류(CAL_DETAIL_TYPE)
+
+// CONT_DEL_YN  		일정 삭제 여부
+// CAL_DETAIL_TYPE  	카테고리 상세 종류
+// CONT_ALLDAY_YN  	종일여부
+
+
+

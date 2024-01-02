@@ -106,9 +106,10 @@
 						<select id="cal_category" data-name="카테고리">
 							<option value="" selected>선택하세요</option>
 							<option value="S1">연차(월차)</option>
-							<option value="S2">프로젝트</option>
-							<option value="S3">출장</option>
-							<option value="S4">기타</option>
+							<option value="S2">반차</option>
+							<option value="S3">프로젝트</option>
+							<option value="S4">출장</option>
+							<option value="S5">기타</option>
 						</select>
 					</div>
 					<div class="m_wrap cont">
@@ -128,43 +129,10 @@
 const checkAllDay = document.getElementById("cal_allDay");
 const editStartTime = document.getElementById("cal_startTime");
 const editEndTime = document.getElementById("cal_endTime");
-//나중에 캘린더 추가 기능 넣을 때 쓸 부분 지금은 주석처리
-//const P_mSeq = document.getElementById("P_mSeqMake").value;
 
-document.addEventListener('DOMContentLoaded', function(){
-	//getList();
-});
-
-function getList(){
-	var w_myCalList = document.getElementById("w_myCalList_main");
-	$.ajax({
-         type : "GET",
-         contentType : "application/json",
-         url : '/calendar.json/' + P_mSeq,
-         dataType : 'json',
-         success : function(rslt){
-			let dataResult = "";
-             if(rslt.resultCode == 200){
-				var resultObj = rslt.data.items;
-				console.log(resultObj);
-				 for(let i=0; i<resultObj.length; i++){
-					dataResult += `<div class="w_myCalListDetail">
-						<label for="myCalCheck${i}">
-							<input type="checkbox" id="myCalCheck${i}" class="login_id_sv">
-							<span for="myCalCheck${i}"></span>
-								${resultObj[i].calName}
-						</label>
-					</div>`;
-				 }
-				w_myCalList.innerHTML = dataResult;
-             }else{
-                 $.alertError(rslt.resultMsg);
-             }
-         },
-         error : function(request, status, error){
-             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
-         }
-     });
+function w_modal_open(){
+	var calListModal = document.getElementById("calList_modal");
+	calListModal.dataset.openyn = calListModal.dataset.openyn == "N" ? "Y" : "N";
 }
 
 function allDayCheck() {
@@ -180,59 +148,93 @@ function allDayCheck() {
 	}
 }
 
+//나중에 캘린더 추가 기능 넣을 때 쓸 부분 지금은 주석처리
+//const P_mSeq = document.getElementById("P_mSeqMake").value;
 
-function saveCalType(){
-	let calType = document.getElementById("P_calType");
-	let P_calType = (calType.options[calType.selectedIndex].value);
-	let P_calName = document.getElementById("P_calName");
-	let P_mSeqMake = document.getElementById("P_mSeqMake");
-	let P_mSeqParty = document.getElementById("P_mSeqParty");
-	
-	if(P_calName == ""){
-		$.alertError("캘린더제목을 작성해주세요");
-		return false;
-	}else if(P_mSeqParty == ""){
-		$.alertError("참가할 회원을 작성해주세요");
-		return false;
-	}
-	
-	ajaxData = {calType: P_calType
-					 , mSeqMake : P_mSeqMake.value
-					 , mSeqParty : P_mSeqParty.value
-					 , calName : P_calName.value }
-	$.ajax({
-         type : "POST",
-         contentType : "application/json",
-         url : '/calendar.json',
-         data : JSON.stringify(ajaxData),
-         dataType : 'json',
-         success : function(rslt){
-             if(rslt.resultCode == 200){
-                 $.alertSuccess("성공:: " + rslt.resultCode + "  메세지 ::" + rslt.resultMsg);
-				 P_calName.value = "";
-				 P_mSeqParty.value = "";
-				 calType.selectedIndex = 0; // Index of the default option
-				// Trigger the change event
-				var event = new Event('change');
-				calType.dispatchEvent(event);
-				 getList();
-				 w_modal_open();
-             }else{
-                 $.alertError(rslt.resultMsg);
-             }
-         },
-         error : function(request, status, error){
-             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
-         }
-     });
-	
-}
+// document.addEventListener('DOMContentLoaded', function(){
+// 	//getList();
+// });
 
-function w_modal_open(){
-	var calListModal = document.getElementById("calList_modal");
-	calListModal.dataset.openyn = calListModal.dataset.openyn == "N" ? "Y" : "N";
-}
+// function getList(){
+// 	var w_myCalList = document.getElementById("w_myCalList_main");
+// 	$.ajax({
+//          type : "GET",
+//          contentType : "application/json",
+//          url : '/calendar.json/' + P_mSeq,
+//          dataType : 'json',
+//          success : function(rslt){
+// 			let dataResult = "";
+//              if(rslt.resultCode == 200){
+// 				var resultObj = rslt.data.items;
+// 				console.log(resultObj);
+// 				 for(let i=0; i<resultObj.length; i++){
+// 					dataResult += `<div class="w_myCalListDetail">
+// 						<label for="myCalCheck${i}">
+// 							<input type="checkbox" id="myCalCheck${i}" class="login_id_sv">
+// 							<span for="myCalCheck${i}"></span>
+// 								${resultObj[i].calName}
+// 						</label>
+// 					</div>`;
+// 				 }
+// 				w_myCalList.innerHTML = dataResult;
+//              }else{
+//                  $.alertError(rslt.resultMsg);
+//              }
+//          },
+//          error : function(request, status, error){
+//              $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+//          }
+//      });
+// }
 
+
+
+// function saveCalType(){
+// 	let calType = document.getElementById("P_calType");
+// 	let P_calType = (calType.options[calType.selectedIndex].value);
+// 	let P_calName = document.getElementById("P_calName");
+// 	let P_mSeqMake = document.getElementById("P_mSeqMake");
+// 	let P_mSeqParty = document.getElementById("P_mSeqParty");
+	
+// 	if(P_calName == ""){
+// 		$.alertError("캘린더제목을 작성해주세요");
+// 		return false;
+// 	}else if(P_mSeqParty == ""){
+// 		$.alertError("참가할 회원을 작성해주세요");
+// 		return false;
+// 	}
+	
+// 	ajaxData = {calType: P_calType
+// 					 , mSeqMake : P_mSeqMake.value
+// 					 , mSeqParty : P_mSeqParty.value
+// 					 , calName : P_calName.value }
+// 	$.ajax({
+//          type : "POST",
+//          contentType : "application/json",
+//          url : '/calendar.json',
+//          data : JSON.stringify(ajaxData),
+//          dataType : 'json',
+//          success : function(rslt){
+//              if(rslt.resultCode == 200){
+//                  $.alertSuccess("성공:: " + rslt.resultCode + "  메세지 ::" + rslt.resultMsg);
+// 				 P_calName.value = "";
+// 				 P_mSeqParty.value = "";
+// 				 calType.selectedIndex = 0; // Index of the default option
+// 				// Trigger the change event
+// 				var event = new Event('change');
+// 				calType.dispatchEvent(event);
+// 				 getList();
+// 				 w_modal_open();
+//              }else{
+//                  $.alertError(rslt.resultMsg);
+//              }
+//          },
+//          error : function(request, status, error){
+//              $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+//          }
+//      });
+	
+// }
 </script>
 <script type="text/javascript" th:src="@{/js/calendar.js}"></script>
 <script type="text/javascript" th:src="@{/js/calendarRegi.js}"></script>
