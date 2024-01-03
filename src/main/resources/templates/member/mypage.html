@@ -41,11 +41,11 @@
                     <div class="box_col">
                         <div class="flex_item">
                             <p class="birth_title">입사일자</p>
-                            <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input">
+                            <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input" th:value="${data.session_m_join_comp_dt}">
                         </div>
                         <div class="flex_item">
                             <p class="birth_title">휴가잔여일수</p>
-                            <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input">
+                            <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input" th:value="${data.session_m_vact_cnt}">
                         </div>
                     </div>
                 </div>

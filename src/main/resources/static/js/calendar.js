@@ -30,6 +30,7 @@ const calendarOption = {
     },
     //기존 이벤트 가져오기
     events: function(info, successCallback, failureCallback){
+        console.log(info);
         getEventList(info, successCallback, failureCallback);
     },
 }
@@ -108,19 +109,16 @@ function headerType(calendar){
 
 function getEventList(info, successCallback, failureCallback) {
     let inputCalSeq = document.getElementById("P_CalSeq").value;
-    console.log(inputCalSeq);
-    ajaxData = {
-        calSeq : inputCalSeq,
-        contStartDt : "2023-12-31",
-        contEndDt : "2024-01-01"
-    }
-    console.log(encodeURI(JSON.stringify(ajaxData)))
+    let inputmSeq = document.getElementById("P_mSeq").value;
+
+    let param = "calSeq="+inputCalSeq+"&mSeq="+inputmSeq+"&contStartDt=2023-01-01&contEndDt=2024-12-31"
+    console.log(param);
     $.ajax({
         type : "get",
-        url : "/cont.json",
-        data : encodeURI(JSON.stringify(ajaxData)),
+        url : "/cont.json?" + param,
         success : function(response){
-            successCallback(response);
+            console.log(response.data.items);
+            successCallback(response.data.items);
         },
         error : function(err){
             console.log(err);
