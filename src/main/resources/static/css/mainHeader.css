@@ -142,7 +142,7 @@
     animation-iteration-count: 1;
     cursor: pointer;
 }
-.footer {min-width: 850px; padding: 15px 25px; font-size: 13px; text-align: center; color:#c9bbb5; border-top: 1px solid #c9bbb5; font-family: 'bitbit'; letter-spacing: 10px;}
+.footer {min-width: 850px; padding: 15px 25px; font-size: 13px; text-align: center; color:#c9bbb5; border-top: 1px solid #c9bbb5; font-weight: 900; letter-spacing: 20px;}
 
 @keyframes eff24-move {
     30% {

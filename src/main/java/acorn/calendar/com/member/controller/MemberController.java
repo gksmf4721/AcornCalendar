@@ -83,7 +83,7 @@ public class MemberController {
 			}
 
 			// BCrypt 적용
-			//acornMap.put("mPw",passwordEncoder.encode(acornMap.get("mPw").toString()));
+			// acornMap.put("mPw",passwordEncoder.encode(acornMap.get("mPw").toString()));
 
 			acornMap.put("mPw", PasswordHashUtils.createHash(acornMap.get("mPw").toString()));
 			memberService.insertMember(acornMap, request);
@@ -126,7 +126,8 @@ public class MemberController {
 			}
 
 			// security
-			//if (passwordEncoder.matches(acornMap.getString("mPw", resultMap.getString("M_PW")))) {
+			// if (passwordEncoder.matches(acornMap.getString("mPw",
+			// resultMap.getString("M_PW")))) {
 			if (PasswordHashUtils.validatePassword(acornMap.getString("mPw"), resultMap.getString("M_PW"))) {
 				LoginSession.setLoginSession(resultMap);
 				session.setAttribute("trashLetterDelete", true);
@@ -148,7 +149,9 @@ public class MemberController {
 	}
 
 	@GetMapping("/mypage.do")
-	public String mypage(AcornMap acornMap) throws Exception {
+	public String mypage(AcornMap acornMap, Model model) throws Exception {
+		// 2024-01-03 효니 :: 마이페이지 처음 띄울때, 회원번호 필요해서 추가함
+		model.addAttribute("data", acornMap);
 		return "member/mypage";
 	}
 }

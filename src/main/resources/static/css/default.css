@@ -33,11 +33,7 @@ input[type="checkbox"] + span {display:inline-block; width: 17px; height: 17px; 
 input[type="checkbox"]:checked + span {background:#44413e url(../img/icon/Done.png) no-repeat;background-size: 17px 17px; }
 input[type="checkbox"]:checked + span ::after{content:"";}
 
-*{font-family: 'Pretendard-Regular','DungGeunMo','bitbit', 'DOSPilgiMedium'}
-@font-face{
-	font-family:'bitbit';
-	src:url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff'),url('//cdn.df.nexon.com/img/common/font/DNFBitBit-Regular.woff2') ;
-}
+*{font-family: 'Pretendard-Regular','DungGeunMo','DOSPilgiMedium'}
 @font-face {
 	font-family: 'DungGeunMo';
 	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
