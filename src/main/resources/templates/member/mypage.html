@@ -2,7 +2,8 @@
     <th:block layout:fragment="mainContent">
     <!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
     <input type="hidden" data-sidebar="a_mypage" id="actSidebarData">
-        <div class="main_content_m">
+    <input type="hidden" id="P_mSeq" th:value="${data.session_m_seq}">
+    <div class="main_content_m">
         <div class="main_item">
             <div class="w_title">
                 <div class="w_left"><a href="/mypage.do" target="_self">MYPAGE</a></div>
@@ -14,43 +15,39 @@
                     </div>
                 </div>
             </div>
-
             <div class="mypage_content">
                 <div class="item" style="width:70%">
-                    <input type="text" placeholder="이름">
-                    <input type="text" placeholder="닉네임"><button type="button">중복</button>
-                    <input type="text" placeholder="이메일"><button type="button">인증번호 전송</button>
-                    <input type="text" placeholder="인증번호"><button type="button">인증번호 확인</button>
-                    <input type="date" placeholder="생년월일">
+                    <input type="text" placeholder="이름" id="mName" name="mName" maxlength="10" th:value="${data.session_m_name}">
+                    <input type="text" placeholder="아이디" id="mId" name="mId" disabled th:value="${data.session_m_id}">
+                    <input type="text" placeholder="닉네임" id="mNickname" name="mNickname" th:value="${data.session_m_nickname}">
+                    <button type="button" id="nickChk">중복</button>
+                    <input type="text" placeholder="이메일" id="mEmail" name="mEmail" th:value="${data.session_m_email}">
+                    <button type="button" id="sendBtn" >인증번호 전송</button>
+                    <input type="text" placeholder="인증번호" id="mEmailChk"> 
+                    <button type="button" id="confirmAuthBtn">인증번호 확인</button>
                     <div class="box_col">
-                        <div class="flex-item">
-                           <p class="birth_title">생년월일</p>
-                           <input type="date" id="mBirth" data-name="생년월일"  class="login_input">
+                        <div class="flex_item">
+                            <p class="birth_title">생년월일</p>
+                            <input type="date" id="mBirth" data-name="생년월일" th:value="${data.session_m_birth}">
                         </div>
-                           <div class="flex-item">
-                              <p class="birth_title">생일공개여부</p>
-                              <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" data-name="생일공개여부">
-                              <label for="Y">공개</label>
-                              <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" data-name="생일공개여부">
-                              <label for="N">비공개</label>
-                           </div>
-                     </div>
-                     <div class="box_col">
-                        <div class="flex-item">
-                           <p class="birth_title">입사일자</p>
-                           <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input">
+                        <div class="flex_item">
+                            <p class="birth_title">생일공개여부</p>
+                            <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" data-name="생일공개여부qn"th:checked="${data.session_m_birth_yn eq 'Y'}" >
+                            <label for="Y">공개</label>
+                            <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" data-name="생일공개여부"th:checked="${data.session_m_birth_yn eq 'N'}">
+                            <label for="N">비공개</label>
                         </div>
-                        <div class="flex-item">
-                           <p class="birth_title">휴가잔여일수</p>
-                           <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input">
+                    </div>
+                    <div class="box_col">
+                        <div class="flex_item">
+                            <p class="birth_title">입사일자</p>
+                            <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input">
                         </div>
-                     </div>
-
-                    <!-- <h3 class="birth_title">생일공개여부</h3>
-                    <input type="radio" id="mBirthYn1" value="Y">
-                    <label for="Y">공개</label>
-                    <input type="radio" id="mBirthYn2" value="N">
-                    <label for="N">비공개</label> -->
+                        <div class="flex_item">
+                            <p class="birth_title">휴가잔여일수</p>
+                            <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input">
+                        </div>
+                    </div>
                 </div>
                 <div class="item" style="width:30%">
                     <div class="w_photo_m">
@@ -62,9 +59,39 @@
             <div class="bottom_btn">
                 <input type="button" value="저장">
                 <input type="button" value="탈퇴">
-
             </div>
         </div>
     </div>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("mEmailChk").style.display = 'none';
+    document.getElementById("confirmAuthBtn").style.display = 'none';
+    // getMypage();
+});
+
+/* ****************************************
+ * 화면 불러올 때, 회원정보 값 불러오기
+ * ************************************** */
+function getMypage(){
+    let inputMSeq = document.getElementById("P_mSeq").value;
+    ajaxData = {mSeq : inputMSeq};
+
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : "",
+        data : JSON.stringify(ajaxData),
+        dataType : 'json',
+        success: function(rslt){
+        },
+        error : function(request, status, error){
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+        }
+    })
+
+
+}
+
+    </script>
     </th:block>
 </html>

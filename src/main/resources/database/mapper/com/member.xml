@@ -36,14 +36,12 @@
 		FROM JH_MEMBER
 		WHERE M_EMAIL = #{mEmail}
 	</select>
-
+	
+	<!--2024-01-03 효니 :: 추가안해서 추가함(입사일자, 휴가잔여일수 추가)-->
 	<select id="selectLogin" parameterType="acornMap" resultType="acornMap">
-		SELECT M_SEQ, M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN
+		SELECT M_SEQ, M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN, M_JOIN_COMP_DT, M_VACT_CNT
 		FROM JH_MEMBER
 		WHERE M_ID = #{mId}
 		AND M_DEL_YN = 'N'
 	</select>
-
-
-
 </mapper>

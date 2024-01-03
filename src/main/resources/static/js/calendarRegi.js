@@ -8,8 +8,6 @@ const endTime = document.getElementById('cal_endTime');         //info.event.end
 const content = document.getElementById("P_contCont");          //내용
 const cateTypeId = document.getElementById("cal_category");     //카테고리
 
-
-
 /* ****************************************
  *  Modal function :: modalSlide
  *  날짜.이벤트 클릭 시 우측 모달창 열림
@@ -27,7 +25,6 @@ function modalSlide(info, type, openYn){
             endDate.value = info.dateStr;
             startTime.value = hourMinFormat(new Date());
             endTime.value = hourMinFormat(t_hour);
-            
         } else if(type == "E"){
             title.value = info.event.title;
             startDate.value = dateFormat(nvl(info.event.start));
@@ -48,7 +45,11 @@ function modalSlide(info, type, openYn){
     }
 }
 
+/* ****************************************
+ * 값 리셋시키기
+ * ************************************** */
 function valueReset(type){
+    //모달창 닫을때 값 리셋
 	if(type == "modalClose"){
 		title.value = ""
 	    startDate.value = ""
@@ -64,8 +65,11 @@ function valueReset(type){
     endTime.value = ""
 }
 
+/* ****************************************
+ *  일정 등록하기
+ * ************************************** */
 function regiEvent(){
-    //필수입력 검사 => 나중에 if문 안에 전부 집어넣기
+    //필수입력 검사 => 나중에 if문 안에 value값 체크하는것 집어넣기
     //if(fn_dataChk(formData)){console.log('a')}
     let inputcalSeq = document.getElementById("P_CalSeq").value;        //캘린더 시퀀스
     let inputmSeq = document.getElementById("P_mSeq").value;            //일정 등록 회원 시퀀스
@@ -78,6 +82,7 @@ function regiEvent(){
     let inputcalDetailType = document.getElementById("cal_category").value;
     let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";                    //종일 여부
 
+    //종일버튼 체크 시, 시작시각&종료시각 null로 넣기
     if(inputcontAlldayYn == "Y"){
         inputcontStartTm = null;
         inputcontEndTm = null;
@@ -95,8 +100,6 @@ function regiEvent(){
         calDetailType : inputcalDetailType,
         contAlldayYn : inputcontAlldayYn
     }
-    console.log(JSON.stringify(ajaxData));
-
     $.ajax({
         type : "POST",
         contentType : "application/json",

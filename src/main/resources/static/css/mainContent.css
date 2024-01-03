@@ -78,12 +78,17 @@
 .mypage_content{display:inline-flex; padding:10px; justify-content: space-around;width: -webkit-fill-available; align-items: stretch;}
 .mypage_content input{width: 635px;height: 40px; margin-top: 10px;}
 .mypage_content input[type='date']{width:618px;}
-.birth_title{margin-top:40px;}
 .mypage_content input[type='radio']{width:20px; height:20px}
 .mypage_content button{background-color: #44413e; color: #fff;height: 36px;width: 60px;cursor: pointer;font-size: 13px;vertical-align: middle;border: 1px solid #44413e;margin-left: 15px;}
 .w_photo_m{display: inline-block;text-align: center;}
 .w_photo_m img{width:70%; height:100%; border: 1px solid black;}
 .w_photo_m input[type="file"]{width: 250px;height: 24px;}
-.bottom_btn{text-align: center;}
+.box_col{display:flex; flex-direction: row; border-top: 2px solid #373029; align-items: center;margin-top: 20px;padding-top: 10px; width: 710px;}
+.box_col > .flex_item{width:50%; text-align: left;}
+.birth_title{    padding-bottom: 10px;font-size: 15px;}
+.birth_title + input[type="date"], input[type="text"]{width: 70%; height: 30px;} 
+.birth_title ~ input[type="radio"]{width: 10%; height: 15px; margin-top:10px; cursor: pointer;} 
+
+.bottom_btn{text-align: center;margin-top:40px;}
 .bottom_btn input[type="button"]:first-child{background-color: #373029; color:#fff  }
 .bottom_btn input[type="button"]{background-color: #fff; color:#373029;width: 50px;height: 33px;font-size: 20px;}
