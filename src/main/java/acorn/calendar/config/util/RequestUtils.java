@@ -50,6 +50,8 @@ public class RequestUtils {
 			acornMap.put("session_m_birth", login.getM_birth());
 			acornMap.put("session_m_birth_yn", login.getM_birth_yn());
 			acornMap.put("session_m_del_yn", login.getM_del_yn());
+			acornMap.put("session_m_join_comp_dt", login.getM_join_comp_dt());
+			acornMap.put("session_m_vact_cnt",login.getM_vact_cnt());
 		}else {
 			acornMap.put("sessionLogin", "N");
 			acornMap.remove("session_m_seq");
@@ -60,6 +62,8 @@ public class RequestUtils {
 			acornMap.remove("session_m_birth");
 			acornMap.remove("session_m_birth_yn");
 			acornMap.remove("session_m_del_yn");
+			acornMap.remove("session_m_join_comp_dt");
+			acornMap.remove("session_m_vact_cnt");
 		}
 
 		return acornMap;

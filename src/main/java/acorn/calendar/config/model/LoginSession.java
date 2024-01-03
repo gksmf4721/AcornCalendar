@@ -20,6 +20,8 @@ public class LoginSession implements Serializable {
 	private String m_birth;
 	private String m_birth_yn;
 	private String m_del_yn;
+	private String m_join_comp_dt;
+	private String m_vact_cnt;
 	
 	public static void setLoginSession(AcornMap acornMap) {
 		
@@ -33,6 +35,8 @@ public class LoginSession implements Serializable {
 		login.setM_birth(acornMap.getString("M_BIRTH"));
 		login.setM_birth_yn(acornMap.getString("M_BIRTH_YN"));
 		login.setM_del_yn(acornMap.getString("M_DEL_YN"));
+		login.setM_join_comp_dt(acornMap.getString("M_JOIN_COMP_DT"));
+		login.setM_vact_cnt(acornMap.getString("M_VACT_CNT"));
 		
 		SessionUtils.getSession(true).setAttribute(LOGIN_SESSION, login);
 	}
