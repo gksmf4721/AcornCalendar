@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,9 +23,12 @@ public class CalendarContService {
         calendarContRepository.save(calendarContRepository.returnCalendarEntity(cont));
     }
 
-    public CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse selectCalendarCont(CalendarVO.Jh_Cal_Cont_Calendar cont){
+    public CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse selectCalendarCont(long calSeq, long mSeq, String contStartDt, String contEntDt) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         List<CalendarDTO.Jh_Cal_Cont_Calendar_Response> entities = calendarContRepository.findCalendarEntitiesBy(
-                "N",cont.getCalSeq(),cont.getContStartDt(),cont.getContEndDt(),cont.getContStartDt(),cont.getContEndDt());
+                "N",calSeq,sdf.parse(contStartDt),sdf.parse(contEntDt));
         return CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse.of(entities);
     }
 

@@ -66,8 +66,9 @@ public class CalendarController {
 
 	@ApiOperation(tags = "Cont", value = "일정 조회", notes = "일정 조회")
 	@GetMapping(value = "/cont.json", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RestResponse<CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse>> selectCont(@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody){
-		CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse response = calendarContService.selectCalendarCont(requestBody);
+	public ResponseEntity<RestResponse<CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse>> selectCont(
+			@RequestParam("calSeq") long calSeq, @RequestParam("mSeq") long mSeq, @RequestParam("contStartDt") String contStartDt, @RequestParam("contEndDt") String contEndDt) throws ParseException {
+		CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse response = calendarContService.selectCalendarCont(calSeq, mSeq, contStartDt, contEndDt);
 		return ResponseEntity.ok(new RestResponse<CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse>(response));
 	}
 

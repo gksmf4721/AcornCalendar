@@ -53,15 +53,12 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
     }
 
     default List<CalendarDTO.Jh_Cal_Cont_Calendar_Response> findCalendarEntitiesBy(
-            String contDelYn, long calSeq, Date contStartDt1, Date contEndDt1, Date contStartDt2, Date contEndDt2
-    ){
-        contStartDt1 = format(contStartDt2);
-        contEndDt1 = format(contEndDt1);
-        contStartDt2 = format(contStartDt2);
-        contEndDt2 = format(contEndDt2);
+            String contDelYn, long calSeq, Date contStartDt, Date contEndDt){
+        contStartDt = format(contStartDt);
+        contEndDt = format(contEndDt);
 
         List<CalendarContEntity> entities = findByContStartDtBetweenOrContEndDtBetweenAndContDelYnAndCalSeq(
-                contStartDt1, contEndDt1, contStartDt2, contEndDt2, contDelYn, calSeq);
+                contStartDt, contEndDt, contStartDt, contEndDt, contDelYn, calSeq);
         return entities.stream().map(
                 entity -> CalendarDTO.Jh_Cal_Cont_Calendar_Response.ofEntity(entity))
                 .collect(Collectors.toList());
