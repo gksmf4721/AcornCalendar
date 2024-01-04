@@ -1,8 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
     <th:block layout:fragment="mainContent">
+    <form id="formData">
     <!--sideBar Active와 연관 : mainSideBar의 li태그 id와 data-sidebar의 값이 같아야함-->
     <input type="hidden" data-sidebar="a_mypage" id="actSidebarData">
-    <input type="hidden" id="P_mSeq" th:value="${data.session_m_seq}">
+    <input type="hidden" id="m_seq" th:value="${data.session_m_seq}">
+
     <div class="main_content_m">
         <div class="main_item">
             <div class="w_title">
@@ -17,35 +19,54 @@
             </div>
             <div class="mypage_content">
                 <div class="item" style="width:70%">
-                    <input type="text" placeholder="이름" id="mName" name="mName" maxlength="10" th:value="${data.session_m_name}">
-                    <input type="text" placeholder="아이디" id="mId" name="mId" disabled th:value="${data.session_m_id}">
-                    <input type="text" placeholder="닉네임" id="mNickname" name="mNickname" th:value="${data.session_m_nickname}">
-                    <button type="button" id="nickChk">중복</button>
-                    <input type="text" placeholder="이메일" id="mEmail" name="mEmail" th:value="${data.session_m_email}">
-                    <button type="button" id="sendBtn" >인증번호 전송</button>
-                    <input type="text" placeholder="인증번호" id="mEmailChk"> 
-                    <button type="button" id="confirmAuthBtn">인증번호 확인</button>
+                    <ul class="my_profile_list">
+                        <li>
+                            <h4>이름</h4>
+                            <input type="text" id="m_name" name="m_name" maxlength="10" th:value="${data.session_m_name}" data-name="이름">
+                        </li>
+                        <li>
+                            <h4>아이디</h4>
+                            <input type="text" id="m_id" name="m_id" th:value="${data.session_m_id}" disabled>
+                        </li>
+                        <li>
+                            <h4>닉네임</h4>
+                            <input type="text" placeholder="닉네임" id="m_nickname" name="m_nickname" th:value="${data.session_m_nickname}" data-name="닉네임" onchange="styleChange(this.value, 'nick');">
+                            <button type="button" id="nickChk" onclick="duplicate('m_nickname', '닉네임', 'nickname')" style="display:none;">중복</button>
+                            <p id="nickChk_info" class="chk_befo" data-dupl="Y" style="display:none;">닉네임 중복 체크를 해주세요</p>
+                        </li>
+                        <li>
+                            <h4>이메일</h4>
+                            <input type="text" placeholder="이메일" id="m_email" name="m_email" th:value="${data.session_m_email}" data-name="이메일" onchange="styleChange(this.value, 'email')">
+                            <button type="button" id="sendBtn" onclick="sendMail('m_email','J');" style="display:none;">인증번호 전송</button>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="인증번호" id="mEmailChk" style="display:none;"> 
+                            <button type="button" id="confirmAuthBtn" style="display:none;" onclick="confirmMail('m_email', 'J')">인증번호 확인</button>
+                            <p id="emailChk_info" class="chk_befo" data-dupl="Y" style="display:none;">이메일 인증을 해주세요</p>
+                        </li>
+                    </ul>
                     <div class="box_col">
                         <div class="flex_item">
                             <p class="birth_title">생년월일</p>
-                            <input type="date" id="mBirth" data-name="생년월일" th:value="${data.session_m_birth}">
+                            <input type="date" id="m_birth" data-name="생년월일" th:value="${data.session_m_birth}">
                         </div>
                         <div class="flex_item">
                             <p class="birth_title">생일공개여부</p>
-                            <input type="radio" id="mBirthYn1" name="mBirthYn" value="Y" data-name="생일공개여부qn"th:checked="${data.session_m_birth_yn eq 'Y'}" >
+                            <input type="hidden" id="m_birth_yn">
+                            <input type="radio" id="m_birth_yn1" name="m_birth_yn" value="Y" data-name="생일공개여부"th:checked="${data.session_m_birth_yn eq 'Y'}" >
                             <label for="Y">공개</label>
-                            <input type="radio" id="mBirthYn2" name="mBirthYn" value="N" data-name="생일공개여부"th:checked="${data.session_m_birth_yn eq 'N'}">
+                            <input type="radio" id="m_birth_yn2" name="m_birth_yn" value="N" data-name="생일공개여부"th:checked="${data.session_m_birth_yn eq 'N'}">
                             <label for="N">비공개</label>
                         </div>
                     </div>
                     <div class="box_col">
                         <div class="flex_item">
                             <p class="birth_title">입사일자</p>
-                            <input type="date" id="mJoinCompDt" data-name="입사일자"  class="login_input" th:value="${data.session_m_join_comp_dt}">
+                            <input type="date" id="m_join_comp_dt" data-name="입사일자" th:value="${data.session_m_join_comp_dt}">
                         </div>
                         <div class="flex_item">
                             <p class="birth_title">휴가잔여일수</p>
-                            <input type="text" id="mVactCnt" data-name="입사일자"  class="login_input" th:value="${data.session_m_vact_cnt}">
+                            <input type="text" id="m_vact_cnt" data-name="입사일자" th:value="${data.session_m_vact_cnt}">
                         </div>
                     </div>
                 </div>
@@ -57,25 +78,104 @@
                 </div>
             </div>
             <div class="bottom_btn">
-                <input type="button" value="저장">
-                <input type="button" value="탈퇴">
+                <input type="button" value="저장" onclick="valueChange();">
+                <input type="button" value="탈퇴" onclick="quit();">
             </div>
         </div>
     </div>
-<script type="text/javascript">
+    </form>
+<script th:inline="javascript">
 document.addEventListener("DOMContentLoaded", function(){
-    document.getElementById("mEmailChk").style.display = 'none';
-    document.getElementById("confirmAuthBtn").style.display = 'none';
-    // getMypage();
+    
 });
 
 /* ****************************************
- * 화면 불러올 때, 회원정보 값 불러오기
+ * 값 변경되었을때 save로 값 넘기기
+ * 원래 가지고 있던 data값과 비교해서 변경되었는지 확인하기
+ * ************************************** */
+const data =[[${data}]];
+
+function valueChange(){
+    //session에서 필요없는 부분은 삭제 => spread ... 함수 사용
+    const  {session_m_del_yn, ...rest1 } = data;
+    const  {session_m_seq, ...rest2 } = rest1;
+    const  {sessionLogin, ...dataObj } = rest2;
+
+    //나중에 if문 안에 코드 넣기
+    // if(fn_dataChk(formData)){}
+    
+    let m_birth_yn_val = document.querySelector('input[name="m_birth_yn"]:checked').value;
+    document.getElementById("m_birth_yn").value = m_birth_yn_val;
+
+    let changeObj = new Object();
+    for(key in dataObj){
+        //세션에서 가져온 키값을 잘라서, id값으로 넣은 후 해당하는 value값 가져오기
+        //value값이 변경되었다면, 변경된 것들만 chageObj에 넣기
+        let idKey = key.slice(8);   
+        let idVal = document.getElementById(idKey).value;
+        if(dataObj[key] != idVal){
+            changeObj[idKey] = idVal;
+        }
+    }
+
+    save(chagneObj);
+}
+
+//닉네임, 이메일 값 변경 시, 스타일 변경
+function styleChange(value, type){
+    if(type == 'nick'){
+        if(value != data.session_m_nickname){
+            document.getElementById('nickChk').style.display = "";
+            document.getElementById('nickChk_info').style.display = "";
+            nickChk_info.dataset.dupl = 'N';
+        }else{
+            document.getElementById('nickChk').style.display = "none";
+            document.getElementById('nickChk_info').style.display = "none";
+            nickChk_info.dataset.dupl = 'Y';
+        }
+    } else if(type == 'email'){
+        if(value != data.session_m_email){
+            //보이는경우
+            document.getElementById('sendBtn').style.display = "";
+            document.getElementById('mEmailChk').style.display = "";
+            document.getElementById("confirmAuthBtn").style.display = "";
+            document.getElementById('emailChk_info').style.display = "";
+            emailChk_info.dataset.dupl = 'N';
+        }else{
+            //안보이는경우
+            document.getElementById('sendBtn').style.display = "none";
+            document.getElementById('mEmailChk').style.display = "none";
+            document.getElementById("confirmAuthBtn").style.display = "none";
+            document.getElementById('emailChk_info').style.display = "none";
+            emailChk_info.dataset.dupl = 'Y';
+        }
+    }
+}
+
+function save(obj){
+    ajaxData = obj;
+    console.log(JSON.stringify(ajaxData));
+    return false;
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : "url을 바꿔야합니다~!",
+        data : JSON.stringify(ajaxData),
+        dataType : 'json',
+        success: function(rslt){
+        },
+        error : function(request, status, error){
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+        }
+    });
+}
+
+
+/* ****************************************
+ * sample ajax 
  * ************************************** */
 function getMypage(){
-    let inputMSeq = document.getElementById("P_mSeq").value;
-    ajaxData = {mSeq : inputMSeq};
-
+    ajaxData = {dd : aa }
     $.ajax({
         type : "POST",
         contentType : "application/json",
@@ -87,11 +187,11 @@ function getMypage(){
         error : function(request, status, error){
             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
         }
-    })
-
-
+    });
 }
 
+
     </script>
+    <script type="text/javascript" th:src="@{/js/member.js}"></script>
     </th:block>
 </html>

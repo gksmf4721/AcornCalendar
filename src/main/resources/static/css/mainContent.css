@@ -76,7 +76,7 @@
 .main_content_m > .main_item {width: 1159px;height: 620px;margin: auto;}
 
 .mypage_content{display:inline-flex; padding:10px; justify-content: space-around;width: -webkit-fill-available; align-items: stretch;}
-.mypage_content input{width: 635px;height: 40px; margin-top: 10px;}
+.mypage_content input{width: 635px;height: 40px;}
 .mypage_content input[type='date']{width:618px;}
 .mypage_content input[type='radio']{width:20px; height:20px}
 .mypage_content button{background-color: #44413e; color: #fff;height: 36px;width: 60px;cursor: pointer;font-size: 13px;vertical-align: middle;border: 1px solid #44413e;margin-left: 15px;}
@@ -92,3 +92,10 @@
 .bottom_btn{text-align: center;margin-top:40px;}
 .bottom_btn input[type="button"]:first-child{background-color: #373029; color:#fff  }
 .bottom_btn input[type="button"]{background-color: #fff; color:#373029;width: 50px;height: 33px;font-size: 20px;}
+.chk_befo{font-size: 13px; color:red;}
+.mypage_content .item{padding: 30px 0px 0px 20px;}
+
+/* 마이페이지 정보 입력 */
+.my_profile_list > li{position: relative; padding-left: 80px;}
+.my_profile_list > li > h4{position: absolute; top: 0; left: 0; line-height: 30px;}
+.my_profile_list > li + li{margin-top: 20px;}

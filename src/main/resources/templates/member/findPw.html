@@ -33,13 +33,13 @@
 		//인증번호 전송
 		let sendBtn = document.getElementById("sendBtn");
 		sendBtn.addEventListener('click',() => {
-			sendMail('P');
+			sendMail('mEmail','P');
 		});
 
 		//인증번호 확인
 		let chkBtn = document.getElementById("chkBtn");
 		chkBtn.addEventListener('click',() => {
-			confirmMail('P');
+			confirmMail("mEmail",'P');
 		});
 
 		//비밀번호 변경

@@ -54,8 +54,8 @@
     }
 
 	//아이디찾기&비밀번호찾기&회원가입 => 이메일 보내기
-	function sendMail(mtype){
-		let email = document.getElementById("mEmail").value;
+	function sendMail(emailId, mtype){
+		let email = document.getElementById(emailId).value;
 		if(email === ""){ $.alertError("이메일을 입력해주세요"); return;}
 
         ajaxData = {mEmail:email, type:mtype}
@@ -71,7 +71,7 @@
                     if(mtype == 'J'){
                         document.getElementById("mEmailChk").style.display = '';
                         document.getElementById("confirmAuthBtn").style.display = '';
-                        document.getElementById("mEmail").readOnly = true;
+                        document.getElementById(emailId).readOnly = true;
                     }
 					$.alertSuccess(rslt.resultMsg);
 				} else {
@@ -82,11 +82,10 @@
 	}
 
     //아이디찾기&비밀번호찾기&회원가입 => 인증번호 확인
-	function confirmMail(mtype){
-		let email = document.getElementById("mEmail").value;
+	function confirmMail(emailId, mtype){
+		let email = document.getElementById(emailId).value;
 		let emailChk = document.getElementById("mEmailChk").value;
         let emailChk_info = document.getElementById("emailChk_info");
-
 		if(emailChk === ""){ $.alertError("인증번호를 입력해주세요"); return;}
 
         ajaxData = {mEmail:email, inputAuth:emailChk, type:mtype}
