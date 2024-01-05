@@ -25,6 +25,11 @@ function modalSlide(info, type, openYn){
             endDate.value = info.dateStr;
             startTime.value = hourMinFormat(new Date());
             endTime.value = hourMinFormat(t_hour);
+
+            document.getElementById("cAddBtn1").style.display = "";
+            document.getElementById("cAddBtn2").style.display = "none";
+            document.getElementById("cAddBtn3").style.display = "none";
+            
         } else if(type == "E"){
             title.value = info.event.title;
             startDate.value = dateFormat(nvl(info.event.start));
@@ -34,6 +39,12 @@ function modalSlide(info, type, openYn){
             alldayCheck.checked = info.event.allDay;
             content.innerHTML = info.event.extendedProps.contCont;
             cateTypeId.value = info.event.extendedProps.calDetailType;
+
+            document.getElementById("cAddBtn1").style.display = "none";
+            document.getElementById("cAddBtn2").style.display = "";
+            document.getElementById("cAddBtn3").style.display = "";
+            document.getElementById("cAddBtn3").dataset.delt = info.event.extendedProps.contSeq;
+            
         }
         body.classList.add('modalAct');
     } else {
@@ -59,6 +70,7 @@ function valueReset(type){
         cateTypeId.value = "";
         startTime.disabled = false;
         endTime.disabled = false;
+        document.getElementById("cAddBtn3").dataset.delt = "";
 	}
     //종일체크버튼 클릭 시, 시간만 리셋되도록 만들기
     startTime.value = ""
@@ -68,7 +80,7 @@ function valueReset(type){
 /* ****************************************
  *  일정 등록하기
  * ************************************** */
-function regiEvent(){
+function regiEvent(type){
     //필수입력 검사 => 나중에 if문 안에 value값 체크하는것 집어넣기
     //if(fn_dataChk(formData)){console.log('a')}
     let inputcalSeq = document.getElementById("P_CalSeq").value;        //캘린더 시퀀스
@@ -100,14 +112,28 @@ function regiEvent(){
         calDetailType : inputcalDetailType,
         contAlldayYn : inputcontAlldayYn
     }
+    console.log("캘린더 저장할 때 넘기는 값::");
+    console.log(JSON.stringify(ajaxData));
+    let ajaxUrl = "";
+    let text = "";
+    if(type == 'N'){
+        ajaxUrl = "/cont.json";
+        text = "저장되었습니다!"
+    } else {
+        //수정할 때 넘길 url만 추가하면 됨
+        ajaxUrl = "";
+        text = "수정되었습니다!";
+    }   
     $.ajax({
         type : "POST",
         contentType : "application/json",
-        url : '/cont.json',
+        url : ajaxUrl,
         data : JSON.stringify(ajaxData),
         dataType : 'json',
         success : function(rslt){
-            console.log(rslt);
+            $.alertSuccess(text);
+            calendarRender();
+            modalSlide('', '', 'N');
         },
         error : function(request, status, error){
             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
@@ -115,7 +141,29 @@ function regiEvent(){
     });
 }
 
+function deltEvent(){
+    let ajaxUrl = "";
+    let inputContSeq = document.getElementById("cAddBtn3").dataset.delt;
+    let text = "삭제되었습니다!";
+    ajaxData = {contSeq : inputContSeq}
+    console.log(JSON.stringify(ajaxData));
 
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : ajaxUrl,
+        data : JSON.stringify(ajaxData),
+        dataType : 'json',
+        success : function(rslt){
+            $.alertSuccess(text);
+            calendarRender();
+            modalSlide('', '', 'N');
+        },
+        error : function(request, status, error){
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+        }
+    });
+}
 
 /* ****************************************
  *  JSON으로 일정 넘기기

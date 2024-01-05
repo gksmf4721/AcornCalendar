@@ -30,7 +30,6 @@ const calendarOption = {
     },
     //기존 이벤트 가져오기
     events: function(info, successCallback, failureCallback){
-        console.log(info);
         getEventList(info, successCallback, failureCallback);
     },
 }
@@ -44,13 +43,7 @@ const s_calendarOption = {
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
-    var s_calendarEl = document.getElementById('smallCalendar'); // calendar 요소 가져오기
-    var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
-    var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
-    calendar.render();      //calendar 렌더링
-    s_calendar.render();      //작은 calendar 렌더링
-    
+    calendarRender();
     var $div = document.createElement("div");                   //$div 하나 생성
     var body  = document.querySelector('.container_wrap');          
     $div.setAttribute('id', 'overlay');                         //$div id='overlay' 요소 추가
@@ -59,29 +52,37 @@ document.addEventListener('DOMContentLoaded', function(){
     $div.addEventListener('click',() => {
         modalSlide('','', 'N');
     });
-
-     // 왼쪽,오른쪽 버튼을 클릭하였을 경우        
-    $("button.fc-prev-button, button.fc-next-button, button.fc-today-button, button.fc-prevYear-button, button.fc-nextYear-button").click(function() {
-        firstLastDay();
-    });
+    //  // 왼쪽,오른쪽 버튼을 클릭하였을 경우        
+    // $("button.fc-prev-button, button.fc-next-button, button.fc-today-button, button.fc-prevYear-button, button.fc-nextYear-button").click(function() {
+    //     getEventList();
+    // });
 });
 
-function firstLastDay(){
-    var currentDate = calendar.getDate();
-    var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
-    var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
-    var daysAgo = new Date(firstDayOfMonth);
-    daysAgo.setDate(firstDayOfMonth.getDate() - firstDayOfDay);   //현재월의 1일에서 해당하는 요일만큼 빼기 :: 캘린더의 첫번째 일요일 날짜가 나옴
-    var formattedDate = daysAgo.toISOString().split('T')[0];    //포맷팅
-    console.log('캘린더에서 보이는 진짜 첫번째 날짜 ::' + formattedDate);
-
-    var lastDayOfMonth = new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0);
-    var lastDayOfDay = 7 - lastDayOfMonth.getDay();
-    var daysAhead = new Date(lastDayOfMonth);
-    daysAhead.setDate(lastDayOfMonth.getDate() + lastDayOfDay);
-    var formattedLastDayOfMonth = daysAhead.toISOString().split('T')[0];
-    console.log("캘린더에서 보이는 진짜 마지막 날짜 :: " + formattedLastDayOfMonth)
+function calendarRender(){
+    var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
+    var s_calendarEl = document.getElementById('smallCalendar'); // calendar 요소 가져오기
+    var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
+    var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
+    calendar.render();      //calendar 렌더링
+    s_calendar.render();      //작은 calendar 렌더링
 }
+
+// function firstLastDay(){
+//     var currentDate = calendar.getDate();
+//     var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
+//     var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
+//     var daysAgo = new Date(firstDayOfMonth);
+//     daysAgo.setDate(firstDayOfMonth.getDate() - firstDayOfDay);   //현재월의 1일에서 해당하는 요일만큼 빼기 :: 캘린더의 첫번째 일요일 날짜가 나옴
+//     var formattedDate = daysAgo.toISOString().split('T')[0];    //포맷팅
+//     console.log('캘린더에서 보이는 진짜 첫번째 날짜 ::' + formattedDate);
+
+//     var lastDayOfMonth = new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0);
+//     var lastDayOfDay = 7 - lastDayOfMonth.getDay();
+//     var daysAhead = new Date(lastDayOfMonth);
+//     daysAhead.setDate(lastDayOfMonth.getDate() + lastDayOfDay);
+//     var formattedLastDayOfMonth = daysAhead.toISOString().split('T')[0];
+//     console.log("캘린더에서 보이는 진짜 마지막 날짜 :: " + formattedLastDayOfMonth)
+// }
 
 function headerType(calendar){
     var calendarType = calendar.view.type;
@@ -92,36 +93,43 @@ function headerType(calendar){
 
 }
 
-//데이터 json 가져오기
-// function getEventList(info, successCallback, failureCallback) {
-//     $.ajax({
-//         type : "get",
-//         url : "/json/calendarEvent.json",
-//         success : function(response){
-//             console.log(response)
-//             successCallback(response);
-//         },
-//         error : function(err){
-//             failureCallback(err);
-//         }
-//     });
-// }
-
 function getEventList(info, successCallback, failureCallback) {
     let inputCalSeq = document.getElementById("P_CalSeq").value;
     let inputmSeq = document.getElementById("P_mSeq").value;
 
-    let param = "calSeq="+inputCalSeq+"&mSeq="+inputmSeq+"&contStartDt=2023-01-01&contEndDt=2024-12-31"
-    console.log(param);
+    //캘린더의 첫번째 날짜, 마지막 날짜 가지고오기
+    let first = info.startStr.indexOf("T")
+    let last = info.endStr.indexOf("T")
+    first = info.startStr.substring(0, first)
+    last = info.endStr.substring(0, last);
+
+    let param = "calSeq="+inputCalSeq+"&mSeq="+inputmSeq;
+    let param2 = "&contStartDt="+first +"&contEndDt="+last;
     $.ajax({
         type : "get",
-        url : "/cont.json?" + param,
+        url : "/cont.json?" + param + param2,
         success : function(response){
-            console.log(response.data.items);
+            let list = response.data.items;
+            let resultArr = [];
+            for(let i=0; i<list.length; i++){
+
+                //일정에서 시각이 null 인 경우 없애고, 있는 경우 "T" 붙이기
+                list[i].contStartTm = list[i].contStartTm == null ? "" : "T" + list[i].contStartTm;
+                list[i].contEndTm = list[i].contEndTm == null ? "" : "T" + list[i].contEndTm;
+                allDayParam = list[i].contAlldayYn == "Y" ? true : false;
+
+                //일정에 들어갈 시간 형식에 맞춰서 변경
+                let startParam = list[i].contStartDt.split(" ")[0] + list[i].contStartTm;
+                let endParam = list[i].contEndDt.split(" ")[0] + list[i].contEndTm;
+                
+                list[i].start = startParam;
+                list[i].end = endParam;
+                list[i].allDay = allDayParam;
+            }
             successCallback(response.data.items);
         },
         error : function(err){
-            console.log(err);
+            failureCallback(err);
         }
     });
 }

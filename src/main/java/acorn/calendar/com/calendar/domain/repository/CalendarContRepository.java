@@ -15,11 +15,14 @@ import java.util.stream.Collectors;
 
 public interface CalendarContRepository extends JpaRepository<CalendarContEntity, Long> {
 
-//    List<CalendarContEntity> findByContStartDtBetweenOrContEndDtBetweenAndContDelYnAndCalSeq(
-//            Date contStartDt1, Date contEndDt1, Date contStartDt2, Date contEndDt2, String contDelYn, long calSeq);
+    // List<CalendarContEntity>
+    // findByContStartDtBetweenOrContEndDtBetweenAndContDelYnAndCalSeq(
+    // Date contStartDt1, Date contEndDt1, Date contStartDt2, Date contEndDt2,
+    // String contDelYn, long calSeq);
 
     @Query("SELECT ce FROM JH_CAL_CONT ce WHERE " +
-            "((ce.contStartDt BETWEEN :contStartDt1 AND :contEndDt1) OR (ce.contEndDt BETWEEN :contStartDt2 AND :contEndDt2)) " +
+            "((ce.contStartDt BETWEEN :contStartDt1 AND :contEndDt1) OR (ce.contEndDt BETWEEN :contStartDt2 AND :contEndDt2)) "
+            +
             "AND ce.contDelYn = :contDelYn " +
             "AND ce.calSeq = :calSeq")
     List<CalendarContEntity> findByContStartDtBetweenOrContEndDtBetweenAndContDelYnAndCalSeq(
@@ -28,13 +31,17 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
             @Param("contStartDt2") Date contStartDt2,
             @Param("contEndDt2") Date contEndDt2,
             @Param("contDelYn") String contDelYn,
-            @Param("calSeq") long calSeq
-    );
+            @Param("calSeq") long calSeq);
+
     default CalendarContEntity returnCalendarEntity(CalendarVO.Jh_Cal_Cont_Calendar vo) throws ParseException {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDt = sdf.parse(vo.getContStartDt().toString());
-        Date endDt = sdf.parse(vo.getContEndDt().toString());
+        // 2024 - 01 - 05 효니 수정
+        // 이 부분은 효니가 이미 시작하는 날짜랑 마지막날짜를 잘라서 주기 때문에 재욱이가 이렇게 자를 필요가 없어! 그래서 효니가 주석처리하고,
+        // contStartTm, contEndTm안에 그냥 vo에서 가져온 값으로 넣엇어!
+
+        // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        // Date startDt = sdf.parse(vo.getContStartDt().toString());
+        // Date endDt = sdf.parse(vo.getContEndDt().toString());
 
         return CalendarContEntity.builder()
                 .contSeq(vo.getContSeq())
@@ -42,8 +49,8 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
                 .mSeq(vo.getMSeq())
                 .contCont(vo.getContCont())
                 .contTitle(vo.getContTitle())
-                .contStartDt(startDt)
-                .contEndDt(endDt)
+                .contStartDt(vo.getContStartDt())
+                .contEndDt(vo.getContEndDt())
                 .contStartTm(vo.getContStartTm())
                 .contEndTm(vo.getContEndTm())
                 .contDelYn(vo.getContDelYn())
@@ -53,7 +60,7 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
     }
 
     default List<CalendarDTO.Jh_Cal_Cont_Calendar_Response> findCalendarEntitiesBy(
-            String contDelYn, long calSeq, Date contStartDt, Date contEndDt){
+            String contDelYn, long calSeq, Date contStartDt, Date contEndDt) {
         contStartDt = format(contStartDt);
         contEndDt = format(contEndDt);
 
@@ -64,15 +71,15 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
                 .collect(Collectors.toList());
     }
 
-    default Date format(Date date){
+    default Date format(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formatDate = sdf.format(date);
 
         Date parse = null;
 
-        try{
+        try {
             parse = sdf.parse(formatDate);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return parse;
