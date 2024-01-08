@@ -44,4 +44,16 @@
 		WHERE M_ID = #{mId}
 		AND M_DEL_YN = 'N'
 	</select>
+
+	<update id="updateMypage" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		SET M_NAME = #{m_name},
+		    M_NICKNAME = #{m_nickname},
+		    M_EMAIL = #{m_email},
+		    M_BIRTH = #{m_birth},
+		    M_BIRTH_YN = #{m_birth_yn},
+		    M_JOIN_COMP_DT = #{m_join_comp_dt},
+		    M_VACT_CNT = #{m_vact_cnt}
+		WHERE M_SEQ = #{m_seq}
+	</update>
 </mapper>

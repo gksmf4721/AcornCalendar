@@ -14,10 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import acorn.calendar.com.member.service.MemberService;
 import acorn.calendar.config.data.AcornMap;
@@ -153,5 +150,13 @@ public class MemberController {
 		// 2024-01-03 효니 :: 마이페이지 처음 띄울때, 회원번호 필요해서 추가함
 		model.addAttribute("data", acornMap);
 		return "member/mypage";
+	}
+
+	@PostMapping("/mypage.json")
+	public void mypage(@RequestBody String json, HttpServletResponse response) throws Exception {
+		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		AcornMap resultMap = new AcornMap();
+		resultMap.put("resultCd", memberService.updateMypage(acornMap));
+		ResponseUtils.jsonMap(response, resultMap);
 	}
 }
