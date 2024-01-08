@@ -7,6 +7,7 @@ const headerToolbar = {
 
 //캘린더 생성 옵션
 const calendarOption = {
+    initialDate : new Date(),
     height: '750px',                                    //높이 설정
     initialView : 'dayGridMonth',                       //초기 로드 될때 보이는 캘린더 화면 (기본 설정 : 달)
     headerToolbar : headerToolbar,                      //헤더 툴바 설정
@@ -18,7 +19,7 @@ const calendarOption = {
     weekends : true,                                    //초기에 주말 보이기
     dayMaxEvents: true,                                 //이벤트가 많이 추가되면 높이 제한
     showNonCurrentDates : true,                         //전달까지 보이기
-    fixedWeekCount : false,
+    fixedWeekCount : false,                             
     //날짜 클릭 시, 이벤트 추가 
     dateClick : function(info){
         //모달 열기 :: 신규
@@ -58,39 +59,17 @@ document.addEventListener('DOMContentLoaded', function(){
     // });
 });
 
-function calendarRender(){
+function calendarRender(date){
+    calendarOption.initialDate = date;
+
     var calendarEl = document.getElementById('calendar'); // calendar 요소 가져오기
     var s_calendarEl = document.getElementById('smallCalendar'); // calendar 요소 가져오기
     var calendar = new FullCalendar.Calendar(calendarEl, calendarOption);   //옵션 넣은 calendar 요소 가져오기
-    var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
+    if(s_calendarEl != null){
+        var s_calendar = new FullCalendar.Calendar(s_calendarEl, s_calendarOption);   //옵션 넣은 calendar 요소 가져오기
+        s_calendar.render();      //작은 calendar 렌더링
+    }
     calendar.render();      //calendar 렌더링
-    s_calendar.render();      //작은 calendar 렌더링
-}
-
-// function firstLastDay(){
-//     var currentDate = calendar.getDate();
-//     var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
-//     var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
-//     var daysAgo = new Date(firstDayOfMonth);
-//     daysAgo.setDate(firstDayOfMonth.getDate() - firstDayOfDay);   //현재월의 1일에서 해당하는 요일만큼 빼기 :: 캘린더의 첫번째 일요일 날짜가 나옴
-//     var formattedDate = daysAgo.toISOString().split('T')[0];    //포맷팅
-//     console.log('캘린더에서 보이는 진짜 첫번째 날짜 ::' + formattedDate);
-
-//     var lastDayOfMonth = new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0);
-//     var lastDayOfDay = 7 - lastDayOfMonth.getDay();
-//     var daysAhead = new Date(lastDayOfMonth);
-//     daysAhead.setDate(lastDayOfMonth.getDate() + lastDayOfDay);
-//     var formattedLastDayOfMonth = daysAhead.toISOString().split('T')[0];
-//     console.log("캘린더에서 보이는 진짜 마지막 날짜 :: " + formattedLastDayOfMonth)
-// }
-
-function headerType(calendar){
-    var calendarType = calendar.view.type;
-
-    //월 :: dayGridMonth
-    //주 :: dayGridWeek
-    //일 :: timeGridDay
-
 }
 
 function getEventList(info, successCallback, failureCallback) {
@@ -109,6 +88,7 @@ function getEventList(info, successCallback, failureCallback) {
         type : "get",
         url : "/cont.json?" + param + param2,
         success : function(response){
+            console.log(response.data.items);
             let list = response.data.items;
             let resultArr = [];
             for(let i=0; i<list.length; i++){
@@ -133,3 +113,30 @@ function getEventList(info, successCallback, failureCallback) {
         }
     });
 }
+
+
+// function firstLastDay(){
+//     var currentDate = calendar.getDate();
+//     var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);  //현재월의 1일을 가져와서 Date 타입으로 변경
+//     var firstDayOfDay = firstDayOfMonth.getDay() - 1;    //현재1일의 요일을 가져오기(일:0 ~ 토:6) 거기서 -1 하기 (시작이 0이기 때문)
+//     var daysAgo = new Date(firstDayOfMonth);
+//     daysAgo.setDate(firstDayOfMonth.getDate() - firstDayOfDay);   //현재월의 1일에서 해당하는 요일만큼 빼기 :: 캘린더의 첫번째 일요일 날짜가 나옴
+//     var formattedDate = daysAgo.toISOString().split('T')[0];    //포맷팅
+//     console.log('캘린더에서 보이는 진짜 첫번째 날짜 ::' + formattedDate);
+
+//     var lastDayOfMonth = new Date(firstDayOfMonth.getFullYear(), firstDayOfMonth.getMonth() + 1, 0);
+//     var lastDayOfDay = 7 - lastDayOfMonth.getDay();
+//     var daysAhead = new Date(lastDayOfMonth);
+//     daysAhead.setDate(lastDayOfMonth.getDate() + lastDayOfDay);
+//     var formattedLastDayOfMonth = daysAhead.toISOString().split('T')[0];
+//     console.log("캘린더에서 보이는 진짜 마지막 날짜 :: " + formattedLastDayOfMonth)
+// }
+
+// function headerType(calendar){
+//     var calendarType = calendar.view.type;
+
+    //월 :: dayGridMonth
+    //주 :: dayGridWeek
+    //일 :: timeGridDay
+
+// }

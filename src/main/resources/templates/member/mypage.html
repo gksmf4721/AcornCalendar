@@ -156,11 +156,9 @@ function valueChange(){
 function save(obj){
     ajaxData = obj;
     console.log(JSON.stringify(ajaxData));
-
-    console.log(Object.keys(ajaxData).length);
-
     if(Object.keys(ajaxData).length == 0){
-        $.alertError("저장할 내용이 없습니다.")
+        $.alertError("저장할 내용이 없습니다.");
+        return false;
     }else{
         $.ajax({
             type : "POST",
@@ -181,13 +179,13 @@ function save(obj){
 function quitConfirm(){
     $.confirm("탈퇴하시겠습니까?", "지금까지 AcornCalendar를 이용해주셔서 감사합니다. 탈퇴하시면 저장하신 캘린더 내용은 모두 삭제됩니다.")
         .then(result => {
-                        if(result){
-                            quit();
-                        }else{
-                            swal("휴 ㅎㅎ 떠나지마세요 ㅠㅜ", {icon : "error"});
-                        }
-                    }
-            );
+                if(result){
+                    quit();
+                }else{
+                    swal("휴 ㅎㅎ 떠나지마세요 ㅠㅜ", {icon : "error"});
+                }
+            }
+        );
 }
 
 function quit(){

@@ -17,11 +17,11 @@
 				<div class="w_modal">
 					<div class="w_modal_item">
 						<h4>입사일자</h4>
-						<h5>2023.12.23</h5>
+						<h5 th:text="${data.session_m_join_comp_dt}"></h5>
 					</div>
 					<div class="w_modal_item">
-						<h4>총 휴가 일수</h4>
-						<h5>150만개</h5>
+						<h4>올해 휴가 잔여일수</h4>
+						<h5><span th:text="${data.session_m_vact_cnt}"></span> 개</h5>
 					</div>
 					<div class="w_modal_item">
 						<h4>남은 휴가 일수</h4>
@@ -29,7 +29,6 @@
 					</div>
 				</div>
             </div>
-
 			<!-- <div class="w_main_item">
 				<div class="w_myCal">
                     <h3>내 캘린더</h3>
@@ -55,9 +54,6 @@
 					<div class="modalBtn"><input type="button" onclick="saveCalType();" value="저장"></div>
 				</div>
             </div> -->
-
-
-
 
 			<div class="main_item">
 				<div class="w_title cal">
@@ -118,10 +114,10 @@
 					</div>
 				</div>
 				<div class="modalBtn">
-					<input type="button" value="저장" id="cAddBtn1" onclick="regiEvent('N');">
-					<input type="button" value="수정" id="cAddBtn2" onclick="regiEvent('E');">
-					<input type="button" value="삭제" id="cAddBtn3" onclick="deltEvent();">
-					<button id="modalCloseButton" onclick="modalSlide('', '', 'N');">닫기</button>
+					<input type="button" value="저장" class="btn regi" id="cAddBtn1" onclick="regiEvent('N');">
+					<input type="button" value="수정" class="btn modi" id="cAddBtn2" onclick="regiEvent('E');">
+					<input type="button" value="삭제" class="btn delt" id="cAddBtn3" onclick="deltEvent();">
+					<input type="button" value="닫기" class="btn clos" id="modalCloseButton" onclick="modalSlide('', '', 'N');">
 				</div>
 			</div>
 		</aside>

@@ -70,7 +70,7 @@ function valueReset(type){
         cateTypeId.value = "";
         startTime.disabled = false;
         endTime.disabled = false;
-        document.getElementById("cAddBtn3").dataset.delt = "";
+        document.getElementById("cAddBtn3").dataset.delt = "";  //삭제할때 넣을 일정 시퀀스 값
 	}
     //종일체크버튼 클릭 시, 시간만 리셋되도록 만들기
     startTime.value = ""
@@ -83,16 +83,16 @@ function valueReset(type){
 function regiEvent(type){
     //필수입력 검사 => 나중에 if문 안에 value값 체크하는것 집어넣기
     //if(fn_dataChk(formData)){console.log('a')}
-    let inputcalSeq = document.getElementById("P_CalSeq").value;        //캘린더 시퀀스
-    let inputmSeq = document.getElementById("P_mSeq").value;            //일정 등록 회원 시퀀스
+    let inputcalSeq = document.getElementById("P_CalSeq").value;            //캘린더 시퀀스
+    let inputmSeq = document.getElementById("P_mSeq").value;                //일정 등록 회원 시퀀스
     let inputcontCont = document.getElementById("P_contCont").innerHTML;    //일정 내용
-    let inputcontTitle = title.value;                                   //제목
-    let inputcontStartDt = startDate.value;                             //시작 날짜
-    let inputcontEndDt = endDate.value;                                 //마감 날짜
-    let inputcontStartTm = startTime.value;                             //일정 시작 시각
-    let inputcontEndTm = endTime.value;                                 //일정 마감 시각
-    let inputcalDetailType = document.getElementById("cal_category").value;
-    let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";                    //종일 여부
+    let inputcontTitle = title.value;                                       //제목
+    let inputcontStartDt = startDate.value;                                 //시작 날짜
+    let inputcontEndDt = endDate.value;                                     //마감 날짜
+    let inputcontStartTm = startTime.value;                                 //일정 시작 시각
+    let inputcontEndTm = endTime.value;                                     //일정 마감 시각
+    let inputcalDetailType = document.getElementById("cal_category").value; //카테고리 종류
+    let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";        //종일 여부
 
     //종일버튼 체크 시, 시작시각&종료시각 null로 넣기
     if(inputcontAlldayYn == "Y"){
@@ -112,8 +112,10 @@ function regiEvent(type){
         calDetailType : inputcalDetailType,
         contAlldayYn : inputcontAlldayYn
     }
+
     console.log("캘린더 저장할 때 넘기는 값::");
     console.log(JSON.stringify(ajaxData));
+
     let ajaxUrl = "";
     let text = "";
     if(type == 'N'){
@@ -132,7 +134,7 @@ function regiEvent(type){
         dataType : 'json',
         success : function(rslt){
             $.alertSuccess(text);
-            calendarRender();
+            calendarRender(inputcontStartDt);
             modalSlide('', '', 'N');
         },
         error : function(request, status, error){
@@ -144,7 +146,9 @@ function regiEvent(type){
 function deltEvent(){
     let ajaxUrl = "";
     let inputContSeq = document.getElementById("cAddBtn3").dataset.delt;
+    let inputcontStartDt = startDate.value;                                 //시작 날짜
     let text = "삭제되었습니다!";
+
     ajaxData = {contSeq : inputContSeq}
     console.log(JSON.stringify(ajaxData));
 
@@ -156,7 +160,7 @@ function deltEvent(){
         dataType : 'json',
         success : function(rslt){
             $.alertSuccess(text);
-            calendarRender();
+            calendarRender(inputcontStartDt);
             modalSlide('', '', 'N');
         },
         error : function(request, status, error){

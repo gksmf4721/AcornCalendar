@@ -161,7 +161,10 @@
     }
 
     function sideActEvent(){
-        let active = document.getElementById("actSidebarData").dataset.sidebar;
-        let activeTarget = document.getElementById(active);
-        activeTarget.classList.add("main_selected");
+        if(document.getElementById("actSidebarData") != null){
+            let active = document.getElementById("actSidebarData").dataset.sidebar;
+            let activeTarget = document.getElementById(active);
+            activeTarget.classList.add("main_selected");
+        }
+        
     }

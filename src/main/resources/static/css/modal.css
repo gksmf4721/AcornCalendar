@@ -30,3 +30,9 @@ aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -38
 .m_date > input[type="date"]{width:calc(var(--modal_Tag_Width)/2 - 25px); margin-right:5px; padding-left: 1px; border:1px solid #a3a3a3;border-radius: 3px; background-position: right 3px center;}
 .m_date > input[type="time"]{width: calc(var(--modal_Tag_Width)/2 - 40px)};
 .m_wrap > input[type="date"] + input[type="date"]{margin-left: 5px;}
+
+.btn{border:none; font-size: 18px; cursor: pointer;}
+.btn.regi{background-color:#87abca;}
+.btn.modi{background-color:#abca87;}
+.btn.delt{background-color:#ca87ab;}
+.btn.clos{background-color:#878aca;}
