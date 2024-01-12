@@ -58,4 +58,8 @@ public class MemberService {
 		return sqlSession.selectOne("mapper.com.member.updateMypage",acornMap);
 	}
 
+	public int deleteMypage(AcornMap acornMap) throws Exception {
+		return sqlSession.selectOne("mapper.com.member.deleteMypage",acornMap);
+	}
+
 }

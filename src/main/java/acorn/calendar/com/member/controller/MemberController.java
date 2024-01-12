@@ -152,11 +152,20 @@ public class MemberController {
 		return "member/mypage";
 	}
 
-	@PostMapping("/mypage.json")
-	public void mypage(@RequestBody String json, HttpServletResponse response) throws Exception {
+	@PostMapping("/updateMypage.json")
+	public void updateMypage(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		AcornMap resultMap = new AcornMap();
 		resultMap.put("resultCd", memberService.updateMypage(acornMap));
+		ResponseUtils.jsonMap(response, resultMap);
+	}
+
+	@PostMapping("/deleteMypage.json")
+	public void delteMypage(@RequestBody String json, HttpServletResponse response) throws Exception {
+		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		AcornMap resultMap = new AcornMap();
+		resultMap.put("resultCd", memberService.deleteMypage(acornMap));
+		SessionUtils.getSession(false);
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 }

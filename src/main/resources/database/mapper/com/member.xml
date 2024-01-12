@@ -56,4 +56,11 @@
 		    M_VACT_CNT = #{m_vact_cnt}
 		WHERE M_SEQ = #{m_seq}
 	</update>
+
+	<update id="deleteMypage" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		SET M_DEL_YN = 'Y'
+		WHERE M_SEQ = #{m_seq}
+	</update>
+
 </mapper>
