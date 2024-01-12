@@ -55,7 +55,7 @@ public class MemberService {
 	}
 
 	public int updateMypage(AcornMap acornMap) throws Exception {
-		return sqlSession.selectOne("mapper.com.member.updateMypage");
+		return sqlSession.selectOne("mapper.com.member.updateMypage",acornMap);
 	}
 
 }
