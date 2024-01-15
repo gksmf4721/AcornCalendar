@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
@@ -172,9 +173,12 @@ public class MemberController {
 	@PostMapping("/testtt.json")
 	public void testtt(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
 		AcornMap resultMap = new AcornMap();
 		memberService.PROC_UPDATE_VACT_CNT(acornMap);
-		System.out.println("뭘까용?" + acornMap.get("RSLT"));
 
 		resultMap.put("resultData", acornMap.get("RSLT"));
 		ResponseUtils.jsonMap(response, resultMap);
