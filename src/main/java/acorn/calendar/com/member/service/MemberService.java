@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.Map;
+
 import javax.activation.DataSource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,14 +23,14 @@ public class MemberService {
 	@Autowired
 	private SqlSession sqlSession;
 
-
-	//@Transactional(rollbackFor={Exception.class}) // 기존 해당 어노테이션과 다르게 모든 Exception 을 rollback.
+	// @Transactional(rollbackFor={Exception.class}) // 기존 해당 어노테이션과 다르게 모든
+	// Exception 을 rollback.
 	public void insertMember(AcornMap acornMap, HttpServletRequest request) throws Exception {
 
-		try{
-			sqlSession.insert("mapper.com.member.insertMember",acornMap);
-			sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap,request));
-		}catch (Exception e){
+		try {
+			sqlSession.insert("mapper.com.member.insertMember", acornMap);
+			sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap, request));
+		} catch (Exception e) {
 			// sqlSession.rollback();
 		}
 
@@ -44,22 +46,29 @@ public class MemberService {
 
 	public int selectInputCheck(AcornMap acornMap) throws Exception {
 		int result = 0;
-		if(acornMap.getString("type").equals("id")) result = sqlSession.selectOne("mapper.com.member.selectIdCheck",acornMap);
-		else if(acornMap.get("type").equals("nickname")) result = sqlSession.selectOne("mapper.com.member.selectNicknameCheck",acornMap);
-		//else result = sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
+		if (acornMap.getString("type").equals("id"))
+			result = sqlSession.selectOne("mapper.com.member.selectIdCheck", acornMap);
+		else if (acornMap.get("type").equals("nickname"))
+			result = sqlSession.selectOne("mapper.com.member.selectNicknameCheck", acornMap);
+		// else result =
+		// sqlSession.selectOne("mapper.com.member.selectEmailCheck",acornMap);
 		return result;
 	}
 
 	public AcornMap selectLogin(AcornMap acornMap) throws Exception {
-		return sqlSession.selectOne("mapper.com.member.selectLogin",acornMap);
+		return sqlSession.selectOne("mapper.com.member.selectLogin", acornMap);
 	}
 
 	public int updateMypage(AcornMap acornMap) throws Exception {
-		return sqlSession.update("mapper.com.member.updateMypage",acornMap);
+		return sqlSession.update("mapper.com.member.updateMypage", acornMap);
 	}
 
 	public int deleteMypage(AcornMap acornMap) throws Exception {
-		return sqlSession.update("mapper.com.member.deleteMypage",acornMap);
+		return sqlSession.update("mapper.com.member.deleteMypage", acornMap);
+	}
+
+	public void PROC_UPDATE_VACT_CNT(AcornMap acornMap) throws Exception {
+		sqlSession.selectOne("mapper.com.member.PROC_UPDATE_VACT_CNT", acornMap);
 	}
 
 }

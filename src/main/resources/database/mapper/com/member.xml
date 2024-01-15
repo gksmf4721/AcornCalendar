@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.com.member">
 
-
 	<insert id="insertMember" parameterType="acornMap">
 		INSERT INTO JH_MEMBER
 			(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN, M_JOIN_COMP_DT, M_VACT_CNT)
@@ -62,5 +61,14 @@
 		SET M_DEL_YN = 'Y'
 		WHERE M_SEQ = #{m_seq}
 	</update>
+
+	<!--204-01-15 프로시저 연결-->
+	<select id="PROC_UPDATE_VACT_CNT" parameterType="acornMap" statementType="CALLABLE">
+		CALL PROC_UPDATE_VACT_CNT(
+		#{P_SEQ, 			mode=IN, 	jdbcType=numeric,	javaType=Integer},
+		#{P_JOIN_COMP_DT, 	mode=IN, 	jdbcType=DATE,		javaType=Date},
+		#{RSLT,				mode=OUT,	jdbcType=VARCHAR,	javaType=String}
+		)
+	</select>
 
 </mapper>

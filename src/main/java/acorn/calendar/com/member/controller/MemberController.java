@@ -168,4 +168,15 @@ public class MemberController {
 		SessionUtils.getSession(false);
 		ResponseUtils.jsonMap(response, resultMap);
 	}
+
+	@PostMapping("/testtt.json")
+	public void testtt(@RequestBody String json, HttpServletResponse response) throws Exception {
+		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		AcornMap resultMap = new AcornMap();
+		memberService.PROC_UPDATE_VACT_CNT(acornMap);
+		System.out.println("뭘까용?" + acornMap.get("RSLT"));
+
+		resultMap.put("resultData", acornMap.get("RSLT"));
+		ResponseUtils.jsonMap(response, resultMap);
+	}
 }

@@ -69,6 +69,13 @@
                             <input type="text" id="m_vact_cnt" data-name="입사일자" th:value="${data.session_m_vact_cnt}">
                         </div>
                     </div>
+                    <div class="box_col">
+                        <div class="flex_item">
+                            <p class="birth_title">월차인가요 연차인가요</p>
+                            <input type="text">
+                            <input type="button" onclick="testtt();" value="값 불러오기">
+                        </div>
+                    </div>
                 </div>
                 <div class="item" style="width:30%">
                     <div class="w_photo_m">
@@ -198,6 +205,24 @@ function quit(){
         dataType : 'json',
         success: function(rslt){
             $.alertSuccessRtn("탈퇴처리 되었습니다ㅜㅜ","/logout.do")
+        },
+        error : function(request, status, error){
+            $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+        }
+    });
+}
+
+function testtt(){
+    ajaxData2 = {};
+    ajaxData2 = {P_SEQ : 88, P_JOIN_COMP_DT : '2023-05-08'};
+    $.ajax({
+        type : "POST",
+        contentType : "application/json",
+        url : "/testtt.json",
+        data : JSON.stringify(ajaxData2),
+        dataType : 'json',
+        success: function(rslt){
+            $.alertSuccess(rslt.resultData);
         },
         error : function(request, status, error){
             $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
