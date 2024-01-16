@@ -173,14 +173,11 @@ public class MemberController {
 	@PostMapping("/testtt.json")
 	public void testtt(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
 		AcornMap resultMap = new AcornMap();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
 		memberService.PROC_UPDATE_VACT_CNT(acornMap);
-
-		resultMap.put("resultData", acornMap.get("RSLT"));
+		resultMap.put("resultCd","1");
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 }

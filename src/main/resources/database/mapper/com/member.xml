@@ -63,12 +63,11 @@
 	</update>
 
 	<!--204-01-15 프로시저 연결-->
-	<select id="PROC_UPDATE_VACT_CNT" parameterType="acornMap" statementType="CALLABLE">
+	<update id="PROC_UPDATE_VACT_CNT" parameterType="acornMap" statementType="CALLABLE">
 		CALL PROC_UPDATE_VACT_CNT(
-		#{P_SEQ, 			mode=IN, 	jdbcType=NUMERIC,	javaType=Integer},
-		#{P_JOIN_COMP_DT, 	mode=IN, 	jdbcType=DATE,		javaType=Date},
-		#{RSLT,				mode=OUT,	jdbcType=VARCHAR,	javaType=String}
-		)
-	</select>
+		#{P_SEQ, 					mode=IN, 	jdbcType=NUMERIC,	javaType=String},
+		#{P_JOIN_COMP_DT, 	mode=IN, 	jdbcType=DATE,		javaType=Date}
+		)	
+	</update>
 
 </mapper>

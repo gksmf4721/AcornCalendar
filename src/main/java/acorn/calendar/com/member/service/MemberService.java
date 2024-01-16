@@ -68,7 +68,7 @@ public class MemberService {
 	}
 
 	public void PROC_UPDATE_VACT_CNT(AcornMap acornMap) throws Exception {
-		sqlSession.selectOne("mapper.com.member.PROC_UPDATE_VACT_CNT", acornMap);
+		sqlSession.update("mapper.com.member.PROC_UPDATE_VACT_CNT", acornMap);
 	}
 
 }
