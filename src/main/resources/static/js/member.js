@@ -41,7 +41,7 @@
                             setCookie('id',0,0);
                         }
                         sessionStorage.setItem("id",inputId);
-                        location.href = rslt.resultUrl;
+                        testtt(rslt.rsltMSeq, rslt.rsltMJoinCompDt);
                     }else{
                         $.alertError(rslt.resultMsg);
                     }
@@ -51,6 +51,29 @@
                 }
             });
         }
+    }
+
+    
+    function testtt(mSeq, mJoinCompDt){
+        console.log(mSeq);
+        console.log(mJoinCompDt);
+        ajaxData = {P_SEQ : mSeq, P_JOIN_COMP_DT : mJoinCompDt};
+        $.ajax({
+            type : "POST",
+            contentType : "application/json",
+            url : "/testtt.json",
+            data : JSON.stringify(ajaxData),
+            dataType : 'json',
+            success: function(rslt){
+                if(rslt.resultCd == 1){
+                    location.href = rslt.resultUrl;
+                }
+                
+            },
+            error : function(request, status, error){
+                $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
+            }
+        });
     }
 
 	//아이디찾기&비밀번호찾기&회원가입 => 이메일 보내기

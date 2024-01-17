@@ -131,6 +131,8 @@ public class MemberController {
 				session.setAttribute("trashLetterDelete", true);
 				resultMap.put("resultCd", "1");
 				resultMap.put("resultUrl", "/main.do");
+				resultMap.put("rsltMSeq", resultMap.getString("M_SEQ"));
+				resultMap.put("rsltMJoinCompDt", resultMap.getString("M_JOIN_COMP_DT"));
 			} else {
 				resultMap.clear();
 				resultMap.put("resultMsg", "비밀번호를 확인해주세요");
@@ -177,7 +179,8 @@ public class MemberController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
 		memberService.PROC_UPDATE_VACT_CNT(acornMap);
-		resultMap.put("resultCd","1");
+		resultMap.put("resultCd", "1");
+		resultMap.put("resultUrl", "/main.do");
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 }
