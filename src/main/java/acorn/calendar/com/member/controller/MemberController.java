@@ -172,15 +172,23 @@ public class MemberController {
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 
-	@PostMapping("/testtt.json")
-	public void testtt(@RequestBody String json, HttpServletResponse response) throws Exception {
+	@PostMapping("/updateVacation.json")
+	public void updateVacation(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		AcornMap resultMap = new AcornMap();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
 		memberService.PROC_UPDATE_VACT_CNT(acornMap);
+
+		String type = acornMap.getString("P_type");
+		String resultUrl = "";
+		if (type == "login") {
+			resultUrl = "/main.do";
+		} else if (type == "mypage") {
+			resultUrl = "/mypage.do";
+		}
 		resultMap.put("resultCd", "1");
-		resultMap.put("resultUrl", "/main.do");
+		resultMap.put("resultUrl", resultUrl);
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 }

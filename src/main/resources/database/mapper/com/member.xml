@@ -65,8 +65,9 @@
 	<!--204-01-15 프로시저 연결-->
 	<update id="PROC_UPDATE_VACT_CNT" parameterType="acornMap" statementType="CALLABLE">
 		CALL PROC_UPDATE_VACT_CNT(
-		#{P_SEQ, 					mode=IN, 	jdbcType=NUMERIC,	javaType=String},
-		#{P_JOIN_COMP_DT, 	mode=IN, 	jdbcType=DATE,		javaType=Date}
+		#{P_SEQ, 			mode=IN, 	jdbcType=NUMERIC,	javaType=String},
+		#{P_JOIN_COMP_DT, 	mode=IN, 	jdbcType=DATE,		javaType=Date},
+		#{P_type, 			mode=IN, 	jdbcType=VARCHAR,	javaType=String}
 		)	
 	</update>
 

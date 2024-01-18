@@ -41,7 +41,7 @@
                             setCookie('id',0,0);
                         }
                         sessionStorage.setItem("id",inputId);
-                        testtt(rslt.rsltMSeq, rslt.rsltMJoinCompDt);
+                        updateVacation(rslt.rsltMSeq, rslt.rsltMJoinCompDt, 'login');
                     }else{
                         $.alertError(rslt.resultMsg);
                     }
@@ -54,21 +54,22 @@
     }
 
     
-    function testtt(mSeq, mJoinCompDt){
-        console.log(mSeq);
-        console.log(mJoinCompDt);
-        ajaxData = {P_SEQ : mSeq, P_JOIN_COMP_DT : mJoinCompDt};
+    function updateVacation(mSeq, mJoinCompDt, type){
+        ajaxData = {P_SEQ : mSeq, P_JOIN_COMP_DT : mJoinCompDt, P_type : type};
         $.ajax({
             type : "POST",
             contentType : "application/json",
-            url : "/testtt.json",
+            url : "/updateVacation.json",
             data : JSON.stringify(ajaxData),
             dataType : 'json',
             success: function(rslt){
-                if(rslt.resultCd == 1){
-                    location.href = rslt.resultUrl;
+                if(type == 'login'){
+                    if(rslt.resultCd == 1){
+                        location.href = rslt.resultUrl;
+                    }
+                } else if (type == 'mypage'){
+                    $.alertSuccessRtn("저장되었습니다", rslt.resultUrl);
                 }
-                
             },
             error : function(request, status, error){
                 $.alertError("javaScript error : "+ error + "request :" + request + "status : " + status);
