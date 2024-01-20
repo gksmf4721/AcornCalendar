@@ -7,6 +7,7 @@ const startTime = document.getElementById('cal_startTime');     //info.event.sta
 const endTime = document.getElementById('cal_endTime');         //info.event.end - 마감시간
 const content = document.getElementById("P_contCont");          //내용
 const cateTypeId = document.getElementById("cal_category");     //카테고리
+const contSeq = document.getElementById("cont_seq");            //내용 시퀀스
 
 /* ****************************************
  *  Modal function :: modalSlide
@@ -25,6 +26,7 @@ function modalSlide(info, type, openYn){
             endDate.value = info.dateStr;
             startTime.value = hourMinFormat(new Date());
             endTime.value = hourMinFormat(t_hour);
+            contSeq.value = "";
 
             document.getElementById("cAddBtn1").style.display = "";
             document.getElementById("cAddBtn2").style.display = "none";
@@ -39,6 +41,7 @@ function modalSlide(info, type, openYn){
             alldayCheck.checked = info.event.allDay;
             content.innerHTML = info.event.extendedProps.contCont;
             cateTypeId.value = info.event.extendedProps.calDetailType;
+            contSeq.value = info.event.extendedProps.contSeq;
 
             document.getElementById("cAddBtn1").style.display = "none";
             document.getElementById("cAddBtn2").style.display = "";
@@ -104,6 +107,7 @@ function regiEvent(type){
     let inputcontEndTm = endTime.value;                                     //일정 마감 시각
     let inputcalDetailType = document.getElementById("cal_category").value; //카테고리 종류
     let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";        //종일 여부
+    let inputcontSeq = contSeq.value;
 
     //종일버튼 체크 시, 시작시각&종료시각 null로 넣기
     if(inputcontAlldayYn == "Y"){
@@ -121,7 +125,8 @@ function regiEvent(type){
         contStartTm : inputcontStartTm,
         contEndTm : inputcontEndTm,
         calDetailType : inputcalDetailType,
-        contAlldayYn : inputcontAlldayYn
+        contAlldayYn : inputcontAlldayYn,
+        contSeq : inputcontSeq
     }
 
     console.log("캘린더 저장할 때 넘기는 값::");
