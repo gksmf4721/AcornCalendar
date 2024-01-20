@@ -23,10 +23,6 @@
 						<h4>올해 휴가 잔여일수</h4>
 						<h5><span th:text="${data.session_m_vact_cnt}"></span> 개</h5>
 					</div>
-					<div class="w_modal_item">
-						<h4>남은 휴가 일수</h4>
-						<h5>150만개-1개</h5>
-					</div>
 				</div>
             </div>
 			<!-- <div class="w_main_item">
@@ -99,7 +95,7 @@
 					</div>
 					<div class="m_wrap">
 						<span>카테고리</span>
-						<select id="cal_category" data-name="카테고리">
+						<select id="cal_category" data-name="카테고리" onchange="categoryChange(this);">
 							<option value="" selected>선택하세요</option>
 							<option value="S1">연차(월차)</option>
 							<option value="S2">반차</option>

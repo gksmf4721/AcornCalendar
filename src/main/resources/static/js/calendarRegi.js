@@ -56,6 +56,17 @@ function modalSlide(info, type, openYn){
     }
 }
 
+function categoryChange(){
+    let opt_val = cateTypeId.value;
+
+    if(opt_val == 'S1' || opt_val == 'S2'){
+        alldayCheck.checked = true;
+    }else{
+        alldayCheck.checked = false;
+    }
+    allDayCheck();
+}
+
 /* ****************************************
  * 값 리셋시키기
  * ************************************** */
@@ -123,7 +134,7 @@ function regiEvent(type){
         text = "저장되었습니다!"
     } else {
         //수정할 때 넘길 url만 추가하면 됨
-        ajaxUrl = "";
+        ajaxUrl = "/contUpdate.json";
         text = "수정되었습니다!";
     }   
     $.ajax({
