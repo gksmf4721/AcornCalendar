@@ -28,6 +28,15 @@ public class CalendarService {
         return acornMap;
     }
 
+    public void MyCalendarCheck(Long mSeq){
+        CalendarEntity entity = calendarRepository.findByCalDelYnAndSeqMake("N", mSeq);
+        if(entity == null){
+            CalendarVO.Jh_Cal_Calendar calendar = new CalendarVO.Jh_Cal_Calendar(mSeq,"N");
+            insertCalendar(calendar);
+        }
+    }
+
+
     public void insertCalendar(CalendarVO.Jh_Cal_Calendar calendar){
         calendar.setCalDelYn("N");
         calendarRepository.save(calendarRepository.returnCalendarEntity(calendar));

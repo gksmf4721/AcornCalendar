@@ -28,6 +28,11 @@ public class CalendarVO {
             this.calName = calName;
             this.calDelYn = calDelYn;
         }
+
+        public Jh_Cal_Calendar(long mSeqMake, String calDelYn){
+            this.mSeqMake = mSeqMake;
+            this.calDelYn = calDelYn;
+        }
     }
 
     @Data

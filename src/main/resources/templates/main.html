@@ -1,9 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{fragments/layout/main_layout}">
     <th:block layout:fragment="mainContent">
-        <!-- <input type="hidden" id="P_mSeq" th:value="${data.session_m_seq}"> -->
-        <!-- <input type="hidden" id="P_CalSeq" th:value="${calendar.cal_seq}"> -->
-        <input type="hidden" id="P_mSeq" th:value="4">
-        <input type="hidden" id="P_CalSeq" th:value="24">
+        <input type="hidden" id="P_mSeq" th:value="${data.session_m_seq}">
+        <input type="hidden" id="P_CalSeq" th:value="${calendar.cal_seq}">
         <div class="main_content">
             <!--회원 마이페이지-->
             <div class="main_item">
