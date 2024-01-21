@@ -60,11 +60,7 @@ public class CalendarContService {
 
         Double oriVactCnt = Double.parseDouble(LoginSession.getLoginSession().getM_vact_cnt());
 
-        System.out.println("기존 휴가 잔여 일수 : " + oriVactCnt);
-
         CalendarContEntity entity = calendarContRepository.findByContSeq(cont.getContSeq());
-
-        System.out.println("해당 이벤트 휴가 잔여 일 : " + entity.getContStartDt());
 
         Double vactCnt = 0.0;
 
@@ -77,23 +73,31 @@ public class CalendarContService {
                 long contDate = calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt());
 
                 if (entityDate > contDate) {
-
                     vactCnt = (entityDate - contDate) * 1.0;
-                    // 기존 vact_cnt = vact_cnt + (entityDate - contDate);
+
                 } else if (contDate > entityDate) {
                     vactCnt = (contDate - entityDate) * -1.0;
-                    // 기존 vact_cnt = vact_cnt - (contDate - entityDate);
+
                 }
+            } else {
+                vactCnt = calculateDaysDifference(entity.getContStartDt(), entity.getContEndDt()) * 1.0;
 
             }
-        }
-        if (entity.getCalDetailType().equals("S2")) {
+        } else if (entity.getCalDetailType().equals("S2")) {
             if (cont.getCalDetailType().equals("S1")) {
+                vactCnt = 0.5 + calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt()) * -1.0;
 
-                vactCnt = calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt()) + 0.5;
-
-            } else if (!cont.getCalDetailType().equals("S1")) {
+            } else if (!cont.getCalDetailType().equals("S2")) {
                 vactCnt = 0.5;
+
+            }
+        } else {
+            if (cont.getCalDetailType().equals("S1")) {
+                vactCnt = calculateDaysDifference(cont.contStartDt, cont.contEndDt) * -1.0;
+
+            } else if (cont.getCalDetailType().equals("S2")) {
+                vactCnt = -0.5;
+
             }
         }
 
@@ -104,7 +108,6 @@ public class CalendarContService {
         calendarContRepository.save(calendarContRepository.returnCalendarEntity(cont));
         sqlSession.update("mapper.com.member.updateVactCnt2", acornMap);
 
-        System.out.println("추가해야 하는 값 : " + vactCnt);
         LoginSession.getLoginSession().setM_vact_cnt(vactCnt.toString());
 
     }
