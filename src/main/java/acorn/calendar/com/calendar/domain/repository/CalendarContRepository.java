@@ -20,6 +20,8 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
     // Date contStartDt1, Date contEndDt1, Date contStartDt2, Date contEndDt2,
     // String contDelYn, long calSeq);
 
+    CalendarContEntity findByContSeq(long contSeq);
+
     @Query("SELECT ce FROM JH_CAL_CONT ce WHERE " +
             "((ce.contStartDt BETWEEN :contStartDt1 AND :contEndDt1) OR (ce.contEndDt BETWEEN :contStartDt2 AND :contEndDt2)) "
             +

@@ -56,6 +56,18 @@
 		WHERE M_SEQ = #{m_seq}
 	</update>
 
+	<update id="updateVactCnt" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		FROM JH_MEMBER
+		WHERE M_SEQ = #{m_seq}
+	</update>
+
+	<select id="selectVactCnt" parameterType="acornMap" resultType="acornMap">
+		SELECT M_VACT_CNT
+		FROM JH_MEMBER
+		WHERE M_SEQ = #{m_seq}
+	</select>
+
 	<update id="deleteMypage" parameterType="acornMap">
 		UPDATE JH_MEMBER
 		SET M_DEL_YN = 'Y'
@@ -70,5 +82,7 @@
 		#{P_type, 			mode=IN, 	jdbcType=VARCHAR,	javaType=String}
 		)	
 	</update>
+
+
 
 </mapper>
