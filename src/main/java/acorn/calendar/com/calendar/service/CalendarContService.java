@@ -102,7 +102,7 @@ public class CalendarContService {
         acornMap.put("m_vact_cnt", vactCnt);
 
         calendarContRepository.save(calendarContRepository.returnCalendarEntity(cont));
-        sqlSession.update("mapper.com.member.updateVactCnt", acornMap);
+        sqlSession.update("mapper.com.member.updateVactCnt2", acornMap);
 
         System.out.println("추가해야 하는 값 : " + vactCnt);
         LoginSession.getLoginSession().setM_vact_cnt(vactCnt.toString());

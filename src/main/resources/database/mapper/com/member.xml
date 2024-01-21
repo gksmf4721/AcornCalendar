@@ -58,7 +58,13 @@
 
 	<update id="updateVactCnt" parameterType="acornMap">
 		UPDATE JH_MEMBER
-		SET M_VACT_CNT = M_VACT_CNT + #{v_vact_cnt}
+		SET M_VACT_CNT = M_VACT_CNT - #{m_vact_cnt}
+		WHERE M_SEQ = #{m_seq}
+	</update>
+
+	<update id="updateVactCnt2" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		SET M_VACT_CNT = M_VACT_CNT + #{m_vact_cnt}
 		WHERE M_SEQ = #{m_seq}
 	</update>
 
