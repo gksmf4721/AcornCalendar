@@ -91,16 +91,26 @@ function getEventList(info, successCallback, failureCallback) {
             console.log(response.data.items);
             let list = response.data.items;
             let resultArr = [];
+            let endToDate = "";
+            let startParam = "";
+            let endParam = "";
             for(let i=0; i<list.length; i++){
 
-                // //일정에서 시각이 null 인 경우 없애고, 있는 경우 "T" 붙이기
+                //일정에서 시각이 null 인 경우 없애고, 있는 경우 "T" 붙이기
                 list[i].contStartTm = list[i].contStartTm == null ? "" : "T" + list[i].contStartTm;
                 list[i].contEndTm = list[i].contEndTm == null ? "" : "T" + list[i].contEndTm;
                 allDayParam = list[i].contAlldayYn == "Y" ? true : false;
 
                 //일정에 들어갈 시간 형식에 맞춰서 변경
-                let startParam = list[i].contStartDt.split(" ")[0] + list[i].contStartTm;
-                let endParam = list[i].contEndDt.split(" ")[0] + list[i].contEndTm;
+                //종일 => 마지막 날짜 + 1 해줘야함
+                if(allDayParam){
+                    endToDate = new Date(list[i].contEndDt.split(" ")[0]);
+                    startParam = list[i].contStartDt.split(" ")[0] + list[i].contStartTm;
+                    endParam=   dateFormat(endToDate, "Y") + list[i].contEndTm;
+                }else{
+                    startParam = list[i].contStartDt.split(" ")[0] + list[i].contStartTm;
+                    endParam =  endToDate + list[i].contEndTm;
+                }
                 
                 list[i].start = startParam;
                 list[i].end = endParam;

@@ -82,10 +82,10 @@ public class MailController {
                     cal.setTime(joinAuthCodeDate);
                     cal.add(Calendar.MINUTE,3);
 
-                    if(new Date().after(new Date(cal.getTimeInMillis()))){
-                        ResponseUtils.responseMap(response,"-1","인증 번호가 만료됐습니다.",null);
-                        return;
-                    }
+                    // if(new Date().after(new Date(cal.getTimeInMillis()))){
+                    //     ResponseUtils.responseMap(response,"-1","인증 번호가 만료됐습니다.",null);
+                    //     return;
+                    // }
                 }catch (NullPointerException ne){
                     ne.printStackTrace();
                     ResponseUtils.responseMap(response,"-1",ValidateUtils.validMsg("auth.confirm.101"),null);

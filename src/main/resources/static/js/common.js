@@ -121,7 +121,7 @@
 
 
     //날짜포맷변경함수 Date => YYYY-MM-DD로 변경
-    function dateFormat(date) {
+    function dateFormat(date, check) {
         let dateFormat1 = "";
         if(date == ""){
             dateFormat1 = "";
@@ -130,6 +130,13 @@
             dateFormat1= d1.getFullYear() +
                 '-' + ( (d1.getMonth()+1) < 9 ? "0" + (d1.getMonth()+1) : (d1.getMonth()+1) )+
                 '-' + ( (d1.getDate()) <= 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
+        }
+
+        if(check == "Y"){
+            const d2 = new Date(date);
+            dateFormat1= d2.getFullYear() +
+                '-' + ( (d2.getMonth()+1) < 9 ? "0" + (d2.getMonth()+1) : (d2.getMonth()+1) )+
+                '-' + ( (d2.getDate()) <= 9 ? "0" + (d2.getDate()+1) : (d2.getDate()+1) );
         }
         return dateFormat1;
     }

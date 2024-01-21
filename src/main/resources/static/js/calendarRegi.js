@@ -72,18 +72,31 @@ function timeChange(){
 }
 function categoryChange(){
     let opt_val = cateTypeId.value;
-
+    console.log(opt_val)
     if(opt_val == 'S1' || opt_val == 'S2' || alldayCheck.checked == true){
-        if(opt_val == 'S2'){
-            endDate.value = startDate.value;
-            endDate.setAttribute("min", startDate.value);
-            endDate.setAttribute("max", startDate.value);
+        if(opt_val == 'S1' || opt_val == 'S2'){
+            alldayCheck.onclick = function(){
+                return false;
+            }
+            if(opt_val == 'S2'){
+                endDate.value = startDate.value;
+                endDate.setAttribute("min", startDate.value);
+                endDate.setAttribute("max", startDate.value);
+            }
+           
         }else{
+            alldayCheck.onclick = function(){
+                return true;
+            }
+            allDayCheck("Y");
             endDate.setAttribute("min", "");
             endDate.setAttribute("max", "");
         }
         alldayCheck.checked = true;
     }else{
+        alldayCheck.onclick = function(){
+            return true;
+        }
         alldayCheck.checked = false;
         endDate.setAttribute("min", "");
         endDate.setAttribute("max", "");

@@ -131,7 +131,7 @@ function w_modal_open(){
 	calListModal.dataset.openyn = calListModal.dataset.openyn == "N" ? "Y" : "N";
 }
 
-function allDayCheck() {
+function allDayCheck(type) {
 	if (checkAllDay.checked) {
 		//종일 체크 시, 시간 선택 불가능
 		editStartTime.disabled = true;
