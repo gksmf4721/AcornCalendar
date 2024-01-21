@@ -127,10 +127,10 @@ public class CalendarContService {
         CalendarContEntity entity = calendarContRepository.findByContSeq(cont.getContSeq());
 
         Double plusVactCnt = 0.0;
-        if (cont.getCalDetailType().equals("S1")) {
+        if (entity.getCalDetailType().equals("S1")) {
             plusVactCnt = calculateDaysDifference(entity.getContStartDt(), entity.getContEndDt()) * 1.0;
 
-        } else if (cont.getCalDetailType().equals("S2")) {
+        } else if (entity.getCalDetailType().equals("S2")) {
             plusVactCnt = 0.5;
         }
 

@@ -93,7 +93,7 @@ function getEventList(info, successCallback, failureCallback) {
             let resultArr = [];
             for(let i=0; i<list.length; i++){
 
-                //일정에서 시각이 null 인 경우 없애고, 있는 경우 "T" 붙이기
+                // //일정에서 시각이 null 인 경우 없애고, 있는 경우 "T" 붙이기
                 list[i].contStartTm = list[i].contStartTm == null ? "" : "T" + list[i].contStartTm;
                 list[i].contEndTm = list[i].contEndTm == null ? "" : "T" + list[i].contEndTm;
                 allDayParam = list[i].contAlldayYn == "Y" ? true : false;

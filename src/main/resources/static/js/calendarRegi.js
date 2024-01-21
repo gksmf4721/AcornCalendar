@@ -17,7 +17,9 @@ const contSeq = document.getElementById("cont_seq");            //내용 시퀀�
  *  이벤트 클릭 시, 기존값 매칭하여 적용
  * ************************************** */
 function modalSlide(info, type, openYn){
+    //모달 열림
     if(openYn == "Y"){
+        //새로 등록인 경우
         if(type == "N"){
             let t_hour = new Date();
             t_hour.setHours(t_hour.getHours() + 1);
@@ -31,11 +33,12 @@ function modalSlide(info, type, openYn){
             document.getElementById("cAddBtn1").style.display = "";
             document.getElementById("cAddBtn2").style.display = "none";
             document.getElementById("cAddBtn3").style.display = "none";
-            
+        //수정인 경우
         } else if(type == "E"){
+            console.log(info.event.allDay);
             title.value = info.event.title;
             startDate.value = dateFormat(nvl(info.event.start));
-            endDate.value = dateFormat(nvl(info.event.end));
+            endDate.value = dateFormat(nvl(info.event.extendedProps.contEndDt));
             startTime.value = hourMinFormat(nvl(info.event.start));
             endTime.value = hourMinFormat(nvl(info.event.end));
             alldayCheck.checked = info.event.allDay;
@@ -47,7 +50,8 @@ function modalSlide(info, type, openYn){
             document.getElementById("cAddBtn2").style.display = "";
             document.getElementById("cAddBtn3").style.display = "";
             document.getElementById("cAddBtn3").dataset.delt = info.event.extendedProps.contSeq;
-            
+            allDayCheck();
+            categoryChange();
         }
         body.classList.add('modalAct');
     } else {
@@ -58,14 +62,31 @@ function modalSlide(info, type, openYn){
         }, 500);
     }
 }
+function timeChange(){
+    let opt_val = cateTypeId.value;
 
+    if(opt_val == 'S2'){
+        endDate.value = startDate.value
+    }
+    categoryChange();
+}
 function categoryChange(){
     let opt_val = cateTypeId.value;
 
-    if(opt_val == 'S1' || opt_val == 'S2'){
+    if(opt_val == 'S1' || opt_val == 'S2' || alldayCheck.checked == true){
+        if(opt_val == 'S2'){
+            endDate.value = startDate.value;
+            endDate.setAttribute("min", startDate.value);
+            endDate.setAttribute("max", startDate.value);
+        }else{
+            endDate.setAttribute("min", "");
+            endDate.setAttribute("max", "");
+        }
         alldayCheck.checked = true;
     }else{
         alldayCheck.checked = false;
+        endDate.setAttribute("min", "");
+        endDate.setAttribute("max", "");
     }
     allDayCheck();
 }
@@ -96,7 +117,7 @@ function valueReset(type){
  * ************************************** */
 function regiEvent(type){
     //필수입력 검사 => 나중에 if문 안에 value값 체크하는것 집어넣기
-    //if(fn_dataChk(formData)){console.log('a')}
+    // if(fn_dataChk(formData)){}
     let inputcalSeq = document.getElementById("P_CalSeq").value;            //캘린더 시퀀스
     let inputmSeq = document.getElementById("P_mSeq").value;                //일정 등록 회원 시퀀스
     let inputcontCont = document.getElementById("P_contCont").innerHTML;    //일정 내용
@@ -111,8 +132,8 @@ function regiEvent(type){
 
     //종일버튼 체크 시, 시작시각&종료시각 null로 넣기
     if(inputcontAlldayYn == "Y"){
-        inputcontStartTm = null;
-        inputcontEndTm = null;
+        inputcontStartTm = '00:01:00.0';
+        inputcontEndTm = '00:01:00.0';
     }
 
     ajaxData = {
@@ -149,6 +170,7 @@ function regiEvent(type){
         data : JSON.stringify(ajaxData),
         dataType : 'json',
         success : function(rslt){
+            document.getElementById('w_vact_cnt').innerText = rslt.data;
             $.alertSuccess(text);
             calendarRender(inputcontStartDt);
             modalSlide('', '', 'N');
@@ -160,7 +182,7 @@ function regiEvent(type){
 }
 
 function deltEvent(){
-    let ajaxUrl = "";
+    let ajaxUrl = "/contDelete.json";
     let inputContSeq = document.getElementById("cAddBtn3").dataset.delt;
     let inputcontStartDt = startDate.value;                                 //시작 날짜
     let text = "삭제되었습니다!";
@@ -175,6 +197,7 @@ function deltEvent(){
         data : JSON.stringify(ajaxData),
         dataType : 'json',
         success : function(rslt){
+            document.getElementById('w_vact_cnt').innerText = rslt.data;
             $.alertSuccess(text);
             calendarRender(inputcontStartDt);
             modalSlide('', '', 'N');

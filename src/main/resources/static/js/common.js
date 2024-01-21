@@ -129,7 +129,7 @@
             const d1 = new Date(date);
             dateFormat1= d1.getFullYear() +
                 '-' + ( (d1.getMonth()+1) < 9 ? "0" + (d1.getMonth()+1) : (d1.getMonth()+1) )+
-                '-' + ( (d1.getDate()) < 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
+                '-' + ( (d1.getDate()) <= 9 ? "0" + (d1.getDate()) : (d1.getDate()) );
         }
         return dateFormat1;
     }
