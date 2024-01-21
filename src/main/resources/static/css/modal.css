@@ -14,7 +14,7 @@ aside{background: #FFF;bottom: 0;margin: 0;padding: 0;position: fixed;right: -38
 
 /* 모달 안 내용 */
 .modalContent{padding:20px;}
-.m_wrap{display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:50px; padding:5px 0px; border-bottom:1px solid #48484847;}
+.m_wrap{display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; height:85px; padding:5px 0px; border-bottom:1px solid #48484847;}
 .m_wrap > span {width: 65px;}
 .m_wrap > input[type="text"]{width:var(--modal_Tag_Width);}
 .m_wrap > select {width:var(--modal_Tag_Width); height:24px;}
