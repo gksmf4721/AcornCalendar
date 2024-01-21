@@ -68,6 +68,12 @@
 		WHERE M_SEQ = #{m_seq}
 	</update>
 
+	<update id="deleteCont" parameterType="acornMap">
+		UPDATE JH_MEMBER
+		SET CONT_DEL_YN = 'Y'
+		WHERE CONT_SEQ = #{cont_seq}
+	</update>
+
 	<select id="selectVactCnt" parameterType="acornMap" resultType="acornMap">
 		SELECT M_VACT_CNT
 		FROM JH_MEMBER

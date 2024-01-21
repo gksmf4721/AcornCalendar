@@ -27,17 +27,19 @@ public class CalendarContService {
 
     private final CalendarContRepository calendarContRepository;
 
-    public void insertCalendarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) throws ParseException {
+    public Double insertCalendarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) throws ParseException {
         cont.setContDelYn("N");
 
+        Double minusVactCnt = 0.0;
+
         if (cont.getCalDetailType().equals("S1")) {
-            Double minusVactCnt = (calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt())) * 1.0;
+            minusVactCnt = (calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt())) * 1.0;
             AcornMap acornMap = new AcornMap();
             acornMap.put("m_seq", LoginSession.getLoginSession().getM_seq());
             acornMap.put("m_vact_cnt", minusVactCnt);
             sqlSession.update("mapper.com.member.updateVactCnt", acornMap);
         } else if (cont.getCalDetailType().equals("S2")) {
-            Double minusVactCnt = (calculateDaysDifference(cont.getContStartDt(), cont.getContEndDt())) * 0.5;
+            minusVactCnt = 0.5;
             AcornMap acornMap = new AcornMap();
             acornMap.put("m_seq", LoginSession.getLoginSession().getM_seq());
             acornMap.put("m_vact_cnt", minusVactCnt);
@@ -45,6 +47,12 @@ public class CalendarContService {
         }
 
         calendarContRepository.save(calendarContRepository.returnCalendarEntity(cont));
+
+        Double vact = Double.parseDouble(LoginSession.getLoginSession().getM_vact_cnt()) - minusVactCnt;
+
+        LoginSession.getLoginSession().setM_vact_cnt(String.valueOf(vact));
+
+        return vact;
     }
 
     private long calculateDaysDifference(Date startDate, Date endDate) {
@@ -55,7 +63,7 @@ public class CalendarContService {
         return ((endMillis - startMillis) / millisecondsPerDay) + 1;
     }
 
-    public void updateCalendarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) throws ParseException {
+    public Double updateCalendarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) throws ParseException {
         cont.setContDelYn("N");
 
         Double oriVactCnt = Double.parseDouble(LoginSession.getLoginSession().getM_vact_cnt());
@@ -108,11 +116,14 @@ public class CalendarContService {
         calendarContRepository.save(calendarContRepository.returnCalendarEntity(cont));
         sqlSession.update("mapper.com.member.updateVactCnt2", acornMap);
 
-        LoginSession.getLoginSession().setM_vact_cnt(vactCnt.toString());
+        Double vact = Double.parseDouble(LoginSession.getLoginSession().getM_vact_cnt()) + vactCnt;
 
+        LoginSession.getLoginSession().setM_vact_cnt(vact.toString());
+
+        return vact;
     }
 
-    public void deleteCalednarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) {
+    public Double deleteCalednarCont(CalendarVO.Jh_Cal_Cont_Calendar cont) {
         CalendarContEntity entity = calendarContRepository.findByContSeq(cont.getContSeq());
 
         Double plusVactCnt = 0.0;
@@ -123,8 +134,19 @@ public class CalendarContService {
             plusVactCnt = 0.5;
         }
 
-        System.out.println("삭제 추가 휴가잔여일수 : " + plusVactCnt);
+        AcornMap acornMap = new AcornMap();
+        acornMap.put("m_seq", LoginSession.getLoginSession().getM_seq());
+        acornMap.put("m_vact_cnt", plusVactCnt);
+        acornMap.put("cont_seq", cont.getContSeq());
 
+        sqlSession.update("mapper.com.member.updateVactCnt2", acornMap);
+        sqlSession.update("mapper.com.member.deleteCont", acornMap);
+
+        Double vact = Double.parseDouble(LoginSession.getLoginSession().getM_vact_cnt()) + plusVactCnt;
+
+        LoginSession.getLoginSession().setM_vact_cnt(String.valueOf(vact));
+
+        return vact;
     }
 
     public CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse selectCalendarCont(long calSeq, long mSeq, String contStartDt,

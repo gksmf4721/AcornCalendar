@@ -52,19 +52,28 @@ public class CalendarController {
 	@ApiOperation(tags = "Cont", value = "일정 추가", notes = "일정 추가")
 	@PostMapping(value = "/cont.json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<RestResponse.RestResultResponse> cont(
+	public ResponseEntity<RestResponse<Double>> cont(
 			@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody) throws ParseException {
-		calendarContService.insertCalendarCont(requestBody);
-		return ResponseEntity.ok(RestResponse.RestResultResponse.builder().build());
+		Double vactCnt = calendarContService.insertCalendarCont(requestBody);
+		return ResponseEntity.ok(new RestResponse<Double>(vactCnt));
 	}
 
 	@ApiOperation(tags = "Cont", value = "일정 수정", notes = "일정 수정")
 	@PostMapping(value = "/contUpdate.json", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<RestResponse.RestResultResponse> contUpdate(
+	public ResponseEntity<RestResponse<Double>> contUpdate(
 			@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody) throws ParseException {
-		calendarContService.updateCalendarCont(requestBody);
-		return ResponseEntity.ok(RestResponse.RestResultResponse.builder().build());
+		Double vactCnt = calendarContService.updateCalendarCont(requestBody);
+		return ResponseEntity.ok(new RestResponse<Double>(vactCnt));
+	}
+
+	@ApiOperation(tags = "Cont", value = "일정 삭제", notes = "일정 삭제")
+	@PostMapping(value = "/contDelete.json", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<RestResponse<Double>> contDelete(
+			@RequestBody CalendarVO.Jh_Cal_Cont_Calendar requestBody) throws ParseException {
+		Double vactCnt = calendarContService.deleteCalednarCont(requestBody);
+		return ResponseEntity.ok(new RestResponse<Double>(vactCnt));
 	}
 
 	@ApiOperation(tags = "Calendar", value = "캘린더 조회", notes = "캘린더 조회")
