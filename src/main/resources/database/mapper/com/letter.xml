@@ -50,7 +50,7 @@
 	</select>
 
 	<insert id="insertLetter" parameterType="acornMap">
-		INSERT INTO acorncalendar.JH_LETTER
+		INSERT INTO JH_LETTER
 			(L_SENDER, L_RECIVER, L_TITLE, L_CONTENT, L_SENDT, L_OPEN_YN, L_SENDER_TRASH_STEP, L_RECIVER_TRASH_STEP, L_SENDER_TRASH_DATE)
 		VALUES
 		    (#{session_m_seq}, #{lReciver}, #{lTitle}, #{lContent}, current_timestamp(), 'N', 0, 0, current_timestamp());

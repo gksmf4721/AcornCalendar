@@ -23,22 +23,31 @@ public class FileUtils {
         String savePath = filePath;
 
         //realPath = request.getRealPath(savePath);
-        File baseFile = ResourceUtils.getFile(savePath + "acorn.png");
         String fileExtension = getRandomString();
-        File file2 =new File(savePath+fileExtension+".png");
+        String savedFileName = fileExtension + ".png";
+        int count = 0;
 
-        long fsize1 = baseFile.length();
+        File baseFile = new File(savePath + "acorn.png");
+        File saveDir = new File(savePath);
+        if (baseFile.exists()) {
+            if (!saveDir.exists()) {
+                saveDir.mkdirs();
+            }
 
-        FileInputStream fis = new FileInputStream(baseFile);
-        FileOutputStream fos = new FileOutputStream(file2);
+            File file2 = new File(savePath + savedFileName);
 
-        int input=0, count=0;
+            try (FileInputStream fis = new FileInputStream(baseFile);
+                 FileOutputStream fos = new FileOutputStream(file2)) {
+                int input = 0;
+                byte[] data = new byte[1024];
 
-        byte[] data = new byte[1024];
-
-        while((input=fis.read(data))!=-1){
-            fos.write(data,0,input);
-            count+=input;
+                while ((input = fis.read(data)) != -1) {
+                    fos.write(data, 0, input);
+                    count += input;
+                }
+            }
+        } else {
+            savedFileName = "acorn.png";
         }
 
         AcornMap profile = new AcornMap();
@@ -46,8 +55,8 @@ public class FileUtils {
         profile.put("fType","M");
         profile.put("fTypeSeq",acornMap.getString("mSeq"));
         profile.put("fOgName","base_acorn.png");
-        profile.put("fSvName",fileExtension+".png");
-        profile.put("fSize",count/fsize1);
+        profile.put("fSvName", savedFileName);
+        profile.put("fSize", count);
         profile.put("fMainYn","Y");
         profile.put("fDelYn","Y");
 

@@ -26,13 +26,8 @@ public class MemberService {
 	// @Transactional(rollbackFor={Exception.class}) // 기존 해당 어노테이션과 다르게 모든
 	// Exception 을 rollback.
 	public void insertMember(AcornMap acornMap, HttpServletRequest request) throws Exception {
-
-		try {
-			sqlSession.insert("mapper.com.member.insertMember", acornMap);
-			sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap, request));
-		} catch (Exception e) {
-			// sqlSession.rollback();
-		}
+		sqlSession.insert("mapper.com.member.insertMember", acornMap);
+		sqlSession.insert("mapper.com.member.insertProfile", FileUtils.profileInsert(acornMap, request));
 
 		// try-catch 를 쓰면 error 발생해도 롤백 안 됨
 		// TransactionConfig 를 지우고 테스트 해보면 트랜잭션 처리는 되는 게 맞음

@@ -6,14 +6,14 @@
 		INSERT INTO JH_MEMBER
 			(M_NAME, M_ID, M_PW, M_NICKNAME, M_EMAIL, M_BIRTH, M_BIRTH_YN, M_DEL_YN, M_JOIN_COMP_DT, M_VACT_CNT)
 		VALUES
-		    (#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N', #{mJoinCompDt}, #{mVactCnt})
+		    (#{mName}, #{mId}, #{mPw}, #{mNickname}, #{mEmail}, #{mBirth}, #{mBirthYn}, 'N', NULLIF(#{mJoinCompDt}, ''), COALESCE(NULLIF(#{mVactCnt}, ''), 0))
 		<selectKey keyProperty="mSeq" resultType="String" order="AFTER">
 			SELECT LAST_INSERT_ID() AS M_SEQ
 		</selectKey>
 	</insert>
 
 	<insert id="insertProfile" parameterType="acornMap">
-		INSERT INTO acorncalendar.JH_FILE
+		INSERT INTO JH_FILE
 			(F_TYPE, F_TYPE_SEQ, F_OG_NAME, F_SV_NAME, F_SIZE, F_MAIN_YN, F_DEL_YN)
 		VALUES(#{fType}, #{fTypeSeq}, #{fOgName}, #{fSvName}, #{fSize}, 'Y', 'N');
 	</insert>
@@ -69,7 +69,7 @@
 	</update>
 
 	<update id="deleteCont" parameterType="acornMap">
-		UPDATE JH_MEMBER
+		UPDATE JH_CAL_CONT
 		SET CONT_DEL_YN = 'Y'
 		WHERE CONT_SEQ = #{cont_seq}
 	</update>

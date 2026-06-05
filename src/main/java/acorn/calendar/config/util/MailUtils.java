@@ -4,6 +4,7 @@ import acorn.calendar.config.data.AcornMap;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,6 +28,11 @@ public class MailUtils{
 
     private static JavaMailSender sender;
 
+    @Value("${spring.mail.username}")
+    private String username;
+
+    private static String fromAddress;
+
     @Autowired
     private SpringTemplateEngine template;
 
@@ -38,6 +44,7 @@ public class MailUtils{
     @PostConstruct
     private void initStatic(){
         sender = this.postSender;
+        fromAddress = this.username;
     }
 
     public static String sendMail(AcornMap acornMap) throws Exception {
@@ -54,7 +61,7 @@ public class MailUtils{
         }else{
             messageHelper.setSubject("[AcornCalendar] 회원가입 인증 번호입니다.");
         }
-        messageHelper.setFrom("acorn_calendar@naver.com");
+        messageHelper.setFrom(fromAddress);
         messageHelper.setTo(acornMap.getString("mEmail").toString());
         messageHelper.setText(createHtml(authCode),true);
         sender.send(message);
