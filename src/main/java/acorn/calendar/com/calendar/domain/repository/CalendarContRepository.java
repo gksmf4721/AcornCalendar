@@ -23,6 +23,17 @@ public interface CalendarContRepository extends JpaRepository<CalendarContEntity
     CalendarContEntity findByContSeq(long contSeq);
 
     @Query("SELECT ce FROM JH_CAL_CONT ce WHERE " +
+            "ce.mSeq = :mSeq " +
+            "AND ce.contDelYn = 'N' " +
+            "AND ce.calDetailType IN ('S1', 'S2') " +
+            "AND ce.contStartDt <= :periodEnd " +
+            "AND (ce.contEndDt IS NULL OR ce.contEndDt >= :periodStart)")
+    List<CalendarContEntity> findUsedVacationConts(
+            @Param("mSeq") long mSeq,
+            @Param("periodStart") Date periodStart,
+            @Param("periodEnd") Date periodEnd);
+
+    @Query("SELECT ce FROM JH_CAL_CONT ce WHERE " +
             "((ce.contStartDt BETWEEN :contStartDt1 AND :contEndDt1) OR (ce.contEndDt BETWEEN :contStartDt2 AND :contEndDt2)) "
             +
             "AND ce.contDelYn = :contDelYn " +

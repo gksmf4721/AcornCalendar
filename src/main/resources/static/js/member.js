@@ -41,7 +41,7 @@
                             setCookie('id',0,0);
                         }
                         sessionStorage.setItem("id",inputId);
-                        updateVacation(rslt.rsltMSeq, rslt.rsltMJoinCompDt, 'login');
+                        location.href = rslt.resultUrl;
                     }else{
                         $.alertError(rslt.resultMsg);
                     }

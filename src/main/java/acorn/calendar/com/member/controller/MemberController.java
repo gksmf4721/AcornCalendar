@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import acorn.calendar.com.calendar.service.VacationService;
 import acorn.calendar.config.model.LoginSession;
 import acorn.calendar.config.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+
+	private final VacationService vacationService;
 
 	private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -151,7 +154,11 @@ public class MemberController {
 	@GetMapping("/mypage.do")
 	public String mypage(AcornMap acornMap, Model model) throws Exception {
 		// 2024-01-03 효니 :: 마이페이지 처음 띄울때, 회원번호 필요해서 추가함
+		Double remainingVacationDays = vacationService.calculateRemainingDays(
+				Long.parseLong(acornMap.getString("session_m_seq")),
+				acornMap.getString("session_m_join_comp_dt"));
 		model.addAttribute("data", acornMap);
+		model.addAttribute("remainingVacationDays", remainingVacationDays);
 		return "member/mypage";
 	}
 
@@ -159,7 +166,11 @@ public class MemberController {
 	public void updateMypage(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		AcornMap resultMap = new AcornMap();
-		resultMap.put("resultCd", memberService.updateMypage(acornMap));
+		int resultCd = memberService.updateMypage(acornMap);
+		if (resultCd > 0) {
+			updateLoginSession(acornMap);
+		}
+		resultMap.put("resultCd", resultCd);
 		ResponseUtils.jsonMap(response, resultMap);
 	}
 
@@ -176,19 +187,26 @@ public class MemberController {
 	public void updateVacation(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		AcornMap resultMap = new AcornMap();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		acornMap.put("P_JOIN_COMP_DT", sdf.parse(acornMap.getString("P_JOIN_COMP_DT")));
-		memberService.PROC_UPDATE_VACT_CNT(acornMap);
 
 		String type = acornMap.getString("P_type");
 		String resultUrl = "";
-		if (type == "login") {
+		if ("login".equals(type)) {
 			resultUrl = "/main.do";
-		} else if (type == "mypage") {
+		} else if ("mypage".equals(type)) {
 			resultUrl = "/mypage.do";
 		}
 		resultMap.put("resultCd", "1");
 		resultMap.put("resultUrl", resultUrl);
 		ResponseUtils.jsonMap(response, resultMap);
+	}
+
+	private void updateLoginSession(AcornMap acornMap) {
+		LoginSession loginSession = LoginSession.getLoginSession();
+		loginSession.setM_name(acornMap.getString("m_name"));
+		loginSession.setM_nickname(acornMap.getString("m_nickname"));
+		loginSession.setM_email(acornMap.getString("m_email"));
+		loginSession.setM_birth(acornMap.getString("m_birth"));
+		loginSession.setM_birth_yn(acornMap.getString("m_birth_yn"));
+		loginSession.setM_join_comp_dt(acornMap.getString("m_join_comp_dt"));
 	}
 }

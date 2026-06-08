@@ -4,6 +4,7 @@ import acorn.calendar.com.calendar.domain.dto.CalendarDTO;
 import acorn.calendar.com.calendar.domain.vo.CalendarVO;
 import acorn.calendar.com.calendar.service.CalendarContService;
 import acorn.calendar.com.calendar.service.CalendarService;
+import acorn.calendar.com.calendar.service.VacationService;
 import acorn.calendar.config.data.RestResponse;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,12 +32,17 @@ public class CalendarController {
 
 	private final CalendarService calendarService;
 	private final CalendarContService calendarContService;
+	private final VacationService vacationService;
 
 	@RequestMapping("/calendarList.do")
 	public String join(AcornMap acornMap, Model model) throws Exception {
 		AcornMap calendar = calendarService.selectMyCalendar(Long.parseLong(acornMap.getString("session_m_seq")));
+		Double remainingVacationDays = vacationService.calculateRemainingDays(
+				Long.parseLong(acornMap.getString("session_m_seq")),
+				acornMap.getString("session_m_join_comp_dt"));
 		model.addAttribute("calendar", calendar);
 		model.addAttribute("data", acornMap);
+		model.addAttribute("remainingVacationDays", remainingVacationDays);
 		return "calendar/calendarList";
 	}
 

@@ -66,7 +66,7 @@
                         </div>
                         <div class="flex_item">
                             <p class="birth_title">휴가잔여일수</p>
-                            <input type="text" id="m_vact_cnt" data-name="입사일자" th:value="${data.session_m_vact_cnt}">
+                            <input type="text" id="m_vact_cnt" data-name="휴가잔여일수" th:value="${remainingVacationDays}" readonly>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,6 @@ function save(obj){
     let input_m_birth = document.getElementById('m_birth').value;
     let input_m_birth_yn = document.querySelector('input[name="m_birth_yn"]:checked').value;
     let input_m_join_comp_dt = document.getElementById('m_join_comp_dt').value;
-    let input_m_vact_cnt = document.getElementById('m_vact_cnt').value;
     let input_m_seq = document.getElementById('m_seq').value;
 
     let befo_join_comp_dt = [[${data.session_m_join_comp_dt}]];
@@ -138,7 +137,6 @@ function save(obj){
         m_birth: input_m_birth,
         m_birth_yn: input_m_birth_yn,
         m_join_comp_dt: input_m_join_comp_dt,
-        m_vact_cnt: input_m_vact_cnt,
         m_seq: input_m_seq
     }
 
@@ -154,7 +152,7 @@ function save(obj){
             dataType : 'json',
             success: function(rslt){
                 if(input_m_join_comp_dt != befo_join_comp_dt){
-                    updateVacation(input_m_seq, input_m_join_comp_dt, 'mypage');
+                    $.alertSuccessRtn("저장되었습니다", "/mypage.do");
                 } else {
                     $.alertSuccess("저장되었습니다.");
                 }

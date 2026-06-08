@@ -45,6 +45,9 @@ function modalSlide(info, type, openYn){
             content.innerHTML = info.event.extendedProps.contCont;
             cateTypeId.value = info.event.extendedProps.calDetailType;
             contSeq.value = info.event.extendedProps.contSeq;
+            contSeq.dataset.oldType = info.event.extendedProps.calDetailType;
+            contSeq.dataset.oldStartDt = dateFormat(nvl(info.event.start));
+            contSeq.dataset.oldEndDt = dateFormat(nvl(info.event.extendedProps.contEndDt));
 
             document.getElementById("cAddBtn1").style.display = "none";
             document.getElementById("cAddBtn2").style.display = "";
@@ -119,6 +122,9 @@ function valueReset(type){
         startTime.disabled = false;
         endTime.disabled = false;
         document.getElementById("cAddBtn3").dataset.delt = "";  //삭제할때 넣을 일정 시퀀스 값
+        contSeq.dataset.oldType = "";
+        contSeq.dataset.oldStartDt = "";
+        contSeq.dataset.oldEndDt = "";
 	}
     //종일체크버튼 클릭 시, 시간만 리셋되도록 만들기
     startTime.value = ""
@@ -142,22 +148,27 @@ function regiEvent(type){
         let inputcalDetailType = document.getElementById("cal_category").value; //카테고리 종류
         let inputcontAlldayYn = alldayCheck.checked == true ? "Y" : "N";        //종일 여부
         let inputcontSeq = contSeq.value;
-        let w_vact_cnt =  document.getElementById('w_vact_cnt').innerText;
+        let w_vact_cnt =  Number(document.getElementById('w_vact_cnt').innerText);
+        let available_vact_cnt = w_vact_cnt;
+
+        if(type == 'E'){
+            available_vact_cnt += calculateVacationDays(
+                contSeq.dataset.oldType,
+                contSeq.dataset.oldStartDt,
+                contSeq.dataset.oldEndDt
+            );
+        }
 
         if(inputcalDetailType === 'S1'){
 
-            let startDate = new Date(inputcontStartDt);
-            let endDate = new Date(inputcontEndDt);
+            var dayDiff = calculateVacationDays(inputcalDetailType, inputcontStartDt, inputcontEndDt);
 
-            var timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
-            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
-
-            if(w_vact_cnt < dayDiff){
+            if(available_vact_cnt < dayDiff){
                 $.alertError('휴가 잔여일수가 없습니다.');
                 return;
             }
         } 
-        if(inputcalDetailType === 'S2' && w_vact_cnt - 0.5 < 0){
+        if(inputcalDetailType === 'S2' && available_vact_cnt - 0.5 < 0){
             $.alertError('휴가 잔여일수가 없습니다.');
             return;
         }
@@ -216,6 +227,22 @@ function regiEvent(type){
     
 
     
+}
+
+function calculateVacationDays(calDetailType, contStartDt, contEndDt){
+    if(calDetailType === 'S2'){
+        return 0.5;
+    }
+
+    if(calDetailType !== 'S1' || !contStartDt){
+        return 0;
+    }
+
+    let startDate = new Date(contStartDt);
+    let endDate = new Date(contEndDt || contStartDt);
+    let timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+
+    return Math.ceil(timeDiff / (1000 * 3600 * 24)) + 1;
 }
 
 function deltEvent(){
