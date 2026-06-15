@@ -39,7 +39,8 @@ public class CalendarController {
 		AcornMap calendar = calendarService.selectMyCalendar(Long.parseLong(acornMap.getString("session_m_seq")));
 		Double remainingVacationDays = vacationService.calculateRemainingDays(
 				Long.parseLong(acornMap.getString("session_m_seq")),
-				acornMap.getString("session_m_join_comp_dt"));
+				acornMap.getString("session_m_join_comp_dt"),
+				Double.parseDouble(acornMap.getString("session_m_vact_cnt", "0")));
 		model.addAttribute("calendar", calendar);
 		model.addAttribute("data", acornMap);
 		model.addAttribute("remainingVacationDays", remainingVacationDays);

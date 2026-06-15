@@ -53,7 +53,15 @@ public class CalendarContService {
         LoginSession loginSession = LoginSession.getLoginSession();
         return vacationService.calculateRemainingDays(
                 Long.parseLong(loginSession.getM_seq()),
-                loginSession.getM_join_comp_dt());
+                loginSession.getM_join_comp_dt(),
+                parseVacationDays(loginSession.getM_vact_cnt()));
+    }
+
+    private double parseVacationDays(String vacationDays) {
+        if (vacationDays == null || vacationDays.trim().isEmpty()) {
+            return 0.0;
+        }
+        return Double.parseDouble(vacationDays);
     }
 
     public CalendarDTO.Jh_Cal_Cont_Calendar_ListResponse selectCalendarCont(long calSeq, long mSeq, String contStartDt,

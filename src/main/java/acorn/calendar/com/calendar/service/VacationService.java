@@ -21,16 +21,20 @@ public class VacationService {
     private final CalendarContRepository calendarContRepository;
 
     public double calculateRemainingDays(long mSeq, String joinCompDt) {
+        return calculateRemainingDays(mSeq, joinCompDt, 0.0);
+    }
+
+    public double calculateRemainingDays(long mSeq, String joinCompDt, double extraDays) {
         LocalDate joinDate = parseJoinDate(joinCompDt);
         if (joinDate == null) {
-            return 0.0;
+            return extraDays;
         }
 
         LocalDate today = LocalDate.now();
         double grantedDays = calculateGrantedDays(joinDate, today);
         double usedDays = calculateUsedDays(mSeq, joinDate, today);
 
-        return grantedDays - usedDays;
+        return grantedDays + extraDays - usedDays;
     }
 
     public double calculateGrantedDays(LocalDate joinDate, LocalDate today) {

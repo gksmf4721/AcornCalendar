@@ -51,7 +51,8 @@
 		    M_EMAIL = #{m_email},
 		    M_BIRTH = #{m_birth},
 		    M_BIRTH_YN = #{m_birth_yn},
-		    M_JOIN_COMP_DT = #{m_join_comp_dt}
+		    M_JOIN_COMP_DT = #{m_join_comp_dt},
+		    M_VACT_CNT = COALESCE(NULLIF(#{m_vact_cnt}, ''), 0)
 		WHERE M_SEQ = #{m_seq}
 	</update>
 

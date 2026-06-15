@@ -156,7 +156,8 @@ public class MemberController {
 		// 2024-01-03 효니 :: 마이페이지 처음 띄울때, 회원번호 필요해서 추가함
 		Double remainingVacationDays = vacationService.calculateRemainingDays(
 				Long.parseLong(acornMap.getString("session_m_seq")),
-				acornMap.getString("session_m_join_comp_dt"));
+				acornMap.getString("session_m_join_comp_dt"),
+				Double.parseDouble(acornMap.getString("session_m_vact_cnt", "0")));
 		model.addAttribute("data", acornMap);
 		model.addAttribute("remainingVacationDays", remainingVacationDays);
 		return "member/mypage";
@@ -165,6 +166,7 @@ public class MemberController {
 	@PostMapping("/updateMypage.json")
 	public void updateMypage(@RequestBody String json, HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
+		acornMap.put("m_vact_cnt", acornMap.getString("m_vact_cnt", "0"));
 		AcornMap resultMap = new AcornMap();
 		int resultCd = memberService.updateMypage(acornMap);
 		if (resultCd > 0) {
@@ -208,5 +210,6 @@ public class MemberController {
 		loginSession.setM_birth(acornMap.getString("m_birth"));
 		loginSession.setM_birth_yn(acornMap.getString("m_birth_yn"));
 		loginSession.setM_join_comp_dt(acornMap.getString("m_join_comp_dt"));
+		loginSession.setM_vact_cnt(acornMap.getString("m_vact_cnt"));
 	}
 }
