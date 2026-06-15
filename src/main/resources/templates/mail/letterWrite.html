@@ -46,6 +46,7 @@
 
         let type = [[${type}]];
         if(type == "toMe"){
+            document.getElementById("lReciver").value = [[${data.session_m_nickname}]];
             document.getElementById("lReciver").readOnly = true;
             document.getElementById("writeMe").classList.add("selected_btn");
             document.getElementById("m_container_title").innerText = "내게쓰기";
@@ -75,9 +76,9 @@
             data : JSON.stringify(ajaxData),
             dataType : 'json',
             success : function(rslt){
-                fetch(`/api/publish?lReciver=${document.querySelector("#lReciver").value}`);
                 $.alertSuccess(rslt.resultMsg);
                 if(rslt.resultCd=='1'){
+                    fetch(`/api/publish?lReciver=${document.querySelector("#lReciver").value}`);
                     location.href = rslt.resultUrl;
                 }
             },

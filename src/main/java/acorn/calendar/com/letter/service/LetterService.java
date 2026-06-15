@@ -83,11 +83,17 @@ public class LetterService {
 
 	public String selectSeq(AcornMap acornMap) throws Exception {
 		AcornMap resultMap = sqlSession.selectOne("mapper.com.letter.selectSeq",acornMap);
+		if (resultMap == null) {
+			return "";
+		}
 		return resultMap.getString("M_SEQ");
 	}
 
 	public String selectId(AcornMap acornMap) throws Exception {
 		AcornMap resultMap = sqlSession.selectOne("mapper.com.letter.selectId",acornMap);
+		if (resultMap == null) {
+			return "";
+		}
 		return resultMap.getString("M_ID");
 	}
 

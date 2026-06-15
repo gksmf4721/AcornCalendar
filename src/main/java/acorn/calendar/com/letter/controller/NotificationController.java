@@ -47,6 +47,9 @@ public class NotificationController {
         //message = URLEncoder.encode(msg,"utf-8");
 
         String userId = letterService.selectId(acornMap);
+        if ("".equals(userId)) {
+            return;
+        }
 
         Set<String> deadIds = new HashSet<>();
         CLIENTS.forEach((id,emitter) -> {

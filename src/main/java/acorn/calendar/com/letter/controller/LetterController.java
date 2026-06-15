@@ -94,8 +94,9 @@ public class LetterController {
 //	}
 
 	@RequestMapping("/letterWrite.do")
-	public String letterWrite(Model model, @RequestParam(name="type",defaultValue="") String type) throws Exception {
+	public String letterWrite(AcornMap acornMap, Model model, @RequestParam(name="type",defaultValue="") String type) throws Exception {
 		model.addAttribute("type", type);
+		model.addAttribute("data", acornMap);
 		return "mail/letterWrite";
 	}
 
@@ -117,12 +118,22 @@ public class LetterController {
 	public void letterWrite(@RequestBody String json,HttpServletResponse response) throws Exception {
 		AcornMap acornMap = JsonUtils.toAcornMap(json);
 		try{
-			acornMap.put("lReciver",letterService.selectSeq(acornMap));
+			if ("toMe".equals(acornMap.getString("lReciver"))) {
+				acornMap.put("lReciver", acornMap.getString("session_m_nickname"));
+			}
+
+			String reciverSeq = letterService.selectSeq(acornMap);
+			if ("".equals(reciverSeq)) {
+				ResponseUtils.responseMap(response, "-1","없는 회원입니다.",null);
+				return;
+			}
+
+			acornMap.put("lReciver", reciverSeq);
 			letterService.insertLetter(acornMap);
 			ResponseUtils.responseMap(response, "1","메일 전송 성공","/letterBox.do");
-		}catch (NullPointerException e){
+		}catch (Exception e){
 			e.printStackTrace();
-			ResponseUtils.responseMap(response, "-1","없는 회원입니다.",null);
+			ResponseUtils.responseMap(response, "-1","메일 전송 실패",null);
 		}
 	}
 
